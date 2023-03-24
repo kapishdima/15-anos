@@ -15,6 +15,7 @@ $lightGrayColor: #f1f2f6;
 $darkGrayColor: #aeaba8;
 $darkColor: #000;
 $accentColor: #db5b78;
+$errorColor: #db5b78;
 
 // ------------------------------
 // Shadows
@@ -73,6 +74,14 @@ $button-padding-x: 12px;
   font-size: 15px;
   font-weight: 600;
   color: $darkColor;
+}
+
+// The style is used for error ​​in input fields
+@mixin inputError {
+  font-family: $anevir-ff;
+  font-size: 12px;
+  font-weight: 400;
+  color: $errorColor;
 }
 
 // ------------------------------

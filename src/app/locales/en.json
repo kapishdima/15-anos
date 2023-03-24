@@ -1,0 +1,7 @@
+{
+  "login_title": "Enter a password",
+  "login_subtitle": "You can find the password in a message you received from a person who invited you",
+  "login_button_text": "Log in",
+  "password_placehoder": "Enter password",
+  "event_title_placeholder": "Enter event title"
+}

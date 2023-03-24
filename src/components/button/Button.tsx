@@ -1,11 +1,15 @@
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
-export const Button: React.FC<PropsWithChildren> = ({ children }) => {
+type ButtonProps = PropsWithChildren & {
+  type?: 'submit' | 'button';
+};
+
+export const Button: React.FC<ButtonProps> = ({ type = 'button', children }) => {
   // TODO: Add button variants classes
 
   return (
-    <button type="button" className={classNames('button', 'button-primary')}>
+    <button type={type} className={classNames('button', 'button-primary')}>
       {children}
     </button>
   );
