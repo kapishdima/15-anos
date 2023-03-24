@@ -1,0 +1,87 @@
+// ------------------------------
+// Fonts
+// ------------------------------
+
+$recoleta-ff: 'Recoleta';
+$recoleta-alt-ff: 'Recoleta Alt';
+
+$anevir-ff: 'Avenir';
+
+// ------------------------------
+// Colors
+// ------------------------------
+
+$lightGrayColor: #f1f2f6;
+$darkGrayColor: #aeaba8;
+$darkColor: #000;
+$accentColor: #db5b78;
+
+// ------------------------------
+// Shadows
+// ------------------------------
+
+$box-shadow: 6px 6px 14px -18px rgba(0, 0, 0, 0.24);
+
+// ------------------------------
+// Border Radius
+// ------------------------------
+
+$base-br: 14px;
+
+// ------------------------------
+// Paddings
+// ------------------------------
+
+$box-padding-x: 20px;
+$box-padding-y: 24px;
+
+$input-padding-x: 12px;
+$input-padding-y: 14px;
+
+$button-padding-x: 12px;
+
+// ------------------------------
+// Texts
+// ------------------------------
+// Style is used for first level headings
+.heading1 {
+  font-family: $recoleta-alt-ff;
+  font-size: 25px;
+  font-weight: 500;
+  color: $darkColor;
+}
+
+// The style is used for subheadings, explanatory text, etc.
+.subtitle {
+  font-family: $anevir-ff;
+  font-size: 15px;
+  font-weight: normal;
+  color: $darkColor;
+}
+
+// The style is used for hints in input fields (placeholder)
+@mixin inputPlaceholder {
+  font-family: $anevir-ff;
+  font-size: 15px;
+  font-weight: 600;
+  color: $darkGrayColor;
+}
+
+// The style is used for values ​​in input fields
+@mixin inputValue {
+  font-family: $anevir-ff;
+  font-size: 15px;
+  font-weight: 600;
+  color: $darkColor;
+}
+
+// ------------------------------
+// Buttons
+// ------------------------------
+
+$button-ff: $anevir-ff;
+$button-fz: 12px;
+$button-fw: 600;
+
+$button-bg: $accentColor;
+$button-hover-bg: darken($accentColor, 5);

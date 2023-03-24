@@ -1,0 +1,23 @@
+.button {
+  padding: $button-padding-x;
+  border-radius: 20px;
+  border: none;
+
+  font-family: $button-ff;
+  font-size: $button-fz;
+  font-weight: $button-fw;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: background-color 0.25s ease;
+
+  &-primary {
+    color: #fff;
+    background-color: $button-bg;
+
+    &:hover {
+      background-color: $button-hover-bg;
+    }
+  }
+}
