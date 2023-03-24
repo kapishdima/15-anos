@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/15-anos/static/css/main.d7ad3b6a.css",
-    "main.js": "/15-anos/static/js/main.a22fe41b.js",
+    "main.js": "/15-anos/static/js/main.dbc20d9a.js",
     "static/media/avenirnextcyr-thinitalic.eot": "/15-anos/static/media/avenirnextcyr-thinitalic.abcd9d8551aca503cabd.eot",
     "static/media/avenirnextcyr-lightitalic.eot": "/15-anos/static/media/avenirnextcyr-lightitalic.95733b154be717cbb8c3.eot",
     "static/media/avenirnextcyr-thinitalic.ttf": "/15-anos/static/media/avenirnextcyr-thinitalic.44d27c99cedb0d339d39.ttf",
@@ -97,10 +97,10 @@
     "static/media/avenirnextcyr-ultralight.woff": "/15-anos/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/15-anos/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
     "main.d7ad3b6a.css.map": "/15-anos/static/css/main.d7ad3b6a.css.map",
-    "main.a22fe41b.js.map": "/15-anos/static/js/main.a22fe41b.js.map"
+    "main.dbc20d9a.js.map": "/15-anos/static/js/main.dbc20d9a.js.map"
   },
   "entrypoints": [
     "static/css/main.d7ad3b6a.css",
-    "static/js/main.a22fe41b.js"
+    "static/js/main.dbc20d9a.js"
   ]
 }
