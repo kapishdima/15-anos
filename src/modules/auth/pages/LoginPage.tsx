@@ -1,17 +1,32 @@
-import React from 'react';
-
-import { Box } from '../../components/layout/Box';
-import { LoginForm } from '../../modules/auth/ui/LoginForm';
-
-import AngleLeft from '../../image/icons/angle-left.svg';
-import Logo from '../../image/logo.png';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import useMediaQuery from '../../components/hooks/useMediaQuery';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import useMediaQuery from '../../../components/hooks/useMediaQuery';
+import { Box } from '../../../components/layout/Box/Box';
+import { LoginForm } from '../shared/LoginForm';
+
+import AngleLeft from '../../../image/icons/angle-left.svg';
+import Logo from '../../../image/logo.png';
+import { authAnonymously } from '../../firebase/auth';
+import { getAuth } from 'firebase/auth';
+import { Loader } from '../../../components/layout/Loader/Loader';
 
 export const LoginPage: React.FC = () => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const boxMaxWidth = isMobile ? '90vw' : '35vw';
+
+  const [user, loading] = useAuthState(getAuth());
+
+  useEffect(() => {
+    authAnonymously();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className="login-page ">
       <div className="login-page__header">

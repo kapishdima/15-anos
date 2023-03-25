@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { MIN_PASSWORD } from '../../../app/validation-constants';
+import { MIN_PASSWORD } from '../../../app/contants/validation-constants';
 
 export const useEventTitleField = () => {
   const [shown, setShown] = useState(false);
   const { watch } = useFormContext();
 
   const getShownState = (password: string) => {
-    const lastSymbol = password?.at(-1) || '';
     const hasMinPassword = password.length >= MIN_PASSWORD;
+    const hasLastUpperChar = /.*[A-Z]$/gm.test(password);
 
-    setShown(Boolean(hasMinPassword && lastSymbol === lastSymbol.toUpperCase()));
+    setShown(Boolean(hasMinPassword && hasLastUpperChar));
   };
 
   useEffect(() => {

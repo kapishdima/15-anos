@@ -1,11 +1,10 @@
 import React from 'react';
-import { LoginPage } from './pages/Auth/LoginPage';
-
-import { createI18n } from './app/i18n';
-
-createI18n();
+import { LoginPage } from './modules/auth/pages/LoginPage';
+import { useSetup } from './app/hooks/useSetup';
 
 function App() {
+  useSetup();
+
   return <LoginPage />;
 }
 

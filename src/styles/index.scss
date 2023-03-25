@@ -9,10 +9,15 @@
 @import '../components/index.scss';
 
 // ---------------------------
-// Pages
+// Modules
 // ---------------------------
 
-@import '../pages/index.scss';
+@import '../modules/index.scss';
+
+// ---------------------------
+// Libraries
+// ---------------------------
+@import '~react-toastify/dist/ReactToastify.css';
 
 * {
   margin: 0;

@@ -3,5 +3,11 @@
   "login_subtitle": "You can find the password in a message you received from a person who invited you",
   "login_button_text": "Log in",
   "password_placehoder": "Enter password",
-  "event_title_placeholder": "Enter event title"
+  "event_title_placeholder": "Enter event title",
+
+  "invalid_password": "Incorrect password",
+  "invalid_event_name": "Incorrect event name",
+  "null_event_name": "The event name has not been set yet. Сontact the event organizer",
+  "auth_error": "Authentication error. Try again",
+  "cant_login": "You tried to login more than {{attempts}} times. Wait {{time}} seconds"
 }

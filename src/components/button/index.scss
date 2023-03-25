@@ -1,4 +1,8 @@
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: $button-padding-x;
   border-radius: 20px;
   border: none;
@@ -19,5 +23,11 @@
     &:hover {
       background-color: $button-hover-bg;
     }
+  }
+
+  &:disabled {
+    background-color: #cecece;
+    pointer-events: none;
+    user-select: none;
   }
 }

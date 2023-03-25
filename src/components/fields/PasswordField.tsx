@@ -13,7 +13,7 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({ name, placeholder 
       {({ field, fieldState }) => (
         <div className="form-field__container">
           <input
-            type="password"
+            type="text"
             placeholder={placeholder || ''}
             className={classNames('form-field', 'text-form-field')}
             name={field.value}
