@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { INVALID_LOGIN_ATTEMPT } from '../../../app/contants/local-storage-keys';
+import {
+  INVALID_LOGIN_ATTEMPT,
+  SUCCESS_ACCOUNT_CREATION,
+} from '../../../app/contants/local-storage-keys';
 import { useState } from 'react';
 
 export type ErrorTypes = 'wrong' | 'user' | 'eventTitle wrong' | 'eventTitle null' | 'reUser';
@@ -22,6 +25,14 @@ export const useError = () => {
     }
 
     return hasMaxAttempts;
+  };
+
+  const detectCanCreateProfile = () => {
+    const successAccountCreation = JSON.parse(
+      window.localStorage.getItem(SUCCESS_ACCOUNT_CREATION) || '0',
+    );
+
+    return successAccountCreation < 3;
   };
 
   const waitLogin = (time: number) => {
@@ -57,5 +68,6 @@ export const useError = () => {
     handleError,
     canLogin,
     detectCanLogin,
+    detectCanCreateProfile,
   };
 };

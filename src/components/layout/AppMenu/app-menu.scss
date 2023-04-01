@@ -1,0 +1,57 @@
+.app-menu {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  margin: 25% 0;
+
+  &__group {
+    border-bottom: 1px solid $menuGroupBorderColor;
+  }
+
+  &__title {
+    @include menuTitle;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    border-radius: $menu-link-br;
+    background-color: transparent;
+    padding: $menu-item-padding-y 0;
+
+    text-decoration: none;
+
+    transition: background-color 0.5s ease, color 0.5s ease, padding-left 0.5s ease;
+
+    @include menuLink;
+
+    &:hover {
+      background-color: $accentColor;
+      padding-left: $menu-item-padding-x;
+      color: #fff;
+
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+
+    svg {
+      width: 18px;
+
+      path {
+        transition: fill 0.5s ease;
+      }
+    }
+  }
+}

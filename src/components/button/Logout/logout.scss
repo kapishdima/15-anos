@@ -1,0 +1,14 @@
+.logout {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  position: absolute;
+  bottom: $sidebar-padding-y;
+
+  @include logout;
+
+  img {
+    width: 14px;
+  }
+}

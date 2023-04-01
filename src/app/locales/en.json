@@ -1,4 +1,5 @@
 {
+  "Back": "Back",
   "login_title": "Enter a password",
   "login_subtitle": "You can find the password in a message you received from a person who invited you",
   "login_button_text": "Log in",
@@ -9,5 +10,15 @@
   "invalid_event_name": "Incorrect event name",
   "null_event_name": "The event name has not been set yet. Сontact the event organizer",
   "auth_error": "Authentication error. Try again",
-  "cant_login": "You tried to login more than {{attempts}} times. Wait {{time}} seconds"
+  "cant_login": "You tried to login more than {{attempts}} times. Wait {{time}} seconds",
+
+  "Enter details of your Quinceañera": "Enter details of your Quinceañera",
+  "When is your Quinceañera?": "When is your Quinceañera?",
+  "What is the budget approximately?": "What is the budget approximately?",
+  "How many guests are you expecting?": "How many guests are you expecting?",
+  "Where will be your Quinceañera?": "Where will be your Quinceañera?",
+  "What language do you prefer?": "What language do you prefer?",
+  "What current do you use?": "What current do you use?",
+  "Create profile": "Create profile",
+  "You cannot create a new profile because you have already created 3 profiles": "You cannot create a new profile because you have already created 3 profiles"
 }

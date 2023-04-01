@@ -1,0 +1,123 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  column-gap: 8px;
+
+  padding: $button-padding-x;
+  border-radius: 20px;
+  border: none;
+  background-color: transparent;
+
+  font-family: $button-ff;
+  font-size: $button-fz;
+  font-weight: $button-fw;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: background-color 0.25s ease;
+
+  &:disabled {
+    background-color: #cecece;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  svg {
+    width: 12px;
+  }
+}
+
+// ----------------------------------
+// Filled Primary Button
+// ----------------------------------
+
+.filled.primary {
+  color: #fff;
+  background-color: $button-bg;
+
+  &:hover {
+    background-color: $button-hover-bg;
+  }
+
+  svg {
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+// ----------------------------------
+// Filled Error Button
+// ----------------------------------
+
+.filled.error {
+  color: #fff;
+  background-color: $button-error-bg;
+
+  &:hover {
+    background-color: $button-error-hover-bg;
+  }
+
+  svg {
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+// ----------------------------------
+// Ghost Primary Button
+// ----------------------------------
+
+.ghost.primary {
+  color: $button-bg;
+
+  &:hover {
+    color: $button-hover-bg;
+  }
+
+  svg {
+    path {
+      fill: $button-bg;
+    }
+  }
+}
+
+// ----------------------------------
+// Ghost Error Button
+// ----------------------------------
+
+.ghost.error {
+  color: $button-error-bg;
+
+  &:hover {
+    color: $button-error-hover-bg;
+  }
+
+  svg {
+    path {
+      fill: $button-error-bg;
+    }
+  }
+}
+
+// ----------------------------------
+// Ghost Text Button
+// ----------------------------------
+
+.ghost.text {
+  color: $button-text-bg;
+
+  &:hover {
+    color: $button-text-hover-bg;
+  }
+
+  svg {
+    path {
+      fill: $button-text-bg;
+    }
+  }
+}

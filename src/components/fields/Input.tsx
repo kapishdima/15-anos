@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
 import {
   Controller,
   ControllerFieldState,
@@ -20,6 +20,9 @@ type Children = ({
 
 export type BaseInputProps = {
   name: string;
+  label?: string | null;
+  suffix?: string;
+  type?: HTMLInputTypeAttribute;
 };
 
 type InputProps = BaseInputProps & {

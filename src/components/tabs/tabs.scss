@@ -1,0 +1,53 @@
+.tabs {
+  &-pills {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  &-pill {
+    position: relative;
+
+    font-family: $anevir-ff;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $darkGrayColor;
+    text-transform: uppercase;
+
+    padding-bottom: 8px;
+    cursor: pointer;
+
+    transition: color 0.5s ease;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      width: 0;
+      height: 2px;
+
+      background-color: $darkColor;
+
+      transition: width 0.5s ease;
+    }
+
+    &--active {
+      color: $darkColor;
+      &::before {
+        width: 100%;
+        right: 0;
+      }
+    }
+
+    &:hover {
+      color: $darkColor;
+      &::before {
+        width: 100%;
+        right: 0;
+      }
+    }
+  }
+}

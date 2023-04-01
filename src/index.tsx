@@ -4,6 +4,7 @@ import App from './App';
 
 import './styles/index.scss';
 import { ToastContainer } from 'react-toastify';
+import { UserLocationProvider } from './app/location/UserLocationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -14,6 +15,8 @@ root.render(
       pauseOnHover={false}
       autoClose={3000}
     />
-    <App />
+    <UserLocationProvider>
+      <App />
+    </UserLocationProvider>
   </React.StrictMode>,
 );

@@ -1,10 +1,17 @@
+@import './datepicker-field.scss';
+
 .form-field__container {
   display: flex;
   flex-direction: column;
-  row-gap: 4px;
+  row-gap: 8px;
 }
 
-.form-field {
+.form-field__label {
+  @include inputLabel;
+}
+
+.form-field,
+.form-field__container input {
   width: 100%;
   padding: $input-padding-y $input-padding-x;
 
@@ -21,4 +28,29 @@
   &__error {
     @include inputError;
   }
+}
+
+.form-input__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .form-input__suffix {
+    position: absolute;
+    right: $input-padding-x;
+
+    font-family: $anevir-ff;
+    font-size: 0.75rem;
+    color: $darkGrayColor;
+  }
+}
+
+// ----------------------------
+// Hide default arrows
+// ----------------------------
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -8,6 +8,12 @@ $recoleta-alt-ff: 'Recoleta Alt';
 $anevir-ff: 'Avenir';
 
 // ------------------------------
+// Sizes
+// ------------------------------
+
+$sidebar-width: 300px;
+
+// ------------------------------
 // Colors
 // ------------------------------
 
@@ -15,20 +21,30 @@ $lightGrayColor: #f1f2f6;
 $darkGrayColor: #aeaba8;
 $darkColor: #000;
 $accentColor: #db5b78;
-$errorColor: #db5b78;
+$errorColor: #e74c3c;
 $loaderColor: #db5b78;
+$successColor: #2ecc71;
+$menuGroupBorderColor: rgba(#f7f7f7, 0.65);
+
+// Color used for right border of sidebar
+$sidebarBackgroundColor: #fff;
+$sidebarBorderColor: rgba(#e3e3e3, 0.7);
 
 // ------------------------------
 // Shadows
 // ------------------------------
 
 $box-shadow: 0 0 13px -18px rgba(0, 0, 0, 0.24);
+$event-timer-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+$task-progressbar-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
 
 // ------------------------------
 // Border Radius
 // ------------------------------
 
 $base-br: 14px;
+$menu-link-br: 12px;
+$event-timer-br: 18px;
 
 // ------------------------------
 // Paddings
@@ -38,13 +54,32 @@ $box-padding-x: 20px;
 $box-padding-y: 24px;
 
 $input-padding-x: 12px;
-$input-padding-y: 14px;
+$input-padding-y: 10px;
 
 $button-padding-x: 12px;
+
+$sidebar-padding-y: 18px;
+$sidebar-padding-x: 18px;
+
+$event-timer-padding-y: 12px;
+$event-timer-padding-x: 18px;
+
+$menu-item-padding-y: 12px;
+$menu-item-padding-x: 14px;
+
+$main-content-padding-y: 48px;
+$main-content-padding-x: 12px;
+
+$task-progress-padding-y: 16px;
+$task-progress-padding-x: 18px;
+
+$task-card-padding-y: 12px;
+$task-card-padding-x: 12px;
 
 // ------------------------------
 // Texts
 // ------------------------------
+
 // Style is used for first level headings
 .heading1 {
   font-family: $recoleta-alt-ff;
@@ -73,7 +108,7 @@ $button-padding-x: 12px;
 @mixin inputValue {
   font-family: $anevir-ff;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: $darkColor;
 }
 
@@ -83,6 +118,54 @@ $button-padding-x: 12px;
   font-size: 0.75rem;
   font-weight: 400;
   color: $errorColor;
+}
+
+// The style is used for label ​​in input fields
+@mixin inputLabel {
+  font-family: $anevir-ff;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: $darkGrayColor;
+}
+
+// The style is used for app title in sidebar (Quincy)
+@mixin appTitle {
+  font-family: $recoleta-alt-ff;
+  font-size: 2rem;
+  font-weight: 400;
+  color: $accentColor;
+}
+
+// The style is used for menu group title in sidebar
+@mixin menuTitle {
+  font-family: $recoleta-alt-ff;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #d5d5d5;
+}
+
+// The style is used for menu link in sidebar
+@mixin menuLink {
+  font-family: $anevir-ff;
+  font-size: 1rem;
+  font-weight: 400;
+  color: $darkColor;
+}
+
+// The style is used for logout button
+@mixin logout {
+  font-family: $anevir-ff;
+  font-size: 1rem;
+  font-weight: 400;
+  color: $darkColor;
+}
+
+// The style is used for page title;
+@mixin pageTitle {
+  font-family: $recoleta-alt-ff;
+  font-size: 2rem;
+  font-weight: 400;
+  color: $darkColor;
 }
 
 // ------------------------------
@@ -95,3 +178,9 @@ $button-fw: 600;
 
 $button-bg: $accentColor;
 $button-hover-bg: darken($accentColor, 5);
+
+$button-error-bg: $errorColor;
+$button-error-hover-bg: darken($errorColor, 5);
+
+$button-text-bg: $darkColor;
+$button-text-hover-bg: darken($darkColor, 5);

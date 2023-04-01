@@ -1,0 +1,96 @@
+.select {
+  width: 100%;
+  position: relative;
+
+  &.opened {
+    .select-dropdown {
+      z-index: 2;
+      opacity: 1;
+      display: flex;
+      animation: fadeIn 0.25s ease;
+    }
+  }
+
+  &-field {
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
+
+    background-color: transparent;
+    border: 1px solid #cbcbcb;
+    border-radius: 12px;
+  }
+  &-placeholder {
+    @include inputPlaceholder;
+  }
+
+  &-value {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    &__text {
+      @include inputValue;
+    }
+  }
+
+  &-dropdown {
+    width: 100%;
+    position: absolute;
+    top: 120%;
+    z-index: -2;
+
+    max-height: 300px;
+    overflow-y: auto;
+
+    display: none;
+    flex-direction: column;
+
+    background-color: #fff;
+    border: 1px solid #cbcbcb;
+    border-radius: 12px;
+
+    opacity: 0;
+    transition: opacity 0.25s ease;
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: $lightGrayColor;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $darkGrayColor;
+    }
+  }
+
+  &-option {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    padding: $input-padding-y $input-padding-x;
+    border-bottom: 1px solid $lightGrayColor;
+
+    @include inputValue;
+
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+
+    &:hover {
+      background-color: $lightGrayColor;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

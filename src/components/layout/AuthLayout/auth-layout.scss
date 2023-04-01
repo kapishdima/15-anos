@@ -1,0 +1,39 @@
+.auth-layout {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 24px;
+
+    .back-button {
+      display: flex;
+      align-content: inherit;
+      column-gap: 4px;
+
+      font-family: $anevir-ff;
+      font-weight: 500;
+      color: $darkColor;
+      font-size: 14px;
+
+      cursor: pointer;
+
+      img {
+        width: 18px;
+      }
+    }
+  }
+}

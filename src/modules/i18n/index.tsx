@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import detector from 'i18next-browser-languagedetector';
 
 import en from '../../app/locales/en.json';
+import ru from '../../app/locales/ru.json';
+import ua from '../../app/locales/ru.json';
 
 export const createI18nClient = () => {
   i18n
@@ -11,6 +13,8 @@ export const createI18nClient = () => {
     .init({
       resources: {
         en: { translation: en },
+        ru: { translation: ru },
+        ua: { translation: ua },
       },
       fallbackLng: 'en',
       interpolation: {

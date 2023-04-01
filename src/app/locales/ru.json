@@ -1,0 +1,23 @@
+{
+  "Back": "Назад",
+  "login_title": "Введите пароль",
+  "login_subtitle": "Вы можете найти пароль в сообщении, которое вы получили от человека, который вас пригласил",
+  "login_button_text": "Войти",
+  "password_placehoder": "Введите пароль",
+  "event_title_placeholder": "Введите название мероприятия",
+
+  "invalid_password": "Неверный пароль",
+  "invalid_event_name": "Неверное название мероприятия",
+  "null_event_name": "Название события еще не установлено. Связаться с организатором мероприятия",
+  "auth_error": "Ошибка аутентификации. Попробуйте еще раз",
+  "cant_login": "Вы пытались войти более {{attempts}} раз. Подождите {{time}} секунд",
+
+  "Enter details of your Quinceañera": "Введите данные вашего Quinceañera",
+  "When is your Quinceañera?": "Когда ваш Quinceañera?",
+  "What is the budget approximately?": "Какой примерно бюджет?",
+  "How many guests are you expecting?": "Сколько гостей вы ожидаете?",
+  "Where will be your Quinceañera?": "Где будет ваш Quinceañera?",
+  "What language do you prefer?": "Какой язык вы предпочитаете?",
+  "What currency do you use?": "Какую валюту вы используете?",
+  "Create profile": "Создать профиль"
+}

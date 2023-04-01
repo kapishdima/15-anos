@@ -1,0 +1,58 @@
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+
+  padding: 8px;
+
+  transition: background-color 0.5s ease;
+  cursor: pointer;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    path {
+      transition: fill 0.5s ease;
+    }
+  }
+}
+
+.icon-button.primary {
+  &:hover {
+    background-color: $accentColor;
+
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+.icon-button.error {
+  &:hover {
+    background-color: $errorColor;
+
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+.icon-button.success {
+  &:hover {
+    background-color: $successColor;
+
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}

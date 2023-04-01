@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Form } from '../../../components/form/Form';
-import { Button } from '../../../components/button/Button';
+import { Button } from '../../../components/button/Button/Button';
 import { PasswordField } from '../../../components/fields/PasswordField';
 import { loginSchemaValidation } from '../validation/login.validation';
 import { EventTitleField } from './EventTitleField';
@@ -11,12 +11,12 @@ import { useLogin } from '../hook/useLogin';
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
-  const { mutate, isLoading, error, canLogin } = useLogin();
+
+  const { mutate, isLoading, canLogin } = useLogin();
+
   const onSubmit = async (values: any) => {
     await mutate(values);
   };
-
-  console.log(error);
 
   return (
     <Form onSubmit={onSubmit} classes="login-form" schema={loginSchemaValidation}>

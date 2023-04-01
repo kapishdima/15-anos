@@ -1,0 +1,25 @@
+.task-progress {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  background-color: #fff;
+  border-radius: $base-br;
+  box-shadow: $task-progressbar-shadow;
+
+  padding: $task-progress-padding-y $task-progress-padding-x;
+
+  &__title {
+    font-family: $anevir-ff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $darkColor;
+  }
+
+  &__subtitle {
+    font-family: $anevir-ff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $darkGrayColor;
+  }
+}
