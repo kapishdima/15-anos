@@ -6,15 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { CreateProfileForm } from '../shared/CreateProfileForm';
 
 import Logo from '../../../image/logo.png';
-import { getAuth } from 'firebase/auth';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Loader } from '../../../components/layout/Loader/Loader';
 import { authAnonymously } from '../../firebase/auth';
+import { auth } from '../../firebase';
 
 export const CreateProfilePage: React.FC = () => {
   const { t } = useTranslation();
 
-  const [_, loading] = useAuthState(getAuth());
+  const [_, loading] = useAuthState(auth);
 
   useEffect(() => {
     authAnonymously();

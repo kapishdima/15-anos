@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { MIN_PASSWORD } from '../../../app/contants/validation-constants';
+import { MIN_PASSWORD } from '../../../app/constants/validation-constants';
 
 export const useEventTitleField = () => {
   const [shown, setShown] = useState(false);

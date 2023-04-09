@@ -3,10 +3,16 @@ import { LoginPage } from '../../modules/auth/pages/LoginPage';
 import { CreateProfilePage } from '../../modules/auth/pages/CreateProfilePage';
 import { HomePage } from '../../modules/home/pages/HomePage';
 
+import { ProtectedRoute } from './ProtectedRoute';
+
 export const router = createHashRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/login',

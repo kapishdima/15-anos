@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import {
   INVALID_LOGIN_ATTEMPT,
   SUCCESS_ACCOUNT_CREATION,
-} from '../../../app/contants/local-storage-keys';
+} from '../../../app/constants/local-storage-keys';
 import { useState } from 'react';
 
 export type ErrorTypes = 'wrong' | 'user' | 'eventTitle wrong' | 'eventTitle null' | 'reUser';

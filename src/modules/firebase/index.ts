@@ -1,4 +1,6 @@
 import { initializeApp } from 'firebase/app';
+import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCvCSVr97kPlAHyB55Md6qsKef1T28mlLw',
@@ -11,6 +13,9 @@ const firebaseConfig = {
   measurementId: 'G-4MBLZVJ6FK',
 };
 
-export const createFirebaseClient = () => {
-  initializeApp(firebaseConfig);
-};
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const db = getFirestore();
+
+setPersistence(auth, browserLocalPersistence);
+export default app;

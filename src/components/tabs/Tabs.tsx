@@ -1,8 +1,13 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
+type Tab = {
+  title: string;
+  component: JSX.Element;
+};
+
 type TabsProps = {
-  tabs: string[];
+  tabs: Tab[];
 };
 
 export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
@@ -18,11 +23,13 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
         {tabs.map((tab, index) => (
           <div
             className={classNames('tabs-pill', { 'tabs-pill--active': index === activeTab })}
-            onClick={() => changeTab(index)}>
-            {tab}
+            onClick={() => changeTab(index)}
+            key={tab.title}>
+            {tab.title}
           </div>
         ))}
       </div>
+      <div className="tabs-content">{tabs[activeTab].component}</div>
     </div>
   );
 };

@@ -25,6 +25,7 @@ $errorColor: #e74c3c;
 $loaderColor: #db5b78;
 $successColor: #2ecc71;
 $menuGroupBorderColor: rgba(#f7f7f7, 0.65);
+$iconButtonBorderColor: rgba(#aeaba8, 0.3);
 
 // Color used for right border of sidebar
 $sidebarBackgroundColor: #fff;
@@ -44,7 +45,7 @@ $task-progressbar-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
 
 $base-br: 14px;
 $menu-link-br: 12px;
-$event-timer-br: 18px;
+$event-timer-br: 38px;
 
 // ------------------------------
 // Paddings
@@ -131,9 +132,9 @@ $task-card-padding-x: 12px;
 // The style is used for app title in sidebar (Quincy)
 @mixin appTitle {
   font-family: $recoleta-alt-ff;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 400;
-  color: $accentColor;
+  color: $darkColor;
 }
 
 // The style is used for menu group title in sidebar
@@ -141,7 +142,7 @@ $task-card-padding-x: 12px;
   font-family: $recoleta-alt-ff;
   font-size: 1.25rem;
   font-weight: 400;
-  color: #d5d5d5;
+  color: $darkColor;
 }
 
 // The style is used for menu link in sidebar

@@ -24,6 +24,8 @@
     align-items: center;
     column-gap: 8px;
 
+    position: relative;
+
     border-radius: $menu-link-br;
     background-color: transparent;
     padding: $menu-item-padding-y 0;
@@ -34,15 +36,36 @@
 
     @include menuLink;
 
-    &:hover {
-      background-color: $accentColor;
-      padding-left: $menu-item-padding-x;
-      color: #fff;
+    &:before {
+      content: '';
 
-      svg {
-        path {
-          fill: #fff;
-        }
+      position: absolute;
+      bottom: 0;
+      z-index: -1;
+      left: -$sidebar-padding-y;
+
+      width: calc(100% + ($sidebar-padding-y * 2));
+      height: 100%;
+
+      opacity: 0;
+      background-color: $lightGrayColor;
+
+      transition: opacity 0.5s ease;
+    }
+
+    &:hover {
+      // background-color: $accentColor;
+      padding-left: $menu-item-padding-x;
+      // color: #fff;
+
+      // svg {
+      //   path {
+      //     fill: #fff;
+      //   }
+      // }
+
+      &:before {
+        opacity: 1;
       }
     }
 

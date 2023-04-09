@@ -5,6 +5,8 @@
 
   position: relative;
 
+  width: 90%;
+
   &__image {
     position: relative;
 
@@ -39,7 +41,7 @@
   width: 92%;
 
   position: absolute;
-  bottom: -10%;
+  bottom: -14%;
   left: 4%;
 
   padding: $event-timer-padding-y $event-timer-padding-x;
@@ -61,11 +63,11 @@
       color: $accentColor;
 
       &--value {
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 500;
       }
       &--title {
-        font-size: 12px;
+        font-size: 0.625rem;
         font-weight: 400;
       }
     }

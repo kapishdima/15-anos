@@ -6,7 +6,7 @@ import { useUserLocation } from '../../../app/location/useUserLocation';
 import { currensies } from '../../../app/data/currencies';
 import format from 'date-fns/format';
 import { getTimezoneOffset } from '../../../app/location/getTimezone';
-import { SUCCESS_ACCOUNT_CREATION } from '../../../app/contants/local-storage-keys';
+import { SUCCESS_ACCOUNT_CREATION } from '../../../app/constants/local-storage-keys';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 

@@ -21,6 +21,11 @@
   }
 }
 
+.icon-button.filled.white {
+  background-color: #fff;
+  border: 1px solid $iconButtonBorderColor;
+}
+
 .icon-button.primary {
   &:hover {
     background-color: $accentColor;

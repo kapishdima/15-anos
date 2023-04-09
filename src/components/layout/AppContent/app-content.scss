@@ -1,4 +1,6 @@
 .app-content {
   flex: 1 1 auto;
   padding: $main-content-padding-y $main-content-padding-x;
+
+  margin-left: $sidebar-width;
 }

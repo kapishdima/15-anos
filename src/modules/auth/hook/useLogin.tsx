@@ -1,8 +1,13 @@
 import { getFunctions } from 'firebase/functions';
 import { useHttpsCallable } from 'react-firebase-hooks/functions';
+import { useNavigate } from 'react-router-dom';
+
 import { CloutFunctionResponse } from '../../../app/http/http';
 import { useError } from './useError';
-import { INVALID_LOGIN_ATTEMPT } from '../../../app/contants/local-storage-keys';
+import { EVENT_DETAILS, INVALID_LOGIN_ATTEMPT } from '../../../app/constants/local-storage-keys';
+import { EventDetails } from '../@types';
+import { AppRoutes } from '../../../app/router/routes';
+import { forceRefreshUser } from '../../firebase/auth';
 
 export const useLogin = () => {
   const [exucute, isLoading, error] = useHttpsCallable<any, CloutFunctionResponse>(
@@ -10,6 +15,7 @@ export const useLogin = () => {
     'login',
   );
   const { canLogin, detectCanLogin, handleError } = useError();
+  const navigate = useNavigate();
 
   const prepareValues = (values: any) => {
     const isOwner = /.*[A-Z]$/gm.test(values.password);
@@ -40,8 +46,18 @@ export const useLogin = () => {
     }
 
     clearInvalidAttempts();
+    onSuccessLogin(response?.data);
 
     return response?.data;
+  };
+
+  const onSuccessLogin = async (eventDetails: EventDetails) => {
+    window.localStorage.setItem(EVENT_DETAILS, JSON.stringify(eventDetails));
+    const refreshed = await forceRefreshUser();
+
+    if (refreshed) {
+      navigate(AppRoutes.ROOT);
+    }
   };
 
   return {

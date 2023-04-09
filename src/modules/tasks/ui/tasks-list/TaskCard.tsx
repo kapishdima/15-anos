@@ -1,7 +1,7 @@
 import React from 'react';
-import { AngleRightIcon } from '../../../components/icons/AngleRightIcon';
+import { AngleRightIcon } from '../../../../components/icons/AngleRightIcon';
 import classNames from 'classnames';
-import { CheckIcon } from '../../../components/icons/CheckIcon';
+import { CheckIcon } from '../../../../components/icons/CheckIcon';
 
 type TaskCardProps = {
   image: string;
@@ -20,8 +20,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 }) => {
   return (
     <div className={classNames('task-card', { 'task-card--completed': completed })}>
-      <div className="task-card__icon" style={{ backgroundColor: color }}>
-        <img src={image} alt="" />
+      <div className="task-card__image">
+        <div className="task-card__icon" style={{ backgroundColor: color }}>
+          <img src={image} alt="" />
+        </div>
         <div className="task-card__checked-icon">
           <CheckIcon />
         </div>

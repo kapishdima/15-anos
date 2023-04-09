@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
 
-  position: sticky;
+  position: fixed;
   top: 0;
 
   width: $sidebar-width;
@@ -14,7 +14,22 @@
   border-right: 1px solid $sidebarBorderColor;
   background-color: $sidebarBackgroundColor;
 
-  border-top-right-radius: 24px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $lightGrayColor;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $darkGrayColor;
+    border-radius: 4px;
+  }
 
   &__logo {
     display: flex;
@@ -26,7 +41,7 @@
     margin-bottom: 48px;
 
     img {
-      width: 48px;
+      width: 36px;
       object-fit: cover;
     }
 

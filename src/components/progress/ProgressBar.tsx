@@ -11,7 +11,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ value }) => {
         <div className="progress-bar__value" style={{ width: `${value}%` }}></div>
         <div className="progress-bar__thumb"></div>
       </div>
-      <div className="progress-bar__label">{value}%</div>
+      {!isNaN(value) && <div className="progress-bar__label">{value}%</div>}
     </div>
   );
 };
