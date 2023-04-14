@@ -5,5 +5,5 @@ import { TaskList } from './TaskList';
 export const TaskListByCategories: React.FC = () => {
   const tasksStore = useTasksStore();
 
-  return <TaskList tasks={sortByCategoriesAlphabet(tasksStore.tasks)} />;
+  return <TaskList tasks={sortByCategoriesAlphabet(tasksStore.tasksForView)} />;
 };

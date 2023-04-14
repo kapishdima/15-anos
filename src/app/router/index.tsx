@@ -4,10 +4,11 @@ import { CreateProfilePage } from '../../modules/auth/pages/CreateProfilePage';
 import { HomePage } from '../../modules/home/pages/HomePage';
 
 import { ProtectedRoute } from './ProtectedRoute';
+import { AppRoutes } from './routes';
 
 export const router = createHashRouter([
   {
-    path: '/',
+    path: AppRoutes.ROOT,
     element: (
       <ProtectedRoute>
         <HomePage />
@@ -15,11 +16,11 @@ export const router = createHashRouter([
     ),
   },
   {
-    path: '/login',
+    path: AppRoutes.LOGIN,
     element: <LoginPage />,
   },
   {
-    path: '/profile/create',
+    path: AppRoutes.CREATE_PROFILE,
     element: <CreateProfilePage />,
   },
 ]);

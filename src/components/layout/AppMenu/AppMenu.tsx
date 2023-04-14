@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UsersIcon, SeetingPlanIcon, InviteIcon } from '../../icons';
+import { UsersIcon, SeetingPlanIcon, InviteIcon } from '@components/index';
 
 export const AppMenu: React.FC = () => {
   return (

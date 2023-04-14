@@ -14,6 +14,7 @@ export const UserLocationProvider: React.FC<PropsWithChildren> = ({ children }) 
   const [currency, setCurrency] = useState('');
 
   const fetchUserLocation = async () => {
+    // @TODO: resolve this
     const response = await fetch('https://api.ipregistry.co/?key=6wpnhc1x91kxudii');
     const location = await response.json();
 

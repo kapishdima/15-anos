@@ -15,7 +15,7 @@
   &:hover:not(.task-card--completed) {
     .task-card__checked-icon {
       display: flex;
-      // opacity: 1;
+
       animation: fadeIn 500ms ease both;
     }
   }
@@ -105,6 +105,10 @@
       }
     }
   }
+
+  &__remove-button {
+    animation: fadeIn 500ms ease both;
+  }
 }
 
 .task-list {
@@ -133,6 +137,12 @@
       margin-bottom: 10px;
       text-transform: uppercase;
     }
+  }
+}
+
+.toggle-visibility {
+  button {
+    padding-left: 0;
   }
 }
 

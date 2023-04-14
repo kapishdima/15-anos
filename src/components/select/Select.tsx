@@ -1,6 +1,8 @@
-import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
-import { useClickOutside } from '../hooks/useClickOutside';
+
+import classNames from 'classnames';
+import { useClickOutside } from '@components/index';
+import { useTranslation } from 'react-i18next';
 
 export type Option = {
   icon?: string;
@@ -21,6 +23,7 @@ export const Select: React.FC<SelectProps> = ({
   placeholder,
   defaultSelected,
 }) => {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<Option | null>(
     options.find((option) => option.value.toLowerCase() === defaultSelected?.toLowerCase()) || null,
   );
@@ -67,12 +70,16 @@ export const Select: React.FC<SelectProps> = ({
         )}
       </div>
       <div className="select-dropdown">
-        {options.map((option) => (
-          <div className="select-option" onClick={() => onOptionClick(option)}>
-            {option.icon && <div className="select-option-icon">{option.icon}</div>}
-            <div className="select-option-label">{option.label}</div>
-          </div>
-        ))}
+        {options.length ? (
+          options.map((option) => (
+            <div className="select-option" onClick={() => onOptionClick(option)}>
+              {option.icon && <div className="select-option-icon">{option.icon}</div>}
+              <div className="select-option-label">{option.label}</div>
+            </div>
+          ))
+        ) : (
+          <div className="select-dropdown__empty">{t('Empty')}</div>
+        )}
       </div>
     </div>
   );

@@ -17,7 +17,7 @@
 
   cursor: pointer;
 
-  transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 
   &:disabled {
     background-color: #cecece;
@@ -59,6 +59,25 @@
 
   &:hover {
     background-color: $button-error-hover-bg;
+  }
+
+  svg {
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+// ----------------------------------
+// Filled Success Button
+// ----------------------------------
+
+.filled.success {
+  color: #fff;
+  background-color: $successColor;
+
+  &:hover {
+    background-color: $success-success-hover-bg;
   }
 
   svg {
@@ -118,6 +137,24 @@
   svg {
     path {
       fill: $button-text-bg;
+    }
+  }
+}
+
+// ----------------------------------
+// Ghost Text Button
+// ----------------------------------
+
+.ghost.success {
+  color: $successColor;
+
+  &:hover {
+    color: darken($successColor, 10%);
+  }
+
+  svg {
+    path {
+      fill: $successColor;
     }
   }
 }

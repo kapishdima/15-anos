@@ -1,5 +1,6 @@
 import React from 'react';
-import { PageTitle } from '../../heading/PageTitle';
+
+import { PageTitle } from '@components/index';
 
 type PageHeaderProps = {
   title: string;

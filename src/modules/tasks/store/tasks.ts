@@ -4,7 +4,6 @@ import { EVENT_DETAILS } from '../../../app/constants/local-storage-keys';
 import { Timestamp } from 'firebase/firestore';
 
 import { format } from 'date-fns';
-import groupBy from 'lodash.groupby';
 import sortBy from 'lodash.sortby';
 import { orderBy } from 'lodash';
 
@@ -24,6 +23,7 @@ export type Task = {
 };
 
 export type TaskViewModal = {
+  id: string;
   categoryId: string;
   completed: Date;
   date: Date;
@@ -38,15 +38,21 @@ export type GroupedTasks = { [key: string]: TaskViewModal[] };
 
 interface TasksStore {
   tasks: TaskViewModal[];
+  tasksForView: TaskViewModal[];
   total: number;
   completed: number;
   loading: boolean;
+  isRemoval: boolean;
   fetchTasks: () => Promise<void>;
+  toggleTaskRemoval: () => void;
+  showCompleted: () => void;
+  hideCompleted: () => void;
+  removeTask: (id: string) => void;
 }
 
 export const groupByMonth = (tasks: TaskViewModal[]) => {
   const groupedTask = tasks.reduce((acc, task) => {
-    const key = format(task.date, 'MMMM');
+    const key = format(task.date, 'MMMM, yyyy');
     acc[key] = [...(acc[key] || []), task];
 
     return acc;
@@ -91,9 +97,11 @@ export const sortByCategoriesAlphabet = (tasks: TaskViewModal[]) => {
 
 export const useTasksStore = create<TasksStore>((set) => ({
   tasks: [],
+  tasksForView: [],
   completed: 0,
   total: 0,
   loading: false,
+  isRemoval: false,
   fetchTasks: async () => {
     set(() => ({
       loading: true,
@@ -105,6 +113,25 @@ export const useTasksStore = create<TasksStore>((set) => ({
     const total = tasks.length;
     const completed = tasks.filter((task) => task.isCompleted).length;
 
-    set(() => ({ tasks, loading: false, total, completed }));
+    set(() => ({ tasks, tasksForView: tasks, loading: false, total, completed }));
   },
+  showCompleted: () =>
+    set((state) => {
+      return { tasksForView: state.tasks };
+    }),
+  hideCompleted: () =>
+    set((state) => {
+      const uncompleted = state.tasks.filter((task) => !task.isCompleted);
+
+      return { tasksForView: uncompleted };
+    }),
+  toggleTaskRemoval: () =>
+    set((state) => {
+      return { isRemoval: !state.isRemoval };
+    }),
+
+  removeTask: (id: string) =>
+    set((state) => {
+      return { tasksForView: state.tasksForView.filter((task) => task.id !== id) };
+    }),
 }));

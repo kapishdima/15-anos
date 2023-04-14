@@ -21,12 +21,18 @@
 
   @include inputValue;
 
-  ::placeholder {
+  &::placeholder {
     @include inputPlaceholder;
   }
 
   &__error {
     @include inputError;
+  }
+}
+
+.form-textarea__container {
+  textarea {
+    min-height: 200px;
   }
 }
 

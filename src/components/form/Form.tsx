@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ObjectSchema } from 'yup';
+import classNames from 'classnames';
 
 type FormProps = PropsWithChildren & {
   onSubmit: (values: any) => void;
@@ -24,7 +25,9 @@ export const Form: React.FC<FormProps> = ({
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={classes}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={classNames('form-container', classes)}>
         {children}
       </form>
     </FormProvider>

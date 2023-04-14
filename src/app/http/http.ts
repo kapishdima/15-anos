@@ -1,3 +1,3 @@
 export type CloutFunctionResponseError = { error: string };
 
-export type CloutFunctionResponse = CloutFunctionResponseError | any;
+export type CloutFunctionResponse<TData = any> = CloutFunctionResponseError | TData;

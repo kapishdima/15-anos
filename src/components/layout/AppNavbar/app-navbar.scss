@@ -27,7 +27,7 @@
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: $darkGrayColor;
+    background: lighten($darkGrayColor, 20%);
     border-radius: 4px;
   }
 

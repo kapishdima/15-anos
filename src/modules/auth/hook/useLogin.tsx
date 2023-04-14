@@ -5,65 +5,109 @@ import { useNavigate } from 'react-router-dom';
 import { CloutFunctionResponse } from '../../../app/http/http';
 import { useError } from './useError';
 import { EVENT_DETAILS, INVALID_LOGIN_ATTEMPT } from '../../../app/constants/local-storage-keys';
-import { EventDetails } from '../@types';
+import { EventDetails, LoginCredentials, LoginPayload, UserRoles } from '../@types';
 import { AppRoutes } from '../../../app/router/routes';
-import { forceRefreshUser } from '../../firebase/auth';
+import { authAnonymously, forceRefreshUser } from '../../firebase/auth';
+import { auth } from '../../firebase';
+import { CloudFunctionsRoutes } from '../../../app/constants/cloud-functions';
 
 export const useLogin = () => {
-  const [exucute, isLoading, error] = useHttpsCallable<any, CloutFunctionResponse>(
+  const [exucute, isLoading, error] = useHttpsCallable<LoginPayload, CloutFunctionResponse>(
     getFunctions(),
-    'login',
+    CloudFunctionsRoutes.LOGIN,
   );
   const { canLogin, detectCanLogin, handleError } = useError();
   const navigate = useNavigate();
 
-  const prepareValues = (values: any) => {
-    const isOwner = /.*[A-Z]$/gm.test(values.password);
-    const isAssistant = /.*[a-z]$/gm.test(values.password);
+  const login = async (values: LoginCredentials) => {
+    /**
+      The user has 3 attempts to log in. 
+      After 3 attempts the user must wait 10 * (number of attempts) seconds 
+      before he can log in again 
+     * */
 
-    return {
-      role: isOwner ? 'owner' : isAssistant ? 'assistant' : 'viewer',
-      password: values.password,
-      eventTitle: values.eventTitle,
-    };
-  };
-
-  const clearInvalidAttempts = () => {
-    window.localStorage.removeItem(INVALID_LOGIN_ATTEMPT);
-  };
-
-  const mutate = async (values: any) => {
     const hasMaxAttempts = detectCanLogin();
 
     if (hasMaxAttempts) {
       return;
     }
 
-    const response = await exucute(prepareValues(values));
+    /**
+     Since all users in firebase are anonymous - before login, 
+     we need to create an anonymous user session 
+     * */
 
-    if (response?.data.error) {
-      return handleError(response?.data.error);
-    }
+    await authAnonymously();
 
-    clearInvalidAttempts();
-    onSuccessLogin(response?.data);
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        return;
+      }
 
-    return response?.data;
+      const response = await exucute(toLoginPayload(values));
+
+      if (response?.data.error) {
+        return handleError(response?.data.error);
+      }
+
+      clearInvalidAttempts();
+      onSuccessLogin(response?.data);
+
+      return response?.data;
+    });
   };
 
   const onSuccessLogin = async (eventDetails: EventDetails) => {
     window.localStorage.setItem(EVENT_DETAILS, JSON.stringify(eventDetails));
-    const refreshed = await forceRefreshUser();
 
-    if (refreshed) {
-      navigate(AppRoutes.ROOT);
-    }
+    /**
+     In order for the data of an anonymous user to be successfully updated, 
+     you need to do force get user token 
+     * */
+
+    await forceRefreshUser();
+
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser) {
+        navigate(AppRoutes.ROOT);
+      }
+    });
   };
 
   return {
-    mutate,
+    login,
     isLoading,
     error,
     canLogin,
   };
+};
+
+/**
+  Returns the user's role.
+  
+  The last character is a capital letter - owner
+  The last character is a small letter - assintant
+  All the rest - viewer
+ 
+ * */
+
+const getUserRole = (password: string): UserRoles => {
+  const isOwner = /.*[A-Z]$/gm.test(password);
+  const isAssistant = /.*[a-z]$/gm.test(password);
+
+  return isOwner ? 'owner' : isAssistant ? 'assistant' : 'viewer';
+};
+
+const toLoginPayload = (values: LoginCredentials): LoginPayload => {
+  const role = getUserRole(values.password);
+
+  return {
+    role,
+    password: values.password,
+    eventTitle: values.eventTitle,
+  };
+};
+
+const clearInvalidAttempts = () => {
+  window.localStorage.removeItem(INVALID_LOGIN_ATTEMPT);
 };

@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
-import { AppLayout } from '../../../components/layout/AppLayout/AppLayout';
-import { PageHeader } from '../../../components/layout/PageHeader/PageHeader';
-import { CreateTask } from '../../tasks/ui/buttons/CreateTask/CreateTask';
-import { RemoveTask } from '../../tasks/ui/buttons/RemoveTask/RemoveTask';
-import { TaskProgress } from '../../tasks/ui/tasks-progress/TaskProgress';
-import { TaskList } from '../../tasks/ui/tasks-list/TaskList';
-import { Tabs } from '../../../components/tabs/Tabs';
-import { useTasksStore } from '../../tasks/store/tasks';
-import { useCategoriesStore } from '../../categories/store/categories';
-import { TaskListByDate } from '../../tasks/ui/tasks-list/TaskListByDate';
-import { TaskListByCategories } from '../../tasks/ui/tasks-list/TaskListByCategories';
+import { AppLayout, PageHeader } from '@components/index';
+
+import {
+  CreateTask,
+  RemoveTask,
+  TaskProgress,
+  useTasksStore,
+  TaskListByDate,
+  TaskListByCategories,
+  ToggleVisibilityCompleted,
+} from '@modules/tasks';
+
+import { useCategoriesStore } from '@modules/categories';
+
+import { Tabs } from '@components/index';
+import { useTranslation } from 'react-i18next';
 
 export const HomePage: React.FC = () => {
   const tasksStore = useTasksStore();
   const categoriesStore = useCategoriesStore();
+  const { t } = useTranslation();
 
   useEffect(() => {
     tasksStore.fetchTasks();
@@ -21,10 +27,10 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <AppLayout>
+    <AppLayout loading={tasksStore.loading && categoriesStore.loading}>
       <div className="home-page">
         <PageHeader
-          title="Tasks"
+          title={t('Tasks')}
           actions={
             <>
               <CreateTask />
@@ -37,6 +43,7 @@ export const HomePage: React.FC = () => {
           <div className="tasks-info">
             <TaskProgress total={tasksStore.total} completed={tasksStore.completed} />
             <Tabs
+              extra={<ToggleVisibilityCompleted />}
               tabs={[
                 { title: 'By Data', component: <TaskListByDate /> },
                 { title: 'By Category', component: <TaskListByCategories /> },

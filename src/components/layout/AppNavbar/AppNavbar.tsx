@@ -1,9 +1,8 @@
 import React from 'react';
-import { AppMenu } from '../AppMenu/AppMenu';
-import { EventCard } from '../../event/EventCard/EventCard';
-import { Logout } from '../../button/Logout/Logout';
 
-import Logo from '../../../image/logo.png';
+import { Logout, EventCard, AppMenu } from '@components/index';
+
+import Logo from '@image/logo.png';
 
 export const AppNavbar: React.FC = () => {
   return (

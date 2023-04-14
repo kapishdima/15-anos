@@ -1,15 +1,20 @@
 import React from 'react';
-import { Form } from '../../../components/form/Form';
-import { TextField } from '../../../components/fields/TextField';
 import { useTranslation } from 'react-i18next';
-import { Button } from '../../../components/button/Button/Button';
-import { DatepickerField } from '../../../components/fields/DatepickerField';
-import { CurrencyField } from '../../../components/fields/CurrencyField/CurrencyField';
-import { CountrySelect } from '../../../components/fields/CountrySelect';
-import { LanguagesSelect } from '../../../components/fields/LanguagesSelect';
-import { CurrencySelect } from '../../../components/fields/CurrencySelect';
-import { useCreateProfile } from '../hook/useCreateProfile';
 import { addWeeks } from 'date-fns';
+
+import {
+  Form,
+  TextField,
+  Button,
+  DatepickerField,
+  CurrencyField,
+  CountrySelect,
+  LanguagesSelect,
+  CurrencySelect,
+} from '@components/index';
+
+import { useCreateProfile } from '../hook/useCreateProfile';
+import { CreateProfileCredentials } from '../@types';
 
 const date = new Date();
 date.setFullYear(new Date().getFullYear() + 1);
@@ -29,10 +34,10 @@ const initialValues = {
 
 export const CreateProfileForm: React.FC = () => {
   const { t } = useTranslation();
-  const { mutate, isLoading } = useCreateProfile();
+  const { createProfile, isLoading } = useCreateProfile();
 
-  const onSubmit = async (values: any) => {
-    await mutate(values);
+  const onSubmit = async (values: CreateProfileCredentials) => {
+    await createProfile(values);
   };
 
   return (

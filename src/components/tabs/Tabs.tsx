@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 type Tab = {
   title: string;
@@ -8,14 +9,24 @@ type Tab = {
 
 type TabsProps = {
   tabs: Tab[];
+  extra?: JSX.Element;
 };
 
-export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
+export const Tabs: React.FC<TabsProps> = ({ tabs, extra }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [activeTab, setActiveTab] = useState(0);
 
   const changeTab = (index: number) => {
     setActiveTab(index);
+    searchParams.set('activeTab', `${index}`);
+    setSearchParams(searchParams);
   };
+
+  useEffect(() => {
+    const tab = searchParams.get('activeTab');
+    setActiveTab(parseInt(tab || '0'));
+  }, []);
 
   return (
     <div className="tabs">
@@ -29,6 +40,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
           </div>
         ))}
       </div>
+      {extra}
       <div className="tabs-content">{tabs[activeTab].component}</div>
     </div>
   );

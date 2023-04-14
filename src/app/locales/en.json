@@ -1,15 +1,15 @@
 {
   "Back": "Back",
-  "login_title": "Enter a password",
-  "login_subtitle": "You can find the password in a message you received from a person who invited you",
-  "login_button_text": "Log in",
-  "password_placehoder": "Enter password",
-  "event_title_placeholder": "Enter event title",
+  "Enter a password": "Enter a password",
+  "You can find the password in a message you received from a person who invited you": "You can find the password in a message you received from a person who invited you",
+  "Log in": "Log in",
+  "Enter password": "Enter password",
+  "Enter event title": "Enter event title",
 
-  "invalid_password": "Incorrect password",
-  "invalid_event_name": "Incorrect event name",
-  "null_event_name": "The event name has not been set yet. Сontact the event organizer",
-  "auth_error": "Authentication error. Try again",
+  "Incorrect password": "Incorrect password",
+  "Incorrect event name": "Incorrect event name",
+  "The event name has not been set yet. Сontact the event organizer": "The event name has not been set yet. Сontact the event organizer",
+  "Authentication error. Try again": "Authentication error. Try again",
   "cant_login": "You tried to login more than {{attempts}} times. Wait {{time}} seconds",
 
   "Enter details of your Quinceañera": "Enter details of your Quinceañera",
@@ -20,5 +20,12 @@
   "What language do you prefer?": "What language do you prefer?",
   "What current do you use?": "What current do you use?",
   "Create profile": "Create profile",
-  "You cannot create a new profile because you have already created 3 profiles": "You cannot create a new profile because you have already created 3 profiles"
+  "You cannot create a new profile because you have already created 3 profiles": "You cannot create a new profile because you have already created 3 profiles",
+
+  "Empty": "No data",
+  "Cancel": "Cancel",
+  "Confirm": "Ok",
+  "Tasks": "Tasks",
+  "Task details": "Task details",
+  "Save the task": "Save the task"
 }

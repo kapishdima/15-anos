@@ -101,7 +101,7 @@ $task-card-padding-x: 12px;
 @mixin inputPlaceholder {
   font-family: $anevir-ff;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: $darkGrayColor;
 }
 
@@ -169,6 +169,14 @@ $task-card-padding-x: 12px;
   color: $darkColor;
 }
 
+// The style is used for page title;
+@mixin modalTitle {
+  font-family: $recoleta-alt-ff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: $darkColor;
+}
+
 // ------------------------------
 // Buttons
 // ------------------------------
@@ -185,3 +193,5 @@ $button-error-hover-bg: darken($errorColor, 5);
 
 $button-text-bg: $darkColor;
 $button-text-hover-bg: darken($darkColor, 5);
+
+$success-success-hover-bg: darken($successColor, 5);

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import { countries } from '@app/data/countries';
+import { languages } from '@app/data/languages';
+import { useUserLocation } from '@app/location/useUserLocation';
+
 import { SelectField } from './SelectField';
 import { BaseInputProps } from './Input';
-import { countries } from '../../app/data/countries';
-import { languages } from '../../app/data/languages';
-import { useFormContext } from 'react-hook-form';
-import { useUserLocation } from '../../app/location/useUserLocation';
-import { useTranslation } from 'react-i18next';
 
 type LanguagesSelectProps = BaseInputProps & {
   placeholder?: string;

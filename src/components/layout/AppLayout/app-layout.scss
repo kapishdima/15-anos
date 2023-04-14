@@ -1,4 +1,26 @@
 .app-layout {
   display: flex;
   column-gap: 48px;
+
+  &__children {
+    animation: fadeIn 300ms ease both;
+  }
+}
+
+.app-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100vh;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

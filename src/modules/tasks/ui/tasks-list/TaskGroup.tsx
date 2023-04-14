@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { TaskViewModal, groupByDay } from '../../store/tasks';
-import { TaskCard } from './TaskCard';
+import { v4 as uuidv4 } from 'uuid';
 
-import MockTaskIcon from '../../../../image/icons/task-icon.svg';
-import isPast from 'date-fns/isPast';
-import classNames from 'classnames';
-import isSameMonth from 'date-fns/isSameMonth';
+import { TaskViewModal, groupByDay, useTasksStore } from '../../store/tasks';
+
+import { TaskCard } from './TaskCard';
 import { TaskMonth } from './TaskMonth';
 import { TasksDay } from './TasksDay';
-import { getCategoryById, useCategoriesStore } from '../../../categories/store/categories';
+
+import { getCategoryById, useCategoriesStore } from '@modules/categories';
+import MockTaskIcon from '@image/icons/task-icon.svg';
 
 type TaskGroupProps = {
   title: string;
@@ -19,10 +19,11 @@ type TaskGroupProps = {
 export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks }) => {
   const groupedByDay = groupByDay(tasks);
   const categoriesStore = useCategoriesStore();
+  const tasksStore = useTasksStore();
 
   return (
     <>
-      <TaskMonth title={title} tasks={tasks} />
+      <TaskMonth title={title.split(',')[0]} tasks={tasks} />
       {Object.entries(groupedByDay).map(([date, dayTasks]) => (
         <div className="task-list__group">
           <TasksDay title={date} tasks={dayTasks} />
@@ -30,11 +31,15 @@ export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks }) => {
             const category = getCategoryById(categoriesStore.categories, task.categoryId);
             return (
               <TaskCard
-                id="1"
+                id={task.id}
                 name={task.title['en']}
                 image={MockTaskIcon}
                 completed={task.isCompleted}
                 color={`#${category?.color}`}
+                category={category?.title['en'] || ''}
+                date={task.date}
+                notes={task.notes}
+                isRemoval={tasksStore.isRemoval}
               />
             );
           })}

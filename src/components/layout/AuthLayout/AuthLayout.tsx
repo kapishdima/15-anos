@@ -1,7 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 
-import AngleLeft from '../../../image/icons/angle-left.svg';
 import { useTranslation } from 'react-i18next';
+
+import AngleLeft from '@image/icons/angle-left.svg';
 
 export const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();

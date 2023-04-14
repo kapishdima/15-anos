@@ -2,28 +2,28 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { Form } from '../../../components/form/Form';
-import { Button } from '../../../components/button/Button/Button';
-import { PasswordField } from '../../../components/fields/PasswordField';
+import { Form, Button, PasswordField } from '@components/index';
+
 import { loginSchemaValidation } from '../validation/login.validation';
 import { EventTitleField } from './EventTitleField';
 import { useLogin } from '../hook/useLogin';
+import { LoginCredentials } from '../@types';
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
 
-  const { mutate, isLoading, canLogin } = useLogin();
+  const { login, isLoading, canLogin } = useLogin();
 
-  const onSubmit = async (values: any) => {
-    await mutate(values);
+  const onSubmit = async (values: LoginCredentials) => {
+    await login(values);
   };
 
   return (
     <Form onSubmit={onSubmit} classes="login-form" schema={loginSchemaValidation}>
-      <PasswordField placeholder={t('password_placehoder')} name="password" />
+      <PasswordField placeholder={t('Enter password')} name="password" />
       <EventTitleField />
       <Button type="submit" loading={isLoading} disabled={!canLogin}>
-        {t('login_button_text')}
+        {t('Log in')}
       </Button>
     </Form>
   );

@@ -51,16 +51,16 @@ export const useError = () => {
     switch (error) {
       case 'wrong': {
         onInvalidPassword();
-        return toast.error(t('invalid_password'));
+        return toast.error(t('Incorrect password'));
       }
       case 'user':
-        return toast.error(t('auth_error'));
+        return toast.error(t('Authentication error. Try again'));
       case 'eventTitle wrong':
-        return toast.error(t('invalid_event_name'));
+        return toast.error(t('Incorrect event name'));
       case 'eventTitle null':
-        return toast.error(t('null_event_name'));
+        return toast.error(t('The event name has not been set yet. Сontact the event organizer'));
       case 'reUser':
-        return toast.error(t('auth_error'));
+        return toast.error(t('Authentication error. Try again'));
     }
   };
 

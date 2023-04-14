@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { BaseInputProps, Input } from '../Input';
-import { MaskedField } from '../MasketField';
+import { MaskedField } from '../MaskedField';
 import { useCurrencyField } from './useCurrencyField';
 
 type CurrencyFieldProps = BaseInputProps & {

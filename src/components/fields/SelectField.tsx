@@ -25,6 +25,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
                 {label}
               </label>
             )}
+
             <Select
               defaultSelected={field.value}
               placeholder={placeholder}

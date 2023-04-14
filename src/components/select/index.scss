@@ -84,6 +84,11 @@
       background-color: $lightGrayColor;
     }
   }
+
+  &__empty {
+    text-align: center;
+    @include inputValue;
+  }
 }
 
 @keyframes fadeIn {

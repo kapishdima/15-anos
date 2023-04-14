@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EventImage from '../../../image/mock-event.jpg';
+import EventImage from '@image/mock-event.jpg';
 import { EventTimer } from './EventTimer';
 
 export const EventCard: React.FC = () => {

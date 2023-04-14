@@ -5,5 +5,5 @@ import { TaskList } from './TaskList';
 export const TaskListByDate: React.FC = () => {
   const tasksStore = useTasksStore();
 
-  return <TaskList tasks={sortByDate(tasksStore.tasks)} />;
+  return <TaskList tasks={sortByDate(tasksStore.tasksForView)} />;
 };

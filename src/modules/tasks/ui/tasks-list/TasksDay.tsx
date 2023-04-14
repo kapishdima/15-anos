@@ -1,10 +1,10 @@
 import React from 'react';
 
 import isToday from 'date-fns/isToday';
+import isPast from 'date-fns/isPast';
 import classNames from 'classnames';
 
 import { TaskViewModal } from '../../store/tasks';
-import isPast from 'date-fns/isPast';
 
 type TasksDayProps = {
   title: string;

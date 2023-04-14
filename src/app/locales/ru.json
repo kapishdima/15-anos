@@ -1,15 +1,15 @@
 {
   "Back": "Назад",
-  "login_title": "Введите пароль",
-  "login_subtitle": "Вы можете найти пароль в сообщении, которое вы получили от человека, который вас пригласил",
-  "login_button_text": "Войти",
-  "password_placehoder": "Введите пароль",
-  "event_title_placeholder": "Введите название мероприятия",
+  "Enter a password": "Введите пароль",
+  "You can find the password in a message you received from a person who invited you": "Вы можете найти пароль в сообщении, которое вы получили от человека, который вас пригласил",
+  "Log in": "Войти",
+  "Enter password": "Введите пароль",
+  "Enter event title": "Введите название мероприятия",
 
-  "invalid_password": "Неверный пароль",
-  "invalid_event_name": "Неверное название мероприятия",
-  "null_event_name": "Название события еще не установлено. Связаться с организатором мероприятия",
-  "auth_error": "Ошибка аутентификации. Попробуйте еще раз",
+  "Incorrect password": "Неверный пароль",
+  "Incorrect event name": "Неверное название мероприятия",
+  "The event name has not been set yet. Сontact the event organizer": "Название события еще не установлено. Связаться с организатором мероприятия",
+  "Authentication error. Try again": "Ошибка аутентификации. Попробуйте еще раз",
   "cant_login": "Вы пытались войти более {{attempts}} раз. Подождите {{time}} секунд",
 
   "Enter details of your Quinceañera": "Введите данные вашего Quinceañera",
@@ -19,5 +19,11 @@
   "Where will be your Quinceañera?": "Где будет ваш Quinceañera?",
   "What language do you prefer?": "Какой язык вы предпочитаете?",
   "What currency do you use?": "Какую валюту вы используете?",
-  "Create profile": "Создать профиль"
+  "Create profile": "Создать профиль",
+
+  "Cancel": "Отменить",
+  "Confirm": "Ok",
+  "Tasks": "Задачи",
+  "Task details": "Детали задачи",
+  "Save the task": "Сохранить задачу"
 }

@@ -15,8 +15,6 @@ export const forceRefreshUser = async () => {
   }
 
   await auth.currentUser.getIdToken(true);
-  // await auth.currentUser.getIdTokenResult(true);
-
   return true;
 };
 

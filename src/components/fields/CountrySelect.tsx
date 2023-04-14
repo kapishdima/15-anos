@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+
+import { countries } from '@app/data/countries';
+import { useUserLocation } from '@app/location/useUserLocation';
+
 import { SelectField } from './SelectField';
 import { BaseInputProps } from './Input';
-import { countries } from '../../app/data/countries';
-import { useUserLocation } from '../../app/location/useUserLocation';
-import { useFormContext } from 'react-hook-form';
 
 type CountrySelectProps = BaseInputProps & {
   placeholder?: string;
