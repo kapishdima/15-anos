@@ -2,51 +2,51 @@ import React, { useEffect } from 'react';
 import { AppLayout, PageHeader } from '@components/index';
 
 import {
-  CreateTask,
-  RemoveTask,
-  TaskProgress,
-  useTasksStore,
-  TaskListByDate,
-  TaskListByCategories,
+  CreatePayment,
+  RemovePayment,
+  PaymentsProgress,
+  usePaymentsStore,
+  PaymentsListByCategories,
+  PaymentsListByDate,
   ToggleVisibilityCompleted,
-} from '@modules/tasks';
+} from '@modules/payments';
 
 import { useCategoriesStore } from '@modules/categories';
 
 import { Tabs } from '@components/index';
 import { useTranslation } from 'react-i18next';
 
-export const HomePage: React.FC = () => {
-  const tasksStore = useTasksStore();
+export const PaymentsIndex: React.FC = () => {
+  const paymentsStore = usePaymentsStore();
   const categoriesStore = useCategoriesStore();
   const { t } = useTranslation();
 
   useEffect(() => {
-    tasksStore.fetchTasks();
+    paymentsStore.fetchTasks();
     categoriesStore.fetchCategories();
   }, []);
 
   return (
-    <AppLayout loading={tasksStore.loading && categoriesStore.loading}>
+    <AppLayout loading={paymentsStore.loading && categoriesStore.loading}>
       <div className="home-page">
         <PageHeader
-          title={t('Tasks')}
+          title={t('Payments')}
           actions={
             <>
-              <CreateTask />
-              <RemoveTask removal={tasksStore.isRemoval} />
+              <CreatePayment />
+              <RemovePayment removal={paymentsStore.isRemoval} />
             </>
           }
         />
 
-        {tasksStore.tasks && (
+        {paymentsStore.tasks && (
           <div className="tasks-info">
-            <TaskProgress total={tasksStore.total} completed={tasksStore.completed} />
+            <PaymentsProgress available={1000} paid={0} scheduled={500} perGuest={50} />
             <Tabs
               extra={<ToggleVisibilityCompleted />}
               tabs={[
-                { title: 'By Data', component: <TaskListByDate /> },
-                { title: 'By Category', component: <TaskListByCategories /> },
+                { title: 'By Data', component: <PaymentsListByDate /> },
+                { title: 'By Category', component: <PaymentsListByCategories /> },
               ]}
             />
           </div>

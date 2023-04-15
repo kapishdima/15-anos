@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Card, useModal } from '@/components';
-import { useTasksStore } from '@modules/tasks';
+import { usePaymentsStore } from '@modules/payments';
 
-import { CreateTaskModal } from '../create-task/CreateTaskModal';
+import { CreatePaymentModal } from '../create-payment/CreatePaymentModal';
 
-type TaskCardProps = {
+type PaymentCardProps = {
   image: string;
   name: string;
   id: string;
@@ -17,7 +17,7 @@ type TaskCardProps = {
   completed?: boolean;
 };
 
-export const TaskCard: React.FC<TaskCardProps> = ({
+export const PaymentCard: React.FC<PaymentCardProps> = ({
   id,
   name,
   image,
@@ -28,17 +28,17 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   isRemoval,
   color = '#db5b78',
 }) => {
-  const tasksStore = useTasksStore();
-  const TASK_MODAL_ID = `task-modal-${id}`;
+  const paymentsStore = usePaymentsStore();
+  const PAYMENT_MODAL_ID = `payment-modal-${id}`;
 
   const { open } = useModal();
 
   const onOpen = () => {
-    open(TASK_MODAL_ID);
+    open(PAYMENT_MODAL_ID);
   };
 
   const onDelete = (id: string) => {
-    tasksStore.removeTask(id);
+    paymentsStore.removeTask(id);
   };
 
   return (
@@ -53,7 +53,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         onOpen={onOpen}
         onDelete={onDelete}
       />
-      <CreateTaskModal id={TASK_MODAL_ID} initialValues={{ name, category, date, notes }} />
+      <CreatePaymentModal id={PAYMENT_MODAL_ID} initialValues={{ name, category, date, notes }} />
     </>
   );
 };

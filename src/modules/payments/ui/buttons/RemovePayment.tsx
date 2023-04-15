@@ -3,17 +3,17 @@ import { TrashIcon } from '@components/icons';
 import { CheckIcon, IconButton } from '@components/index';
 
 import { Protected, RoleActions } from '@modules/roles';
-import { useTasksStore } from '@/modules/tasks';
+import { usePaymentsStore } from '@modules/payments';
 
-type RemoveTaskProps = {
+type RemovePaymentProps = {
   removal: boolean;
 };
 
-export const RemoveTask: React.FC<RemoveTaskProps> = ({ removal }) => {
-  const tasksStore = useTasksStore();
+export const RemovePayment: React.FC<RemovePaymentProps> = ({ removal }) => {
+  const paymentsStore = usePaymentsStore();
 
   const onClick = () => {
-    tasksStore.toggleTaskRemoval();
+    paymentsStore.toggleTaskRemoval();
   };
 
   return (

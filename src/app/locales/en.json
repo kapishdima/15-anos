@@ -27,5 +27,25 @@
   "Confirm": "Ok",
   "Tasks": "Tasks",
   "Task details": "Task details",
-  "Save the task": "Save the task"
+
+  "Save the task": "Save the task",
+  "Save the payment": "Save the payment",
+
+  "Payments": "Payments",
+  "Payment details": "Payment details",
+
+  "Enter payment name": "Enter payment name",
+  "Enter task name": "Enter task name",
+
+  "Select date": "Select date",
+  "Amount payable": "Amount payable",
+  "Paid": "Paid",
+  "Select category": "Select payment category",
+  "Enter notes": "Enter notes",
+
+  "Task category": "Task category",
+  "Payment category": "Payment category",
+  "Name": "Name",
+  "Date": "Date",
+  "Notes": "Notes"
 }

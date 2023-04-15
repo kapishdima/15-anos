@@ -5,7 +5,7 @@ export const useCurrencyField = (onCurrencyChange: (value: string) => void) => {
   const { watch } = useFormContext();
 
   useEffect(() => {
-    const subscription = watch((fields) => onCurrencyChange(fields.currency));
+    const subscription = watch((fields) => onCurrencyChange(fields.currency || 'USD'));
 
     return () => subscription.unsubscribe();
   }, [watch]);

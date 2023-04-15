@@ -1,0 +1,59 @@
+.payment-progress {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+
+  margin-top: 24px;
+
+  background-color: #fff;
+  border-radius: $base-br;
+  box-shadow: $task-progressbar-shadow;
+
+  padding: $task-progress-padding-y $task-progress-padding-x;
+
+  &__title {
+    font-family: $anevir-ff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $darkColor;
+  }
+
+  &__subtitle {
+    font-family: $anevir-ff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $darkGrayColor;
+  }
+
+  .payments-info {
+    width: 100%;
+
+    padding-top: 16px;
+
+    display: flex;
+    align-items: center;
+    column-gap: 10%;
+
+    border-top: 1px solid rgba($darkGrayColor, 8%);
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+
+      &-amount {
+        font-family: $anevir-ff;
+        font-size: 1rem;
+        font-weight: 500;
+        color: $successColor;
+      }
+
+      &-label {
+        font-family: $anevir-ff;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $darkGrayColor;
+      }
+    }
+  }
+}

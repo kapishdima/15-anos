@@ -6,6 +6,7 @@ import { useCurrencyField } from './useCurrencyField';
 
 type CurrencyFieldProps = BaseInputProps & {
   placeholder?: string | null;
+  color?: string;
 };
 
 export const CurrencyField: React.FC<CurrencyFieldProps> = ({ name, placeholder, label, type }) => {

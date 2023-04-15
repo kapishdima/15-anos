@@ -29,6 +29,8 @@ import { PlusIcon } from './icons/PlusIcon';
 import { SeetingPlanIcon } from './icons/SeetingPlanIcon';
 import { TrashIcon } from './icons/TrashIcon';
 import { UsersIcon } from './icons/UsersIcon';
+import { TasksIcon } from './icons/TasksIcon';
+import { PaymentsIcon } from './icons/PaymentsIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -50,6 +52,8 @@ import { Tabs } from './tabs/Tabs';
 
 import { Modal } from './modal/Modal';
 import { useModal } from './modal/useModal';
+
+import { Card } from './card/Card';
 
 export {
   Button,
@@ -95,4 +99,7 @@ export {
   TextAreaField,
   Modal,
   useModal,
+  TasksIcon,
+  PaymentsIcon,
+  Card,
 };

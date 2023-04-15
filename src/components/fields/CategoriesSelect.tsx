@@ -4,7 +4,7 @@ import { BaseInputProps } from './Input';
 import { useCategoriesStore } from '@/modules/categories';
 
 type CategoriesSelectProps = BaseInputProps & {
-  placeholder?: string;
+  placeholder?: string | null;
 };
 
 export const CategoriesSelect: React.FC<CategoriesSelectProps> = ({ name, label, placeholder }) => {
@@ -17,5 +17,7 @@ export const CategoriesSelect: React.FC<CategoriesSelectProps> = ({ name, label,
       }))
     : [];
 
-  return <SelectField name={name} label={label} placeholder={placeholder} options={options} />;
+  return (
+    <SelectField name={name} label={label} placeholder={placeholder || ''} options={options} />
+  );
 };

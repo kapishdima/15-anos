@@ -25,5 +25,23 @@
   "Confirm": "Ok",
   "Tasks": "Задачи",
   "Task details": "Детали задачи",
-  "Save the task": "Сохранить задачу"
+  "Save the task": "Сохранить задачу",
+  "Save the payment": "Сохранить платеж",
+
+  "Payments": "Платежи",
+  "Payment details": "Детали платежа",
+
+  "Enter payment name": "Введите название платежа",
+  "Enter task name": "Введите название задачи",
+
+  "Select date": "Выберите дату",
+  "Amount payable": "Подлежащая уплате сумма",
+  "Paid": "Выплачено",
+  "Select category": "Выберите категорию",
+  "Enter notes": "Введите заметки",
+
+  "Task category": "Категория задачи",
+  "Name": "Название",
+  "Date": "Дата",
+  "Notes": "Заметки"
 }

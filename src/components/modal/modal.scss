@@ -55,6 +55,25 @@
   &__content {
     margin-top: 2rem;
     margin-bottom: 2rem;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    padding-right: 10px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: $lightGrayColor;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: lighten($darkGrayColor, 20%);
+      border-radius: 4px;
+    }
   }
 
   &__footer {

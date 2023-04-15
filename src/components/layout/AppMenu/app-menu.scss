@@ -36,6 +36,13 @@
 
     @include menuLink;
 
+    &.active {
+      padding-left: $menu-item-padding-x;
+      &:before {
+        opacity: 1;
+      }
+    }
+
     &:before {
       content: '';
 
