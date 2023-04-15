@@ -11,7 +11,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
   return (
     <div className="task-list">
       {Object.entries(tasks).map(([title, tasks]) => (
-        <TaskGroup title={title} tasks={tasks} />
+        <TaskGroup title={title} tasks={tasks} key={title} />
       ))}
     </div>
   );
