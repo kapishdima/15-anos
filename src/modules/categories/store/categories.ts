@@ -5,6 +5,7 @@ import { EVENT_DETAILS } from '../../../app/constants/local-storage-keys';
 export type Translations = { [key: string]: string };
 
 export type Category = {
+  id: string;
   color: string;
   icon: string;
   title: Translations;
@@ -17,7 +18,7 @@ interface CategoriesStore {
 }
 
 export const getCategoryById = (categories: Category[], id: string) => {
-  return categories.find((category) => category.title['en'] === id);
+  return categories.find((category) => category.id === id);
 };
 
 export const useCategoriesStore = create<CategoriesStore>((set) => ({

@@ -8,11 +8,11 @@ export const AppMenu: React.FC = () => {
   return (
     <div className="app-menu">
       {Object.entries(menu).map(([title, items]) => (
-        <div className="app-menu__group">
+        <div className="app-menu__group" key={title}>
           <h4 className="app-menu__title">{title}</h4>
           <div className="app-menu__links">
             {items.map((item) => (
-              <Link to={item.path} className="app-menu__link">
+              <Link to={item.path} className="app-menu__link" key={item.path}>
                 {item.icon}
                 {item.title}
               </Link>

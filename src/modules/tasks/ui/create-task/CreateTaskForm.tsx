@@ -1,30 +1,20 @@
-import { Form, TextField, CategoriesSelect, DatepickerField, TextAreaField } from '@/components';
 import React from 'react';
+import { TextField, CategoriesSelect, DatepickerField, TextAreaField } from '@/components';
 import { useTranslation } from 'react-i18next';
 
-const defaultValues = {
-  date: new Date(),
-};
-
-type CreateTaskFormProps = {
-  initialValues?: any;
-};
-
-export const CreateTaskForm: React.FC<CreateTaskFormProps> = ({ initialValues }) => {
+export const CreateTaskForm: React.FC = () => {
   const { t } = useTranslation();
-  const onSubmit = (values: any) => {
-    console.log(values);
-  };
+
   return (
-    <Form onSubmit={onSubmit} initialValues={initialValues || defaultValues}>
-      <TextField name="name" label={t('Name')} placeholder={t('Enter task name')} />
+    <>
+      <TextField name="title" label={t('Name')} placeholder={t('Enter task name')} />
       <DatepickerField name="date" label={t('Date')} placeholder={t('Select date')} />
       <CategoriesSelect
-        name="category"
-        label={t('Payment category')}
+        name="categoryId"
+        label={t('Task category')}
         placeholder={t('Select category')}
       />
       <TextAreaField name="notes" label={t('Notes')} placeholder={t('Enter notes')} />
-    </Form>
+    </>
   );
 };

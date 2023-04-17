@@ -72,7 +72,7 @@ export const Select: React.FC<SelectProps> = ({
       <div className="select-dropdown">
         {options.length ? (
           options.map((option) => (
-            <div className="select-option" onClick={() => onOptionClick(option)}>
+            <div className="select-option" key={option.value} onClick={() => onOptionClick(option)}>
               {option.icon && <div className="select-option-icon">{option.icon}</div>}
               <div className="select-option-label">{option.label}</div>
             </div>

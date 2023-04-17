@@ -51,6 +51,7 @@ import { Select } from './select/Select';
 import { Tabs } from './tabs/Tabs';
 
 import { Modal } from './modal/Modal';
+import { Dialog } from './modal/Dialog';
 import { useModal } from './modal/useModal';
 
 import { Card } from './card/Card';
@@ -102,4 +103,5 @@ export {
   TasksIcon,
   PaymentsIcon,
   Card,
+  Dialog,
 };

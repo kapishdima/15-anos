@@ -1,16 +1,50 @@
-import { Collections } from '../../../app/constants/collections';
-import { getSnapshot } from '../../firebase/firestore';
-import { Task, TaskViewModal } from '../store/tasks';
-import { v4 as uuidv4 } from 'uuid';
+import { Collections } from '@app/constants/collections';
+import {
+  deleteDocument,
+  fromDate,
+  getSnapshot,
+  pushData,
+  toDate,
+  updateDocument,
+} from '@modules/firebase/firestore';
+import { getEventId } from '@/modules/event';
 
-export const getTasks = async (eventId: string): Promise<TaskViewModal[]> => {
+import { Task, TaskViewModal } from '../store/tasks';
+
+export const getTasks = async (): Promise<TaskViewModal[]> => {
+  const eventId = getEventId();
   const tasks = await getSnapshot<Task[]>(Collections.EVENTS, [eventId, Collections.TASKS]);
 
   return tasks.map((task) => ({
     ...task,
-    id: uuidv4(),
-    date: new Date(task.date.toDate()),
-    completed: new Date(task.completed.toDate()),
+    date: new Date(toDate(task.date)),
+    completed: new Date(toDate(task.completed)),
     isCompleted: task.status !== 'undone',
   }));
+};
+
+export const removeTask = async (id: string) => {
+  const eventId = getEventId();
+  return deleteDocument(Collections.EVENTS, [eventId, Collections.TASKS, id]);
+};
+
+export const updateTask = async (id: string, payload: any) => {
+  const eventId = getEventId();
+  return updateDocument(Collections.EVENTS, [eventId, Collections.TASKS, id], payload);
+};
+
+export const createTask = async (payload: any) => {
+  const eventId = getEventId();
+
+  const taskData = {
+    ...payload,
+    status: 'undone',
+    vendorId: 'none',
+    date: fromDate(payload.date),
+  };
+  return pushData(Collections.EVENTS, [eventId, Collections.TASKS, payload.title], taskData);
+};
+
+export const updateTaskStatus = async (id: string, status: 'undone' | 'done') => {
+  return await updateTask(id, { status });
 };

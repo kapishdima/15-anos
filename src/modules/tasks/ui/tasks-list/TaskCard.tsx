@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card, useModal } from '@/components';
 import { useTasksStore } from '@modules/tasks';
@@ -7,9 +7,9 @@ import { CreateTaskModal } from '../create-task/CreateTaskModal';
 
 type TaskCardProps = {
   image: string;
-  name: string;
+  title: string;
   id: string;
-  category: string;
+  categoryId: string;
   date: Date;
   notes: string;
   isRemoval?: boolean;
@@ -19,10 +19,10 @@ type TaskCardProps = {
 
 export const TaskCard: React.FC<TaskCardProps> = ({
   id,
-  name,
+  title,
   image,
   completed,
-  category,
+  categoryId,
   date,
   notes,
   isRemoval,
@@ -31,7 +31,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const tasksStore = useTasksStore();
   const TASK_MODAL_ID = `task-modal-${id}`;
 
-  const { open } = useModal();
+  const { open, close } = useModal();
 
   const onOpen = () => {
     open(TASK_MODAL_ID);
@@ -41,19 +41,38 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     tasksStore.removeTask(id);
   };
 
+  const updateTask = async (values: any) => {
+    await tasksStore.updateTask(id, values);
+    close(TASK_MODAL_ID);
+    tasksStore.fetchTasks();
+  };
+
+  const updateTaskStatus = async (id: string) => {
+    const status = completed ? 'undone' : 'done';
+    await tasksStore.changeTaskStatus(id, status);
+    tasksStore.fetchTasks();
+  };
+
   return (
     <>
       <Card
         id={id}
-        title={name}
+        title={title}
         icon={image}
         color={color}
         completed={completed}
         removal={isRemoval}
+        loading={tasksStore.loading && tasksStore.taskInProcessing === id}
         onOpen={onOpen}
         onDelete={onDelete}
+        onIconClick={updateTaskStatus}
       />
-      <CreateTaskModal id={TASK_MODAL_ID} initialValues={{ name, category, date, notes }} />
+      <CreateTaskModal
+        id={TASK_MODAL_ID}
+        initialValues={{ title, categoryId, date, notes }}
+        onSubmit={updateTask}
+        loading={tasksStore.loading}
+      />
     </>
   );
 };

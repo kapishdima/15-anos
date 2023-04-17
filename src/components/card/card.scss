@@ -12,8 +12,8 @@
 
   cursor: pointer;
 
-  &:hover:not(.task-card--completed) {
-    .task-card__checked-icon {
+  &:hover:not(.card--completed) {
+    .card__checked-icon {
       display: flex;
 
       animation: fadeIn 500ms ease both;
@@ -21,20 +21,20 @@
   }
 
   &:hover {
-    .task-card__icon-button {
+    .card__icon-button {
       transform: translateX(5px);
     }
   }
 
   &--completed {
-    .task-card__name {
+    .card__name {
       color: $darkGrayColor;
       text-decoration: line-through;
     }
-    .task-card__icon {
+    .card__icon {
       opacity: 0.5;
     }
-    .task-card__checked-icon {
+    .card__checked-icon {
       display: flex;
       opacity: 1;
       background-color: $successColor;

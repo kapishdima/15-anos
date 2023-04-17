@@ -81,6 +81,12 @@
     align-items: center;
     justify-content: flex-end;
   }
+
+  .dialog__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+  }
 }
 
 @keyframes mmfadeIn {

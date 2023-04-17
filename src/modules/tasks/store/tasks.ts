@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { getTasks } from '../api/tasks.api';
-import { EVENT_DETAILS } from '../../../app/constants/local-storage-keys';
+import { createTask, getTasks, removeTask, updateTask, updateTaskStatus } from '../api/tasks.api';
 import { Timestamp } from 'firebase/firestore';
 
 import { format } from 'date-fns';
@@ -12,6 +11,7 @@ export type Translations = { [key: string]: string };
 export type Statuses = 'done' | 'undone';
 
 export type Task = {
+  id: string;
   categoryId: string;
   completed: Timestamp;
   date: Timestamp;
@@ -43,11 +43,15 @@ interface TasksStore {
   completed: number;
   loading: boolean;
   isRemoval: boolean;
+  taskInProcessing: string;
   fetchTasks: () => Promise<void>;
   toggleTaskRemoval: () => void;
   showCompleted: () => void;
   hideCompleted: () => void;
   removeTask: (id: string) => void;
+  updateTask: (id: string, payload: any) => void;
+  addTask: (payload: any) => void;
+  changeTaskStatus: (id: string, status: 'undone' | 'done') => void;
 }
 
 export const groupByMonth = (tasks: TaskViewModal[]) => {
@@ -102,13 +106,13 @@ export const useTasksStore = create<TasksStore>((set) => ({
   total: 0,
   loading: false,
   isRemoval: false,
+  taskInProcessing: '',
   fetchTasks: async () => {
     set(() => ({
       loading: true,
     }));
-    const eventDetails = JSON.parse(window.localStorage.getItem(EVENT_DETAILS) || '{}');
-    const event = `event${eventDetails.eventNumber}`;
-    const tasks = (await getTasks(event)) || [];
+    const tasks = (await getTasks()) || [];
+    console.log(tasks);
 
     const total = tasks.length;
     const completed = tasks.filter((task) => task.isCompleted).length;
@@ -130,8 +134,51 @@ export const useTasksStore = create<TasksStore>((set) => ({
       return { isRemoval: !state.isRemoval };
     }),
 
-  removeTask: (id: string) =>
-    set((state) => {
-      return { tasksForView: state.tasksForView.filter((task) => task.id !== id) };
-    }),
+  removeTask: async (id: string) => {
+    try {
+      set(() => ({ loading: true, taskInProcessing: id }));
+      await removeTask(id);
+
+      set((state) => {
+        return {
+          tasksForView: state.tasksForView.filter((task) => task.id !== id),
+          loading: false,
+          taskInProcessing: '',
+        };
+      });
+    } catch (error) {
+      set(() => ({ loading: false, taskInProcessing: '' }));
+    }
+  },
+
+  updateTask: async (id: string, payload: any) => {
+    try {
+      set(() => ({ loading: true }));
+      await updateTask(id, payload);
+      set(() => ({ loading: false }));
+    } catch (error) {
+      set(() => ({ loading: false }));
+    }
+  },
+
+  changeTaskStatus: async (id: string, status: 'undone' | 'done') => {
+    try {
+      set(() => ({ loading: true, taskInProcessing: id }));
+      await updateTaskStatus(id, status);
+      set(() => ({ loading: false, taskInProcessing: '' }));
+    } catch (error) {
+      set(() => ({ loading: false, taskInProcessing: '' }));
+    }
+  },
+
+  addTask: async (payload: any) => {
+    try {
+      set(() => ({ loading: true }));
+      await createTask(payload);
+      set(() => ({ loading: false }));
+    } catch (error) {
+      console.error(error);
+      set(() => ({ loading: false }));
+    }
+  },
 }));

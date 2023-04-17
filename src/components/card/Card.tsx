@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
-import { CheckIcon, AngleRightIcon, IconButton, TrashIcon } from '@components/index';
+import { CheckIcon, AngleRightIcon, IconButton, TrashIcon, Spinner } from '@components/index';
 
 type CardProps = {
   id: string;
@@ -10,6 +10,8 @@ type CardProps = {
   color: string;
   completed?: boolean;
   removal?: boolean;
+  loading?: boolean;
+  onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
 };
@@ -20,15 +22,27 @@ export const Card: React.FC<CardProps> = ({
   removal,
   onOpen,
   onDelete,
+  onIconClick,
   title,
   icon,
   color,
+  loading,
 }) => {
+  const handleIconClick = (event: MouseEvent) => {
+    event.stopPropagation();
+
+    if (!onIconClick) {
+      return;
+    }
+
+    onIconClick(id);
+  };
+
   return (
     <div className={classNames('card', { 'card--completed': completed })} onClick={onOpen}>
-      <div className="card__image">
+      <div className="card__image" onClick={handleIconClick}>
         <div className="card__icon" style={{ backgroundColor: color }}>
-          <img src={icon} alt="" />
+          {loading ? <Spinner variant="white" /> : <img src={icon} alt="" />}
         </div>
         <div className="card__checked-icon">
           <CheckIcon />
@@ -39,7 +53,7 @@ export const Card: React.FC<CardProps> = ({
         {!removal ? (
           <AngleRightIcon />
         ) : (
-          <IconButton classes="card__remove-button" onClick={() => onDelete(id)}>
+          <IconButton classes="card__remove-button" onClick={() => onDelete(id)} loading={loading}>
             <TrashIcon />
           </IconButton>
         )}

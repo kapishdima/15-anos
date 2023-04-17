@@ -16,7 +16,7 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({ total, completed }) 
     }, 300);
 
     return () => clearTimeout(id);
-  }, []);
+  }, [completed, total]);
 
   return (
     <div className="task-progress">

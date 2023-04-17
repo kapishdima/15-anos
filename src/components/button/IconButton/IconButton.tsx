@@ -1,3 +1,4 @@
+import { Spinner } from '@/components';
 import classNames from 'classnames';
 import React, { MouseEvent, PropsWithChildren } from 'react';
 
@@ -9,12 +10,14 @@ type IconButtonProps = PropsWithChildren & {
   variant?: IconButtonVariants;
   appearance?: IconButtonApearence;
   classes?: string;
+  loading?: boolean;
 };
 
 export const IconButton: React.FC<IconButtonProps> = ({
   onClick,
   children,
   classes,
+  loading,
   variant = 'primary',
   appearance = 'filled',
 }) => {
@@ -31,7 +34,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
     <button
       className={classNames('icon-button', variant, appearance, classes)}
       onClick={handleClick}>
-      {children}
+      {loading ? <Spinner variant="white" /> : children}
     </button>
   );
 };

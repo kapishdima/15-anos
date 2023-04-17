@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import Micromodal from 'micromodal';
-import { Button } from '@components/index';
+import { Button, Form } from '@components/index';
 import { useTranslation } from 'react-i18next';
 
 type ModalProps = React.PropsWithChildren & {
@@ -13,9 +13,12 @@ type ModalProps = React.PropsWithChildren & {
   minWidth?: string;
   minHeight?: string;
   loading?: boolean;
+  initialValues?: any;
+  onSubmit: (values: any) => void;
+  validation?: any;
 };
 
-export const Modal: React.FC<ModalProps> = ({
+export const Dialog: React.FC<ModalProps> = ({
   id,
   title,
   children,
@@ -24,6 +27,9 @@ export const Modal: React.FC<ModalProps> = ({
   minHeight,
   minWidth,
   loading,
+  initialValues,
+  onSubmit,
+  validation,
 }) => {
   const { t } = useTranslation();
 
@@ -50,21 +56,23 @@ export const Modal: React.FC<ModalProps> = ({
                 aria-label="Close modal"
                 data-micromodal-close></button>
             </header>
-            <main className="modal__content" id={`${id}-content`}>
-              {children}
-            </main>
-            <footer className="modal__footer">
-              <Button data-micromodal-close appearance="ghost" variant="error">
-                {cancelButtonText || t('Cancel')}
-              </Button>
-              <Button
-                aria-label="Close this dialog window"
-                variant="success"
-                loading={loading}
-                type="submit">
-                {confirmButtonText || t('Confirm')}
-              </Button>
-            </footer>
+            <Form onSubmit={onSubmit} initialValues={initialValues} schema={validation}>
+              <main className="modal__content dialog__content" id={`${id}-content`}>
+                {children}
+              </main>
+              <footer className="modal__footer">
+                <Button data-micromodal-close appearance="ghost" variant="error">
+                  {cancelButtonText || t('Cancel')}
+                </Button>
+                <Button
+                  aria-label="Close this dialog window"
+                  variant="success"
+                  loading={loading}
+                  type="submit">
+                  {confirmButtonText || t('Confirm')}
+                </Button>
+              </footer>
+            </Form>
           </div>
         </div>
       </div>

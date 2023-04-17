@@ -25,18 +25,20 @@ export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks }) => {
     <>
       <TaskMonth title={title.split(',')[0]} tasks={tasks} />
       {Object.entries(groupedByDay).map(([date, dayTasks]) => (
-        <div className="task-list__group">
-          <TasksDay title={date} tasks={dayTasks} />
+        <div className="task-list__group" key={date}>
+          <TasksDay title={date} tasks={dayTasks} key={date} />
           {dayTasks.map((task) => {
             const category = getCategoryById(categoriesStore.categories, task.categoryId);
+
             return (
               <TaskCard
+                key={task.id}
                 id={task.id}
-                name={task.title['en']}
+                title={typeof task.title === 'string' ? task.title : task.title['en']}
                 image={MockTaskIcon}
                 completed={task.isCompleted}
                 color={`#${category?.color}`}
-                category={category?.title['en'] || ''}
+                categoryId={category?.id || ''}
                 date={task.date}
                 notes={task.notes}
                 isRemoval={tasksStore.isRemoval}

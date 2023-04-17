@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ObjectSchema } from 'yup';
@@ -22,6 +22,10 @@ export const Form: React.FC<FormProps> = ({
     defaultValues: initialValues,
     resolver: schema ? yupResolver(schema) : undefined,
   });
+
+  useEffect(() => {
+    form.reset(initialValues);
+  }, [initialValues]);
 
   return (
     <FormProvider {...form}>
