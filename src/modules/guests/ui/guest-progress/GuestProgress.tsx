@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { ProgressCard } from '@components/index';
 
-type TaskProgressProps = {
+type GuestProgressProps = {
   total: number;
-  completed: number;
+  confirmed: number;
 };
 
-export const TaskProgress: React.FC<TaskProgressProps> = ({ total, completed }) => {
+export const GuestProgress: React.FC<GuestProgressProps> = ({ total, confirmed }) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
     const id = setTimeout(() => {
-      const progress = (completed / total) * 100;
+      const progress = (confirmed / total) * 100;
       setValue(progress);
     }, 300);
 
     return () => clearTimeout(id);
-  }, [completed, total]);
+  }, []);
 
   return (
     <ProgressCard
-      title="Task Completed"
+      title="Guest confirmations"
       value={value}
-      hint={`${completed} of ${total} tasks are completed`}
+      hint={`${confirmed} of ${total} guest have confirmed their participation`}
     />
   );
 };

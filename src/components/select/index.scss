@@ -11,14 +11,14 @@
     }
   }
 
-  &-field {
-    width: 100%;
-    padding: $input-padding-y $input-padding-x;
+  // &-field {
+  //   width: 100%;
+  //   padding: $input-padding-y $input-padding-x;
 
-    background-color: transparent;
-    border: 1px solid #cbcbcb;
-    border-radius: 12px;
-  }
+  //   background-color: transparent;
+  //   border: 1px solid #cbcbcb;
+  //   border-radius: 12px;
+  // }
   &-placeholder {
     @include inputPlaceholder;
   }
@@ -35,6 +35,7 @@
 
   &-dropdown {
     width: 100%;
+    min-width: 250px;
     position: absolute;
     top: 120%;
     z-index: -2;
@@ -88,6 +89,29 @@
   &__empty {
     text-align: center;
     @include inputValue;
+  }
+
+  .select-field__select {
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
+
+    background-color: transparent;
+    border: 1px solid #cbcbcb;
+    border-radius: 12px;
+  }
+
+  .select-field__button {
+    width: 100%;
+    padding: $input-padding-y / 2 $input-padding-x;
+
+    background-color: transparent;
+    border: 1px solid #cbcbcb;
+    border-radius: 20px;
+
+    .select-placeholder,
+    .select-value__text {
+      font-size: 0.75rem;
+    }
   }
 }
 

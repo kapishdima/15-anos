@@ -1,0 +1,11 @@
+import React from 'react';
+
+export const WontComeIcon: React.FC = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="11.5" stroke="#e74c3c" />
+      <line x1="8.51041" y1="8.56063" x2="15.5815" y2="15.6317" stroke="#e74c3c" />
+      <line x1="15.6318" y1="8.56058" x2="8.56068" y2="15.6317" stroke="#e74c3c" />
+    </svg>
+  );
+};

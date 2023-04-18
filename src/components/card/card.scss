@@ -109,4 +109,10 @@
   &__remove-button {
     animation: fadeIn 500ms ease both;
   }
+
+  &-actions {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+  }
 }

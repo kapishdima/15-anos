@@ -1,11 +1,12 @@
 import { createHashRouter } from 'react-router-dom';
-import { LoginPage } from '../../modules/auth/pages/LoginPage';
-import { CreateProfilePage } from '../../modules/auth/pages/CreateProfilePage';
-import { HomePage } from '../../modules/home/pages/HomePage';
 
 import { ProtectedRoute } from './ProtectedRoute';
 import { AppRoutes } from './routes';
+
+import { CreateProfilePage, LoginPage } from '@modules/auth';
+import { HomePage } from '@modules/home/';
 import { PaymentsIndex } from '@/modules/payments';
+import { GuestsIndex } from '@/modules/guests';
 
 export const router = createHashRouter([
   {
@@ -29,6 +30,14 @@ export const router = createHashRouter([
     element: (
       <ProtectedRoute>
         <PaymentsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.GUESTS_LIST,
+    element: (
+      <ProtectedRoute>
+        <GuestsIndex />
       </ProtectedRoute>
     ),
   },

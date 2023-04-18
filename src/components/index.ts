@@ -31,6 +31,9 @@ import { TrashIcon } from './icons/TrashIcon';
 import { UsersIcon } from './icons/UsersIcon';
 import { TasksIcon } from './icons/TasksIcon';
 import { PaymentsIcon } from './icons/PaymentsIcon';
+import { ConfirmedIcon } from './icons/ConfirmedIcon';
+import { WontComeIcon } from './icons/WontComeIcon';
+import { InvitedIcon } from './icons/InvitedIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -55,6 +58,7 @@ import { Dialog } from './modal/Dialog';
 import { useModal } from './modal/useModal';
 
 import { Card } from './card/Card';
+import { ProgressCard } from './progress-card/ProgressCard';
 
 export {
   Button,
@@ -104,4 +108,8 @@ export {
   PaymentsIcon,
   Card,
   Dialog,
+  InvitedIcon,
+  ConfirmedIcon,
+  WontComeIcon,
+  ProgressCard,
 };

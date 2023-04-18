@@ -11,6 +11,7 @@ type CardProps = {
   completed?: boolean;
   removal?: boolean;
   loading?: boolean;
+  extra?: JSX.Element;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
@@ -27,6 +28,7 @@ export const Card: React.FC<CardProps> = ({
   icon,
   color,
   loading,
+  extra,
 }) => {
   const handleIconClick = (event: MouseEvent) => {
     event.stopPropagation();
@@ -49,14 +51,20 @@ export const Card: React.FC<CardProps> = ({
         </div>
       </div>
       <div className="card__name">{title}</div>
-      <div className="card__icon-button">
-        {!removal ? (
-          <AngleRightIcon />
-        ) : (
-          <IconButton classes="card__remove-button" onClick={() => onDelete(id)} loading={loading}>
-            <TrashIcon />
-          </IconButton>
-        )}
+      <div className="card-actions">
+        {extra}
+        <div className="card__icon-button">
+          {!removal ? (
+            <AngleRightIcon />
+          ) : (
+            <IconButton
+              classes="card__remove-button"
+              onClick={() => onDelete(id)}
+              loading={loading}>
+              <TrashIcon />
+            </IconButton>
+          )}
+        </div>
       </div>
     </div>
   );

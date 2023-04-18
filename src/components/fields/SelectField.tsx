@@ -6,6 +6,7 @@ type SelectFieldProps = BaseInputProps & {
   options: Option[];
   placeholder?: string;
   onSelect?: (value: string) => void;
+  variant?: 'select' | 'button';
 };
 
 export const SelectField: React.FC<SelectFieldProps> = ({

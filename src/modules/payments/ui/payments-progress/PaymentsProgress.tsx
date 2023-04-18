@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ProgressBar } from '@components/index';
+import { ProgressCard } from '@/components';
 
 type PaymentsProgressProps = {
   available: number;
@@ -23,27 +23,25 @@ export const PaymentsProgress: React.FC<PaymentsProgressProps> = ({
     }, 300);
 
     return () => clearTimeout(id);
-  }, []);
+  }, [available, paid]);
 
   return (
-    <div className="payment-progress">
-      <h4 className="payment-progress__title">Budget utilization</h4>
-      <div className="payment-progressbar">
-        <ProgressBar value={Math.ceil(value)} />
-      </div>
-      <h5 className="payment-progress__subtitle">
-        ${available} available, ${paid} already paid
-      </h5>
-      <div className="payments-info">
-        <div className="payments-info__item">
-          <div className="payments-info__item-amount">${scheduled}</div>
-          <div className="payments-info__item-label">Scheduled payments</div>
+    <ProgressCard
+      value={value}
+      title="Budget utilization"
+      hint={`$${available} available, $${paid} already paid`}
+      extra={
+        <div className="progress-card__extra">
+          <div className="progress-card__extra-item">
+            <div className="progress-card__extra-item__amount">${scheduled}</div>
+            <div className="progress-card__extra-item__label">Scheduled payments</div>
+          </div>
+          <div className="progress-card__extra-item">
+            <div className="progress-card__extra-item__amount">${perGuest}</div>
+            <div className="progress-card__extra-item__label">Total per guest</div>
+          </div>
         </div>
-        <div className="payments-info__item">
-          <div className="payments-info__item-amount">${perGuest}</div>
-          <div className="payments-info__item-label">Total per guest</div>
-        </div>
-      </div>
-    </div>
+      }
+    />
   );
 };

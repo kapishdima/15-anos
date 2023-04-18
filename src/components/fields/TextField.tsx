@@ -5,6 +5,7 @@ import classNames from 'classnames';
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
   color?: string;
+  iconBefore?: string;
 };
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -14,6 +15,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   suffix,
   type,
   color,
+  iconBefore,
 }) => {
   return (
     <Input name={name}>
@@ -24,7 +26,11 @@ export const TextField: React.FC<TextFieldProps> = ({
               {label}
             </label>
           )}
-          <div className="form-input__container">
+          <div
+            className={classNames('form-input__container', { 'with-icon': Boolean(iconBefore) })}>
+            {iconBefore ? (
+              <img className="form-input__before-icon" src={iconBefore} alt="" />
+            ) : null}
             <input
               id={name}
               type={type || 'text'}

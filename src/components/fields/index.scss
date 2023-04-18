@@ -36,6 +36,9 @@
   }
 }
 
+.form-input__container.with-icon input {
+  padding-left: $input-padding-x * 3;
+}
 .form-input__container {
   position: relative;
   display: flex;
@@ -48,6 +51,13 @@
     font-family: $anevir-ff;
     font-size: 0.75rem;
     color: $darkGrayColor;
+  }
+
+  .form-input__before-icon {
+    position: absolute;
+    left: $input-padding-x;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 

@@ -43,5 +43,10 @@
   "Task category": "Категория задачи",
   "Name": "Название",
   "Date": "Дата",
-  "Notes": "Заметки"
+  "Notes": "Заметки",
+  "Guests list": "Список гостей",
+  "Guest": "Гость",
+  "Save the guest": "Save the guest",
+  "Guest name": "Имя",
+  "Enter guest name": "Введите имя"
 }

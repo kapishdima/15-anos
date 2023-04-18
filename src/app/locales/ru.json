@@ -44,5 +44,11 @@
   "Payment category": "Категория платежа",
   "Name": "Название",
   "Date": "Дата",
-  "Notes": "Заметки"
+  "Notes": "Заметки",
+
+  "Guests list": "Список гостей",
+  "Guest": "Гость",
+  "Save the guest": "Сохранить гостя",
+  "Guest name": "Имя",
+  "Enter guest name": "Введите имя"
 }

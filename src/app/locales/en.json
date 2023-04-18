@@ -47,5 +47,11 @@
   "Payment category": "Payment category",
   "Name": "Name",
   "Date": "Date",
-  "Notes": "Notes"
+  "Notes": "Notes",
+
+  "Guests list": "Guests list",
+  "Guest": "Guest",
+  "Save the guest": "Save the guest",
+  "Guest name": "Guest name",
+  "Enter guest name": "Enter guest name"
 }

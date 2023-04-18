@@ -40,7 +40,7 @@ export const HomePage: React.FC = () => {
         />
 
         {tasksStore.tasks && (
-          <div className="tasks-info">
+          <div className="tasks-info ">
             <TaskProgress total={tasksStore.total} completed={tasksStore.completed} />
             <Tabs
               extra={<ToggleVisibilityCompleted />}
