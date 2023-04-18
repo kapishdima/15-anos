@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/15-anos/static/css/main.79b53f70.css",
-    "main.js": "/15-anos/static/js/main.2ae47aa9.js",
+    "main.css": "/15-anos/static/css/main.1f5e6620.css",
+    "main.js": "/15-anos/static/js/main.17a0d370.js",
     "static/media/mock-event.jpg": "/15-anos/static/media/mock-event.fc9b3467c382fbbbfcaf.jpg",
     "static/media/avenirnextcyr-thinitalic.eot": "/15-anos/static/media/avenirnextcyr-thinitalic.abcd9d8551aca503cabd.eot",
     "static/media/avenirnextcyr-lightitalic.eot": "/15-anos/static/media/avenirnextcyr-lightitalic.95733b154be717cbb8c3.eot",
@@ -80,9 +80,13 @@
     "static/media/avenirnextcyr-demi.woff2": "/15-anos/static/media/avenirnextcyr-demi.5d7072de6fcf2d8f6e52.woff2",
     "static/media/logo.png": "/15-anos/static/media/logo.0032b27e20171b0afbbd.png",
     "static/media/sign-out.svg": "/15-anos/static/media/sign-out.7a955b2d53a4a61f895bfa05c1c57afd.svg",
+    "static/media/invited.svg": "/15-anos/static/media/invited.aa004765427243c54e0788b07637aaf1.svg",
+    "static/media/search.svg": "/15-anos/static/media/search.f8dd7b5082b37e368c07e6954c03b2f4.svg",
+    "static/media/confirmed.svg": "/15-anos/static/media/confirmed.da4b078e6bb5b07a013a32165be2e895.svg",
     "static/media/angle-left.svg": "/15-anos/static/media/angle-left.275674ef21867f934b6e744a0c27ae30.svg",
     "index.html": "/15-anos/index.html",
     "static/media/task-icon.svg": "/15-anos/static/media/task-icon.bce5db16a6ecc6ba4099058f6b20befa.svg",
+    "static/media/wont_come.svg": "/15-anos/static/media/wont_come.d49c096aabd112a02bd1f70397e74092.svg",
     "static/media/avenirnextcyr-bold.woff": "/15-anos/static/media/avenirnextcyr-bold.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-bolditalic.woff": "/15-anos/static/media/avenirnextcyr-bolditalic.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-demi.woff": "/15-anos/static/media/avenirnextcyr-demi.31d6cfe0d16ae931b73c.woff",
@@ -99,11 +103,11 @@
     "static/media/avenirnextcyr-thinitalic.woff": "/15-anos/static/media/avenirnextcyr-thinitalic.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralight.woff": "/15-anos/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/15-anos/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
-    "main.79b53f70.css.map": "/15-anos/static/css/main.79b53f70.css.map",
-    "main.2ae47aa9.js.map": "/15-anos/static/js/main.2ae47aa9.js.map"
+    "main.1f5e6620.css.map": "/15-anos/static/css/main.1f5e6620.css.map",
+    "main.17a0d370.js.map": "/15-anos/static/js/main.17a0d370.js.map"
   },
   "entrypoints": [
-    "static/css/main.79b53f70.css",
-    "static/js/main.2ae47aa9.js"
+    "static/css/main.1f5e6620.css",
+    "static/js/main.17a0d370.js"
   ]
 }
