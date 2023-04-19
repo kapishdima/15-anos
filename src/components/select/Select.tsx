@@ -5,7 +5,7 @@ import { useClickOutside } from '@components/index';
 import { useTranslation } from 'react-i18next';
 
 export type Option = {
-  icon?: string;
+  icon?: string | JSX.Element;
   label: string;
   value: string;
 };

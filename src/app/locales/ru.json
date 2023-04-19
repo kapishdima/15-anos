@@ -50,5 +50,8 @@
   "Guest": "Гость",
   "Save the guest": "Сохранить гостя",
   "Guest name": "Имя",
-  "Enter guest name": "Введите имя"
+  "Enter guest name": "Введите имя",
+  "Set guest status": "Выберите статус гостя",
+  "Set the number of extra guests": "Введите кол-во дополнительных гостей",
+  "Set the number of kids": "Введите кол-во детей"
 }

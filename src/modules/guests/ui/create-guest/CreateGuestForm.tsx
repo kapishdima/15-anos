@@ -1,4 +1,11 @@
-import { Form, TextField, SelectField } from '@/components';
+import {
+  Form,
+  TextField,
+  SelectField,
+  ConfirmedIcon,
+  InvitedIcon,
+  WontComeIcon,
+} from '@/components';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -9,9 +16,9 @@ const defaultValues = {
 };
 
 const statuses = [
-  { value: 'invited', label: 'Invited' },
-  { value: 'wont_come', label: "Wont't come" },
-  { value: 'confirmed', label: 'Confirmed participation' },
+  { value: 'invited', label: 'Invited', icon: <InvitedIcon /> },
+  { value: 'wont_come', label: "Wont't come", icon: <WontComeIcon /> },
+  { value: 'confirmed', label: 'Confirmed participation', icon: <ConfirmedIcon /> },
 ];
 
 type CreateGuestFormProps = {
@@ -28,17 +35,17 @@ export const CreateGuestForm: React.FC<CreateGuestFormProps> = ({ initialValues 
       <TextField name="name" label={t('Guest name')} placeholder={t('Enter guest name')} />
       <SelectField
         name="status"
-        label="Set guest status"
+        label={t('Set guest status')}
         options={statuses}
-        placeholder="Set guest status"
+        placeholder={t('Set guest status') || ''}
       />
       <TextField
         name="extra_guests"
         type="number"
-        label={'Set the number of extra guests'}
+        label={t('Set the number of extra guests')}
         placeholder={'0'}
       />
-      <TextField name="kids" type="number" label={'Set the number of kids'} placeholder={'0'} />
+      <TextField name="kids" type="number" label={t('Set the number of kids')} placeholder={'0'} />
     </Form>
   );
 };

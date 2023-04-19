@@ -45,6 +45,7 @@ export const GuestCard: React.FC<GuestCardProps> = ({ id, name, status, extra_gu
         onOpen={onOpen}
         onDelete={onDelete}
         extra={<GuestsStatus />}
+        hoverable={false}
       />
       <CreateGuestModal id={GUEST_MODAL_ID} initialValues={{ name, status, extra_guests, kinds }} />
     </>

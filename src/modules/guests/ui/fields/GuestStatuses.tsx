@@ -1,4 +1,4 @@
-import { Select } from '@/components';
+import { ConfirmedIcon, InvitedIcon, Select, WontComeIcon } from '@/components';
 import React from 'react';
 
 type GuestStatusesSelectProps = {
@@ -7,9 +7,9 @@ type GuestStatusesSelectProps = {
 };
 
 const statuses = [
-  { value: 'invited', label: 'Invited' },
-  { value: 'wont_come', label: "Wont't come" },
-  { value: 'confirmed', label: 'Confirmed participation' },
+  { value: 'invited', label: 'Invited', icon: <InvitedIcon /> },
+  { value: 'wont_come', label: "Wont't come", icon: <WontComeIcon /> },
+  { value: 'confirmed', label: 'Confirmed participation', icon: <ConfirmedIcon /> },
 ];
 
 export const GuestStatusesSelect: React.FC<GuestStatusesSelectProps> = ({

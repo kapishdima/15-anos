@@ -12,20 +12,6 @@
 
   cursor: pointer;
 
-  &:hover:not(.card--completed) {
-    .card__checked-icon {
-      display: flex;
-
-      animation: fadeIn 500ms ease both;
-    }
-  }
-
-  &:hover {
-    .card__icon-button {
-      transform: translateX(5px);
-    }
-  }
-
   &--completed {
     .card__name {
       color: $darkGrayColor;
@@ -114,5 +100,19 @@
     display: flex;
     align-items: center;
     column-gap: 12px;
+  }
+}
+
+.card.card--hoverable:not(.card--completed):hover {
+  .card__checked-icon {
+    display: flex;
+
+    animation: fadeIn 500ms ease both;
+  }
+}
+
+.card.card--hoverable:hover {
+  .card__icon-button {
+    transform: translateX(5px);
   }
 }

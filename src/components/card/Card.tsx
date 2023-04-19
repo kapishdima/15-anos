@@ -12,6 +12,7 @@ type CardProps = {
   removal?: boolean;
   loading?: boolean;
   extra?: JSX.Element;
+  hoverable?: boolean;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
@@ -29,6 +30,7 @@ export const Card: React.FC<CardProps> = ({
   color,
   loading,
   extra,
+  hoverable = true,
 }) => {
   const handleIconClick = (event: MouseEvent) => {
     event.stopPropagation();
@@ -41,7 +43,9 @@ export const Card: React.FC<CardProps> = ({
   };
 
   return (
-    <div className={classNames('card', { 'card--completed': completed })} onClick={onOpen}>
+    <div
+      className={classNames('card', { 'card--completed': completed, 'card--hoverable': hoverable })}
+      onClick={onOpen}>
       <div className="card__image" onClick={handleIconClick}>
         <div className="card__icon" style={{ backgroundColor: color }}>
           {loading ? <Spinner variant="white" /> : <img src={icon} alt="" />}
