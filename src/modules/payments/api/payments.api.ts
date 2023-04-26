@@ -16,8 +16,6 @@ const toDate = (date: any) => {
 export const getPayments = async (eventId: string): Promise<TaskViewModal[]> => {
   const tasks = await getSnapshot<Task[]>(Collections.EVENTS, [eventId, Collections.TASKS]);
 
-  console.log(tasks);
-
   return tasks.map((task) => ({
     ...task,
     id: uuidv4(),

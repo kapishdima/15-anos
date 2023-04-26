@@ -1,3 +1,20 @@
 .page-title {
   @include pageTitle;
 }
+
+.list-title {
+  font-family: $recoleta-alt-ff;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $darkColor;
+}
+
+.page-hint {
+  max-width: 40%;
+  font-family: $anevir-ff;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $darkColor;
+
+  margin-top: 2%;
+}

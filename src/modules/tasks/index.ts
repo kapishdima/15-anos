@@ -7,7 +7,7 @@ import { TaskListByDate } from './ui/tasks-list/TaskListByDate';
 
 import { TaskProgress } from './ui/tasks-progress/TaskProgress';
 
-import { useTasksStore, sortByCategoriesAlphabet, sortByDate } from './store/tasks';
+import { useTasksStore } from './store/tasks';
 
 export {
   CreateTask,
@@ -17,6 +17,4 @@ export {
   TaskListByDate,
   TaskProgress,
   useTasksStore,
-  sortByCategoriesAlphabet,
-  sortByDate,
 };

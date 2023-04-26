@@ -13,6 +13,8 @@ type CardProps = {
   loading?: boolean;
   extra?: JSX.Element;
   hoverable?: boolean;
+  hint?: string;
+  expires?: boolean;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
@@ -30,6 +32,8 @@ export const Card: React.FC<CardProps> = ({
   color,
   loading,
   extra,
+  hint,
+  expires,
   hoverable = true,
 }) => {
   const handleIconClick = (event: MouseEvent) => {
@@ -44,7 +48,11 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={classNames('card', { 'card--completed': completed, 'card--hoverable': hoverable })}
+      className={classNames('card', {
+        'card--completed': completed,
+        'card--hoverable': hoverable,
+        'card--expires': expires,
+      })}
       onClick={onOpen}>
       <div className="card__image" onClick={handleIconClick}>
         <div className="card__icon" style={{ backgroundColor: color }}>
@@ -54,7 +62,10 @@ export const Card: React.FC<CardProps> = ({
           <CheckIcon />
         </div>
       </div>
-      <div className="card__name">{title}</div>
+      <div className="card__info">
+        <div className="card__name">{title}</div>
+        {hint && <div className="card__hint">{hint}</div>}
+      </div>
       <div className="card-actions">
         {extra}
         <div className="card__icon-button">

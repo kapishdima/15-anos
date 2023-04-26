@@ -6,6 +6,7 @@ export enum RoleActions {
   CREATE_TASK = 'tasks.create',
   DELETE_TASK = 'tasks.delete',
   CREATE_GUEST = 'guests.create',
+  CREATE_PURCHASE = 'purchase.create',
 }
 
 export const permissions = {
@@ -14,6 +15,7 @@ export const permissions = {
     RoleActions.DELETE_TASK,
     RoleActions.CREATE_TASK,
     RoleActions.CREATE_GUEST,
+    RoleActions.CREATE_PURCHASE,
   ],
   assistant: [RoleActions.VIEW_TASKS, RoleActions.CREATE_TASK, RoleActions.CREATE_GUEST],
   viewer: [RoleActions.VIEW_TASKS],

@@ -5,15 +5,12 @@ import { CheckIcon, IconButton } from '@components/index';
 import { Protected, RoleActions } from '@modules/roles';
 import { useTasksStore } from '@/modules/tasks';
 
-type RemoveTaskProps = {
-  removal: boolean;
-};
-
-export const RemoveTask: React.FC<RemoveTaskProps> = ({ removal }) => {
-  const tasksStore = useTasksStore();
+export const RemoveTask: React.FC = () => {
+  const toggleTaskRemoval = useTasksStore((state) => state.toggleTaskRemoval);
+  const removal = useTasksStore((state) => state.isRemoval);
 
   const onClick = () => {
-    tasksStore.toggleTaskRemoval();
+    toggleTaskRemoval();
   };
 
   return (

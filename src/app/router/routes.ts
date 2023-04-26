@@ -4,4 +4,6 @@ export enum AppRoutes {
   ROOT = '/',
   GUESTS_LIST = '/guests/list',
   PAYMENTS_LIST = '/payments/list',
+  PURCHASES_LIST = '/purchases/list',
+  PURCHASES_BEST_IDEAS = '/purchases/best-ideas',
 }

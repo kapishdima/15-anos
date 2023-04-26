@@ -1,4 +1,4 @@
-import { PaymentsIcon, TasksIcon, UsersIcon } from '@/components/index';
+import { PaymentsIcon, PurchaseIcon, TasksIcon, UsersIcon } from '@/components/index';
 import { AppRoutes } from './routes';
 
 export type MenuItem = {
@@ -14,7 +14,8 @@ export type Menu = {
 export const createMenu = () => {
   return {
     Guests: [{ icon: <UsersIcon />, title: 'Guests list', path: AppRoutes.GUESTS_LIST }],
-    Tasks: [{ icon: <TasksIcon />, title: 'Tasks list', path: AppRoutes.ROOT }],
-    Payments: [{ icon: <PaymentsIcon />, title: 'Payments list', path: AppRoutes.PAYMENTS_LIST }],
+    Tasks: [{ icon: <TasksIcon />, title: 'Tasks', path: AppRoutes.ROOT }],
+    Payments: [{ icon: <PaymentsIcon />, title: 'Paymentss', path: AppRoutes.PAYMENTS_LIST }],
+    Purchases: [{ icon: <PurchaseIcon />, title: 'Purchases', path: AppRoutes.PURCHASES_LIST }],
   };
 };

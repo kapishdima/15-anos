@@ -17,7 +17,10 @@ import { CategoriesSelect } from './fields/CategoriesSelect';
 import { TextAreaField } from './fields/TextAreaField';
 
 import { Form } from './form/Form';
+
 import { PageTitle } from './heading/PageTitle';
+import { ListTitle } from './heading/ListTitle';
+import { PageHint } from './heading/PageHint';
 
 import { useClickOutside } from './hooks/useClickOutside';
 import { useMediaQuery } from './hooks/useMediaQuery';
@@ -34,6 +37,9 @@ import { PaymentsIcon } from './icons/PaymentsIcon';
 import { ConfirmedIcon } from './icons/ConfirmedIcon';
 import { WontComeIcon } from './icons/WontComeIcon';
 import { InvitedIcon } from './icons/InvitedIcon';
+import { PurchaseIcon } from './icons/PurchaseIcon';
+import { PopularIcon } from './icons/PopularIcon';
+import { LikeIcon } from './icons/LikeIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -59,6 +65,9 @@ import { useModal } from './modal/useModal';
 
 import { Card } from './card/Card';
 import { ProgressCard } from './progress-card/ProgressCard';
+
+import { Slider } from './slider/Slider';
+import { PageBanner } from './banners/PageBanner';
 
 export {
   Button,
@@ -112,4 +121,11 @@ export {
   ConfirmedIcon,
   WontComeIcon,
   ProgressCard,
+  Slider,
+  PurchaseIcon,
+  ListTitle,
+  PageBanner,
+  PageHint,
+  PopularIcon,
+  LikeIcon,
 };

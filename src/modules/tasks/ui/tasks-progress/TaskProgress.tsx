@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { ProgressCard } from '@components/index';
+import { useTasksStore } from '../../store/tasks';
 
-type TaskProgressProps = {
-  total: number;
-  completed: number;
-};
+export const TaskProgress: React.FC = () => {
+  const total = useTasksStore((state) => state.total);
+  const completed = useTasksStore((state) => state.completed);
 
-export const TaskProgress: React.FC<TaskProgressProps> = ({ total, completed }) => {
+  console.log(total);
+  console.log(completed);
+
   const [value, setValue] = useState(0);
 
   useEffect(() => {

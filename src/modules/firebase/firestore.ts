@@ -1,6 +1,5 @@
 import {
   Timestamp,
-  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -23,6 +22,7 @@ export function getSnapshot<TData = any>(key: string, params: string[] = []) {
             ...doc.data(),
           };
         }) as TData;
+
         return resolve(docs);
       },
       (error) => {

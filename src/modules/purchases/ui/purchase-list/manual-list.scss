@@ -1,0 +1,25 @@
+.shopping-list {
+  margin-top: 6%;
+}
+
+.manual-shopping-list {
+  width: 100%;
+
+  .empty-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 8% 0;
+
+    &__title {
+      font-family: $anevir-ff;
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: $darkGrayColor;
+      text-align: center;
+    }
+  }
+}

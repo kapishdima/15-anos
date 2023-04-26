@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { UserLocationProvider } from './app/location/UserLocationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
   <React.StrictMode>
     <ToastContainer

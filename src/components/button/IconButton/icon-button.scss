@@ -33,7 +33,7 @@
   border: 1px solid $iconButtonBorderColor;
 }
 
-.icon-button.primary {
+.icon-button.filled.primary {
   &:hover {
     background-color: $accentColor;
 
@@ -67,4 +67,8 @@
       }
     }
   }
+}
+
+.icon-button.outline {
+  background-color: transparent;
 }

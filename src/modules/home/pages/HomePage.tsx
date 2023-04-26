@@ -17,40 +17,42 @@ import { Tabs } from '@components/index';
 import { useTranslation } from 'react-i18next';
 
 export const HomePage: React.FC = () => {
-  const tasksStore = useTasksStore();
-  const categoriesStore = useCategoriesStore();
+  const fetchTasks = useTasksStore((state) => state.fetchTasks);
+  const tasksLoading = useTasksStore((state) => state.loading);
+
+  const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
+  const categoriesLoading = useCategoriesStore((state) => state.loading);
+
   const { t } = useTranslation();
 
   useEffect(() => {
-    tasksStore.fetchTasks();
-    categoriesStore.fetchCategories();
+    fetchTasks();
+    fetchCategories();
   }, []);
 
   return (
-    <AppLayout loading={tasksStore.loading && categoriesStore.loading}>
+    <AppLayout loading={tasksLoading && categoriesLoading}>
       <div className="home-page">
         <PageHeader
           title={t('Tasks')}
           actions={
             <>
               <CreateTask />
-              <RemoveTask removal={tasksStore.isRemoval} />
+              <RemoveTask />
             </>
           }
         />
 
-        {tasksStore.tasks && (
-          <div className="tasks-info ">
-            <TaskProgress total={tasksStore.total} completed={tasksStore.completed} />
-            <Tabs
-              extra={<ToggleVisibilityCompleted />}
-              tabs={[
-                { title: 'By Data', component: <TaskListByDate /> },
-                { title: 'By Category', component: <TaskListByCategories /> },
-              ]}
-            />
-          </div>
-        )}
+        <div className="tasks-info ">
+          <TaskProgress />
+          <Tabs
+            extra={<ToggleVisibilityCompleted />}
+            tabs={[
+              { title: 'By Data', component: <TaskListByDate /> },
+              { title: 'By Category', component: <TaskListByCategories /> },
+            ]}
+          />
+        </div>
       </div>
     </AppLayout>
   );

@@ -11,14 +11,6 @@
     }
   }
 
-  // &-field {
-  //   width: 100%;
-  //   padding: $input-padding-y $input-padding-x;
-
-  //   background-color: transparent;
-  //   border: 1px solid #cbcbcb;
-  //   border-radius: 12px;
-  // }
   &-placeholder {
     @include inputPlaceholder;
   }

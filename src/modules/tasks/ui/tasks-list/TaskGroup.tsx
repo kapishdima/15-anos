@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
-
-import { TaskViewModal, groupByDay, useTasksStore } from '../../store/tasks';
+import { TaskViewModal, useTasksStore } from '../../store/tasks';
 
 import { TaskCard } from './TaskCard';
 import { TaskMonth } from './TaskMonth';
@@ -10,23 +8,25 @@ import { TasksDay } from './TasksDay';
 
 import { getCategoryById, useCategoriesStore } from '@modules/categories';
 import MockTaskIcon from '@image/icons/task-icon.svg';
+import { groupedByDate } from '../../store/tasks.selectors';
 
 type TaskGroupProps = {
   title: string;
   tasks: TaskViewModal[];
+  hasCardHint?: boolean;
 };
 
-export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks }) => {
-  const groupedByDay = groupByDay(tasks);
+export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks, hasCardHint }) => {
   const categoriesStore = useCategoriesStore();
-  const tasksStore = useTasksStore();
+
+  const isRemoval = useTasksStore((state) => state.isRemoval);
 
   return (
     <>
       <TaskMonth title={title.split(',')[0]} tasks={tasks} />
-      {Object.entries(groupedByDay).map(([date, dayTasks]) => (
+      {Object.entries(groupedByDate(tasks)).map(([date, dayTasks]) => (
         <div className="task-list__group" key={date}>
-          <TasksDay title={date} tasks={dayTasks} key={date} />
+          {!hasCardHint && <TasksDay title={date} tasks={dayTasks} key={date} />}
           {dayTasks.map((task) => {
             const category = getCategoryById(categoriesStore.categories, task.categoryId);
 
@@ -41,7 +41,8 @@ export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks }) => {
                 categoryId={category?.id || ''}
                 date={task.date}
                 notes={task.notes}
-                isRemoval={tasksStore.isRemoval}
+                hint={hasCardHint ? date : undefined}
+                isRemoval={isRemoval}
               />
             );
           })}

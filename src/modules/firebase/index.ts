@@ -3,14 +3,14 @@ import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCvCSVr97kPlAHyB55Md6qsKef1T28mlLw',
-  authDomain: 'quinceanera-planner.firebaseapp.com',
-  databaseURL: 'https://quinceanera-planner.firebaseio.com',
-  projectId: 'quinceanera-planner',
-  storageBucket: 'quinceanera-planner.appspot.com',
-  messagingSenderId: '716866528333',
-  appId: '1:716866528333:web:66398d8bfc9f913e026804',
-  measurementId: 'G-4MBLZVJ6FK',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASURMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

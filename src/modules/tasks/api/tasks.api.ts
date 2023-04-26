@@ -15,6 +15,10 @@ export const getTasks = async (): Promise<TaskViewModal[]> => {
   const eventId = getEventId();
   const tasks = await getSnapshot<Task[]>(Collections.EVENTS, [eventId, Collections.TASKS]);
 
+  if (!tasks) {
+    return [];
+  }
+
   return tasks.map((task) => ({
     ...task,
     date: new Date(toDate(task.date)),
