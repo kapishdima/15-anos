@@ -1,6 +1,7 @@
 import { Button } from './button/Button/Button';
 import { IconButton } from './button/IconButton/IconButton';
 import { Logout } from './button/Logout/Logout';
+import { BackButton } from './button/BackButton/BackButton';
 
 import { EventCard } from './event/EventCard/EventCard';
 
@@ -40,6 +41,11 @@ import { InvitedIcon } from './icons/InvitedIcon';
 import { PurchaseIcon } from './icons/PurchaseIcon';
 import { PopularIcon } from './icons/PopularIcon';
 import { LikeIcon } from './icons/LikeIcon';
+import { BackIcon } from './icons/BackIcon';
+import { ShareIcon } from './icons/ShareIcon';
+import { FillHeartIcon } from './icons/FillHeartIcon';
+import { ExternalLink } from './icons/ExternalLinkIcon';
+import { OutlineShareIcon } from './icons/OutlineShareIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -128,4 +134,10 @@ export {
   PageHint,
   PopularIcon,
   LikeIcon,
+  BackIcon,
+  BackButton,
+  ShareIcon,
+  FillHeartIcon,
+  ExternalLink,
+  OutlineShareIcon,
 };

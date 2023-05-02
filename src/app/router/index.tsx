@@ -7,7 +7,7 @@ import { CreateProfilePage, LoginPage } from '@modules/auth';
 import { HomePage } from '@modules/home/';
 import { PaymentsIndex } from '@/modules/payments';
 import { GuestsIndex } from '@/modules/guests';
-import { PurchaseBestIdeas, PurchasesIndex } from '@/modules/purchases';
+import { PurchaseBestIdeas, PurchasesIndex, SinglePurchasePage } from '@/modules/purchases';
 
 export const router = createHashRouter([
   {
@@ -55,6 +55,14 @@ export const router = createHashRouter([
     element: (
       <ProtectedRoute>
         <PurchaseBestIdeas />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.SINGLE_PURCHASE}/:id`,
+    element: (
+      <ProtectedRoute>
+        <SinglePurchasePage />
       </ProtectedRoute>
     ),
   },

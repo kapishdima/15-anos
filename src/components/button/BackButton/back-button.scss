@@ -1,0 +1,14 @@
+.back-button {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+
+  cursor: pointer;
+
+  &__title {
+    font-family: $anevir-ff;
+    font-size: 16px;
+    font-weight: 400;
+    color: $darkColor;
+  }
+}

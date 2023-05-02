@@ -6,4 +6,5 @@ export enum AppRoutes {
   PAYMENTS_LIST = '/payments/list',
   PURCHASES_LIST = '/purchases/list',
   PURCHASES_BEST_IDEAS = '/purchases/best-ideas',
+  SINGLE_PURCHASE = '/purchases/',
 }

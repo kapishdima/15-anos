@@ -1,16 +1,18 @@
 import React from 'react';
 
-import { PageTitle } from '@components/index';
+import { BackButton, PageTitle } from '@components/index';
 
 type PageHeaderProps = {
-  title: string;
+  title?: string | null;
   actions?: JSX.Element;
+  hasBackButton?: boolean;
 };
 
-export const PageHeader: React.FC<PageHeaderProps> = ({ title, actions }) => {
+export const PageHeader: React.FC<PageHeaderProps> = ({ title, actions, hasBackButton }) => {
   return (
     <div className="page-header">
-      <PageTitle>{title}</PageTitle>
+      {hasBackButton && <BackButton />}
+      {title && <PageTitle>{title}</PageTitle>}
       {actions && <div className="page-header__actions">{actions}</div>}
     </div>
   );

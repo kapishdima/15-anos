@@ -1,5 +1,7 @@
 import React from 'react';
 import { ProductCard } from './ProductCard';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '@/app/router/routes';
 
 type Product = {
   image: string;
@@ -14,10 +16,12 @@ type ProductsListProps = {
 
 export const ProductsList: React.FC<ProductsListProps> = ({ products }) => {
   return (
-    <div className="products-list">
-      {products.map((product) => (
-        <ProductCard {...product} />
-      ))}
-    </div>
+    <Link to={`${AppRoutes.SINGLE_PURCHASE}/1`}>
+      <div className="products-list">
+        {products.map((product) => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    </Link>
   );
 };

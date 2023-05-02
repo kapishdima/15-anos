@@ -4,11 +4,13 @@ import React, { MouseEvent, PropsWithChildren } from 'react';
 
 type IconButtonVariants = 'success' | 'primary' | 'error' | 'white';
 type IconButtonApearence = 'filled' | 'outline';
+type IconButtonSizes = 'md' | 'lg';
 
 type IconButtonProps = PropsWithChildren & {
   onClick?: () => void;
   variant?: IconButtonVariants;
   appearance?: IconButtonApearence;
+  size?: IconButtonSizes;
   classes?: string;
   loading?: boolean;
 };
@@ -20,6 +22,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   loading,
   variant = 'primary',
   appearance = 'filled',
+  size = 'md',
 }) => {
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -32,7 +35,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
 
   return (
     <button
-      className={classNames('icon-button', variant, appearance, classes)}
+      className={classNames('icon-button', variant, appearance, size, classes)}
       onClick={handleClick}>
       {loading ? <Spinner variant="white" /> : children}
     </button>

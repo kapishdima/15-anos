@@ -21,14 +21,12 @@ export const PurchaseBestIdeas: React.FC = () => {
   return (
     <AppLayout>
       <div className="best-ideas">
-        <PageHeader title={t('Best ideas')} />
+        <PageHeader title={t('Best ideas')} hasBackButton />
         <PageBanner image={MockPageBanner} title="Dresses for bridesmaids" />
         <PageHint>
           Here you find the best offers selected by professionals. High qualit, low prices and an
           opportunity to order delivery
         </PageHint>
-
-        {/* <div className="tasks-info "></div> */}
 
         <ProductsList products={products} />
       </div>
