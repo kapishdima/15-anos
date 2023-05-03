@@ -1,7 +1,13 @@
 {
   "files": {
-    "main.css": "/15-anos/static/css/main.ba3643c6.css",
-    "main.js": "/15-anos/static/js/main.7629de4e.js",
+    "main.css": "/15-anos/static/css/main.cc23020f.css",
+    "main.js": "/15-anos/static/js/main.176d2485.js",
+    "static/media/mock-hair.jpg": "/15-anos/static/media/mock-hair.fbe529201d3099f12adc.jpg",
+    "static/media/mock-bouquets.jpg": "/15-anos/static/media/mock-bouquets.cd6a41c35bdefdccacc4.jpg",
+    "static/media/mock-centerpieces.jpg": "/15-anos/static/media/mock-centerpieces.3eac2880bf4232ba1113.jpg",
+    "static/media/mock-footwear.jpg": "/15-anos/static/media/mock-footwear.5c88396f4ac5237aeb9b.jpg",
+    "static/media/mock-purchase.jpg": "/15-anos/static/media/mock-purchase.ba4d61c38bd03cdc8f70.jpg",
+    "static/media/mock-dress.png": "/15-anos/static/media/mock-dress.5ef906008d285062b216.png",
     "static/media/mock-event.jpg": "/15-anos/static/media/mock-event.fc9b3467c382fbbbfcaf.jpg",
     "static/media/avenirnextcyr-thinitalic.eot": "/15-anos/static/media/avenirnextcyr-thinitalic.abcd9d8551aca503cabd.eot",
     "static/media/avenirnextcyr-lightitalic.eot": "/15-anos/static/media/avenirnextcyr-lightitalic.95733b154be717cbb8c3.eot",
@@ -103,11 +109,11 @@
     "static/media/avenirnextcyr-thinitalic.woff": "/15-anos/static/media/avenirnextcyr-thinitalic.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralight.woff": "/15-anos/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/15-anos/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
-    "main.ba3643c6.css.map": "/15-anos/static/css/main.ba3643c6.css.map",
-    "main.7629de4e.js.map": "/15-anos/static/js/main.7629de4e.js.map"
+    "main.cc23020f.css.map": "/15-anos/static/css/main.cc23020f.css.map",
+    "main.176d2485.js.map": "/15-anos/static/js/main.176d2485.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba3643c6.css",
-    "static/js/main.7629de4e.js"
+    "static/css/main.cc23020f.css",
+    "static/js/main.176d2485.js"
   ]
 }
