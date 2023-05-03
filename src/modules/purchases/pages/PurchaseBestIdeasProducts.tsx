@@ -13,22 +13,24 @@ const products = Array(20)
     image: MockDress,
     name: 'Long chiffon dress',
     popular: index % 2 === 0,
+    price: '$33',
+    colors: ['#db5b78', '#e74c3c', '#2ecc71'],
   }));
 
-export const PurchaseBestIdeas: React.FC = () => {
+export const PurchaseBestIdeasProducts: React.FC = () => {
   const { t } = useTranslation();
 
   return (
     <AppLayout>
       <div className="best-ideas">
         <PageHeader title={t('Best ideas')} hasBackButton />
-        <PageBanner image={MockPageBanner} title="Dresses for bridesmaids" />
+        <PageBanner image={MockPageBanner} title="Centerpieces" />
         <PageHint>
           Here you find the best offers selected by professionals. High qualit, low prices and an
           opportunity to order delivery
         </PageHint>
 
-        <ProductsList products={products} type="ideas" />
+        <ProductsList products={products} type="products" />
       </div>
     </AppLayout>
   );

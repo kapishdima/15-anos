@@ -46,6 +46,10 @@ import { ShareIcon } from './icons/ShareIcon';
 import { FillHeartIcon } from './icons/FillHeartIcon';
 import { ExternalLink } from './icons/ExternalLinkIcon';
 import { OutlineShareIcon } from './icons/OutlineShareIcon';
+import { PercentIcon } from './icons/PercentIcon';
+import { DeliveryIcon } from './icons/DeliveryIcon';
+import { ReturnIcon } from './icons/ReturnIcon';
+import { InfoIcon } from './icons/InfoIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -140,4 +144,8 @@ export {
   FillHeartIcon,
   ExternalLink,
   OutlineShareIcon,
+  PercentIcon,
+  DeliveryIcon,
+  ReturnIcon,
+  InfoIcon,
 };

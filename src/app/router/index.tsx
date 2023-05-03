@@ -7,7 +7,13 @@ import { CreateProfilePage, LoginPage } from '@modules/auth';
 import { HomePage } from '@modules/home/';
 import { PaymentsIndex } from '@/modules/payments';
 import { GuestsIndex } from '@/modules/guests';
-import { PurchaseBestIdeas, PurchasesIndex, SinglePurchasePage } from '@/modules/purchases';
+import {
+  PurchaseBestIdeas,
+  PurchaseBestIdeasProducts,
+  PurchasesIndex,
+  SinglePurchasePage,
+  SinglePurchasePageProduct,
+} from '@/modules/purchases';
 
 export const router = createHashRouter([
   {
@@ -51,7 +57,7 @@ export const router = createHashRouter([
     ),
   },
   {
-    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/:id`,
+    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/ideas`,
     element: (
       <ProtectedRoute>
         <PurchaseBestIdeas />
@@ -59,10 +65,26 @@ export const router = createHashRouter([
     ),
   },
   {
-    path: `${AppRoutes.SINGLE_PURCHASE}/:id`,
+    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/products`,
+    element: (
+      <ProtectedRoute>
+        <PurchaseBestIdeasProducts />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/ideas/:id`,
     element: (
       <ProtectedRoute>
         <SinglePurchasePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/products/:id`,
+    element: (
+      <ProtectedRoute>
+        <SinglePurchasePageProduct />
       </ProtectedRoute>
     ),
   },

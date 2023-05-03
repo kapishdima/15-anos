@@ -59,5 +59,11 @@
   "Set the number of kids": "Set the number of kids",
 
   "Purchases": "Purchases",
-  "Best Ideas": "Best Ideas"
+  "Best Ideas": "Best Ideas",
+
+  "Description": "Description",
+  "Link": "Link",
+  "Item name": "Item name",
+  "Item description": "Item description",
+  "Link to an online store": "Link to an online store"
 }

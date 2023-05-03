@@ -56,5 +56,11 @@
   "Set the number of kids": "Введите кол-во детей",
 
   "Purchases": "Покупки",
-  "Best Ideas": "Лучшие идеии"
+  "Best Ideas": "Лучшие идеии",
+
+  "Description": "Описание",
+  "Link": "Ссылка",
+  "Item name": "Имя элемента",
+  "Item description": "Описание элемента",
+  "Link to an online store": "Ссылка на интернет-магазин"
 }

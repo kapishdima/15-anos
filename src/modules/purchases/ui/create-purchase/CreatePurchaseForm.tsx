@@ -26,16 +26,9 @@ export const CreatePurchaseForm: React.FC<CreatePurchaseFormProps> = ({ initialV
   };
   return (
     <Form onSubmit={onSubmit} initialValues={initialValues || defaultValues}>
-      <TextField name="name" label={t('Name')} placeholder={t('Enter payment name')} />
-      <DatepickerField name="date" label={t('Date')} placeholder={t('Select date')} />
-      <CurrencyField name="payable" label={t('Amount payable')} />
-      <CurrencyField name="paid" label={t('Paid')} />
-      <CategoriesSelect
-        name="category"
-        label={t('Task category')}
-        placeholder={t('Select category')}
-      />
-      <TextAreaField name="notes" label={t('Notes')} placeholder={t('Enter notes')} />
+      <TextField name="name" label={t('Name')} placeholder={t('Item name')} />
+      <TextAreaField name="notes" label={t('Description')} placeholder={t('Item description')} />
+      <TextField name="notes" label={t('Link')} placeholder={t('Link to an online store')} />
     </Form>
   );
 };

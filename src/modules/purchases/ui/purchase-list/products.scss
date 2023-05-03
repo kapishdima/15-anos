@@ -4,12 +4,16 @@
   gap: 16px;
 
   margin-top: 5%;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  row-gap: 4px;
+  row-gap: 8px;
 
   width: 20vw;
   height: 50vh;
@@ -53,8 +57,30 @@
   &__footer {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+  }
+
+  &__price {
+    font-family: $anevir-ff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $darkGrayColor;
+  }
+
+  &__colors {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+
+    margin-top: 5%;
+  }
+
+  &__color {
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
   }
 
   &__name {

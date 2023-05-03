@@ -13,11 +13,11 @@ export const PurchaseCategoriesList: React.FC = () => {
     <div className="purchase-categories-list">
       <ListTitle>Best Ideas</ListTitle>
       <Slider slidesPerView={3} spaceBetween={10}>
-        <PurchaseCategoryCard id="1" image={MockDressImage} name="Dress for bridesmaids" />
-        <PurchaseCategoryCard id="2" image={MockCenterPiecesImage} name="Centerpieces" />
-        <PurchaseCategoryCard id="3" image={MockFootwearImage} name="Comfortable footwear" />
-        <PurchaseCategoryCard id="3" image={MockBouquetsImage} name="Bouquets" />
-        <PurchaseCategoryCard id="3" image={MockHairImage} name="Hair ornaments" />
+        <PurchaseCategoryCard id="ideas" image={MockDressImage} name="Dress for bridesmaids" />
+        <PurchaseCategoryCard id="products" image={MockCenterPiecesImage} name="Centerpieces" />
+        <PurchaseCategoryCard id="ideas" image={MockFootwearImage} name="Comfortable footwear" />
+        <PurchaseCategoryCard id="products" image={MockBouquetsImage} name="Bouquets" />
+        <PurchaseCategoryCard id="ideas" image={MockHairImage} name="Hair ornaments" />
       </Slider>
     </div>
   );

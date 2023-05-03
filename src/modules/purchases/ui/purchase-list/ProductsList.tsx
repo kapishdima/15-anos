@@ -12,16 +12,17 @@ type Product = {
 
 type ProductsListProps = {
   products: Product[];
+  type: 'products' | 'ideas';
 };
 
-export const ProductsList: React.FC<ProductsListProps> = ({ products }) => {
+export const ProductsList: React.FC<ProductsListProps> = ({ products, type }) => {
   return (
-    <Link to={`${AppRoutes.SINGLE_PURCHASE}/1`}>
-      <div className="products-list">
-        {products.map((product) => (
+    <div className="products-list">
+      {products.map((product) => (
+        <Link to={`${AppRoutes.PURCHASES_BEST_IDEAS}/${type}/1`}>
           <ProductCard {...product} />
-        ))}
-      </div>
-    </Link>
+        </Link>
+      ))}
+    </div>
   );
 };

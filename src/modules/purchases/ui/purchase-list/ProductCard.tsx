@@ -7,10 +7,22 @@ type ProductCardProps = {
   name: string;
   liked?: boolean;
   popular?: boolean;
+  price?: string;
+  colors?: string[];
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ image, name, liked, popular }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  image,
+  name,
+  liked,
+  popular,
+  price,
+  colors,
+}) => {
   const [like, setLike] = useState(liked);
+
+  console.log(price);
+
   return (
     <div className="product-card">
       <div className="product-card__image">
@@ -22,7 +34,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ image, name, liked, po
         <img src={image} alt={name} />
       </div>
       <div className="product-card__footer">
-        <h4 className="product-card__name">{name}</h4>
+        <div className="product-card__info">
+          {price && <div className="product-card__price">from {price}</div>}
+          <h4 className="product-card__name">{name}</h4>
+          {colors && (
+            <div className="product-card__colors">
+              {colors.map((color) => (
+                <div className="product-card__color" style={{ backgroundColor: color }}></div>
+              ))}
+            </div>
+          )}
+        </div>
         <IconButton
           appearance="outline"
           classes={classNames('like-button', { liked: like })}
