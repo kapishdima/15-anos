@@ -71,16 +71,18 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
         <div className="purchase-label__hint">
           13 people have added this item to their shopping list
         </div>
-        <div className="purchase-price">
-          from {price}
-          <div className="purchase-price__tooltip">
-            <InfoIcon />
-            <div className="purchase-price__tooltip-value">
-              The final price depeneds on the order parameters and will be indicated on the seller's
-              website
+        {price && (
+          <div className="purchase-price">
+            from {price}
+            <div className="purchase-price__tooltip">
+              <InfoIcon />
+              <div className="purchase-price__tooltip-value">
+                The final price depeneds on the order parameters and will be indicated on the
+                seller's website
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <h3 className="purchase-title">{name}</h3>
         <p className="purchase-description">{description}</p>
 

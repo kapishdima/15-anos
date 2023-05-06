@@ -76,10 +76,10 @@ export const Select: React.FC<SelectProps> = ({
       </div>
       <div className="select-dropdown">
         {options.length ? (
-          options.map((option) => (
+          options.map((option, index) => (
             <div
               className="select-option"
-              key={option.value}
+              key={`${Date.now() + index}_${option.value}`}
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();

@@ -6,7 +6,7 @@ export const useEventTitleField = () => {
   const [shown, setShown] = useState(false);
   const { watch } = useFormContext();
 
-  const getShownState = (password: string) => {
+  const getShownState = (password = '') => {
     const hasMinPassword = password.length >= MIN_PASSWORD;
     const hasLastUpperChar = /.*[A-Z]$/gm.test(password);
 
@@ -14,7 +14,10 @@ export const useEventTitleField = () => {
   };
 
   useEffect(() => {
-    const subscription = watch((fields) => getShownState(fields.password));
+    const subscription = watch((fields) => {
+      console.log(fields);
+      getShownState(fields.password);
+    });
 
     return () => subscription.unsubscribe();
   }, [watch]);
