@@ -1,17 +1,22 @@
 import { create } from 'zustand';
-import { getPayments } from '../api/payments.api';
-import { EVENT_DETAILS } from '../../../app/constants/local-storage-keys';
+import { devtools, persist } from 'zustand/middleware';
 import { Timestamp } from 'firebase/firestore';
 
-import { format } from 'date-fns';
-import sortBy from 'lodash.sortby';
-import { orderBy } from 'lodash';
+import {
+  createPayment,
+  getPayments,
+  removePayment,
+  updatePayment,
+  updatePaymentStatus,
+} from '../api/payments.api';
+import { exceptCompletedPayments } from './payments.selectors';
 
 export type Translations = { [key: string]: string };
 
 export type Statuses = 'done' | 'undone';
 
-export type Task = {
+export type Payment = {
+  id: string;
   categoryId: string;
   completed: Timestamp;
   date: Timestamp;
@@ -20,118 +25,156 @@ export type Task = {
   suggestions: any[];
   title: Translations;
   vendorId: string;
+  wasPaid: boolean;
+  pay: number;
+  paid: number;
 };
 
-export type TaskViewModal = {
+export type PaymentViewModal = {
   id: string;
   categoryId: string;
   completed: Date;
   date: Date;
   notes: string;
-  isCompleted: boolean;
+  status: Statuses;
   suggestions: any[];
   title: Translations;
   vendorId: string;
+  wasPaid: boolean;
+  pay: number;
+  paid: number;
+  isCompleted: boolean;
 };
 
-export type GroupedTasks = { [key: string]: TaskViewModal[] };
+export type GroupedPayments = { [key: string]: PaymentViewModal[] };
 
-interface TasksStore {
-  tasks: TaskViewModal[];
-  tasksForView: TaskViewModal[];
+export interface PaymentsStore {
+  payments: PaymentViewModal[];
+  paymentsForView: PaymentViewModal[];
   total: number;
   completed: number;
   loading: boolean;
   isRemoval: boolean;
-  fetchTasks: () => Promise<void>;
-  toggleTaskRemoval: () => void;
+  paymentInProcessing: string;
+  fetchPayments: (force?: boolean) => Promise<void>;
+  togglePaymentRemoval: () => void;
   showCompleted: () => void;
   hideCompleted: () => void;
-  removeTask: (id: string) => void;
+  removePayment: (id: string) => void;
+  updatePayment: (id: string, payload: any) => void;
+  addPayment: (payload: any) => void;
+  changePaymentStatus: (id: string, pay: number) => void;
 }
 
-export const groupByMonth = (tasks: TaskViewModal[]) => {
-  const groupedTask = tasks.reduce((acc, task) => {
-    const key = format(task.date, 'MMMM, yyyy');
-    acc[key] = [...(acc[key] || []), task];
+export const usePaymentsStore = create<PaymentsStore>()(
+  devtools(
+    persist(
+      (set, get) => ({
+        payments: [],
+        paymentsForView: [],
+        completed: 0,
+        total: 0,
+        loading: false,
+        isRemoval: false,
+        paymentInProcessing: '',
+        fetchPayments: async (force?: boolean) => {
+          set(() => ({
+            loading: true,
+          }));
 
-    return acc;
-  }, {} as GroupedTasks);
+          const cachedPayments = get().payments;
+          const cachedPaymentsForView = get().paymentsForView;
 
-  return groupedTask;
-};
+          const hasCachePayments = Boolean(cachedPayments && cachedPayments.length);
+          const hasCachedPaymentsForView = Boolean(
+            cachedPaymentsForView && cachedPaymentsForView.length,
+          );
 
-export const groupByDay = (tasks: TaskViewModal[]) => {
-  const groupedTask = tasks.reduce((acc, task) => {
-    const key = format(task.date, 'EEEE, dd MMMM yyyy');
-    acc[key] = [...(acc[key] || []), task];
+          const payments = hasCachePayments && !force ? cachedPayments : await getPayments();
 
-    return acc;
-  }, {} as GroupedTasks);
+          const total = payments.length;
+          const completed = payments.filter((payment) => payment.wasPaid).length;
 
-  return groupedTask;
-};
+          const paymentsForView =
+            hasCachedPaymentsForView && !force ? cachedPaymentsForView : payments;
+          const showCompleted = JSON.parse(
+            new URLSearchParams(window.location.hash).get('showCompleted') || 'true',
+          );
 
-export const groupByCategory = (tasks: TaskViewModal[]) => {
-  const groupedTask = tasks.reduce((acc, task) => {
-    const key = task.categoryId;
-    acc[key] = [...(acc[key] || []), task];
+          set(() => ({
+            payments,
+            paymentsForView: showCompleted
+              ? paymentsForView
+              : exceptCompletedPayments(paymentsForView),
+            loading: false,
+            total,
+            completed,
+          }));
+        },
 
-    return acc;
-  }, {} as GroupedTasks);
+        showCompleted: () => set((state) => ({ paymentsForView: state.payments })),
+        hideCompleted: () =>
+          set((state) => ({ paymentsForView: exceptCompletedPayments(state.payments) })),
+        togglePaymentRemoval: () =>
+          set((state) => {
+            return { isRemoval: !state.isRemoval };
+          }),
 
-  return groupedTask;
-};
+        removePayment: async (id: string) => {
+          try {
+            set(() => ({ loading: true, paymentInProcessing: id }));
+            await removePayment(id);
 
-export const sortByDate = (tasks: TaskViewModal[]) => {
-  const sortedByDate = orderBy(tasks, (task) => new Date(task.date), 'asc');
+            set((state) => {
+              return {
+                paymentsForView: state.paymentsForView.filter((payment) => payment.id !== id),
+                loading: false,
+                paymentInProcessing: '',
+              };
+            });
+          } catch (error) {
+            set(() => ({ loading: false, paymentInProcessing: '' }));
+          }
+        },
 
-  return groupByMonth(sortedByDate);
-};
+        updatePayment: async (id: string, payload: any) => {
+          try {
+            set(() => ({ loading: true }));
+            await updatePayment(id, payload);
+            set(() => ({ loading: false }));
+          } catch (error) {
+            set(() => ({ loading: false }));
+          }
+        },
 
-export const sortByCategoriesAlphabet = (tasks: TaskViewModal[]) => {
-  const sortedByAlphabet = sortBy(tasks, (task) => task.categoryId.toLowerCase());
+        changePaymentStatus: async (id: string, pay: number) => {
+          try {
+            set(() => ({ loading: true, paymentInProcessing: id }));
+            await updatePaymentStatus(id, pay);
+            set(() => ({ loading: false, paymentInProcessing: '' }));
+          } catch (error) {
+            set(() => ({ loading: false, paymentInProcessing: '' }));
+          }
+        },
 
-  return groupByCategory(sortedByAlphabet);
-};
-
-export const usePaymentsStore = create<TasksStore>((set) => ({
-  tasks: [],
-  tasksForView: [],
-  completed: 0,
-  total: 0,
-  loading: false,
-  isRemoval: false,
-  fetchTasks: async () => {
-    set(() => ({
-      loading: true,
-    }));
-    const eventDetails = JSON.parse(window.localStorage.getItem(EVENT_DETAILS) || '{}');
-    const event = `event${eventDetails.eventNumber}`;
-    const tasks = (await getPayments(event)) || [];
-
-    const total = tasks.length;
-    const completed = tasks.filter((task) => task.isCompleted).length;
-
-    set(() => ({ tasks, tasksForView: tasks, loading: false, total, completed }));
-  },
-  showCompleted: () =>
-    set((state) => {
-      return { tasksForView: state.tasks };
-    }),
-  hideCompleted: () =>
-    set((state) => {
-      const uncompleted = state.tasks.filter((task) => !task.isCompleted);
-
-      return { tasksForView: uncompleted };
-    }),
-  toggleTaskRemoval: () =>
-    set((state) => {
-      return { isRemoval: !state.isRemoval };
-    }),
-
-  removeTask: (id: string) =>
-    set((state) => {
-      return { tasksForView: state.tasksForView.filter((task) => task.id !== id) };
-    }),
-}));
+        addPayment: async (payload: any) => {
+          try {
+            set(() => ({ loading: true }));
+            await createPayment(payload);
+            set(() => ({ loading: false }));
+          } catch (error) {
+            console.error(error);
+            set(() => ({ loading: false }));
+          }
+        },
+      }),
+      {
+        name: 'payments',
+        partialize: (state) => ({
+          payments: state.payments,
+          pamynetsForView: state.paymentsForView,
+        }),
+      },
+    ),
+  ),
+);

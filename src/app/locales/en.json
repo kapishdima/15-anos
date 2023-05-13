@@ -65,5 +65,11 @@
   "Link": "Link",
   "Item name": "Item name",
   "Item description": "Item description",
-  "Link to an online store": "Link to an online store"
+  "Link to an online store": "Link to an online store",
+
+  "Tomorrow": "Tomorrow",
+  "Yesterday": "Yesterday",
+  "Today": "Today",
+
+  "Format Date": "{{date, relative}}"
 }

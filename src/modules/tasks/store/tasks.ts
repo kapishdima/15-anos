@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import { createTask, getTasks, removeTask, updateTask, updateTaskStatus } from '../api/tasks.api';
 import { Timestamp } from 'firebase/firestore';
 import { devtools } from 'zustand/middleware';
+import { getCompletedTasks } from './tasks.selectors';
 
 export type Translations = { [key: string]: string };
 
@@ -64,39 +65,37 @@ export const useTasksStore = create<TasksStore>()(
         isRemoval: false,
         taskInProcessing: '',
         fetchTasks: async (force?: boolean) => {
+          set(() => ({
+            loading: true,
+          }));
+
           const cachedTasks = get().tasks;
           const cachedTasksForView = get().tasksForView;
 
           const hasCacheTasks = Boolean(cachedTasks && cachedTasks.length);
           const hasCachedTasksForView = Boolean(cachedTasksForView && cachedTasksForView.length);
 
-          set(() => ({
-            loading: true,
-          }));
-
           const tasks = hasCacheTasks && !force ? cachedTasks : await getTasks();
 
           const total = tasks.length;
           const completed = tasks.filter((task) => task.isCompleted).length;
 
+          const tasksForView = hasCachedTasksForView && !force ? cachedTasksForView : tasks;
+          const showCompleted = JSON.parse(
+            new URLSearchParams(window.location.hash).get('showCompleted') || 'true',
+          );
+
           set(() => ({
             tasks,
-            tasksForView: hasCachedTasksForView && !force ? cachedTasksForView : tasks,
+            tasksForView: showCompleted ? tasksForView : getCompletedTasks(tasksForView),
             loading: false,
             total,
             completed,
           }));
         },
-        showCompleted: () =>
-          set((state) => {
-            return { tasksForView: state.tasks };
-          }),
-        hideCompleted: () =>
-          set((state) => {
-            const uncompleted = state.tasks.filter((task) => !task.isCompleted);
 
-            return { tasksForView: uncompleted };
-          }),
+        showCompleted: () => set((state) => ({ tasksForView: state.tasks })),
+        hideCompleted: () => set((state) => ({ tasksForView: getCompletedTasks(state.tasks) })),
         toggleTaskRemoval: () =>
           set((state) => {
             return { isRemoval: !state.isRemoval };

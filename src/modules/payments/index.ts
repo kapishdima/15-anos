@@ -7,19 +7,23 @@ import { PaymentsListByDate } from './ui/payments-list/PaymentsListByDate';
 
 import { PaymentsProgress } from './ui/payments-progress/PaymentsProgress';
 
+import { usePaymentsStore, PaymentViewModal } from './store/payments';
+import { usePaymentDetailsStore } from './store/payment-details';
+
 import {
-  usePaymentsStore,
-  sortByCategoriesAlphabet,
-  sortByDate,
+  sortedByCategoriesAlphabet,
+  sortedByDate,
+  groupedByDate,
   groupByCategory,
-  groupByDay,
   groupByMonth,
-  TaskViewModal,
-} from './store/payments';
+  scheduledPayments,
+  alreadyPaid,
+  availableBudget,
+} from './store/payments.selectors';
 
 import { PaymentsIndex } from './pages/PaymentsPage';
 
-export type { TaskViewModal };
+export type { PaymentViewModal };
 
 export {
   CreatePayment,
@@ -29,10 +33,14 @@ export {
   PaymentsListByDate,
   PaymentsProgress,
   usePaymentsStore,
-  sortByCategoriesAlphabet,
-  sortByDate,
   groupByCategory,
-  groupByDay,
+  sortedByCategoriesAlphabet,
+  sortedByDate,
+  groupedByDate,
   groupByMonth,
   PaymentsIndex,
+  scheduledPayments,
+  alreadyPaid,
+  availableBudget,
+  usePaymentDetailsStore,
 };

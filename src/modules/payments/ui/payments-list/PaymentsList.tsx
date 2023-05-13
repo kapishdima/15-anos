@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { GroupedTasks } from '../../store/payments';
+import { GroupedPayments } from '../../store/payments';
 import { PaymentGroup } from './PaymentGroup';
 
 type PaymentsListProps = {
-  payments: GroupedTasks;
+  payments: GroupedPayments;
+  hasCardHint?: boolean;
 };
 
-export const PaymentsList: React.FC<PaymentsListProps> = ({ payments }) => {
+export const PaymentsList: React.FC<PaymentsListProps> = ({ payments, hasCardHint }) => {
   return (
     <div className="task-list">
-      {Object.entries(payments).map(([title, tasks]) => (
-        <PaymentGroup title={title} tasks={tasks} key={title} />
+      {Object.entries(payments).map(([title, payments]) => (
+        <PaymentGroup title={title} payments={payments} key={title} hasCardHint={hasCardHint} />
       ))}
     </div>
   );

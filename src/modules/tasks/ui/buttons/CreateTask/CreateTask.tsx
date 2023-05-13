@@ -12,16 +12,19 @@ const CREATE_TASK_MODAL = 'create_task';
 
 export const CreateTask: React.FC = () => {
   const { open, close } = useModal();
-  const taskStore = useTasksStore();
+
+  const loading = useTasksStore((state) => state.loading);
+  const addTask = useTasksStore((state) => state.addTask);
+  const fetchTasks = useTasksStore((state) => state.fetchTasks);
 
   const onClick = () => {
     open(CREATE_TASK_MODAL);
   };
 
   const createTask = async (values: any) => {
-    await taskStore.addTask(values);
+    await addTask(values);
     close(CREATE_TASK_MODAL);
-    taskStore.fetchTasks();
+    fetchTasks(/*force*/ true);
   };
 
   return (
@@ -32,7 +35,7 @@ export const CreateTask: React.FC = () => {
       <CreateTaskModal
         id={CREATE_TASK_MODAL}
         onSubmit={createTask}
-        loading={taskStore.loading}
+        loading={loading}
         validation={createTaskSchemaValidation}
       />
     </Protected>

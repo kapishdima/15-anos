@@ -5,6 +5,8 @@ import detector from 'i18next-browser-languagedetector';
 import en from '../../app/locales/en.json';
 import ru from '../../app/locales/ru.json';
 import ua from '../../app/locales/ru.json';
+import { toRelativeDate } from '@/app/utils/date';
+import { isDate } from 'date-fns';
 
 export const createI18nClient = () => {
   i18n
@@ -19,6 +21,13 @@ export const createI18nClient = () => {
       fallbackLng: 'en',
       interpolation: {
         escapeValue: false,
+        format: (value) => {
+          if (isDate(value)) {
+            return toRelativeDate(value);
+          }
+
+          return value;
+        },
       },
     });
 };

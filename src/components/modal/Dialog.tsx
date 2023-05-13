@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import Micromodal from 'micromodal';
-import { Button, Form } from '@components/index';
+import { Button, Form, useClickOutside } from '@components/index';
 import { useTranslation } from 'react-i18next';
+import { FieldValues, UseFormReset } from 'react-hook-form';
 
 type ModalProps = React.PropsWithChildren & {
   id: string;
@@ -14,8 +15,9 @@ type ModalProps = React.PropsWithChildren & {
   minHeight?: string;
   loading?: boolean;
   initialValues?: any;
-  onSubmit: (values: any) => void;
+  onSubmit: (values: any, reset?: UseFormReset<FieldValues>) => void;
   validation?: any;
+  onClose?: () => void;
 };
 
 export const Dialog: React.FC<ModalProps> = ({
@@ -30,8 +32,12 @@ export const Dialog: React.FC<ModalProps> = ({
   initialValues,
   onSubmit,
   validation,
+  onClose,
 }) => {
   const { t } = useTranslation();
+  const dialog = useRef<HTMLDivElement>(null);
+
+  // useClickOutside(dialog, onClose);
 
   useEffect(() => {
     Micromodal.init();

@@ -68,8 +68,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     fetchTasks(/*force*/ true);
   };
 
-  console.log(expires);
-
   return (
     <>
       <Card

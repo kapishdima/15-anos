@@ -19,7 +19,7 @@ export const CurrencyField: React.FC<CurrencyFieldProps> = ({ name, placeholder,
 
   useCurrencyField((value) => {
     setMask({
-      name: `num ${value}`,
+      name: `num ${value ? value.toString() : ''}`,
       blocks: {
         num: { mask: Number, thousandsSeparator: ' ', min: 0, signed: false },
       },

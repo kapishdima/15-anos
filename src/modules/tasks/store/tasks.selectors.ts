@@ -4,6 +4,10 @@ import { GroupedTasks, TaskViewModal, TasksStore } from './tasks';
 import sortBy from 'lodash.sortby';
 import { orderBy } from 'lodash';
 
+export const getCompletedTasks = (tasks: TaskViewModal[]) => {
+  return tasks.filter((task) => !task.isCompleted);
+};
+
 export const groupByMonth = (tasks: TaskViewModal[]) => {
   const groupedTask = tasks.reduce((acc, task) => {
     const key = format(task.date, 'MMMM, yyyy');
@@ -18,6 +22,7 @@ export const groupByMonth = (tasks: TaskViewModal[]) => {
 export const groupByCategory = (tasks: TaskViewModal[]) => {
   return tasks.reduce((acc, task) => {
     const key = task.categoryId;
+
     acc[key] = [...(acc[key] || []), task];
 
     return acc;
@@ -25,7 +30,6 @@ export const groupByCategory = (tasks: TaskViewModal[]) => {
 };
 
 export const tasksVM = (state: TasksStore) => {
-  console.log(state.tasksForView);
   return state.tasksForView.map((task) => {
     return {
       ...task,

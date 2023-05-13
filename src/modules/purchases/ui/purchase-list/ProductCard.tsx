@@ -21,8 +21,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [like, setLike] = useState(liked);
 
-  console.log(price);
-
   return (
     <div className="product-card">
       <div className="product-card__image">

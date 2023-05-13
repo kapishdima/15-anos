@@ -10,15 +10,11 @@ type RemovePaymentProps = {
 };
 
 export const RemovePayment: React.FC<RemovePaymentProps> = ({ removal }) => {
-  const paymentsStore = usePaymentsStore();
-
-  const onClick = () => {
-    paymentsStore.toggleTaskRemoval();
-  };
+  const togglePaymentRemoval = usePaymentsStore((state) => state.togglePaymentRemoval);
 
   return (
     <Protected action={RoleActions.DELETE_TASK}>
-      <IconButton appearance="filled" variant="white" onClick={onClick}>
+      <IconButton appearance="filled" variant="white" onClick={togglePaymentRemoval}>
         {removal ? <CheckIcon /> : <TrashIcon />}
       </IconButton>
     </Protected>

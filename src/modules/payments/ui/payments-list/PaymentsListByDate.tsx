@@ -1,9 +1,10 @@
 import React from 'react';
-import { sortByDate, usePaymentsStore } from '@modules/payments';
+import { sortedByDate, usePaymentsStore } from '@modules/payments';
 import { PaymentsList } from './PaymentsList';
+import { paymentsVM } from '../../store/payments.selectors';
 
 export const PaymentsListByDate: React.FC = () => {
-  const paymentsStore = usePaymentsStore();
+  const payments = usePaymentsStore(paymentsVM);
 
-  return <PaymentsList payments={sortByDate(paymentsStore.tasksForView)} />;
+  return <PaymentsList payments={sortedByDate(payments)} />;
 };

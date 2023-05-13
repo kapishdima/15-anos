@@ -10,9 +10,15 @@ type DatepickerFieldProps = BaseInputProps & {
   placeholder?: string | null;
   defaultValue?: Date;
   min?: Date;
+  showTimeSelect?: boolean;
 };
 
-export const DatepickerField: React.FC<DatepickerFieldProps> = ({ name, min, label }) => {
+export const DatepickerField: React.FC<DatepickerFieldProps> = ({
+  name,
+  min,
+  label,
+  showTimeSelect = true,
+}) => {
   return (
     <Input name={name}>
       {({ field, fieldState }) => {
@@ -25,7 +31,7 @@ export const DatepickerField: React.FC<DatepickerFieldProps> = ({ name, min, lab
             )}
             <DatePicker
               selected={field.value}
-              showTimeSelect
+              showTimeSelect={showTimeSelect}
               onChange={(date: any) => field.onChange(date)}
               timeFormat="HH:mm"
               dateFormat="MMMM d yyyy - HH:mm"

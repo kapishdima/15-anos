@@ -6,9 +6,6 @@ export const TaskProgress: React.FC = () => {
   const total = useTasksStore((state) => state.total);
   const completed = useTasksStore((state) => state.completed);
 
-  console.log(total);
-  console.log(completed);
-
   const [value, setValue] = useState(0);
 
   useEffect(() => {

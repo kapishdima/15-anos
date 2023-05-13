@@ -8,20 +8,15 @@ import { useTasksStore } from '../../../store/tasks';
 export const ToggleVisibilityCompleted: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [completedVisible, setCompletedVisible] = useState(true);
-  const tasksStore = useTasksStore();
+
+  const showCompleted = useTasksStore((state) => state.showCompleted);
+  const hideCompleted = useTasksStore((state) => state.hideCompleted);
 
   const onClick = () => {
-    if (completedVisible) {
-      searchParams.set('showCompleted', 'false');
+    searchParams.set('showCompleted', JSON.stringify(!completedVisible));
 
-      setSearchParams(searchParams);
-      setCompletedVisible(false);
-    } else {
-      searchParams.set('showCompleted', 'true');
-
-      setSearchParams(searchParams);
-      setCompletedVisible(true);
-    }
+    setSearchParams(searchParams);
+    setCompletedVisible((_completedVisible) => !_completedVisible);
   };
 
   useEffect(() => {
@@ -31,9 +26,9 @@ export const ToggleVisibilityCompleted: React.FC = () => {
 
   useEffect(() => {
     if (completedVisible) {
-      tasksStore.showCompleted();
+      showCompleted();
     } else {
-      tasksStore.hideCompleted();
+      hideCompleted();
     }
   }, [completedVisible]);
 

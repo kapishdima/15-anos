@@ -14,6 +14,9 @@ type CardProps = {
   extra?: JSX.Element;
   hoverable?: boolean;
   hint?: string;
+  showHint?: boolean;
+  showDescription?: boolean;
+  description?: string;
   expires?: boolean;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
@@ -34,6 +37,9 @@ export const Card: React.FC<CardProps> = ({
   extra,
   hint,
   expires,
+  description,
+  showHint = true,
+  showDescription = false,
   hoverable = true,
 }) => {
   const handleIconClick = (event: MouseEvent) => {
@@ -64,7 +70,8 @@ export const Card: React.FC<CardProps> = ({
       </div>
       <div className="card__info">
         <div className="card__name">{title}</div>
-        {hint && <div className="card__hint">{hint}</div>}
+        {hint && showHint && <div className="card__hint">{hint}</div>}
+        {description && showDescription && <div className="card__hint">{description}</div>}
       </div>
       <div className="card-actions">
         {extra}

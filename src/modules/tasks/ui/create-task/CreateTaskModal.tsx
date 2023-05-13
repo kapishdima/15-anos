@@ -1,9 +1,11 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { FieldValues, UseFormReset } from 'react-hook-form';
 
 import { Dialog } from '@/components';
 import { CreateTaskForm } from './CreateTaskForm';
+import { toast } from 'react-toastify';
 
 type CreateTaskModalProps = {
   id: string;
@@ -23,11 +25,22 @@ const defaultValues = {
 export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   id,
   initialValues,
-  onSubmit,
   loading,
   validation,
+  onSubmit,
 }) => {
   const { t } = useTranslation();
+
+  const submit = (values: any, reset?: UseFormReset<FieldValues>) => {
+    onSubmit(values);
+    if (reset) {
+      reset();
+    }
+  };
+
+  const onModalClose = () => {
+    toast.error('Close', { toastId: 'close' });
+  };
 
   return (
     <Dialog
@@ -38,8 +51,9 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       minHeight="90vh"
       loading={loading}
       initialValues={initialValues || defaultValues}
-      onSubmit={onSubmit}
-      validation={validation}>
+      onSubmit={submit}
+      validation={validation}
+      onClose={onModalClose}>
       <CreateTaskForm />
     </Dialog>
   );

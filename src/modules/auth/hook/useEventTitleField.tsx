@@ -15,7 +15,6 @@ export const useEventTitleField = () => {
 
   useEffect(() => {
     const subscription = watch((fields) => {
-      console.log(fields);
       getShownState(fields.password);
     });
 

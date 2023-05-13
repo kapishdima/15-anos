@@ -15,33 +15,46 @@ import { useCategoriesStore } from '@modules/categories';
 
 import { Tabs } from '@components/index';
 import { useTranslation } from 'react-i18next';
+import { usePaymentDetailsStore } from '../store/payment-details';
 
 export const PaymentsIndex: React.FC = () => {
-  const paymentsStore = usePaymentsStore();
-  const categoriesStore = useCategoriesStore();
   const { t } = useTranslation();
 
+  const payments = usePaymentsStore((state) => state.paymentsForView);
+
+  const fetchPayments = usePaymentsStore((state) => state.fetchPayments);
+  const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
+
+  const paymentsLoading = usePaymentsStore((state) => state.loading);
+  const isRemoval = usePaymentsStore((state) => state.isRemoval);
+
+  const categoriesLoading = useCategoriesStore((state) => state.loading);
+
+  const fetchPaymentDetails = usePaymentDetailsStore((state) => state.fetchPaymentDetails);
+  const paymentDetailsLoading = usePaymentDetailsStore((state) => state.loading);
+
   useEffect(() => {
-    paymentsStore.fetchTasks();
-    categoriesStore.fetchCategories();
+    fetchPayments();
+    fetchCategories();
+    fetchPaymentDetails();
   }, []);
 
   return (
-    <AppLayout loading={paymentsStore.loading && categoriesStore.loading}>
+    <AppLayout loading={paymentsLoading && categoriesLoading && paymentDetailsLoading}>
       <div className="home-page">
         <PageHeader
           title={t('Payments')}
           actions={
             <>
               <CreatePayment />
-              <RemovePayment removal={paymentsStore.isRemoval} />
+              <RemovePayment removal={isRemoval} />
             </>
           }
         />
 
-        {paymentsStore.tasks && (
+        {payments && (
           <div className="tasks-info">
-            <PaymentsProgress available={1000} paid={0} scheduled={500} perGuest={50} />
+            <PaymentsProgress />
             <Tabs
               extra={<ToggleVisibilityCompleted />}
               tabs={[
