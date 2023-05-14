@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/15-anos/static/css/main.8b869e48.css",
-    "main.js": "/15-anos/static/js/main.54e6a0fe.js",
+    "main.js": "/15-anos/static/js/main.c6706e12.js",
     "static/media/mock-hair.jpg": "/15-anos/static/media/mock-hair.fbe529201d3099f12adc.jpg",
     "static/media/mock-bouquets.jpg": "/15-anos/static/media/mock-bouquets.cd6a41c35bdefdccacc4.jpg",
     "static/media/mock-centerpieces.jpg": "/15-anos/static/media/mock-centerpieces.3eac2880bf4232ba1113.jpg",
@@ -110,10 +110,10 @@
     "static/media/avenirnextcyr-ultralight.woff": "/15-anos/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/15-anos/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
     "main.8b869e48.css.map": "/15-anos/static/css/main.8b869e48.css.map",
-    "main.54e6a0fe.js.map": "/15-anos/static/js/main.54e6a0fe.js.map"
+    "main.c6706e12.js.map": "/15-anos/static/js/main.c6706e12.js.map"
   },
   "entrypoints": [
     "static/css/main.8b869e48.css",
-    "static/js/main.54e6a0fe.js"
+    "static/js/main.c6706e12.js"
   ]
 }
