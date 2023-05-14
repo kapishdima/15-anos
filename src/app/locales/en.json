@@ -71,5 +71,11 @@
   "Yesterday": "Yesterday",
   "Today": "Today",
 
-  "Format Date": "{{date, relative}}"
+  "Format Date": "{{date, relative}}",
+
+  "Are you sure you want to delete?": "Are you sure you want to delete?",
+  "Yes": "Yes",
+  "No": "No",
+
+  "Are you sure you want to exit without saving?": "Are you sure you want to exit without saving?"
 }

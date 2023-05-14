@@ -5,7 +5,6 @@ import { FieldValues, UseFormReset } from 'react-hook-form';
 
 import { Dialog } from '@/components';
 import { CreateTaskForm } from './CreateTaskForm';
-import { toast } from 'react-toastify';
 
 type CreateTaskModalProps = {
   id: string;
@@ -38,10 +37,6 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     }
   };
 
-  const onModalClose = () => {
-    toast.error('Close', { toastId: 'close' });
-  };
-
   return (
     <Dialog
       id={id}
@@ -52,8 +47,7 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       loading={loading}
       initialValues={initialValues || defaultValues}
       onSubmit={submit}
-      validation={validation}
-      onClose={onModalClose}>
+      validation={validation}>
       <CreateTaskForm />
     </Dialog>
   );

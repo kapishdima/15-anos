@@ -13,6 +13,9 @@ type ModalProps = React.PropsWithChildren & {
   minWidth?: string;
   minHeight?: string;
   loading?: boolean;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  hasCloseIconButton?: boolean;
 };
 
 export const Modal: React.FC<ModalProps> = ({
@@ -24,6 +27,9 @@ export const Modal: React.FC<ModalProps> = ({
   minHeight,
   minWidth,
   loading,
+  onCancel,
+  onConfirm,
+  hasCloseIconButton = true,
 }) => {
   const { t } = useTranslation();
 
@@ -45,23 +51,27 @@ export const Modal: React.FC<ModalProps> = ({
               <h2 className="modal__title" id={`${id}-title`}>
                 {title}
               </h2>
-              <button
-                className="modal__close"
-                aria-label="Close modal"
-                data-micromodal-close></button>
+              {hasCloseIconButton && (
+                <button
+                  className="modal__close"
+                  aria-label="Close modal"
+                  data-micromodal-close></button>
+              )}
             </header>
-            <main className="modal__content" id={`${id}-content`}>
-              {children}
-            </main>
+            {children && (
+              <main className="modal__content" id={`${id}-content`}>
+                {children}
+              </main>
+            )}
             <footer className="modal__footer">
-              <Button data-micromodal-close appearance="ghost" variant="error">
+              <Button data-micromodal-close appearance="ghost" variant="error" onClick={onCancel}>
                 {cancelButtonText || t('Cancel')}
               </Button>
               <Button
                 aria-label="Close this dialog window"
                 variant="success"
                 loading={loading}
-                type="submit">
+                onClick={onConfirm}>
                 {confirmButtonText || t('Confirm')}
               </Button>
             </footer>

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { MouseEvent } from 'react';
 
 import { CheckIcon, AngleRightIcon, IconButton, TrashIcon, Spinner } from '@components/index';
+import { CardRemoveButton } from './CardRemoveButton';
 
 type CardProps = {
   id: string;
@@ -75,18 +76,12 @@ export const Card: React.FC<CardProps> = ({
       </div>
       <div className="card-actions">
         {extra}
-        <div className="card__icon-button">
-          {!removal ? (
-            <AngleRightIcon />
-          ) : (
-            <IconButton
-              classes="card__remove-button"
-              onClick={() => onDelete(id)}
-              loading={loading}>
-              <TrashIcon />
-            </IconButton>
-          )}
-        </div>
+        <CardRemoveButton
+          id={id}
+          removal={removal}
+          onDelete={() => onDelete(id)}
+          loading={loading}
+        />
       </div>
     </div>
   );

@@ -54,7 +54,7 @@
 
   &__content {
     margin-top: 2rem;
-    margin-bottom: 2rem;
+
     max-height: 70vh;
     overflow-y: auto;
 
@@ -80,6 +80,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    margin-top: 2rem;
   }
 
   .dialog__content {

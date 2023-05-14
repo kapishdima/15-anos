@@ -30,6 +30,13 @@
   }
 }
 
+.form-field {
+  transition: border-color 0.25s ease;
+}
+.form-field.form-field--error {
+  border-color: $errorColor;
+}
+
 .form-textarea__container {
   textarea {
     min-height: 200px;

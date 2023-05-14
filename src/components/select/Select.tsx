@@ -16,6 +16,7 @@ type SelectProps = {
   placeholder?: string;
   defaultSelected?: string;
   variant?: 'select' | 'button';
+  invalid?: boolean;
 };
 
 export const Select: React.FC<SelectProps> = ({
@@ -23,6 +24,7 @@ export const Select: React.FC<SelectProps> = ({
   onSelect,
   placeholder,
   defaultSelected,
+  invalid,
   variant = 'select',
 }) => {
   const { t } = useTranslation();
@@ -64,7 +66,11 @@ export const Select: React.FC<SelectProps> = ({
 
   return (
     <div className={classNames('select', { opened })} ref={select}>
-      <div className={classNames('select-field', `select-field__${variant}`)} onClick={toggle}>
+      <div
+        className={classNames('select-field', `select-field__${variant}`, {
+          'select-field--error': invalid,
+        })}
+        onClick={toggle}>
         {selected ? (
           <div className="select-value">
             <div className="select-value__icon">{selected.icon}</div>

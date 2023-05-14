@@ -88,6 +88,10 @@
     @include inputValue;
   }
 
+  .select-field.select-field--error {
+    border-color: $errorColor;
+  }
+
   .select-field__select {
     width: 100%;
     padding: $input-padding-y $input-padding-x;

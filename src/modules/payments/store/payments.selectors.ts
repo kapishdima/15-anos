@@ -102,5 +102,5 @@ export const perGuest = (state: PaymentDetailsStore, paymentsAmount: number) => 
     return 0;
   }
 
-  return paymentsAmount / guests;
+  return Math.ceil(paymentsAmount / guests);
 };

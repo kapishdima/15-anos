@@ -33,7 +33,7 @@ export const getPayments = async (): Promise<PaymentViewModal[]> => {
 
 export const getPaymentDetails = async (): Promise<PaymentDetails | null> => {
   const eventId = getEventId();
-  const paymentDetails = await getSnapshot<PaymentDetails>(Collections.EVENTS, [
+  const paymentDetails = await getSnapshot<PaymentDetails[]>(Collections.EVENTS, [
     eventId,
     Collections.PROFILE_DETAILS,
   ]);
@@ -42,7 +42,7 @@ export const getPaymentDetails = async (): Promise<PaymentDetails | null> => {
     return null;
   }
 
-  return paymentDetails;
+  return paymentDetails[0];
 };
 
 export const removePayment = async (id: string) => {

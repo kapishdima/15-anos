@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { HTMLAttributes, PropsWithChildren } from 'react';
+import React, { HTMLAttributes, PropsWithChildren, MouseEvent } from 'react';
 
 import { Spinner } from '@components/index';
 
@@ -26,12 +26,20 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   ...attrs
 }) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
       type={type}
       className={classNames('button', variant, appearance)}
       disabled={disabled}
-      onClick={onClick}
+      onClick={handleClick}
       {...attrs}>
       {loading ? <Spinner variant="white" /> : children}
     </button>

@@ -14,7 +14,12 @@ export const CreatePaymentForm = () => {
   return (
     <>
       <TextField name="title" label={t('Name')} placeholder={t('Enter payment name')} />
-      <DatepickerField name="date" label={t('Date')} placeholder={t('Select date')} />
+      <DatepickerField
+        name="date"
+        label={t('Date')}
+        placeholder={t('Select date')}
+        showTimeSelect={false}
+      />
       <CurrencyField name="pay" label={t('Amount payable')} />
       <CurrencyField name="paid" label={t('Paid')} />
       <CategoriesSelect

@@ -31,6 +31,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
               defaultSelected={field.value}
               placeholder={placeholder}
               options={options}
+              invalid={Boolean(fieldState.error)}
               onSelect={(value: string) => {
                 if (onSelect) {
                   onSelect(value);

@@ -35,7 +35,9 @@ export const TextField: React.FC<TextFieldProps> = ({
               id={name}
               type={type || 'text'}
               placeholder={placeholder || ''}
-              className={classNames('form-field', 'text-form-field')}
+              className={classNames('form-field', 'text-form-field', {
+                'form-field--error': fieldState.error,
+              })}
               name={field.value}
               value={field.value}
               onChange={field.onChange}

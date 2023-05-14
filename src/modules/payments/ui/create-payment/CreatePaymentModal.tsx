@@ -39,10 +39,6 @@ export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
     }
   };
 
-  const onModalClose = () => {
-    toast.error('Close', { toastId: 'close' });
-  };
-
   return (
     <Dialog
       id={id}
@@ -53,8 +49,7 @@ export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
       loading={loading}
       initialValues={initialValues || defaultValues}
       onSubmit={submit}
-      validation={validation}
-      onClose={onModalClose}>
+      validation={validation}>
       <CreatePaymentForm />
     </Dialog>
   );
