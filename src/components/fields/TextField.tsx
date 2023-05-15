@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { BaseInputProps, Input } from './Input';
 import classNames from 'classnames';
 
@@ -6,6 +6,7 @@ type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
   color?: string;
   iconBefore?: string;
+  onChange?: (event: ChangeEvent) => void;
 };
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -16,6 +17,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   type,
   color,
   iconBefore,
+  onChange,
 }) => {
   return (
     <Input name={name}>
@@ -40,7 +42,7 @@ export const TextField: React.FC<TextFieldProps> = ({
               })}
               name={field.value}
               value={field.value}
-              onChange={field.onChange}
+              onChange={onChange || field.onChange}
               onBlur={field.onBlur}
               ref={field.ref}
               style={{ color }}

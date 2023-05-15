@@ -8,6 +8,7 @@ import {
   removeGuest,
   createGuest,
 } from '../api/guests.api';
+import { exceptConfirmedGuests } from './guests.selector';
 
 export type GuestStatuses =
   | 'none'
@@ -39,7 +40,7 @@ export type GuestViewModal = {
   status: GuestStatuses;
 };
 
-interface GuestsStore {
+export interface GuestsStore {
   guests: Guest[];
   guestsForView: Guest[];
   total: number;
@@ -55,6 +56,7 @@ interface GuestsStore {
   updateGuest: (id: string, payload: any) => Promise<void>;
   changeGuestStatus: (id: string, status: GuestStatuses) => Promise<void>;
   removeGuest: (id: string) => Promise<void>;
+  searchGuest: (query: string) => void;
 }
 
 export const useGuestsStore = create<GuestsStore>()(
@@ -85,22 +87,24 @@ export const useGuestsStore = create<GuestsStore>()(
           const confirmed = guests.filter((guest) => guest.status === 'confirmed').length;
 
           const guestsForView = hasCachedGuestsForView && !force ? cachedGuestsForView : guests;
-          const showCompleted = JSON.parse(
+          const showConfirmed = JSON.parse(
             new URLSearchParams(window.location.hash).get('showCompleted') || 'true',
           );
 
-          set(() => ({ guests, guestsForView, loading: false, total, confirmed }));
+          set(() => ({
+            guests,
+            guestsForView: showConfirmed ? guestsForView : exceptConfirmedGuests(guests),
+            loading: false,
+            total,
+            confirmed,
+          }));
         },
         showConfirmed: () =>
-          set((state) => {
-            return { guestsForView: state.guests };
-          }),
+          set((state) => ({
+            guestsForView: state.guests,
+          })),
         hideConfirmed: () =>
-          set((state) => {
-            const unconfirmed = state.guests.filter((guest) => guest.status !== 'confirmed');
-
-            return { guestsForView: unconfirmed };
-          }),
+          set((state) => ({ guestsForView: exceptConfirmedGuests(state.guests) })),
         toggleGuestsRemoval: () =>
           set((state) => {
             return { isRemoval: !state.isRemoval };
@@ -153,6 +157,15 @@ export const useGuestsStore = create<GuestsStore>()(
             console.error(error);
             set(() => ({ loading: false }));
           }
+        },
+        searchGuest: (query: string) => {
+          set((state) => ({
+            guestsForView: state.guests.filter(
+              (guest) =>
+                guest.name.toLowerCase().includes(query.toLowerCase()) ||
+                guest.nameGuest?.toLowerCase().includes(query.toLowerCase()),
+            ),
+          }));
         },
       }),
       {

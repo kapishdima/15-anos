@@ -17,6 +17,7 @@ type CreateGuestModalProps = {
 const defaultValues = {
   guests: 0,
   kids: 0,
+  status: 'none',
 };
 
 export const CreateGuestModal: React.FC<CreateGuestModalProps> = ({

@@ -1,28 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import { ProgressCard } from '@components/index';
+import { useGuestsStore } from '../../store/guests';
+import {
+  amountConfirmedGuests,
+  amountConfirmedGuestsWithExtraGuests,
+  amountDeclinedGuests,
+  amountGuests,
+  amountInvitedGuests,
+  amountKidsGuest,
+} from '../../store/guests.selector';
 
-type GuestProgressProps = {
-  total: number;
-  confirmed: number;
-};
+const toPercent = (from: number, to: number) => (from / to) * 100;
 
-export const GuestProgress: React.FC<GuestProgressProps> = ({ total, confirmed }) => {
+export const GuestProgress = () => {
   const [value, setValue] = useState(0);
+
+  const guests = useGuestsStore(amountGuests);
+  const confirmedGuests = useGuestsStore(amountConfirmedGuests);
+  const confirmedGuestsWithExtraGuest = useGuestsStore(amountConfirmedGuestsWithExtraGuests);
+  const invitedGuests = useGuestsStore(amountInvitedGuests);
+  const declinedGuests = useGuestsStore(amountDeclinedGuests);
+  const kidsGuests = useGuestsStore(amountKidsGuest);
+
+  const confirmedPercent = toPercent(confirmedGuestsWithExtraGuest, guests);
+  const invitedPercent = toPercent(invitedGuests, guests);
+  const declinedPercent = toPercent(declinedGuests, guests);
+
+  const progressBarBgGradient = `linear-gradient(to right, #2ecc71 0, #2ecc71 ${confirmedPercent}%, #f39c12 ${confirmedPercent}%, #f39c12 ${
+    confirmedPercent + invitedPercent
+  }%, #e74c3c ${confirmedPercent + invitedPercent}%, #e74c3c ${
+    confirmedPercent + invitedPercent + declinedPercent
+  }% )`;
 
   useEffect(() => {
     const id = setTimeout(() => {
-      const progress = (confirmed / total) * 100;
+      const progress = (confirmedGuests / guests) * 100;
       setValue(progress);
     }, 300);
 
     return () => clearTimeout(id);
   }, []);
 
+  console.log(kidsGuests);
+
   return (
     <ProgressCard
       title="Guest confirmations"
       value={value}
-      hint={`${confirmed} of ${total} guest have confirmed their participation`}
+      hint={`${confirmedGuests} of ${guests} guest have confirmed their participation. ${
+        kidsGuests > 0 ? `Plus kids: ${kidsGuests}` : ''
+      }`}
+      bgColor={progressBarBgGradient}
+      fullWithBar
     />
   );
 };

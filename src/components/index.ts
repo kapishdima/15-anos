@@ -50,6 +50,7 @@ import { PercentIcon } from './icons/PercentIcon';
 import { DeliveryIcon } from './icons/DeliveryIcon';
 import { ReturnIcon } from './icons/ReturnIcon';
 import { InfoIcon } from './icons/InfoIcon';
+import { QuestionIcon } from './icons/QuestionIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -148,4 +149,5 @@ export {
   DeliveryIcon,
   ReturnIcon,
   InfoIcon,
+  QuestionIcon,
 };

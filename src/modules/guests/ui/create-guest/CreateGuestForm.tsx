@@ -1,9 +1,17 @@
 import React from 'react';
-import { TextField, SelectField, ConfirmedIcon, InvitedIcon, WontComeIcon } from '@/components';
+import {
+  TextField,
+  SelectField,
+  ConfirmedIcon,
+  InvitedIcon,
+  WontComeIcon,
+  QuestionIcon,
+} from '@/components';
 import { useTranslation } from 'react-i18next';
 import { useFormContext } from 'react-hook-form';
 
 const statuses = [
+  { value: 'none', label: 'Not Invited', icon: <QuestionIcon /> },
   { value: 'invited', label: 'Invited', icon: <InvitedIcon /> },
   { value: 'declined', label: "Wont't come", icon: <WontComeIcon /> },
   { value: 'confirmed', label: 'Confirmed participation', icon: <ConfirmedIcon /> },

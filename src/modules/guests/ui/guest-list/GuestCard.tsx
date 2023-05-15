@@ -2,9 +2,11 @@ import React from 'react';
 import { Card, useModal } from '@/components';
 import { Guest, GuestStatuses, useGuestsStore } from '../../store/guests';
 
+import QuestionIcon from '@image/icons/question.svg';
 import ConfirmedIcon from '@image/icons/confirmed.svg';
 import InvitedIcon from '@image/icons/invited.svg';
 import WontComeIcon from '@image/icons/wont_come.svg';
+
 import { GuestsStatus } from '../buttons/GuestStatus';
 import { CreateGuestModal } from '../create-guest/CreateGuestModal';
 import { createGuestSchemaValidation } from '../../validation/guests.schema';
@@ -12,7 +14,7 @@ import { createGuestSchemaValidation } from '../../validation/guests.schema';
 type GuestCardProps = Guest & {};
 
 const statusesIcons = {
-  none: InvitedIcon,
+  none: QuestionIcon,
   confirmed: ConfirmedIcon,
   confirmedGuest: ConfirmedIcon,
   invited: InvitedIcon,
@@ -51,6 +53,7 @@ export const GuestCard: React.FC<GuestCardProps> = ({
   const fetchGuests = useGuestsStore((state) => state.fetchGuests);
   const updateGuest = useGuestsStore((state) => state.updateGuest);
   const changeGuestStatus = useGuestsStore((state) => state.changeGuestStatus);
+  const isRemoval = useGuestsStore((state) => state.isRemoval);
 
   const loading = useGuestsStore((state) => state.loading);
 
@@ -87,6 +90,7 @@ export const GuestCard: React.FC<GuestCardProps> = ({
         extra={<GuestsStatus onSelect={onUpdateGuestStatus} />}
         hoverable={false}
         loading={loading}
+        removal={isRemoval}
       />
       <CreateGuestModal
         id={GUEST_MODAL_ID}
