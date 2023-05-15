@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/15-anos/static/css/main.8b869e48.css",
-    "main.js": "/15-anos/static/js/main.c6706e12.js",
+    "main.js": "/15-anos/static/js/main.13cfac9e.js",
     "static/media/mock-hair.jpg": "/15-anos/static/media/mock-hair.fbe529201d3099f12adc.jpg",
     "static/media/mock-bouquets.jpg": "/15-anos/static/media/mock-bouquets.cd6a41c35bdefdccacc4.jpg",
     "static/media/mock-centerpieces.jpg": "/15-anos/static/media/mock-centerpieces.3eac2880bf4232ba1113.jpg",
@@ -85,9 +85,10 @@
     "static/media/avenirnextcyr-ultralight.woff2": "/15-anos/static/media/avenirnextcyr-ultralight.e930a33b23c9398f5aa5.woff2",
     "static/media/avenirnextcyr-demi.woff2": "/15-anos/static/media/avenirnextcyr-demi.5d7072de6fcf2d8f6e52.woff2",
     "static/media/logo.png": "/15-anos/static/media/logo.0032b27e20171b0afbbd.png",
-    "static/media/sign-out.svg": "/15-anos/static/media/sign-out.7a955b2d53a4a61f895bfa05c1c57afd.svg",
-    "static/media/invited.svg": "/15-anos/static/media/invited.aa004765427243c54e0788b07637aaf1.svg",
-    "static/media/search.svg": "/15-anos/static/media/search.f8dd7b5082b37e368c07e6954c03b2f4.svg",
+    "static/media/sign-out.svg": "/15-anos/static/media/sign-out.e60ca4ce5be0e962e3a61061d4c0d094.svg",
+    "static/media/question.svg": "/15-anos/static/media/question.9a25dd559b37d3d35a037b064250f8fe.svg",
+    "static/media/invited.svg": "/15-anos/static/media/invited.8a21438e1c6c646f6d2506fae4ed0077.svg",
+    "static/media/search.svg": "/15-anos/static/media/search.7a05678a4940914fbdcc79101475d018.svg",
     "static/media/confirmed.svg": "/15-anos/static/media/confirmed.da4b078e6bb5b07a013a32165be2e895.svg",
     "static/media/angle-left.svg": "/15-anos/static/media/angle-left.275674ef21867f934b6e744a0c27ae30.svg",
     "index.html": "/15-anos/index.html",
@@ -110,10 +111,10 @@
     "static/media/avenirnextcyr-ultralight.woff": "/15-anos/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/15-anos/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
     "main.8b869e48.css.map": "/15-anos/static/css/main.8b869e48.css.map",
-    "main.c6706e12.js.map": "/15-anos/static/js/main.c6706e12.js.map"
+    "main.13cfac9e.js.map": "/15-anos/static/js/main.13cfac9e.js.map"
   },
   "entrypoints": [
     "static/css/main.8b869e48.css",
-    "static/js/main.c6706e12.js"
+    "static/js/main.13cfac9e.js"
   ]
 }
