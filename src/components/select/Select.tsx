@@ -17,6 +17,7 @@ type SelectProps = {
   defaultSelected?: string;
   variant?: 'select' | 'button';
   invalid?: boolean;
+  showSelectedValue?: boolean;
 };
 
 export const Select: React.FC<SelectProps> = ({
@@ -25,6 +26,7 @@ export const Select: React.FC<SelectProps> = ({
   placeholder,
   defaultSelected,
   invalid,
+  showSelectedValue = true,
   variant = 'select',
 }) => {
   const { t } = useTranslation();
@@ -71,7 +73,7 @@ export const Select: React.FC<SelectProps> = ({
           'select-field--error': invalid,
         })}
         onClick={toggle}>
-        {selected ? (
+        {selected && showSelectedValue ? (
           <div className="select-value">
             <div className="select-value__icon">{selected.icon}</div>
             <div className="select-value__text">{selected.label}</div>

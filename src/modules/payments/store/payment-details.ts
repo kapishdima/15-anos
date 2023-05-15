@@ -29,7 +29,6 @@ export const usePaymentDetailsStore = create<PaymentDetailsStore>()(
 
           const hasCachedPaymentDetails = Boolean(cachedPaymentDetails);
 
-          await getPaymentDetails();
           const paymentDetails =
             hasCachedPaymentDetails && !force ? cachedPaymentDetails : await getPaymentDetails();
 

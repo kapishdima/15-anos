@@ -1,38 +1,29 @@
-import {
-  Form,
-  TextField,
-  SelectField,
-  ConfirmedIcon,
-  InvitedIcon,
-  WontComeIcon,
-} from '@/components';
 import React from 'react';
+import { TextField, SelectField, ConfirmedIcon, InvitedIcon, WontComeIcon } from '@/components';
 import { useTranslation } from 'react-i18next';
-
-const defaultValues = {
-  date: new Date(),
-  payable: '0',
-  paid: '0',
-};
+import { useFormContext } from 'react-hook-form';
 
 const statuses = [
   { value: 'invited', label: 'Invited', icon: <InvitedIcon /> },
-  { value: 'wont_come', label: "Wont't come", icon: <WontComeIcon /> },
+  { value: 'declined', label: "Wont't come", icon: <WontComeIcon /> },
   { value: 'confirmed', label: 'Confirmed participation', icon: <ConfirmedIcon /> },
 ];
 
-type CreateGuestFormProps = {
-  initialValues?: any;
-};
-
-export const CreateGuestForm: React.FC<CreateGuestFormProps> = ({ initialValues }) => {
+export const CreateGuestForm: React.FC = () => {
   const { t } = useTranslation();
-  const onSubmit = (values: any) => {
-    console.log(values);
-  };
+  const { getValues } = useFormContext();
+
+  const hasNameGuest = Boolean(getValues('nameGuest'));
+  const hasGuestsGuest = Boolean(getValues('guestsGuest'));
+  const hasKidsGuest = Boolean(getValues('kidsGuest'));
+
   return (
-    <Form onSubmit={onSubmit} initialValues={initialValues || defaultValues}>
-      <TextField name="name" label={t('Guest name')} placeholder={t('Enter guest name')} />
+    <>
+      <TextField
+        name={hasNameGuest ? 'nameGuest' : 'name'}
+        label={t('Guest name')}
+        placeholder={t('Enter guest name')}
+      />
       <SelectField
         name="status"
         label={t('Set guest status')}
@@ -40,12 +31,17 @@ export const CreateGuestForm: React.FC<CreateGuestFormProps> = ({ initialValues 
         placeholder={t('Set guest status') || ''}
       />
       <TextField
-        name="extra_guests"
+        name={hasGuestsGuest ? 'guestGuest' : 'guests'}
         type="number"
         label={t('Set the number of extra guests')}
         placeholder={'0'}
       />
-      <TextField name="kids" type="number" label={t('Set the number of kids')} placeholder={'0'} />
-    </Form>
+      <TextField
+        name={hasKidsGuest ? 'kidsGuest' : 'kids'}
+        type="number"
+        label={t('Set the number of kids')}
+        placeholder={'0'}
+      />
+    </>
   );
 };

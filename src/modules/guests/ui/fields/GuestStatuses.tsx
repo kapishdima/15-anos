@@ -8,7 +8,7 @@ type GuestStatusesSelectProps = {
 
 const statuses = [
   { value: 'invited', label: 'Invited', icon: <InvitedIcon /> },
-  { value: 'wont_come', label: "Wont't come", icon: <WontComeIcon /> },
+  { value: 'declined', label: "Wont't come", icon: <WontComeIcon /> },
   { value: 'confirmed', label: 'Confirmed participation', icon: <ConfirmedIcon /> },
 ];
 
@@ -22,6 +22,7 @@ export const GuestStatusesSelect: React.FC<GuestStatusesSelectProps> = ({
       onSelect={onSelect}
       placeholder="Status"
       variant="button"
+      showSelectedValue={false}
       defaultSelected={defaultSelect}
     />
   );

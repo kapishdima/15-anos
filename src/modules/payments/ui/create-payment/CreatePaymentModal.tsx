@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { FieldValues, UseFormReset } from 'react-hook-form';
 
 import { Dialog } from '@/components';

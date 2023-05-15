@@ -60,7 +60,6 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   };
 
   const onUpdatePayment = async (values: any) => {
-    console.log('onUpdatePayment', values);
     await updatePayment(id, values);
     close(PAYMENT_MODAL_ID);
     fetchPayments(/*force*/ true);

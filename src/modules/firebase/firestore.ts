@@ -13,22 +13,27 @@ export function getSnapshot<TData = any>(key: string, params: string[] = []) {
   const ref = collection(db, key, ...params);
 
   return new Promise<TData>((resolve, reject) => {
-    onSnapshot(
-      ref,
-      (snapshot) => {
-        const docs = snapshot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            ...doc.data(),
-          };
-        }) as TData;
+    try {
+      onSnapshot(
+        ref,
+        (snapshot) => {
+          const docs = snapshot.docs.map((doc) => {
+            return {
+              id: doc.id,
+              ...doc.data(),
+            };
+          }) as TData;
 
-        return resolve(docs);
-      },
-      (error) => {
-        return reject(error);
-      },
-    );
+          return resolve(docs);
+        },
+        (error) => {
+          return reject(error);
+        },
+      );
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
   });
 }
 
