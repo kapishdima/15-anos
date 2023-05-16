@@ -8,6 +8,7 @@ import {
   amountGuests,
   amountInvitedGuests,
   amountKidsGuest,
+  amountNotInvitedGuests,
 } from '../../store/guests.selector';
 
 const toPercent = (from: number, to: number) => (from / to) * 100;
@@ -20,6 +21,7 @@ export const GuestProgress = () => {
   const confirmedGuestsWithExtraGuest = useGuestsStore(amountConfirmedGuestsWithExtraGuests);
   const invitedGuests = useGuestsStore(amountInvitedGuests);
   const declinedGuests = useGuestsStore(amountDeclinedGuests);
+  const notInvitedGuests = useGuestsStore(amountNotInvitedGuests);
   const kidsGuests = useGuestsStore(amountKidsGuest);
 
   const confirmedPercent = toPercent(confirmedGuestsWithExtraGuest, guests);
@@ -30,7 +32,9 @@ export const GuestProgress = () => {
     confirmedPercent + invitedPercent
   }%, #e74c3c ${confirmedPercent + invitedPercent}%, #e74c3c ${
     confirmedPercent + invitedPercent + declinedPercent
-  }% )`;
+  }%, #f1f2f6 ${confirmedPercent + invitedPercent + declinedPercent}%, #f1f2f6 ${
+    confirmedPercent + invitedPercent + declinedPercent + notInvitedGuests
+  }%) `;
 
   useEffect(() => {
     const id = setTimeout(() => {

@@ -43,9 +43,9 @@ export const GuestCard: React.FC<GuestCardProps> = ({
 }) => {
   const GUEST_MODAL_ID = `guest-modal-${id}`;
 
-  const guestsTitle = guests > 0 ? ` +${guests},` : '';
+  const guestsTitle = guests > 0 ? ` +${guests}` : '';
   const kidsTitle = kids > 0 ? ` +${kids} (kids)` : '';
-  const cardTitle = name + guestsTitle + kidsTitle;
+  const cardTitle = name + guestsTitle + (guestsTitle && kidsTitle ? ', ' : '') + kidsTitle;
 
   const { open, close } = useModal();
 

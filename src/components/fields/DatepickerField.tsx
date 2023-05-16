@@ -34,7 +34,7 @@ export const DatepickerField: React.FC<DatepickerFieldProps> = ({
               showTimeSelect={showTimeSelect}
               onChange={(date: any) => field.onChange(date)}
               timeFormat="HH:mm"
-              dateFormat="MMMM d yyyy - HH:mm"
+              dateFormat={showTimeSelect ? 'MMMM d yyyy - HH:mm' : 'MMMM d yyyy'}
               minDate={min ? new Date(min) : null}
             />
 

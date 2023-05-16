@@ -14,19 +14,21 @@ export const exceptConfirmedGuests = (guests: GuestViewModal[]) => {
 };
 
 export const amountGuests = (state: GuestsStore) => {
-  const guestGuest = state.guestsForView.reduce((acc, value: any) => {
+  const guestGuest = state.guests.reduce((acc, value: any) => {
     acc += parseInt(value.guestsGuest) || parseInt(value.guests);
 
     return acc;
   }, 0);
 
-  return state.guestsForView.length + guestGuest;
+  return state.guests.length + guestGuest;
 };
 
 export const amountConfirmedGuestsWithExtraGuests = (state: GuestsStore) => {
-  const confirmedGuests = state.guestsForView.filter(
+  const confirmedGuests = state.guests.filter(
     (guest) => guest.status === 'confirmed' || guest.status === 'confirmedGuest',
   );
+
+  console.log(confirmedGuests);
 
   const guestGuest = confirmedGuests.reduce((acc, value: any) => {
     acc += parseInt(value.guestsGuest) || parseInt(value.guests);
@@ -38,7 +40,7 @@ export const amountConfirmedGuestsWithExtraGuests = (state: GuestsStore) => {
 };
 
 export const amountInvitedGuests = (state: GuestsStore) => {
-  const confirmedGuests = state.guestsForView.filter((guest) => guest.status === 'invited');
+  const confirmedGuests = state.guests.filter((guest) => guest.status === 'invited');
 
   const guestGuest = confirmedGuests.reduce((acc, value: any) => {
     acc += parseInt(value.guestsGuest) || parseInt(value.guests);
@@ -50,7 +52,7 @@ export const amountInvitedGuests = (state: GuestsStore) => {
 };
 
 export const amountDeclinedGuests = (state: GuestsStore) => {
-  const confirmedGuests = state.guestsForView.filter(
+  const confirmedGuests = state.guests.filter(
     (guest) => guest.status === 'declined' || guest.status === 'declinedGuest',
   );
 
@@ -64,15 +66,27 @@ export const amountDeclinedGuests = (state: GuestsStore) => {
 };
 
 export const amountConfirmedGuests = (state: GuestsStore) => {
-  const confirmedGuests = state.guestsForView.filter(
+  const confirmedGuests = state.guests.filter(
     (guest) => guest.status === 'confirmed' || guest.status === 'confirmedGuest',
   );
 
   return confirmedGuests.length;
 };
 
+export const amountNotInvitedGuests = (state: GuestsStore) => {
+  const notInvitedGuests = state.guests.filter((guest) => guest.status === 'none');
+
+  const guestGuest = notInvitedGuests.reduce((acc, value: any) => {
+    acc += parseInt(value.guestsGuest) || parseInt(value.guests);
+
+    return acc;
+  }, 0);
+
+  return notInvitedGuests.length + guestGuest;
+};
+
 export const amountKidsGuest = (state: GuestsStore) => {
-  const confirmedGuests = state.guestsForView.filter(
+  const confirmedGuests = state.guests.filter(
     (guest) => guest.status === 'confirmed' || guest.status === 'confirmedGuest',
   );
 

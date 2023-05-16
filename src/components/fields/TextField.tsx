@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { BaseInputProps, Input } from './Input';
 import classNames from 'classnames';
+import { ControllerRenderProps, FieldValues, useFormContext } from 'react-hook-form';
 
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -19,39 +20,52 @@ export const TextField: React.FC<TextFieldProps> = ({
   iconBefore,
   onChange,
 }) => {
+  const { setValue } = useFormContext();
+  const setDefaultValue = (field: ControllerRenderProps<FieldValues, any>) => {
+    if (type === 'number') {
+      setValue(name, field.value || '0');
+    } else {
+      setValue(name, field.value);
+    }
+  };
+
   return (
     <Input name={name}>
-      {({ field, fieldState }) => (
-        <div className="form-field__container">
-          {label && (
-            <label htmlFor={name} className="form-field__label">
-              {label}
-            </label>
-          )}
-          <div
-            className={classNames('form-input__container', { 'with-icon': Boolean(iconBefore) })}>
-            {iconBefore ? (
-              <img className="form-input__before-icon" src={iconBefore} alt="" />
-            ) : null}
-            <input
-              id={name}
-              type={type || 'text'}
-              placeholder={placeholder || ''}
-              className={classNames('form-field', 'text-form-field', {
-                'form-field--error': fieldState.error,
-              })}
-              name={field.value}
-              value={field.value}
-              onChange={onChange || field.onChange}
-              onBlur={field.onBlur}
-              ref={field.ref}
-              style={{ color }}
-            />
-            {suffix && <div className="form-input__suffix">{suffix}</div>}
+      {({ field, fieldState }) => {
+        return (
+          <div className="form-field__container">
+            {label && (
+              <label htmlFor={name} className="form-field__label">
+                {label}
+              </label>
+            )}
+            <div
+              className={classNames('form-input__container', { 'with-icon': Boolean(iconBefore) })}>
+              {iconBefore ? (
+                <img className="form-input__before-icon" src={iconBefore} alt="" />
+              ) : null}
+              <input
+                id={name}
+                type={type || 'text'}
+                placeholder={placeholder || ''}
+                className={classNames('form-field', 'text-form-field', {
+                  'form-field--error': fieldState.error,
+                })}
+                name={field.name}
+                value={field.value}
+                onChange={onChange || field.onChange}
+                onBlur={() => setDefaultValue(field)}
+                ref={field.ref}
+                style={{ color }}
+              />
+              {suffix && <div className="form-input__suffix">{suffix}</div>}
+            </div>
+            {fieldState.error && (
+              <div className="form-field__error">{fieldState.error.message}</div>
+            )}
           </div>
-          {fieldState.error && <div className="form-field__error">{fieldState.error.message}</div>}
-        </div>
-      )}
+        );
+      }}
     </Input>
   );
 };

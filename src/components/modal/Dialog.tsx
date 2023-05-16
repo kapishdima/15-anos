@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { FieldValues, UseFormReset } from 'react-hook-form';
 
 import { CLOSE_CONFIRMATION_MODAL, CloseConfirmationModal } from './CloseConfirmationModal';
+import { EventEmitter, Events } from '@/app/transport/event-bus';
 
 type ModalProps = React.PropsWithChildren & {
   id: string;
@@ -47,6 +48,7 @@ export const Dialog: React.FC<ModalProps> = ({
   const onConfirmedClose = () => {
     close(closeConfirmationModalId);
     close(id);
+    EventEmitter.dispatch(Events.CLOSE_MODAL);
   };
 
   const onCancelClose = () => {

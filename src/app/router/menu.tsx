@@ -15,7 +15,7 @@ export const createMenu = () => {
   return {
     Guests: [{ icon: <UsersIcon />, title: 'Guests list', path: AppRoutes.GUESTS_LIST }],
     Tasks: [{ icon: <TasksIcon />, title: 'Tasks', path: AppRoutes.ROOT }],
-    Payments: [{ icon: <PaymentsIcon />, title: 'Paymentss', path: AppRoutes.PAYMENTS_LIST }],
+    Payments: [{ icon: <PaymentsIcon />, title: 'Payments', path: AppRoutes.PAYMENTS_LIST }],
     Purchases: [{ icon: <PurchaseIcon />, title: 'Purchases', path: AppRoutes.PURCHASES_LIST }],
   };
 };

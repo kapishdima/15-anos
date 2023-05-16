@@ -15,6 +15,7 @@ type CreateGuestModalProps = {
 };
 
 const defaultValues = {
+  name: '',
   guests: 0,
   kids: 0,
   status: 'none',
