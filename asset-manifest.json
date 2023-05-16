@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/15-anos/static/css/main.8b869e48.css",
-    "main.js": "/15-anos/static/js/main.a13ca2dc.js",
+    "main.css": "/15-anos/static/css/main.e526aac4.css",
+    "main.js": "/15-anos/static/js/main.38045e7f.js",
     "static/media/mock-hair.jpg": "/15-anos/static/media/mock-hair.fbe529201d3099f12adc.jpg",
     "static/media/mock-bouquets.jpg": "/15-anos/static/media/mock-bouquets.cd6a41c35bdefdccacc4.jpg",
     "static/media/mock-centerpieces.jpg": "/15-anos/static/media/mock-centerpieces.3eac2880bf4232ba1113.jpg",
@@ -110,11 +110,11 @@
     "static/media/avenirnextcyr-thinitalic.woff": "/15-anos/static/media/avenirnextcyr-thinitalic.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralight.woff": "/15-anos/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/15-anos/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
-    "main.8b869e48.css.map": "/15-anos/static/css/main.8b869e48.css.map",
-    "main.a13ca2dc.js.map": "/15-anos/static/js/main.a13ca2dc.js.map"
+    "main.e526aac4.css.map": "/15-anos/static/css/main.e526aac4.css.map",
+    "main.38045e7f.js.map": "/15-anos/static/js/main.38045e7f.js.map"
   },
   "entrypoints": [
-    "static/css/main.8b869e48.css",
-    "static/js/main.a13ca2dc.js"
+    "static/css/main.e526aac4.css",
+    "static/js/main.38045e7f.js"
   ]
 }
