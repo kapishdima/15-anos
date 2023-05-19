@@ -24,6 +24,8 @@ export const CloseConfirmationModal: React.FC<CloseConfirmationModalProps> = ({
       hasCloseIconButton={false}
       confirmButtonText={t('Yes')}
       cancelButtonText={t('No')}
+      confirmButtonColor="error"
+      cancelButtonColor="success"
       onCancel={onCancelClose}
       onConfirm={onConfirmedClose}
     />

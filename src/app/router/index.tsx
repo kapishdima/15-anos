@@ -1,4 +1,4 @@
-import { createHashRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from './ProtectedRoute';
 import { AppRoutes } from './routes';
@@ -15,7 +15,7 @@ import {
   SinglePurchasePageProduct,
 } from '@/modules/purchases';
 
-export const router = createHashRouter([
+export const router = createBrowserRouter([
   {
     path: AppRoutes.LOGIN,
     element: <LoginPage />,

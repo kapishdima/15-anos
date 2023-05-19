@@ -9,6 +9,7 @@ import {
   createGuest,
 } from '../api/guests.api';
 import { exceptConfirmedGuests } from './guests.selector';
+import { UrlSearchParams } from '@/app/utils/location';
 
 export type GuestStatuses =
   | 'none'
@@ -159,13 +160,23 @@ export const useGuestsStore = create<GuestsStore>()(
           }
         },
         searchGuest: (query: string) => {
-          set((state) => ({
-            guestsForView: state.guests.filter(
-              (guest) =>
-                guest.name.toLowerCase().includes(query.toLowerCase()) ||
-                guest.nameGuest?.toLowerCase().includes(query.toLowerCase()),
-            ),
-          }));
+          set((state) => {
+            const showConfirmed = UrlSearchParams()?.get('showCompleted');
+
+            console.log(showConfirmed);
+            const guests =
+              showConfirmed === undefined || showConfirmed === true
+                ? state.guests
+                : exceptConfirmedGuests(state.guests);
+
+            return {
+              guestsForView: guests.filter(
+                (guest) =>
+                  guest.name.toLowerCase().includes(query.toLowerCase()) ||
+                  guest.nameGuest?.toLowerCase().includes(query.toLowerCase()),
+              ),
+            };
+          });
         },
       }),
       {

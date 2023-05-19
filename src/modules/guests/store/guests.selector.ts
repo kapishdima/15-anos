@@ -28,8 +28,6 @@ export const amountConfirmedGuestsWithExtraGuests = (state: GuestsStore) => {
     (guest) => guest.status === 'confirmed' || guest.status === 'confirmedGuest',
   );
 
-  console.log(confirmedGuests);
-
   const guestGuest = confirmedGuests.reduce((acc, value: any) => {
     acc += parseInt(value.guestsGuest) || parseInt(value.guests);
 

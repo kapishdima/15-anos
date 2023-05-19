@@ -20,6 +20,7 @@ type ModalProps = React.PropsWithChildren & {
   initialValues?: any;
   onSubmit: (values: any, reset?: UseFormReset<FieldValues>) => void;
   validation?: any;
+  actions?: JSX.Element | null;
 };
 
 export const Dialog: React.FC<ModalProps> = ({
@@ -34,6 +35,7 @@ export const Dialog: React.FC<ModalProps> = ({
   initialValues,
   onSubmit,
   validation,
+  actions,
 }) => {
   const { t } = useTranslation();
   const { open, close } = useModal();
@@ -90,6 +92,7 @@ export const Dialog: React.FC<ModalProps> = ({
                     <Button onClick={handleClose} appearance="ghost" variant="error">
                       {cancelButtonText || t('Cancel')}
                     </Button>
+                    {actions}
                     <Button
                       aria-label="Close this dialog window"
                       variant="success"

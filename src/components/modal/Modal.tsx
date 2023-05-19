@@ -9,6 +9,8 @@ type ModalProps = React.PropsWithChildren & {
   id: string;
   confirmButtonText?: string | null;
   cancelButtonText?: string | null;
+  confirmButtonColor?: any;
+  cancelButtonColor?: any;
   title?: string | null;
   minWidth?: string;
   minHeight?: string;
@@ -24,6 +26,8 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   confirmButtonText,
   cancelButtonText,
+  confirmButtonColor,
+  cancelButtonColor,
   minHeight,
   minWidth,
   loading,
@@ -64,12 +68,16 @@ export const Modal: React.FC<ModalProps> = ({
               </main>
             )}
             <footer className="modal__footer">
-              <Button data-micromodal-close appearance="ghost" variant="error" onClick={onCancel}>
+              <Button
+                data-micromodal-close
+                appearance="ghost"
+                variant={cancelButtonColor || 'error'}
+                onClick={onCancel}>
                 {cancelButtonText || t('Cancel')}
               </Button>
               <Button
                 aria-label="Close this dialog window"
-                variant="success"
+                variant={confirmButtonColor || 'success'}
                 loading={loading}
                 onClick={onConfirm}>
                 {confirmButtonText || t('Confirm')}

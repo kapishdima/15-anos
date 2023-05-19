@@ -16,6 +16,7 @@ import { SelectField } from './fields/SelectField';
 import { TextField } from './fields/TextField';
 import { CategoriesSelect } from './fields/CategoriesSelect';
 import { TextAreaField } from './fields/TextAreaField';
+import { NumberField } from './fields/NumberField';
 
 import { Form } from './form/Form';
 
@@ -150,4 +151,5 @@ export {
   ReturnIcon,
   InfoIcon,
   QuestionIcon,
+  NumberField,
 };

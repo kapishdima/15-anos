@@ -45,13 +45,11 @@ export const GuestProgress = () => {
     return () => clearTimeout(id);
   }, []);
 
-  console.log(kidsGuests);
-
   return (
     <ProgressCard
       title="Guest confirmations"
       value={value}
-      hint={`${confirmedGuests} of ${guests} guest have confirmed their participation. ${
+      hint={`${confirmedGuestsWithExtraGuest} of ${guests} guest have confirmed their participation. ${
         kidsGuests > 0 ? `Plus kids: ${kidsGuests}` : ''
       }`}
       bgColor={progressBarBgGradient}

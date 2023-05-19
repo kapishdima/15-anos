@@ -89,6 +89,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
       />
       <CreatePaymentModal
         id={PAYMENT_MODAL_ID}
+        paymentId={id}
         initialValues={{
           title,
           categoryId,
@@ -100,6 +101,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
         validation={createPaymentSchemaValidation}
         onSubmit={onUpdatePayment}
         loading={loading}
+        hasDeleteButton
       />
     </>
   );

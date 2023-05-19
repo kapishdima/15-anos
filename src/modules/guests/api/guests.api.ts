@@ -25,6 +25,7 @@ export const updateGuest = async (id: string, payload: any) => {
 
   const updateGuestData = Object.keys(payload).reduce((acc: any, value: string) => {
     const payloadValue = payload[value];
+
     if (payloadValue) {
       acc[value] = payloadValue;
     }
@@ -40,6 +41,8 @@ export const createGuest = async (payload: any) => {
 
   const guestData = {
     ...payload,
+    guests: payload.guests || 0,
+    kids: payload.kids || 0,
   };
 
   return pushData(Collections.EVENTS, [eventId, Collections.GUESTS, payload.name], guestData);

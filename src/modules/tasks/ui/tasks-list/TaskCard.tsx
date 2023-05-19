@@ -34,8 +34,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 }) => {
   const updateTask = useTasksStore((state) => state.updateTask);
   const removeTask = useTasksStore((state) => state.removeTask);
-  const changeTaskStatus = useTasksStore((state) => state.changeTaskStatus);
   const fetchTasks = useTasksStore((state) => state.fetchTasks);
+  const changeTaskStatus = useTasksStore((state) => state.changeTaskStatus);
 
   const loading = useTasksStore((state) => state.loading);
   const taskInProcessing = useTasksStore((state) => state.taskInProcessing);
@@ -86,9 +86,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       />
       <CreateTaskModal
         id={TASK_MODAL_ID}
+        taskId={id}
         initialValues={{ title, categoryId, date, notes }}
         onSubmit={updateTaskOnClick}
         loading={loading}
+        hasDeleteButton
       />
     </>
   );

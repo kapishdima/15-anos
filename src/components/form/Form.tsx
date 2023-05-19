@@ -36,7 +36,6 @@ export const Form: React.FC<FormProps> = ({
 
   useEffect(() => {
     EventEmitter.subscribe(Events.CLOSE_MODAL, () => {
-      console.log(Events.CLOSE_MODAL);
       form.reset(initialValues, { keepValues: false });
     });
   }, []);

@@ -22,7 +22,6 @@ export const CreatePayment: React.FC = () => {
   };
 
   const createPayment = async (values: any) => {
-    console.log(values);
     await addPayment(values);
     close(CREATE_PAYMENT_MODAL);
     fetchPayments(/*force*/ true);

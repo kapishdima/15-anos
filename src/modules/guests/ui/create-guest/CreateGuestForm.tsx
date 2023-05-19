@@ -6,6 +6,7 @@ import {
   InvitedIcon,
   WontComeIcon,
   QuestionIcon,
+  NumberField,
 } from '@/components';
 import { useTranslation } from 'react-i18next';
 import { useFormContext } from 'react-hook-form';
@@ -38,17 +39,17 @@ export const CreateGuestForm: React.FC = () => {
         options={statuses}
         placeholder={t('Set guest status') || ''}
       />
-      <TextField
+      <NumberField
         name={hasGuestsGuest ? 'guestGuest' : 'guests'}
-        type="number"
         label={t('Set the number of extra guests')}
         placeholder={'0'}
+        max={9}
       />
-      <TextField
+      <NumberField
         name={hasKidsGuest ? 'kidsGuest' : 'kids'}
-        type="number"
         label={t('Set the number of kids')}
         placeholder={'0'}
+        max={9}
       />
     </>
   );

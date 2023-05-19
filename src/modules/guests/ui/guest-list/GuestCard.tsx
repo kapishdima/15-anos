@@ -67,7 +67,6 @@ export const GuestCard: React.FC<GuestCardProps> = ({
   };
 
   const onUpdateGuest = async (values: any) => {
-    console.log('onUpdateGuest', values);
     await updateGuest(id, values);
     close(GUEST_MODAL_ID);
     fetchGuests(/*force*/ true);
@@ -94,10 +93,12 @@ export const GuestCard: React.FC<GuestCardProps> = ({
       />
       <CreateGuestModal
         id={GUEST_MODAL_ID}
+        guestId={id}
         initialValues={{ name, status, guests, kids, nameGuest, guestsGuest, kidsGuest }}
         onSubmit={onUpdateGuest}
         loading={loading}
         validation={createGuestSchemaValidation}
+        hasDeleteButton
       />
     </>
   );
