@@ -98,7 +98,7 @@ export const usePaymentsStore = create<PaymentsStore>()(
           const paymentsForView =
             hasCachedPaymentsForView && !force ? cachedPaymentsForView : payments;
           const showCompleted = JSON.parse(
-            new URLSearchParams(window.location.hash).get('showCompleted') || 'true',
+            new URLSearchParams(window.location.search).get('showCompleted') || 'true',
           );
 
           set(() => ({

@@ -82,7 +82,7 @@ export const useTasksStore = create<TasksStore>()(
 
           const tasksForView = hasCachedTasksForView && !force ? cachedTasksForView : tasks;
           const showCompleted = JSON.parse(
-            new URLSearchParams(window.location.hash).get('showCompleted') || 'true',
+            new URLSearchParams(window.location.search).get('showCompleted') || 'true',
           );
 
           set(() => ({

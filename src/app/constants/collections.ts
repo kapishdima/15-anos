@@ -4,5 +4,5 @@ export enum Collections {
   CATEGORIES = 'categories',
   PAYMENTS = 'payments',
   PROFILE_DETAILS = 'details',
-  GUESTS = '/guests',
+  GUESTS = 'guests',
 }

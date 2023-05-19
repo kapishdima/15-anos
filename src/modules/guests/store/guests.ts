@@ -89,7 +89,7 @@ export const useGuestsStore = create<GuestsStore>()(
 
           const guestsForView = hasCachedGuestsForView && !force ? cachedGuestsForView : guests;
           const showConfirmed = JSON.parse(
-            new URLSearchParams(window.location.hash).get('showCompleted') || 'true',
+            new URLSearchParams(window.location.search).get('showCompleted') || 'true',
           );
 
           set(() => ({
@@ -161,9 +161,10 @@ export const useGuestsStore = create<GuestsStore>()(
         },
         searchGuest: (query: string) => {
           set((state) => {
-            const showConfirmed = UrlSearchParams()?.get('showCompleted');
+            const showConfirmed = JSON.parse(
+              new URLSearchParams(window.location.search).get('showCompleted') || 'true',
+            );
 
-            console.log(showConfirmed);
             const guests =
               showConfirmed === undefined || showConfirmed === true
                 ? state.guests
