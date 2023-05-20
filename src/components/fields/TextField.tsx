@@ -6,7 +6,8 @@ type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
   color?: string;
   iconBefore?: string;
-  onChange?: (event: ChangeEvent) => void;
+  iconAfter?: JSX.Element | string;
+  onChange?: (event: ChangeEvent<any>) => void;
 };
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -17,6 +18,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   type,
   color,
   iconBefore,
+  iconAfter,
   onChange,
 }) => {
   return (
@@ -48,6 +50,15 @@ export const TextField: React.FC<TextFieldProps> = ({
                 ref={field.ref}
                 style={{ color }}
               />
+              <div className="form-input__after-icon">
+                {iconAfter ? (
+                  typeof iconAfter === 'string' ? (
+                    <img className="form-input__before-icon" src={iconAfter} alt="" />
+                  ) : (
+                    iconAfter
+                  )
+                ) : null}
+              </div>
               {suffix && <div className="form-input__suffix">{suffix}</div>}
             </div>
             {fieldState.error && (

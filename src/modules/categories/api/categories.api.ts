@@ -1,9 +1,9 @@
 import { Collections } from '../../../app/constants/collections';
-import { getSnapshot } from '../../firebase/firestore';
+import { getSnapshotCollection } from '../../firebase/firestore';
 import { Category } from '../store/categories';
 
 export const getCategories = async (eventId: string) => {
-  const categories = await getSnapshot<Category[]>(Collections.EVENTS, [
+  const categories = await getSnapshotCollection<Category[]>(Collections.EVENTS, [
     eventId,
     Collections.CATEGORIES,
   ]);

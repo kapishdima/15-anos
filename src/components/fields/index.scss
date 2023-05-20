@@ -66,6 +66,19 @@
     top: 50%;
     transform: translateY(-50%);
   }
+
+  .form-input__after-icon {
+    position: absolute;
+    right: $input-padding-x;
+    top: 50%;
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    svg {
+      width: 16px;
+    }
+  }
 }
 
 // ----------------------------

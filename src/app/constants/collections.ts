@@ -5,4 +5,5 @@ export enum Collections {
   PAYMENTS = 'payments',
   PROFILE_DETAILS = 'details',
   GUESTS = 'guests',
+  LIST = 'list',
 }

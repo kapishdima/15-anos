@@ -3,13 +3,16 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   onSnapshot,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from 'firebase/firestore';
 import { db } from './index';
 
-export function getSnapshot<TData = any>(key: string, params: string[] = []) {
+export function getSnapshotCollection<TData = any>(key: string, params: string[] = []) {
   const ref = collection(db, key, ...params);
 
   return new Promise<TData>((resolve, reject) => {
@@ -23,6 +26,37 @@ export function getSnapshot<TData = any>(key: string, params: string[] = []) {
               ...doc.data(),
             };
           }) as TData;
+
+          console.log(docs);
+
+          return resolve(docs);
+        },
+        (error) => {
+          return reject(error);
+        },
+      );
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+}
+
+export async function getSnapshotDocument<TData = any>(key: string, params: string[] = []) {
+  const ref = doc(db, key, ...params);
+
+  return new Promise<TData | null>((resolve, reject) => {
+    try {
+      onSnapshot(
+        ref,
+        (snapshot) => {
+          if (!snapshot.exists()) {
+            return resolve(null);
+          }
+          const docs = {
+            id: snapshot.id,
+            ...snapshot.data(),
+          } as TData;
 
           return resolve(docs);
         },

@@ -8,8 +8,7 @@ import {
   removeGuest,
   createGuest,
 } from '../api/guests.api';
-import { exceptConfirmedGuests } from './guests.selector';
-import { UrlSearchParams } from '@/app/utils/location';
+import { exceptConfirmedGuests, filterGuestsByName } from './guests.selector';
 
 export type GuestStatuses =
   | 'none'
@@ -101,11 +100,37 @@ export const useGuestsStore = create<GuestsStore>()(
           }));
         },
         showConfirmed: () =>
-          set((state) => ({
-            guestsForView: state.guests,
-          })),
+          set((state) => {
+            const querySearch = new URLSearchParams(window.location.search);
+            const query = querySearch.get('q');
+
+            if (!query) {
+              return {
+                guestsForView: state.guests,
+              };
+            }
+
+            const guests = filterGuestsByName(state.guests, query);
+
+            return {
+              guestsForView: guests,
+            };
+          }),
         hideConfirmed: () =>
-          set((state) => ({ guestsForView: exceptConfirmedGuests(state.guests) })),
+          set((state) => {
+            const querySearch = new URLSearchParams(window.location.search);
+            const query = querySearch.get('q');
+
+            if (!query) {
+              return {
+                guestsForView: exceptConfirmedGuests(state.guests),
+              };
+            }
+
+            const guests = filterGuestsByName(state.guests, query);
+
+            return { guestsForView: exceptConfirmedGuests(guests) };
+          }),
         toggleGuestsRemoval: () =>
           set((state) => {
             return { isRemoval: !state.isRemoval };
@@ -114,7 +139,7 @@ export const useGuestsStore = create<GuestsStore>()(
         removeGuest: async (id: string) => {
           try {
             set(() => ({ loading: true, guestInProcessing: id }));
-            await removeGuest(id);
+            await removeGuest(id, get().guests);
 
             set((state) => {
               return {
@@ -131,7 +156,7 @@ export const useGuestsStore = create<GuestsStore>()(
         updateGuest: async (id: string, payload: any) => {
           try {
             set(() => ({ loading: true }));
-            await updateGuest(id, payload);
+            await updateGuest(id, get().guests, payload);
             set(() => ({ loading: false }));
           } catch (error) {
             console.log(error);
@@ -142,7 +167,7 @@ export const useGuestsStore = create<GuestsStore>()(
         changeGuestStatus: async (id: string, status: GuestStatuses) => {
           try {
             set(() => ({ loading: true, guestInProcessing: id }));
-            await updateGuestStatus(id, status);
+            await updateGuestStatus(id, get().guests, status);
             set(() => ({ loading: false, guestInProcessing: '' }));
           } catch (error) {
             set(() => ({ loading: false, guestInProcessing: '' }));
@@ -152,7 +177,7 @@ export const useGuestsStore = create<GuestsStore>()(
         addGuest: async (payload: any) => {
           try {
             set(() => ({ loading: true }));
-            await createGuest(payload);
+            await createGuest(get().guests, payload);
             set(() => ({ loading: false }));
           } catch (error) {
             console.error(error);
@@ -161,9 +186,8 @@ export const useGuestsStore = create<GuestsStore>()(
         },
         searchGuest: (query: string) => {
           set((state) => {
-            const showConfirmed = JSON.parse(
-              new URLSearchParams(window.location.search).get('showCompleted') || 'true',
-            );
+            const querySearch = new URLSearchParams(window.location.search);
+            const showConfirmed = JSON.parse(querySearch.get('showCompleted') || 'true');
 
             const guests =
               showConfirmed === undefined || showConfirmed === true
@@ -171,11 +195,7 @@ export const useGuestsStore = create<GuestsStore>()(
                 : exceptConfirmedGuests(state.guests);
 
             return {
-              guestsForView: guests.filter(
-                (guest) =>
-                  guest.name.toLowerCase().includes(query.toLowerCase()) ||
-                  guest.nameGuest?.toLowerCase().includes(query.toLowerCase()),
-              ),
+              guestsForView: filterGuestsByName(guests, query),
             };
           });
         },

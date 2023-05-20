@@ -17,6 +17,7 @@ import { TextField } from './fields/TextField';
 import { CategoriesSelect } from './fields/CategoriesSelect';
 import { TextAreaField } from './fields/TextAreaField';
 import { NumberField } from './fields/NumberField';
+import { SearchField } from './fields/SearchField';
 
 import { Form } from './form/Form';
 
@@ -52,6 +53,7 @@ import { DeliveryIcon } from './icons/DeliveryIcon';
 import { ReturnIcon } from './icons/ReturnIcon';
 import { InfoIcon } from './icons/InfoIcon';
 import { QuestionIcon } from './icons/QuestionIcon';
+import { ClearIcon } from './icons/ClearIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -152,4 +154,6 @@ export {
   InfoIcon,
   QuestionIcon,
   NumberField,
+  SearchField,
+  ClearIcon,
 };

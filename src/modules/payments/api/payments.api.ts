@@ -2,7 +2,7 @@ import { Collections } from '@app/constants/collections';
 import {
   deleteDocument,
   fromDate,
-  getSnapshot,
+  getSnapshotCollection,
   pushData,
   toDate,
   updateDocument,
@@ -14,7 +14,7 @@ import { PaymentDetails } from '../store/payment-details';
 
 export const getPayments = async (): Promise<PaymentViewModal[]> => {
   const eventId = getEventId();
-  const payments = await getSnapshot<Payment[]>(Collections.EVENTS, [
+  const payments = await getSnapshotCollection<Payment[]>(Collections.EVENTS, [
     eventId,
     Collections.PAYMENTS,
   ]);
@@ -33,7 +33,7 @@ export const getPayments = async (): Promise<PaymentViewModal[]> => {
 
 export const getPaymentDetails = async (): Promise<PaymentDetails | null> => {
   const eventId = getEventId();
-  const paymentDetails = await getSnapshot<PaymentDetails[]>(Collections.EVENTS, [
+  const paymentDetails = await getSnapshotCollection<PaymentDetails[]>(Collections.EVENTS, [
     eventId,
     Collections.PROFILE_DETAILS,
   ]);

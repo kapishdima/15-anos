@@ -2,7 +2,7 @@ import { Collections } from '@app/constants/collections';
 import {
   deleteDocument,
   fromDate,
-  getSnapshot,
+  getSnapshotCollection,
   pushData,
   toDate,
   updateDocument,
@@ -13,7 +13,10 @@ import { Task, TaskViewModal } from '../store/tasks';
 
 export const getTasks = async (): Promise<TaskViewModal[]> => {
   const eventId = getEventId();
-  const tasks = await getSnapshot<Task[]>(Collections.EVENTS, [eventId, Collections.TASKS]);
+  const tasks = await getSnapshotCollection<Task[]>(Collections.EVENTS, [
+    eventId,
+    Collections.TASKS,
+  ]);
 
   if (!tasks) {
     return [];

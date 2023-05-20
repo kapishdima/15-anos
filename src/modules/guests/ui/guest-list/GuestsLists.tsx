@@ -10,7 +10,7 @@ export const GuestList: React.FC<GuestListProps> = ({ guests }) => {
   return (
     <div className="guest-list">
       {guests.map((guest) => (
-        <GuestCard {...guest} />
+        <GuestCard {...guest} key={guest.id} />
       ))}
     </div>
   );

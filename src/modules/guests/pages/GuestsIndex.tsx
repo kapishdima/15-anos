@@ -8,13 +8,15 @@ import { useGuestsStore } from '../store/guests';
 import { GuestList } from '../ui/guest-list/GuestsLists';
 import { GuestProgress } from '../ui/guest-progress/GuestProgress';
 
-import SearchIcon from '@image/icons/search.svg';
 import { sortedByNameAlphabet } from '../store/guests.selector';
 import { RemoveGuest } from '../ui/buttons/RemoveGuest';
 import { ToggleVisibilityConfirmed } from '../ui/buttons/ToggleVisibilityCompleted';
+import { useSearchParams } from 'react-router-dom';
+import { SearchField } from '@/components/fields/SearchField';
 
 export const GuestsIndex: React.FC = () => {
   const { t } = useTranslation();
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const fetchGuests = useGuestsStore((state) => state.fetchGuests);
   const searchGuest = useGuestsStore((state) => state.searchGuest);
@@ -22,10 +24,9 @@ export const GuestsIndex: React.FC = () => {
   const loading = useGuestsStore((state) => state.loading);
   const isRemoval = useGuestsStore((state) => state.isRemoval);
 
-  const onSearch = (event: ChangeEvent) => {
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
-
+  const onSearch = (value: string) => {
+    searchParams.set('q', value);
+    setSearchParams(searchParams);
     searchGuest(value);
   };
 
@@ -49,14 +50,8 @@ export const GuestsIndex: React.FC = () => {
         {guests && (
           <div className="tasks-info guests-info">
             <GuestProgress />
-            <Form onSubmit={() => {}}>
-              <TextField
-                name="search"
-                label="Search by name"
-                placeholder="Enter guest name"
-                iconBefore={SearchIcon}
-                onChange={onSearch}
-              />
+            <Form onSubmit={() => {}} initialValues={{ search: searchParams.get('q') || '' }}>
+              <SearchField onSearch={onSearch} />
             </Form>
             <ToggleVisibilityConfirmed />
             <GuestList guests={guests} />

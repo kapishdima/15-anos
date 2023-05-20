@@ -96,3 +96,11 @@ export const amountKidsGuest = (state: GuestsStore) => {
 
   return kidsGuest;
 };
+
+export const filterGuestsByName = (guests: GuestViewModal[], query: string) => {
+  return guests.filter(
+    (guest) =>
+      guest.name.toLowerCase().includes(query.toLowerCase()) ||
+      guest.nameGuest?.toLowerCase().includes(query.toLowerCase()),
+  );
+};
