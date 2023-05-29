@@ -3,6 +3,19 @@
     @content;
   }
 }
+
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desctopSM {
+  @media (max-width: 1366px) {
+    @content;
+  }
+}
+
 @mixin fullHD {
   @media (min-width: 1680px) {
     @content;

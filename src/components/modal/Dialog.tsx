@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import Micromodal from 'micromodal';
-import { Button, Form, useClickOutside, useModal } from '@components/index';
+import { Button, Form, useClickOutside, useMediaQuery, useModal } from '@components/index';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, UseFormReset } from 'react-hook-form';
 
@@ -40,6 +40,8 @@ export const Dialog: React.FC<ModalProps> = ({
   const { t } = useTranslation();
   const { open, close } = useModal();
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   const closeConfirmationModalId = `${id}_${CLOSE_CONFIRMATION_MODAL}`;
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +75,10 @@ export const Dialog: React.FC<ModalProps> = ({
               role="dialog"
               aria-modal="true"
               aria-labelledby={`${id}-title`}
-              style={{ minHeight, minWidth }}>
+              style={{
+                minHeight: !isMobile ? minHeight : '',
+                minWidth: !isMobile ? minWidth : '',
+              }}>
               <div className="">
                 <header className="modal__header">
                   <h2 className="modal__title" id={`${id}-title`}>

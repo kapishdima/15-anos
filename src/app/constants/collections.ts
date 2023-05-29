@@ -6,4 +6,5 @@ export enum Collections {
   PROFILE_DETAILS = 'details',
   GUESTS = 'guests',
   LIST = 'list',
+  SHOPPING_LIST = 'shopping',
 }

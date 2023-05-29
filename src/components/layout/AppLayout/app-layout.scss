@@ -2,6 +2,10 @@
   display: flex;
   column-gap: 48px;
 
+  @include mobile {
+    flex-direction: column;
+  }
+
   &__children {
     animation: fadeIn 300ms ease both;
   }

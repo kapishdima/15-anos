@@ -28,6 +28,10 @@
     border-radius: $base-br;
     box-shadow: $box-shadow;
     overflow-y: auto;
+
+    @include mobile {
+      min-width: 100vw;
+    }
   }
 
   &__header {
