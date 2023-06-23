@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { Events, EventEmitter } from '@app/transport/event-bus';
 
 type FormProps = PropsWithChildren & {
+  id?: string;
   onSubmit: (values: any, reset?: UseFormReset<FieldValues>) => void;
   initialValues?: any;
   classes?: string;
@@ -20,25 +21,36 @@ export const Form: React.FC<FormProps> = ({
   children,
   classes,
   schema,
+  id,
 }) => {
   const form = useForm({
     defaultValues: initialValues,
     resolver: schema ? yupResolver(schema) : undefined,
   });
 
+  const submit = (values: any) => {
+    onSubmit(values, form.reset);
+  };
+
   useEffect(() => {
     form.reset(initialValues);
   }, [initialValues]);
 
-  const submit = (values: any) => {
-    onSubmit(values, form.reset);
-  };
+  React.useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      form.reset();
+    }
+  }, [form.formState, form.reset]);
 
   useEffect(() => {
     EventEmitter.subscribe(Events.CLOSE_MODAL, () => {
       form.reset(initialValues, { keepValues: false });
     });
   }, []);
+
+  useEffect(() => {
+    EventEmitter.dispatch(Events.FORM_MODIFY, { isDirty: form.formState.isDirty, id });
+  }, [form.formState.isDirty]);
 
   return (
     <FormProvider {...form}>

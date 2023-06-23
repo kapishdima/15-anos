@@ -18,6 +18,7 @@ import { CategoriesSelect } from './fields/CategoriesSelect';
 import { TextAreaField } from './fields/TextAreaField';
 import { NumberField } from './fields/NumberField';
 import { SearchField } from './fields/SearchField';
+import { ColorPickerField } from './fields/ColorPickerField';
 
 import { Form } from './form/Form';
 
@@ -54,6 +55,12 @@ import { ReturnIcon } from './icons/ReturnIcon';
 import { InfoIcon } from './icons/InfoIcon';
 import { QuestionIcon } from './icons/QuestionIcon';
 import { ClearIcon } from './icons/ClearIcon';
+import { ProfileIcon } from './icons/ProfileIcon';
+import { SettingsIcon } from './icons/SettingsIcon';
+import { DesignIcon } from './icons/DesignIcon';
+import { LocaleIcon } from './icons/LocaleIcon';
+import { UploadIcon } from './icons/UploadIcon';
+import { AngleLeftIcon } from './icons/AngleLeftIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -82,6 +89,9 @@ import { ProgressCard } from './progress-card/ProgressCard';
 
 import { Slider } from './slider/Slider';
 import { PageBanner } from './banners/PageBanner';
+
+import { Dropzone } from './dropzone/Dropzone';
+import { ScrollXArea } from './scroll/ScrollXArea';
 
 export {
   Button,
@@ -156,4 +166,13 @@ export {
   NumberField,
   SearchField,
   ClearIcon,
+  ProfileIcon,
+  SettingsIcon,
+  DesignIcon,
+  LocaleIcon,
+  ColorPickerField,
+  Dropzone,
+  UploadIcon,
+  AngleLeftIcon,
+  ScrollXArea,
 };

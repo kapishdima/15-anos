@@ -1,0 +1,57 @@
+.dropzone {
+  width: 100%;
+  height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.75rem;
+
+  border-radius: 0.5rem;
+  background-color: #fff;
+  padding: 1rem;
+
+  &-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    row-gap: 0.5rem;
+
+    border-radius: 0.25rem;
+    border: 1px dashed $darkGrayColor;
+  }
+
+  &-label {
+    @include menuTitle;
+    font-size: 1rem;
+  }
+
+  &-available {
+    @include inputPlaceholder;
+    font-size: 0.75rem;
+  }
+
+  &-files {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+  }
+
+  &-file {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

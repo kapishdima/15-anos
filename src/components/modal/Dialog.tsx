@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Micromodal from 'micromodal';
@@ -11,6 +11,7 @@ import { EventEmitter, Events } from '@/app/transport/event-bus';
 
 type ModalProps = React.PropsWithChildren & {
   id: string;
+  hasConfirmButton?: boolean;
   confirmButtonText?: string | null;
   cancelButtonText?: string | null;
   title?: string | null;
@@ -36,17 +37,24 @@ export const Dialog: React.FC<ModalProps> = ({
   onSubmit,
   validation,
   actions,
+  hasConfirmButton = true,
 }) => {
+  const closeConfirmationModalId = `${id}_${CLOSE_CONFIRMATION_MODAL}`;
+
   const { t } = useTranslation();
   const { open, close } = useModal();
 
+  const modalRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const closeConfirmationModalId = `${id}_${CLOSE_CONFIRMATION_MODAL}`;
-  const modalRef = useRef<HTMLDivElement>(null);
+  const [shouldCloseConfirmation, setShouldConfirmation] = useState(false);
 
   const handleClose = () => {
-    open(closeConfirmationModalId);
+    if (shouldCloseConfirmation) {
+      open(closeConfirmationModalId);
+    } else {
+      close(id);
+    }
   };
 
   const onConfirmedClose = () => {
@@ -63,6 +71,12 @@ export const Dialog: React.FC<ModalProps> = ({
 
   useEffect(() => {
     Micromodal.init();
+  }, []);
+
+  useEffect(() => {
+    EventEmitter.subscribe(Events.FORM_MODIFY, ({ isDirty }) => {
+      setShouldConfirmation(isDirty);
+    });
   }, []);
 
   return (
@@ -89,7 +103,7 @@ export const Dialog: React.FC<ModalProps> = ({
                     aria-label="Close modal"
                     onClick={handleClose}></button>
                 </header>
-                <Form onSubmit={onSubmit} initialValues={initialValues} schema={validation}>
+                <Form id={id} onSubmit={onSubmit} initialValues={initialValues} schema={validation}>
                   <main className="modal__content dialog__content" id={`${id}-content`}>
                     {children}
                   </main>
@@ -98,13 +112,15 @@ export const Dialog: React.FC<ModalProps> = ({
                       {cancelButtonText || t('Cancel')}
                     </Button>
                     {actions}
-                    <Button
-                      aria-label="Close this dialog window"
-                      variant="success"
-                      loading={loading}
-                      type="submit">
-                      {confirmButtonText || t('Confirm')}
-                    </Button>
+                    {hasConfirmButton && (
+                      <Button
+                        aria-label="Close this dialog window"
+                        variant="success"
+                        loading={loading}
+                        type="submit">
+                        {confirmButtonText || t('Confirm')}
+                      </Button>
+                    )}
                   </footer>
                 </Form>
               </div>

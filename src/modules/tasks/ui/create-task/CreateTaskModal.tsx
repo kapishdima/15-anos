@@ -14,7 +14,9 @@ type CreateTaskModalProps = {
   onSubmit: (values: any) => void;
   loading?: boolean;
   validation?: any;
+  actions?: JSX.Element | null;
   hasDeleteButton?: boolean;
+  hasConfirmButton?: boolean;
 };
 
 const defaultValues = {
@@ -32,6 +34,8 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   validation,
   onSubmit,
   hasDeleteButton,
+  actions,
+  hasConfirmButton = true,
 }) => {
   const { t } = useTranslation();
 
@@ -65,12 +69,16 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       onSubmit={submit}
       validation={validation}
       actions={
-        hasDeleteButton ? (
-          <Button variant="error" onClick={onDelete}>
-            Delete task
-          </Button>
-        ) : null
-      }>
+        <>
+          {hasDeleteButton ? (
+            <Button variant="error" onClick={onDelete}>
+              Delete task
+            </Button>
+          ) : null}
+          {actions}
+        </>
+      }
+      hasConfirmButton={hasConfirmButton}>
       <CreateTaskForm />
     </Dialog>
   );

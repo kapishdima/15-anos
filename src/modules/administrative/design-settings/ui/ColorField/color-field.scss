@@ -1,0 +1,48 @@
+.color-field-container {
+  min-width: max-content;
+  position: relative;
+
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.colors {
+  margin-bottom: 3%;
+}
+
+.colors-label {
+  display: block;
+  @include inputLabel;
+  margin-bottom: 0.5rem;
+}
+
+.color-field {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  row-gap: 8px;
+
+  background-color: $white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  box-shadow: $box-shadow;
+
+  cursor: pointer;
+
+  &__label {
+    @include inputLabel;
+  }
+
+  &__indicator {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  &__picker {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 0;
+  }
+}

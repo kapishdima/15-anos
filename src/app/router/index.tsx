@@ -14,6 +14,9 @@ import {
   SinglePurchasePage,
   SinglePurchasePageProduct,
 } from '@/modules/purchases';
+import { WeddingProfileIndex } from '@/modules/administrative/wedding-profile';
+import { RegionSettingsIndex } from '@/modules/administrative/region-settings';
+import { DesignSettingsIndex } from '@/modules/administrative/design-settings';
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +88,30 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <SinglePurchasePageProduct />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.WEDDING_PROFILE}`,
+    element: (
+      <ProtectedRoute>
+        <WeddingProfileIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.REGION_SETTINGS}`,
+    element: (
+      <ProtectedRoute>
+        <RegionSettingsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.DESIGN_SETTINGS}`,
+    element: (
+      <ProtectedRoute>
+        <DesignSettingsIndex />
       </ProtectedRoute>
     ),
   },
