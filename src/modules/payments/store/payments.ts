@@ -3,6 +3,7 @@ import { devtools, persist } from 'zustand/middleware';
 import { Timestamp } from 'firebase/firestore';
 
 import {
+  PaidStatus,
   createPayment,
   getPayments,
   removePayment,
@@ -63,7 +64,7 @@ export interface PaymentsStore {
   removePayment: (id: string) => void;
   updatePayment: (id: string, payload: any) => void;
   addPayment: (payload: any) => void;
-  changePaymentStatus: (id: string, pay: number) => void;
+  changePaymentStatus: (id: string, pay: number, status: PaidStatus) => void;
 }
 
 export const usePaymentsStore = create<PaymentsStore>()(
@@ -140,17 +141,24 @@ export const usePaymentsStore = create<PaymentsStore>()(
         updatePayment: async (id: string, payload: any) => {
           try {
             set(() => ({ loading: true }));
-            await updatePayment(id, payload);
+            const payment = get().payments.find((payment) => payment.id === id)!;
+
+            const updatePaymentData = {
+              ...payload,
+              wasPaid: (payload.paid || payment.paid) === (payload.pay || payment.pay),
+            };
+            await updatePayment(id, updatePaymentData);
+
             set(() => ({ loading: false }));
           } catch (error) {
             set(() => ({ loading: false }));
           }
         },
 
-        changePaymentStatus: async (id: string, pay: number) => {
+        changePaymentStatus: async (id: string, pay: number, status: PaidStatus) => {
           try {
             set(() => ({ loading: true, paymentInProcessing: id }));
-            await updatePaymentStatus(id, pay);
+            await updatePaymentStatus(id, pay, status);
             set(() => ({ loading: false, paymentInProcessing: '' }));
           } catch (error) {
             set(() => ({ loading: false, paymentInProcessing: '' }));

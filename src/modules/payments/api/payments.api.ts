@@ -12,6 +12,8 @@ import { getEventId } from '@/modules/event';
 import { Payment, PaymentViewModal } from '../store/payments';
 import { PaymentDetails } from '../store/payment-details';
 
+export type PaidStatus = 'paid' | 'not_paid';
+
 export const getPayments = async (): Promise<PaymentViewModal[]> => {
   const eventId = getEventId();
   const payments = await getSnapshotCollection<Payment[]>(Collections.EVENTS, [
@@ -23,12 +25,18 @@ export const getPayments = async (): Promise<PaymentViewModal[]> => {
     return [];
   }
 
-  return payments.map((payment) => ({
-    ...payment,
-    isCompleted: payment.paid === payment.pay,
-    date: new Date(toDate(payment.date)),
-    completed: new Date(toDate(payment.completed)),
-  }));
+  console.log(payments);
+
+  return payments.map((payment) => {
+    console.log('was paid', payment.title, payment.wasPaid);
+
+    return {
+      ...payment,
+      isCompleted: payment.wasPaid,
+      date: new Date(toDate(payment.date)),
+      completed: new Date(toDate(payment.completed)),
+    };
+  });
 };
 
 export const getPaymentDetails = async (): Promise<PaymentDetails | null> => {
@@ -70,13 +78,26 @@ export const createPayment = async (payload: any) => {
   return pushData(Collections.EVENTS, [eventId, Collections.PAYMENTS, payload.title], paymentData);
 };
 
-export const updatePaymentStatus = async (id: string, pay: number) => {
-  const updatePaidStatusData = {
+export const updatePaymentStatus = async (id: string, pay: number, status: PaidStatus) => {
+  const updatePaidStatusData = status === 'paid' ? createPaidData(pay) : createNotPaidData(pay);
+
+  return await updatePayment(id, updatePaidStatusData);
+};
+
+const createPaidData = (pay: number) => {
+  return {
     pay,
     paid: pay,
     completed: fromDate(new Date()),
     wasPaid: true,
   };
+};
 
-  return await updatePayment(id, updatePaidStatusData);
+const createNotPaidData = (pay: number) => {
+  return {
+    pay,
+    paid: 0,
+    completed: fromDate(new Date()),
+    wasPaid: false,
+  };
 };

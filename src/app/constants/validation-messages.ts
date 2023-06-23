@@ -12,4 +12,5 @@ export const MIN_KID_AMOUNT = 'Minimum number of children 0';
 export const MIN_GUEST_AMOUNT = 'Minimum number of guests 0';
 export const MAX_GUEST_AMOUNT = 'Maximum number of guests 0';
 
+export const MIN_PAY_AMOUNT = 'Minimum payment amount must be greater than 0';
 export const NO_LEADING_ZERO = 'Leading zero is not allowed';

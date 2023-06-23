@@ -2,6 +2,7 @@ import Emitter from 'eventemitter3';
 
 export enum Events {
   CLOSE_MODAL = 'close_modal',
+  FORM_MODIFY = 'form_modify',
 }
 
 const emitter = new Emitter();

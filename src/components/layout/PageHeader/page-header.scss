@@ -8,6 +8,10 @@
     width: 100%;
   }
 
+  @include desctopSM {
+    width: 70%;
+  }
+
   &__actions {
     display: flex;
     align-items: center;

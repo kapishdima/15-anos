@@ -20,6 +20,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   iconBefore,
   iconAfter,
   onChange,
+  variant = 'outline',
 }) => {
   return (
     <Input name={name}>
@@ -40,7 +41,7 @@ export const TextField: React.FC<TextFieldProps> = ({
                 id={name}
                 type={type || 'text'}
                 placeholder={placeholder || ''}
-                className={classNames('form-field', 'text-form-field', {
+                className={classNames('form-field', 'text-form-field', variant, {
                   'form-field--error': fieldState.error,
                 })}
                 name={field.name}

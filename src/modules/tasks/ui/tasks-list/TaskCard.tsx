@@ -6,6 +6,7 @@ import { useTasksStore } from '@modules/tasks';
 import { CreateTaskModal } from '../create-task/CreateTaskModal';
 import isToday from 'date-fns/isToday';
 import isPast from 'date-fns/isPast';
+import { CreateTaskActions } from '../buttons/CreateTaskActions/CreateTaskActions';
 
 type TaskCardProps = {
   image: string;
@@ -65,6 +66,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const updateTaskStatus = async (id: string) => {
     const status = completed ? 'undone' : 'done';
     await changeTaskStatus(id, status);
+    close(TASK_MODAL_ID);
     fetchTasks(/*force*/ true);
   };
 
@@ -91,6 +93,14 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         onSubmit={updateTaskOnClick}
         loading={loading}
         hasDeleteButton
+        hasConfirmButton={false}
+        actions={
+          <CreateTaskActions
+            modalId={TASK_MODAL_ID}
+            updateTaskStatus={() => updateTaskStatus(id)}
+            isCompleted={Boolean(completed)}
+          />
+        }
       />
     </>
   );

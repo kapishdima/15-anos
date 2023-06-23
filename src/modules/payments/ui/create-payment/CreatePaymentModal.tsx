@@ -14,7 +14,9 @@ type CreatePaymentModalProps = {
   onSubmit: (values: any) => void;
   loading?: boolean;
   validation?: any;
+  actions?: JSX.Element | null;
   hasDeleteButton?: boolean;
+  hasConfirmButton?: boolean;
 };
 
 const defaultValues = {
@@ -32,7 +34,9 @@ export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
   onSubmit,
   loading,
   validation,
+  actions,
   hasDeleteButton,
+  hasConfirmButton,
 }) => {
   const { t } = useTranslation();
   const { close } = useModal();
@@ -40,11 +44,8 @@ export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
   const removePayment = usePaymentsStore((state) => state.removePayment);
   const fetchPayments = usePaymentsStore((state) => state.fetchPayments);
 
-  const submit = (values: any, reset?: UseFormReset<FieldValues>) => {
+  const submit = (values: any) => {
     onSubmit(values);
-    if (reset) {
-      reset();
-    }
   };
 
   const onDelete = () => {
@@ -67,12 +68,16 @@ export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
       initialValues={initialValues || defaultValues}
       onSubmit={submit}
       validation={validation}
+      hasConfirmButton={hasConfirmButton}
       actions={
-        hasDeleteButton ? (
-          <Button variant="error" onClick={onDelete}>
-            Delete payment
-          </Button>
-        ) : null
+        <>
+          {hasDeleteButton ? (
+            <Button variant="error" onClick={onDelete}>
+              Delete payment
+            </Button>
+          ) : null}
+          {actions}
+        </>
       }>
       <CreatePaymentForm />
     </Dialog>

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Card, useModal } from '@/components';
 import { usePaymentsStore } from '@modules/payments';
 
 import { CreatePaymentModal } from '../create-payment/CreatePaymentModal';
 import { createPaymentSchemaValidation } from '../../validations/payments.schema';
+import { TogglePaymentStatus } from '../buttons/TogglePaymentStatus';
+import { Events, EventEmitter } from '@/app/transport/event-bus';
+import { CreatePaymentActions } from '../buttons/CreatePaymentActions';
 
 type PaymentCardProps = {
   image: string;
@@ -16,7 +19,6 @@ type PaymentCardProps = {
   paid: number;
   notes: string;
   color?: string;
-  completed?: boolean;
   hint?: string;
   isRemoval?: boolean;
   isCompleted?: boolean;
@@ -27,7 +29,6 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   id,
   title,
   image,
-  completed,
   categoryId,
   date,
   notes,
@@ -39,14 +40,14 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   completedDate,
   color = '#db5b78',
 }) => {
+  const PAYMENT_MODAL_ID = `payment-modal-${id}`;
+
   const removePayment = usePaymentsStore((state) => state.removePayment);
   const fetchPayments = usePaymentsStore((state) => state.fetchPayments);
   const updatePayment = usePaymentsStore((state) => state.updatePayment);
   const changePaymentStatus = usePaymentsStore((state) => state.changePaymentStatus);
 
   const loading = usePaymentsStore((state) => state.loading);
-
-  const PAYMENT_MODAL_ID = `payment-modal-${id}`;
 
   const { open, close } = useModal();
 
@@ -66,7 +67,9 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   };
 
   const onUpdatePaymentStatus = async (id: string) => {
-    await changePaymentStatus(id, pay);
+    const status = isCompleted ? 'not_paid' : 'paid';
+    await changePaymentStatus(id, pay, status);
+    close(PAYMENT_MODAL_ID);
     fetchPayments(/*force*/ true);
   };
 
@@ -77,7 +80,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
         title={title}
         icon={image}
         color={color}
-        completed={completed}
+        completed={isCompleted}
         removal={isRemoval}
         onOpen={onOpen}
         onDelete={onDelete}
@@ -101,7 +104,15 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
         validation={createPaymentSchemaValidation}
         onSubmit={onUpdatePayment}
         loading={loading}
+        actions={
+          <CreatePaymentActions
+            modalId={PAYMENT_MODAL_ID}
+            isCompleted={Boolean(isCompleted)}
+            updatePaymentStatus={() => onUpdatePaymentStatus(id)}
+          />
+        }
         hasDeleteButton
+        hasConfirmButton={false}
       />
     </>
   );
