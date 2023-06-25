@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AppLayout, Form, PageHeader, TextField } from '@components/index';
+import { AppLayout, Form, PageHeader } from '@components/index';
+import { SearchField } from '@/components/fields/SearchField';
 
 import { CreateGuest } from '../ui/buttons/CreateGuest';
 import { useGuestsStore } from '../store/guests';
@@ -12,7 +13,6 @@ import { sortedByNameAlphabet } from '../store/guests.selector';
 import { RemoveGuest } from '../ui/buttons/RemoveGuest';
 import { ToggleVisibilityConfirmed } from '../ui/buttons/ToggleVisibilityCompleted';
 import { useSearchParams } from 'react-router-dom';
-import { SearchField } from '@/components/fields/SearchField';
 
 export const GuestsIndex: React.FC = () => {
   const { t } = useTranslation();
@@ -22,7 +22,6 @@ export const GuestsIndex: React.FC = () => {
   const searchGuest = useGuestsStore((state) => state.searchGuest);
   const guests = useGuestsStore((state) => sortedByNameAlphabet(state));
   const loading = useGuestsStore((state) => state.loading);
-  const isRemoval = useGuestsStore((state) => state.isRemoval);
 
   const onSearch = (value: string) => {
     searchParams.set('q', value);
@@ -42,13 +41,13 @@ export const GuestsIndex: React.FC = () => {
           actions={
             <>
               <CreateGuest />
-              <RemoveGuest removal={isRemoval} />
+              <RemoveGuest />
             </>
           }
         />
 
         {guests && (
-          <div className="tasks-info guests-info">
+          <div className="guests-info">
             <GuestProgress />
             <Form onSubmit={() => {}} initialValues={{ search: searchParams.get('q') || '' }}>
               <SearchField onSearch={onSearch} />

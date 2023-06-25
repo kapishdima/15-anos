@@ -10,6 +10,7 @@ const defaultValues = {
   title: '',
   description: '',
   url: '',
+  image: '',
 };
 
 type CreatePurchaseModalProps = {

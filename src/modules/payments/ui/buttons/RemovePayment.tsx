@@ -5,12 +5,9 @@ import { CheckIcon, IconButton } from '@components/index';
 import { Protected, RoleActions } from '@modules/roles';
 import { usePaymentsStore } from '@modules/payments';
 
-type RemovePaymentProps = {
-  removal: boolean;
-};
-
-export const RemovePayment: React.FC<RemovePaymentProps> = ({ removal }) => {
+export const RemovePayment: React.FC = () => {
   const togglePaymentRemoval = usePaymentsStore((state) => state.togglePaymentRemoval);
+  const removal = usePaymentsStore((state) => state.isRemoval);
 
   return (
     <Protected action={RoleActions.DELETE_TASK}>

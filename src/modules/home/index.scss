@@ -1,15 +1,4 @@
 .home-page {
-  .tasks-info {
-    max-width: 55%;
-
-    @include mobile {
-      max-width: 100%;
-    }
-
-    @include desctopSM {
-      max-width: 70%;
-    }
-  }
   .task-progress {
     margin-top: 2%;
   }

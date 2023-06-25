@@ -15,8 +15,12 @@
   flex-direction: column;
   row-gap: 8px;
 
-  width: 20vw;
+  width: calc(20vw - 8px);
   height: 50vh;
+
+  @include mobile {
+    width: 100%;
+  }
 
   &__image {
     position: relative;

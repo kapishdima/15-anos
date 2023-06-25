@@ -13,7 +13,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, actions, hasBackB
     <div className="page-header">
       {hasBackButton && <BackButton />}
       {title && <PageTitle>{title}</PageTitle>}
-      {actions && <div className="page-header__actions">{actions}</div>}
+      {<div className="page-header__actions">{actions}</div>}
     </div>
   );
 };

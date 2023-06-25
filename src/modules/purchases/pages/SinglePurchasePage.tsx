@@ -7,7 +7,7 @@ import MockDress from '@/image/mock-dress.png';
 
 export const SinglePurchasePage: React.FC = () => {
   return (
-    <AppLayout>
+    <AppLayout fullWidth>
       <PageHeader hasBackButton />
       <PurchaseProduct
         image={MockDress}

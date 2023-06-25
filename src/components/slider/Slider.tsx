@@ -7,9 +7,9 @@ type SliderProps = PropsWithChildren & SwiperProps;
 
 export const Slider: React.FC<SliderProps> = ({ children, ...sliderOptions }) => {
   return (
-    <Swiper {...sliderOptions}>
+    <Swiper {...sliderOptions} className="slider">
       {React.Children.map(children, (child) => (
-        <SwiperSlide>{child}</SwiperSlide>
+        <SwiperSlide className="slider-slide">{child}</SwiperSlide>
       ))}
     </Swiper>
   );

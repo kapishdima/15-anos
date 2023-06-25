@@ -1,24 +1,21 @@
-import { Button, ListTitle } from '@/components';
 import React from 'react';
-import { useShoppingStore } from '../../store/shopping';
+import { ListTitle } from '@/components';
+import { useShoppingStore } from '../../../store/shopping';
+import { CreatePurchase } from '../../buttons/CreatePurchase';
 
-export const ManualShopingList: React.FC = () => {
+export const ManualWishList: React.FC = () => {
   const products = useShoppingStore((state) => state.products);
-
-  console.log(products);
 
   return (
     <div className="manual-shopping-list">
-      <ListTitle>My shopping list</ListTitle>
+      <ListTitle>My wishlist</ListTitle>
       {!products.length ? (
         <div className="empty-list">
           <h4 className="empty-list__title">
-            Your shopping list is empty now. <br />
+            This wishlist is empty now. <br />
             Add new items to it from Best Ideas or manually
           </h4>
-          <Button appearance="ghost" variant="text">
-            Add manually
-          </Button>
+          <CreatePurchase as="button" />
         </div>
       ) : (
         <div className="products-list">

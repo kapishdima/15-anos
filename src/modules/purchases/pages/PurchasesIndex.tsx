@@ -2,8 +2,9 @@ import { AppLayout, PageHeader, Tabs } from '@/components';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CreatePurchase } from '../ui/buttons/CreatePurchase';
-import { ShoppingList } from '../ui/purchase-list/ShoppingList';
+import { ShoppingList } from '../ui/purchase-list/ShoppingList/ShoppingList';
 import { useShoppingStore } from '../store/shopping';
+import { Wishlist } from '../ui/purchase-list/Wishlist/Wishlist';
 
 export const PurchasesIndex: React.FC = () => {
   const { t } = useTranslation();
@@ -27,14 +28,12 @@ export const PurchasesIndex: React.FC = () => {
           }
         />
 
-        <div className="tasks-info ">
-          <Tabs
-            tabs={[
-              { title: 'Shopping List', component: <ShoppingList /> },
-              { title: 'Wishlist', component: <ShoppingList /> },
-            ]}
-          />
-        </div>
+        <Tabs
+          tabs={[
+            { title: 'Shopping List', component: <ShoppingList /> },
+            { title: 'Wishlist', component: <Wishlist /> },
+          ]}
+        />
       </div>
     </AppLayout>
   );

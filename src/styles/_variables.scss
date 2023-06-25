@@ -176,6 +176,10 @@ $page-banner-padding-x: 16px;
   font-size: 2rem;
   font-weight: 400;
   color: $darkColor;
+
+  @include mobile {
+    font-size: 1.75rem;
+  }
 }
 
 // The style is used for page title;

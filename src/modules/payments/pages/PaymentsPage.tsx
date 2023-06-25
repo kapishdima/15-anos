@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { AppLayout, PageHeader } from '@components/index';
+import { useTranslation } from 'react-i18next';
+
+import { Tabs, AppLayout, PageHeader } from '@components/index';
 
 import {
   CreatePayment,
@@ -13,20 +15,16 @@ import {
 
 import { useCategoriesStore } from '@modules/categories';
 
-import { Tabs } from '@components/index';
-import { useTranslation } from 'react-i18next';
 import { usePaymentDetailsStore } from '../store/payment-details';
 
 export const PaymentsIndex: React.FC = () => {
   const { t } = useTranslation();
 
   const payments = usePaymentsStore((state) => state.paymentsForView);
+  const paymentsLoading = usePaymentsStore((state) => state.loading);
 
   const fetchPayments = usePaymentsStore((state) => state.fetchPayments);
   const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
-
-  const paymentsLoading = usePaymentsStore((state) => state.loading);
-  const isRemoval = usePaymentsStore((state) => state.isRemoval);
 
   const categoriesLoading = useCategoriesStore((state) => state.loading);
 
@@ -47,13 +45,13 @@ export const PaymentsIndex: React.FC = () => {
           actions={
             <>
               <CreatePayment />
-              <RemovePayment removal={isRemoval} />
+              <RemovePayment />
             </>
           }
         />
 
         {payments && (
-          <div className="tasks-info">
+          <>
             <PaymentsProgress />
             <Tabs
               extra={<ToggleVisibilityCompleted />}
@@ -62,7 +60,7 @@ export const PaymentsIndex: React.FC = () => {
                 { title: 'By Category', component: <PaymentsListByCategories /> },
               ]}
             />
-          </div>
+          </>
         )}
       </div>
     </AppLayout>

@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { AppLayout, PageHeader } from '@components/index';
+
+import { useTranslation } from 'react-i18next';
+
+import { Tabs, AppLayout, PageHeader } from '@components/index';
 
 import {
   CreateTask,
@@ -12,9 +15,6 @@ import {
 } from '@modules/tasks';
 
 import { useCategoriesStore } from '@modules/categories';
-
-import { Tabs } from '@components/index';
-import { useTranslation } from 'react-i18next';
 
 export const HomePage: React.FC = () => {
   const fetchTasks = useTasksStore((state) => state.fetchTasks);

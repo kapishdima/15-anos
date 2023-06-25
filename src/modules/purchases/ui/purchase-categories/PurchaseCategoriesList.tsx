@@ -1,5 +1,5 @@
-import { ListTitle, Slider } from '@/components';
 import React from 'react';
+import { ListTitle, Slider } from '@/components';
 import { PurchaseCategoryCard } from './PurchaseCategoryCard';
 
 import MockDressImage from '@/image/mock-purchase.jpg';
@@ -12,7 +12,11 @@ export const PurchaseCategoriesList: React.FC = () => {
   return (
     <div className="purchase-categories-list">
       <ListTitle>Best Ideas</ListTitle>
-      <Slider slidesPerView={3} spaceBetween={10}>
+      <Slider
+        slidesPerView={2}
+        spaceBetween={10}
+        autoHeight
+        breakpoints={{ 768: { slidesPerView: 3 } }}>
         <PurchaseCategoryCard id="ideas" image={MockDressImage} name="Dress for bridesmaids" />
         <PurchaseCategoryCard id="products" image={MockCenterPiecesImage} name="Centerpieces" />
         <PurchaseCategoryCard id="ideas" image={MockFootwearImage} name="Comfortable footwear" />

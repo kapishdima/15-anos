@@ -1,5 +1,5 @@
 import React from 'react';
-import { PurchaseCategoriesList } from '../purchase-categories/PurchaseCategoriesList';
+import { PurchaseCategoriesList } from '../../purchase-categories/PurchaseCategoriesList';
 import { ManualShopingList } from './ManualShoppingList';
 
 export const ShoppingList: React.FC = () => {
