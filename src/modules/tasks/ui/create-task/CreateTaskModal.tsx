@@ -21,7 +21,7 @@ type CreateTaskModalProps = {
 
 const defaultValues = {
   date: new Date(),
-  categoryId: '',
+  categoryId: 'Artists',
   notes: '',
   title: '',
 };

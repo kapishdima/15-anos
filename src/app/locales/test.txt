@@ -1,0 +1,187 @@
+# {
+#   // General
+
+#   Back: Back,
+#   Empty: No data,
+#   Cancel: Cancel,
+#   Confirm: Ok,
+
+#   Tomorrow: Tomorrow,
+#   Yesterday: Yesterday,
+#   Today: Today,
+
+#   // General Form Fields
+
+#   Name: Name,
+#   Date: Date,
+#   Notes: Notes,
+#   Enter notes: Enter notes,
+
+#   Yes: Yes,
+#   No: No,
+
+#   // Confirmation alert
+
+#   Are you sure you want to delete?: Are you sure you want to delete?,
+#   Are you sure you want to exit without saving?: Are you sure you want to exit without saving?,
+
+#   // Error alert
+
+#   Authentication error. Try again: Authentication error. Try again,
+
+#   // Page Tabs
+
+#   By Date: By Date
+#   BY Category: BY CATEGORY
+
+#   // Menu
+
+#   Guests: Guests,
+#   Guests list: Guests list,
+#   Tasks: Tasks,
+#   Payments: Payments,
+#   Purchases: Purchases,
+#   Administrative tools: Administrative tools,
+#   Quinceañera profle: Quinceañera profle,
+#   Preferences: Preferences,
+#   Design: Design,
+#   Language and region: Language and region,
+
+#   // Event timer
+
+#   Days: Days,
+#   Hours: Hours,
+#   Minutes: Minutes,
+#   Seconds: Seconds,
+
+#   // Login
+
+#   You can find the password in a message you received from a person who invited you: You can find the password in a message you received from a person who invited you,
+#   Log in: Log in,
+
+#   // Login Form Fields
+
+#   Enter a password: Enter a password,
+#   Enter event title: Enter event title,
+
+#   // Login Error Alert
+
+#   Incorrect password: Incorrect password,
+#   Incorrect event name: Incorrect event name,
+#   The event name has not been set yet. Сontact the event organizer: The event name has not been set yet. Сontact the event organizer,
+#   You tried to login more than  times. Wait  seconds: You tried to login more than  times. Wait  seconds,
+
+#   // Create profile
+
+#   Enter details of your Quinceañera: Enter details of your Quinceañera,
+#   Create profile: Create profile,
+
+#   // Create profile Form Fields
+
+#   When is your Quinceañera?: When is your Quinceañera?,
+#   What is the budget approximately?: What is the budget approximately?,
+#   How many guests are you expecting?: How many guests are you expecting?,
+#   Where will be your Quinceañera?: Where will be your Quinceañera?,
+#   What language do you prefer?: What language do you prefer?,
+#   What current do you use?: What current do you use?,
+
+#   // Create profile Form Fields
+
+#   You cannot create a new profile because you have already created 3 profiles: You cannot create a new profile because you have already created 3 profiles,
+
+#   // Tasks Page
+
+#   Hide completed tasks: Hide completed tasks
+#   Show completed tasks: Show completed tasks
+
+#   // Task Page Statistics
+
+#   Task Completed: Task Completed
+#   Tasks are completed: Tasks are completed
+
+#   // Create tasks form
+
+#   Task details: Task details
+#   Task category: Task category
+#   Save the task: Save the task
+#   Enter task name: Enter task name
+#   Mark as completed: Mark as completed
+#   Mark as not completed: Mark as not completed
+#   Delete task: Delete task
+
+#   // Payments Page
+
+#   Hide paid payments: Hide paid payments
+#   Show paid payments: Show paid payments
+
+#   // Payments Page Statistics
+
+#   Budget utilization: Budget utilization
+#   Available: available
+#   Already paid: already paid
+#   Scheduled payments: Scheduled payments
+#   Total per guest: Total per guest
+
+#   // Create Payment Form
+
+#   Payment details: Payment details
+#   Enter payment name: Enter payment name
+#   Amount payable: Amount payable
+#   Paid: Paid
+#   Select payment date: Select date
+#   Payment category: Payment category
+#   Select payment category: Select payment category
+#   Save the payment: Save the payment
+#   Mark as paid: Mark as paid
+#   Mark as not paid: Mark as not paid
+
+#   // Guests Pages
+
+#   // Guests Pages Statistics
+
+#   Guest confirmations: Guest confirmations
+#   Guest have confirmed their participation: guest have confirmed their participation
+
+#   Search by name: Search by name
+#   Enter guest name: Enter guest name
+
+#   Hide confirmed guests: Hide confirmed guests
+#   Show confirmed guests: Show confirmed guests
+
+#   // Guests Statuses
+
+#   Status: Status
+#   Not invited: Not invited
+#   Invited: Invited
+#   Wont come: Wont come
+#   Confirmed participation: Confirmed participation
+
+#   // Create guest form
+
+#   Guest details: Guest details
+#   Guest name: Guest name
+#   Enter guest name: Enter guest name
+#   Select guest status: Select guest status
+#   Enter the number of additional guests: Enter the number of additional guests
+#   Enter number of children: Enter number of children
+#   Save the guest: Save the guest
+
+#   // Purchases Page
+
+#   Best Ideas: Best Ideas
+#   Shopping list: Shopping list
+#   Wishlist: Wishlist
+#   My shopping list: My shopping list
+#   Your shopping list is empty now. Add new items to it from Best Ideas or manually: Your shopping list is empty now. Add new items to it from Best Ideas or manually
+#   Add manually: Add manually
+
+#   // Create Purchases
+
+#   Item name: Item name
+#   Description: Description
+#   Item description: Item description
+#   Link: Link
+#   Link to an online store: Link to an online store
+#   Save The Purchases: Save The Purchases,
+
+# }

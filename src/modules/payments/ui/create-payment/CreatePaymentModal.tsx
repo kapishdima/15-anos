@@ -25,6 +25,7 @@ const defaultValues = {
   date: new Date(),
   pay: '0',
   paid: '0',
+  categoryId: 'Artists',
 };
 
 export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
