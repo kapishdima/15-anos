@@ -4,6 +4,7 @@ import { BaseInputProps, Input } from '../Input';
 import { MaskedField } from '../MaskedField';
 import { useCurrencyField } from './useCurrencyField';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 type CurrencyFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -11,6 +12,7 @@ type CurrencyFieldProps = BaseInputProps & {
 };
 
 export const CurrencyField: React.FC<CurrencyFieldProps> = ({ name, placeholder, label, type }) => {
+  const { t } = useTranslation();
   const { setValue, getValues } = useFormContext();
   const [mask, setMask] = useState({
     name: 'num USD',
@@ -39,7 +41,7 @@ export const CurrencyField: React.FC<CurrencyFieldProps> = ({ name, placeholder,
         <div className="form-field__container" onBlur={onBlur}>
           {label && (
             <label htmlFor={name} className="form-field__label">
-              {label}
+              {t(label)}
             </label>
           )}
           <div className="form-input__container">

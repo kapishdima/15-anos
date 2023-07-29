@@ -2,6 +2,7 @@ import { ColorPickerField, useClickOutside } from '@/components';
 import React, { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 type ColorFieldProps = {
   name: string;
@@ -9,6 +10,8 @@ type ColorFieldProps = {
 };
 
 export const ColorField: React.FC<ColorFieldProps> = ({ label, name }) => {
+  const { t } = useTranslation();
+
   const { watch } = useFormContext();
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const triggerContainerRef = useRef<HTMLDivElement | null>(null);
@@ -40,7 +43,7 @@ export const ColorField: React.FC<ColorFieldProps> = ({ label, name }) => {
   return (
     <div className="color-field-container">
       <div className="color-field" onClick={onIndicatorClick} ref={triggerRef}>
-        <label className="color-field__label">{label}</label>
+        <label className="color-field__label">{t(label || '')}</label>
 
         <div className="color-field__indicator" style={{ backgroundColor: color }}></div>
       </div>

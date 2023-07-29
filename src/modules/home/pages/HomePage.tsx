@@ -23,8 +23,6 @@ export const HomePage: React.FC = () => {
   const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
   const categoriesLoading = useCategoriesStore((state) => state.loading);
 
-  const { t } = useTranslation();
-
   useEffect(() => {
     fetchTasks();
     fetchCategories();
@@ -34,7 +32,8 @@ export const HomePage: React.FC = () => {
     <AppLayout loading={tasksLoading && categoriesLoading}>
       <div className="home-page">
         <PageHeader
-          title={t('Tasks')}
+          title="Tasks"
+          hint="We have compiled a list of tasks for you. Now you can change or delete them and add your own."
           actions={
             <>
               <CreateTask />
@@ -48,8 +47,8 @@ export const HomePage: React.FC = () => {
           <Tabs
             extra={<ToggleVisibilityCompleted />}
             tabs={[
-              { title: 'By Data', component: <TaskListByDate /> },
-              { title: 'By Category', component: <TaskListByCategories /> },
+              { title: 'By date', component: <TaskListByDate /> },
+              { title: 'By category', component: <TaskListByCategories /> },
             ]}
           />
         </div>

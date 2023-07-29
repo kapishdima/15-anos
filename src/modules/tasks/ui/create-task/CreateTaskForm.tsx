@@ -7,7 +7,7 @@ export const CreateTaskForm: React.FC = () => {
 
   return (
     <>
-      <TextField name="title" label={t('Name')} placeholder={t('Enter task name')} />
+      <TextField name="title" label={t('Name')} placeholder={t('Task name')} />
       <DatepickerField
         name="date"
         label={t('Date')}

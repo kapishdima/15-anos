@@ -6,5 +6,11 @@ export enum Collections {
   PROFILE_DETAILS = 'details',
   GUESTS = 'guests',
   LIST = 'list',
-  SHOPPING_LIST = 'shopping',
+  MANUAL_WISH_LIST = 'registry',
+  MANUAL_SHOPPING_LIST = 'shopping',
+  RECOMMENDED_SHOPING_LIST = 'shopping/groups/list',
+  RECOMMENDED_WISH_LIST = 'registry/groups/list',
+  PRODUCTS_LIST = 'items/list',
+  PRODUCTS_PARAMETERS = 'shopping/parametrs',
+  REGION_DETAILS = 'details/profile',
 }

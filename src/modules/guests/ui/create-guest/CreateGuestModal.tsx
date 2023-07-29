@@ -54,7 +54,7 @@ export const CreateGuestModal: React.FC<CreateGuestModalProps> = ({
     <Dialog
       id={id}
       title={t('Guest')}
-      confirmButtonText={t('Save the guest')}
+      confirmButtonText={t('Add guests')}
       minWidth="50vw"
       minHeight="90vh"
       onSubmit={submit}

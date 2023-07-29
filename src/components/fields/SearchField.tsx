@@ -1,9 +1,10 @@
 import React, { ChangeEvent } from 'react';
 
 import { TextField } from './TextField';
-import SearchIcon from '@image/icons/search.svg';
+
 import { useFormContext } from 'react-hook-form';
 import { ClearIcon } from '../icons/ClearIcon';
+import { SearchIcon } from '../icons/SearchIcon';
 
 type SearchFieldProps = {
   onSearch: (value: string) => void;
@@ -27,7 +28,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
       name="search"
       label="Search by name"
       placeholder="Enter guest name"
-      iconBefore={SearchIcon}
+      iconBefore={<SearchIcon />}
       iconAfter={
         <div className="clear-icon" onClick={onClear}>
           <ClearIcon />

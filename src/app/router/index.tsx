@@ -7,13 +7,7 @@ import { CreateProfilePage, LoginPage } from '@modules/auth';
 import { HomePage } from '@modules/home/';
 import { PaymentsIndex } from '@/modules/payments';
 import { GuestsIndex } from '@/modules/guests';
-import {
-  PurchaseBestIdeas,
-  PurchaseBestIdeasProducts,
-  PurchasesIndex,
-  SinglePurchasePage,
-  SinglePurchasePageProduct,
-} from '@/modules/purchases';
+import { PurchaseBestIdeas, PurchasesIndex, SinglePurchasePage } from '@/modules/purchases';
 import { WeddingProfileIndex } from '@/modules/administrative/wedding-profile';
 import { RegionSettingsIndex } from '@/modules/administrative/region-settings';
 import { DesignSettingsIndex } from '@/modules/administrative/design-settings';
@@ -60,34 +54,19 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/ideas`,
+    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/:id`,
     element: (
       <ProtectedRoute>
         <PurchaseBestIdeas />
       </ProtectedRoute>
     ),
   },
+
   {
-    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/products`,
-    element: (
-      <ProtectedRoute>
-        <PurchaseBestIdeasProducts />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/ideas/:id`,
+    path: `${AppRoutes.PURCHASES_BEST_IDEAS}`,
     element: (
       <ProtectedRoute>
         <SinglePurchasePage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: `${AppRoutes.PURCHASES_BEST_IDEAS}/products/:id`,
-    element: (
-      <ProtectedRoute>
-        <SinglePurchasePageProduct />
       </ProtectedRoute>
     ),
   },

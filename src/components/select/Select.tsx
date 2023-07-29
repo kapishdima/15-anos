@@ -76,10 +76,10 @@ export const Select: React.FC<SelectProps> = ({
         {selected && showSelectedValue ? (
           <div className="select-value">
             <div className="select-value__icon">{selected.icon}</div>
-            <div className="select-value__text">{selected.label}</div>
+            <div className="select-value__text">{t(selected.label)}</div>
           </div>
         ) : (
-          <div className="select-placeholder">{placeholder}</div>
+          <div className="select-placeholder">{t(placeholder || '') || ''} </div>
         )}
       </div>
       <div className="select-dropdown">
@@ -94,7 +94,7 @@ export const Select: React.FC<SelectProps> = ({
                 onOptionClick(option);
               }}>
               {option.icon && <div className="select-option-icon">{option.icon}</div>}
-              <div className="select-option-label">{option.label}</div>
+              <div className="select-option-label">{t(option.label)}</div>
             </div>
           ))
         ) : (

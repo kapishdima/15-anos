@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ProgressCard } from '@components/index';
 import { useTasksStore } from '../../store/tasks';
+import { useTranslation } from 'react-i18next';
 
 export const TaskProgress: React.FC = () => {
+  const { t } = useTranslation();
+
   const total = useTasksStore((state) => state.total);
   const completed = useTasksStore((state) => state.completed);
 
@@ -19,9 +22,9 @@ export const TaskProgress: React.FC = () => {
 
   return (
     <ProgressCard
-      title="Task Completed"
+      title="Completed"
       value={value}
-      hint={`${completed} of ${total} tasks are completed`}
+      hint={`${completed} ${t('tasks_completed_2')} ${total} ${t('tasks_completed_3')}`}
     />
   );
 };

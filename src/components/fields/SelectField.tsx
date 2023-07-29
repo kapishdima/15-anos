@@ -1,6 +1,7 @@
 import React from 'react';
 import { BaseInputProps, Input } from './Input';
 import { Option, Select } from '../select/Select';
+import { useTranslation } from 'react-i18next';
 
 type SelectFieldProps = BaseInputProps & {
   options: Option[];
@@ -16,6 +17,8 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   placeholder,
   onSelect,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Input name={name}>
       {({ field, fieldState }) => {
@@ -23,12 +26,11 @@ export const SelectField: React.FC<SelectFieldProps> = ({
           <div className="form-field__container">
             {label && (
               <label htmlFor={name} className="form-field__label">
-                {label}
+                {t(label)}
               </label>
             )}
-
             <Select
-              defaultSelected={field.value}
+              defaultSelected={field.value || options[0].value}
               placeholder={placeholder}
               options={options}
               invalid={Boolean(fieldState.error)}

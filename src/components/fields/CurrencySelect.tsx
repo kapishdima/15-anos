@@ -10,18 +10,28 @@ import { BaseInputProps } from './Input';
 
 type CurrencySelectProps = BaseInputProps & {
   placeholder?: string;
+  autodetect?: boolean;
 };
 
-export const CurrencySelect: React.FC<CurrencySelectProps> = ({ name, label, placeholder }) => {
+export const CurrencySelect: React.FC<CurrencySelectProps> = ({
+  name,
+  label,
+  placeholder,
+  autodetect = true,
+}) => {
   const location = useUserLocation();
   const { setValue } = useFormContext();
 
   const options = currensies.map((currency) => ({
-    label: currency.currencyCode,
-    value: currency.currencyCode,
+    label: currency.name,
+    value: currency.code,
+    icon: currency.symbol_native,
   }));
 
   useEffect(() => {
+    if (!autodetect) {
+      return;
+    }
     setValue(name, location?.currency);
   }, [location, location?.country]);
 

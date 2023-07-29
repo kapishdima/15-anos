@@ -10,10 +10,13 @@ import {
   amountKidsGuest,
   amountNotInvitedGuests,
 } from '../../store/guests.selector';
+import { useTranslation } from 'react-i18next';
 
 const toPercent = (from: number, to: number) => (from / to) * 100;
 
 export const GuestProgress = () => {
+  const { t } = useTranslation();
+
   const [value, setValue] = useState(0);
 
   const guests = useGuestsStore(amountGuests);
@@ -49,9 +52,9 @@ export const GuestProgress = () => {
     <ProgressCard
       title="Guest confirmations"
       value={value}
-      hint={`${confirmedGuestsWithExtraGuest} of ${guests} guest have confirmed their participation. ${
-        kidsGuests > 0 ? `Plus kids: ${kidsGuests}` : ''
-      }`}
+      hint={`${confirmedGuestsWithExtraGuest} ${t('guests_confirmations_2')} ${guests} ${t(
+        'guests_confirmations_3',
+      )}. ${kidsGuests > 0 ? `${t('pluskids1')} ${kidsGuests}` : ''}`}
       bgColor={progressBarBgGradient}
       fullWithBar
     />

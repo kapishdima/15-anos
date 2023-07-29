@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProgressBar } from '../progress/ProgressBar';
+import { useTranslation } from 'react-i18next';
 
 type ProgressCardProps = {
   title: string;
@@ -18,9 +19,11 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
   bgColor,
   fullWithBar = false,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="progress-card">
-      <h4 className="progress-card__title">{title}</h4>
+      <h4 className="progress-card__title">{t(title)}</h4>
       <div className="progress-card__progressbar">
         <ProgressBar value={Math.ceil(value)} bgColor={bgColor} fullWithBar={fullWithBar} />
       </div>

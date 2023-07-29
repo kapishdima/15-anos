@@ -13,7 +13,7 @@ export const CreatePaymentForm = () => {
 
   return (
     <>
-      <TextField name="title" label={t('Name')} placeholder={t('Enter payment name')} />
+      <TextField name="title" label={t('Name')} placeholder={t('Payment name')} />
       <DatepickerField
         name="date"
         label={t('Date')}

@@ -8,8 +8,11 @@ import {
   alreadyPaid,
 } from '@modules/payments';
 import { paymentsAmount, perGuest } from '../../store/payments.selectors';
+import { useTranslation } from 'react-i18next';
 
 export const PaymentsProgress = () => {
+  const { t } = useTranslation();
+
   const scheduled = usePaymentsStore(scheduledPayments);
   const paid = usePaymentsStore(alreadyPaid);
   const available = usePaymentDetailsStore((state) => availableBudget(state, paid));
@@ -31,16 +34,16 @@ export const PaymentsProgress = () => {
     <ProgressCard
       value={value}
       title="Budget utilization"
-      hint={`$${available} available, $${paid} already paid`}
+      hint={`$${available} ${t('budget_available_2')} $${paid} ${t('budget_available_3')}`}
       extra={
         <div className="progress-card__extra">
           <div className="progress-card__extra-item">
             <div className="progress-card__extra-item__amount">${scheduled}</div>
-            <div className="progress-card__extra-item__label">Scheduled payments</div>
+            <div className="progress-card__extra-item__label">{t('Scheduled payments')}</div>
           </div>
           <div className="progress-card__extra-item">
             <div className="progress-card__extra-item__amount">${paymentPerGuest}</div>
-            <div className="progress-card__extra-item__label">Total per guest</div>
+            <div className="progress-card__extra-item__label">{t('Total per guest')}</div>
           </div>
         </div>
       }

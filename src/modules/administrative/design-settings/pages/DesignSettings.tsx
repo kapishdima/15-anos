@@ -2,7 +2,6 @@ import React from 'react';
 import { AppLayout, Button, Form, PageHeader } from '@components/index';
 
 import { useTranslation } from 'react-i18next';
-import { ColorField } from '../ui/ColorField/ColorField';
 import { DropzoneField } from '@/components/fields/DropzoneField';
 import { Colors } from '../ui/Colors/Colors';
 
@@ -30,7 +29,7 @@ export const DesignSettingsIndex: React.FC = () => {
           <Form onSubmit={onSubmit} initialValues={initialValues}>
             <Colors />
             <DropzoneField name="image" label="Main image" />
-            <Button variant="success">Save the design</Button>
+            <Button variant="success">{t('Save the design')}</Button>
           </Form>
         </div>
       </div>

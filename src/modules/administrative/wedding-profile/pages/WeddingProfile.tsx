@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   AppLayout,
   Button,
@@ -10,31 +10,45 @@ import {
 } from '@components/index';
 
 import { useTranslation } from 'react-i18next';
-
-const initialValues = {
-  date: new Date(),
-  budget: '1000',
-  guests: 10,
-};
+import { useProfileStore } from '../../store/profile';
 
 export const WeddingProfileIndex: React.FC = () => {
   const { t } = useTranslation();
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const fetchProfileDetails = useProfileStore((state) => state.fetchProfileDetails);
+  const saveProfileDetails = useProfileStore((state) => state.saveProfileDetails);
+
+  const loading = useProfileStore((state) => state.loading);
+  const profile = useProfileStore((state) => state.profile);
+
+  const initialValues = {
+    date: new Date(),
+    budget: profile?.budget,
+    guests: profile?.guests,
   };
 
+  const onSubmit = async (values: any) => {
+    await saveProfileDetails(values);
+    await fetchProfileDetails(/*force*/ true);
+  };
+
+  useEffect(() => {
+    fetchProfileDetails();
+  }, []);
+
   return (
-    <AppLayout>
+    <AppLayout loading={loading}>
       <div className="home-page">
-        <PageHeader title="Wedding Details" />
+        <PageHeader title="Quinceañera profile" />
 
         <div className="tasks-info wedding-profile-form">
           <Form onSubmit={onSubmit} initialValues={initialValues}>
             <DatepickerField name="date" label="Date" />
             <CurrencyField name="budget" label="Budget" />
             <NumberField name="guests" label="Number of guests" color="#2ecc71" />
-            <Button variant="success">Save details</Button>
+            <Button type="submit" variant="success">
+              {t('Save details')}
+            </Button>
           </Form>
         </div>
       </div>

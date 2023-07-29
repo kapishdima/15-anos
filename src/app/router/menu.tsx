@@ -27,8 +27,7 @@ export const createMenu = () => {
     Payments: [{ icon: <PaymentsIcon />, title: 'Payments', path: AppRoutes.PAYMENTS_LIST }],
     Purchases: [{ icon: <PurchaseIcon />, title: 'Purchases', path: AppRoutes.PURCHASES_LIST }],
     'Administrative tools': [
-      { icon: <ProfileIcon />, title: 'Wedding profile', path: AppRoutes.WEDDING_PROFILE },
-      { icon: <SettingsIcon />, title: 'Preferences', path: '/' },
+      { icon: <ProfileIcon />, title: 'Quinceañera profile', path: AppRoutes.WEDDING_PROFILE },
       { icon: <DesignIcon />, title: 'Design', path: AppRoutes.DESIGN_SETTINGS },
       { icon: <LocaleIcon />, title: 'Language and region', path: AppRoutes.REGION_SETTINGS },
     ],

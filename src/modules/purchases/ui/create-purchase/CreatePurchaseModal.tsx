@@ -41,7 +41,7 @@ export const CreatePurchaseModal: React.FC<CreatePurchaseModalProps> = ({
     <Dialog
       id={id}
       title={t('Purchase details')}
-      confirmButtonText={t('Save the Purchase')}
+      confirmButtonText={t('Save the item')}
       minWidth="50vw"
       minHeight="90vh"
       loading={loading}

@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { BaseInputProps, Input } from './Input';
+import { useTranslation } from 'react-i18next';
 
 type DatepickerFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -19,6 +20,8 @@ export const DatepickerField: React.FC<DatepickerFieldProps> = ({
   label,
   showTimeSelect = true,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Input name={name}>
       {({ field, fieldState }) => {
@@ -26,7 +29,7 @@ export const DatepickerField: React.FC<DatepickerFieldProps> = ({
           <div className="form-field__container">
             {label && (
               <label htmlFor={name} className="form-field__label">
-                {label}
+                {t(label)}
               </label>
             )}
             <DatePicker

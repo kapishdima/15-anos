@@ -1,11 +1,12 @@
 import React, { ChangeEvent } from 'react';
 import { BaseInputProps, Input } from './Input';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
   color?: string;
-  iconBefore?: string;
+  iconBefore?: string | any;
   iconAfter?: JSX.Element | string;
   onChange?: (event: ChangeEvent<any>) => void;
 };
@@ -22,6 +23,8 @@ export const TextField: React.FC<TextFieldProps> = ({
   onChange,
   variant = 'outline',
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Input name={name}>
       {({ field, fieldState }) => {
@@ -29,18 +32,22 @@ export const TextField: React.FC<TextFieldProps> = ({
           <div className="form-field__container">
             {label && (
               <label htmlFor={name} className="form-field__label">
-                {label}
+                {t(label)}
               </label>
             )}
             <div
               className={classNames('form-input__container', { 'with-icon': Boolean(iconBefore) })}>
               {iconBefore ? (
-                <img className="form-input__before-icon" src={iconBefore} alt="" />
+                typeof iconBefore === 'string' ? (
+                  <img className="form-input__before-icon" src={iconBefore} alt="" />
+                ) : (
+                  <div className="form-input__before-icon">{iconBefore}</div>
+                )
               ) : null}
               <input
                 id={name}
                 type={type || 'text'}
-                placeholder={placeholder || ''}
+                placeholder={t(placeholder || '') || ''}
                 className={classNames('form-field', 'text-form-field', variant, {
                   'form-field--error': fieldState.error,
                 })}

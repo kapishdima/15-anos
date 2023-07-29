@@ -20,7 +20,7 @@ export const useError = () => {
 
     if (hasMaxAttempts) {
       setCanLogin(false);
-      toast.error(t('cant_login', { attempts, time: waitTime }), { toastId: 'cant_login' });
+      toast.error(`${t('Try again in ')}${waitTime}${t('seconds')}`, { toastId: 'cant_login' });
       waitLogin(waitTime);
     }
 
@@ -51,16 +51,16 @@ export const useError = () => {
     switch (error) {
       case 'wrong': {
         onInvalidPassword();
-        return toast.error(t('Incorrect password'));
+        return toast.error(t('Invalid password'));
       }
       case 'user':
-        return toast.error(t('Authentication error. Try again'));
+        return toast.error(t('Error, try again'));
       case 'eventTitle wrong':
-        return toast.error(t('Incorrect event name'));
+        return toast.error(t('Invalid password or event name'));
       case 'eventTitle null':
-        return toast.error(t('The event name has not been set yet. Сontact the event organizer'));
+        return toast.error(t('This event has no name. Contact the event creator.'));
       case 'reUser':
-        return toast.error(t('Authentication error. Try again'));
+        return toast.error(t('Error, try again'));
     }
   };
 

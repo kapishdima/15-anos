@@ -61,6 +61,8 @@ import { DesignIcon } from './icons/DesignIcon';
 import { LocaleIcon } from './icons/LocaleIcon';
 import { UploadIcon } from './icons/UploadIcon';
 import { AngleLeftIcon } from './icons/AngleLeftIcon';
+import { LogoutIcon } from './icons/LogoutIcon';
+import { SearchIcon } from './icons/SearchIcon';
 
 import { AppContent } from './layout/AppContent/AppContent';
 import { AppLayout } from './layout/AppLayout/AppLayout';
@@ -175,4 +177,6 @@ export {
   UploadIcon,
   AngleLeftIcon,
   ScrollXArea,
+  LogoutIcon,
+  SearchIcon,
 };

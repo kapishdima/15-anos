@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import detector from 'i18next-browser-languagedetector';
 
 import en from '../../app/locales/en.json';
-import ru from '../../app/locales/ru.json';
-import ua from '../../app/locales/ru.json';
+import es from '../../app/locales/es.json';
+import pt from '../../app/locales/pt.json';
 import { toRelativeDate } from '@/app/utils/date';
 import { isDate } from 'date-fns';
 
@@ -15,8 +15,8 @@ export const createI18nClient = () => {
     .init({
       resources: {
         en: { translation: en },
-        ru: { translation: ru },
-        ua: { translation: ua },
+        es: { translation: es },
+        pt: { translation: pt },
       },
       fallbackLng: 'en',
       interpolation: {

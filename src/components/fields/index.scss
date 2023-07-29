@@ -65,6 +65,10 @@
     left: $input-padding-x;
     top: 50%;
     transform: translateY(-50%);
+
+    svg {
+      width: 26px;
+    }
   }
 
   .form-input__after-icon {

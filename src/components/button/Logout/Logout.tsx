@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from '@modules/firebase/auth';
 import { AppRoutes } from '@app/router/routes';
-import LogoutIcon from '@image/icons/sign-out.svg';
+import { LogoutIcon } from '@/components';
 
 export const Logout: React.FC = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const Logout: React.FC = () => {
   return (
     <div className="logout" onClick={onClick}>
       Logout
-      <img src={LogoutIcon} alt="Logout" />
+      <LogoutIcon />
     </div>
   );
 };

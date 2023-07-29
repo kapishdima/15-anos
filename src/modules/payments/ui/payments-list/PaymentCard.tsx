@@ -8,6 +8,7 @@ import { createPaymentSchemaValidation } from '../../validations/payments.schema
 import { TogglePaymentStatus } from '../buttons/TogglePaymentStatus';
 import { Events, EventEmitter } from '@/app/transport/event-bus';
 import { CreatePaymentActions } from '../buttons/CreatePaymentActions';
+import { useTranslation } from 'react-i18next';
 
 type PaymentCardProps = {
   image: string;
@@ -40,6 +41,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   completedDate,
   color = '#db5b78',
 }) => {
+  const { t } = useTranslation();
   const PAYMENT_MODAL_ID = `payment-modal-${id}`;
 
   const removePayment = usePaymentsStore((state) => state.removePayment);
@@ -88,7 +90,9 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
         hint={hint}
         showHint={!isCompleted}
         showDescription={paid > 0}
-        description={isCompleted ? `Paid ${completedDate}` : `Already paid: ${paid} $`}
+        description={
+          isCompleted ? `${t('Paid')} ${completedDate}` : `${t('Already paid')}: ${paid} $`
+        }
       />
       <CreatePaymentModal
         id={PAYMENT_MODAL_ID}

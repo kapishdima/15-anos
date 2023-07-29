@@ -3,17 +3,29 @@ import React from 'react';
 import { AppLayout, PageHeader } from '@/components';
 import { PurchaseProduct } from '../ui/purchase-product/PurchaseProduct';
 
-import MockDress from '@/image/mock-dress.png';
+import { useProductsStore } from '../store/products';
 
 export const SinglePurchasePage: React.FC = () => {
+  const getProduct = useProductsStore((state) => state.getProduct);
+
+  const product = getProduct();
+
   return (
     <AppLayout fullWidth>
       <PageHeader hasBackButton />
       <PurchaseProduct
-        image={MockDress}
-        name="Long shiffon dress"
-        description="High Quality Chiffon & Iace. The upper part of the dress is Iace, Chiffon above the waist. V-neck, Sleeveless, Zipper closure"
+        image={product.image}
+        name={product.title.en}
+        description={product.description.en}
+        colors={product.colors}
+        price={product.price?.toString()}
         popular
+        url={product.url}
+        popularCount={product.popularity}
+        specialOffer={product.offer}
+        canDelivery={product.delivery}
+        canReturn={product.returns}
+        canTailor={product.tailor}
       />
     </AppLayout>
   );

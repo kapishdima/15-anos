@@ -1,12 +1,13 @@
 import React from 'react';
-import { PurchaseCategoriesList } from '../../purchase-categories/PurchaseCategoriesList';
+
 import { ManualWishList } from './ManualWishlist';
+import { RecommendedWishList } from '../../purchase-categories/RecommendedWishList';
 
 export const Wishlist: React.FC = () => {
   return (
     <div className="shopping-list">
       <ManualWishList />
-      <PurchaseCategoriesList />
+      <RecommendedWishList />
     </div>
   );
 };

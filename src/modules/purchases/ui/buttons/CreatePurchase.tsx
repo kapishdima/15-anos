@@ -5,7 +5,11 @@ import { Button, IconButton, useModal } from '@components/index';
 
 import { Protected, RoleActions } from '@modules/roles';
 import { CreatePurchaseModal } from '../create-purchase/CreatePurchaseModal';
-import { useShoppingStore } from '../../store/shopping';
+import { useManualShoppingStore } from '../../store/manual_shopping_list';
+import { useSearchParams } from 'react-router-dom';
+import { useProductsStore } from '../../store/products';
+import { useManualWishList } from '../../store/manual_wish_list';
+import { useTranslation } from 'react-i18next';
 
 const CREATE_PURCHASE_MODAL = 'create_purchase';
 
@@ -14,20 +18,26 @@ type CreatePurchaseProps = {
 };
 
 export const CreatePurchase: React.FC<CreatePurchaseProps> = ({ as = 'icon' }) => {
+  const { t } = useTranslation();
   const { open, close } = useModal();
+  const [searchParams] = useSearchParams();
 
-  const addPurches = useShoppingStore((state) => state.addProduct);
-  const fetchProducts = useShoppingStore((state) => state.fetchProducts);
-  const loading = useShoppingStore((state) => state.loading);
+  const activeTab = searchParams.get('activeTab');
+
+  const addProduct = useProductsStore((state) => state.addProduct);
+  const fetchManualShoppingList = useManualShoppingStore((state) => state.fetchManualShoppingList);
+  const fetchManualWishList = useManualWishList((state) => state.fetchManualWishList);
+  const loading = useManualShoppingStore((state) => state.loading);
 
   const onClick = () => {
     open(CREATE_PURCHASE_MODAL);
   };
 
   const createPurchase = async (values: any) => {
-    await addPurches(values);
+    await addProduct(activeTab === '0' ? 'shopping' : 'registry', values);
     close(CREATE_PURCHASE_MODAL);
-    fetchProducts(/*force*/ true);
+    fetchManualShoppingList(/*force*/ true);
+    fetchManualWishList(/*force*/ true);
   };
 
   return (
@@ -38,7 +48,7 @@ export const CreatePurchase: React.FC<CreatePurchaseProps> = ({ as = 'icon' }) =
         </IconButton>
       ) : (
         <Button variant="text" appearance="ghost" onClick={onClick}>
-          Add manually
+          {t('Add manually')}
         </Button>
       )}
       <CreatePurchaseModal id={CREATE_PURCHASE_MODAL} onSubmit={createPurchase} loading={loading} />

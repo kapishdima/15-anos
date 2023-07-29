@@ -5,7 +5,7 @@ export enum AppRoutes {
   GUESTS_LIST = '/guests/list',
   PAYMENTS_LIST = '/payments/list',
   PURCHASES_LIST = '/purchases/list',
-  PURCHASES_BEST_IDEAS = '/purchases/best-ideas',
+  PURCHASES_BEST_IDEAS = '/purchases/best-ideas/product',
   SINGLE_PURCHASE = '/purchases/',
   WEDDING_PROFILE = '/wedding-profile',
   REGION_SETTINGS = '/region-settings',

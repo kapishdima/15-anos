@@ -11,15 +11,21 @@ import { BaseInputProps } from './Input';
 
 type LanguagesSelectProps = BaseInputProps & {
   placeholder?: string;
+  country?: string;
 };
 
-export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({ name, label, placeholder }) => {
+export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
+  name,
+  label,
+  placeholder,
+  country,
+}) => {
   const location = useUserLocation();
   const { setValue } = useFormContext();
   const { i18n } = useTranslation();
 
   const options = languages.map((language) => ({
-    icon: countries.find((country) => country.code.toLowerCase() === language.code)?.flag,
+    icon: language.flag,
     label: language.name,
     value: language.code,
   }));
@@ -29,7 +35,10 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({ name, label, p
   };
 
   useEffect(() => {
-    setValue(name, location?.country);
+    setValue(
+      name,
+      languages.find((language) => location?.country.toLowerCase() === language.code) || 'en',
+    );
   }, [location, location?.country]);
 
   return (

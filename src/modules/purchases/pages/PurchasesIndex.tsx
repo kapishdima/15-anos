@@ -1,23 +1,25 @@
-import { AppLayout, PageHeader, Tabs } from '@/components';
 import React, { useEffect } from 'react';
+
+import { AppLayout, PageHeader, Tabs } from '@/components';
 import { useTranslation } from 'react-i18next';
 import { CreatePurchase } from '../ui/buttons/CreatePurchase';
+
 import { ShoppingList } from '../ui/purchase-list/ShoppingList/ShoppingList';
-import { useShoppingStore } from '../store/shopping';
 import { Wishlist } from '../ui/purchase-list/Wishlist/Wishlist';
+
+import { useProductParameters } from '../store/products_parameters';
 
 export const PurchasesIndex: React.FC = () => {
   const { t } = useTranslation();
 
-  const fetchProducts = useShoppingStore((state) => state.fetchProducts);
-  const loading = useShoppingStore((state) => state.loading);
+  const fetchProductsParameters = useProductParameters((state) => state.fetchProductsParameters);
 
   useEffect(() => {
-    fetchProducts();
+    fetchProductsParameters();
   }, []);
 
   return (
-    <AppLayout loading={loading}>
+    <AppLayout loading={false}>
       <div className="home-page">
         <PageHeader
           title={t('Purchases')}
@@ -30,8 +32,8 @@ export const PurchasesIndex: React.FC = () => {
 
         <Tabs
           tabs={[
-            { title: 'Shopping List', component: <ShoppingList /> },
-            { title: 'Wishlist', component: <Wishlist /> },
+            { title: t('Shopping list'), component: <ShoppingList /> },
+            { title: t('Wishlist'), component: <Wishlist /> },
           ]}
         />
       </div>

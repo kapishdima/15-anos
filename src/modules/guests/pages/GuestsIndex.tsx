@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { AppLayout, Form, PageHeader } from '@components/index';
 import { SearchField } from '@/components/fields/SearchField';
@@ -15,7 +14,6 @@ import { ToggleVisibilityConfirmed } from '../ui/buttons/ToggleVisibilityComplet
 import { useSearchParams } from 'react-router-dom';
 
 export const GuestsIndex: React.FC = () => {
-  const { t } = useTranslation();
   let [searchParams, setSearchParams] = useSearchParams();
 
   const fetchGuests = useGuestsStore((state) => state.fetchGuests);
@@ -37,7 +35,7 @@ export const GuestsIndex: React.FC = () => {
     <AppLayout loading={loading}>
       <div className="home-page">
         <PageHeader
-          title={t('Guests list')}
+          title="Guests list"
           actions={
             <>
               <CreateGuest />

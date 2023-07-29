@@ -4,8 +4,10 @@ import { useSearchParams } from 'react-router-dom';
 import { Button } from '@components/index';
 
 import { useTasksStore } from '../../../store/tasks';
+import { useTranslation } from 'react-i18next';
 
 export const ToggleVisibilityCompleted: React.FC = () => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [completedVisible, setCompletedVisible] = useState(true);
 
@@ -35,7 +37,7 @@ export const ToggleVisibilityCompleted: React.FC = () => {
   return (
     <div className="toggle-visibility">
       <Button appearance="ghost" variant="success" onClick={onClick}>
-        {completedVisible ? 'Hide completed tasks' : 'Show completed tasks'}
+        {completedVisible ? t('Hide completed tasks') : t('Show completed tasks')}
       </Button>
     </div>
   );

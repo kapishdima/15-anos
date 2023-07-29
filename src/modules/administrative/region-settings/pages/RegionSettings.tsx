@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useTransition } from 'react';
 import {
   AppLayout,
   Button,
@@ -10,31 +10,47 @@ import {
 } from '@components/index';
 
 import { useTranslation } from 'react-i18next';
-
-const initialValues = {
-  country: 'uk',
-  language: 'uk',
-  currency: 'usd',
-};
+import { useProfileStore } from '../../store/profile';
+import { getCountyCode, getCurrencyCode } from '../../store/selector/profile.selector';
 
 export const RegionSettingsIndex: React.FC = () => {
   const { t } = useTranslation();
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const fetchProfileDetails = useProfileStore((state) => state.fetchProfileDetails);
+  const saveProfileDetails = useProfileStore((state) => state.saveProfileDetails);
+
+  const loading = useProfileStore((state) => state.loading);
+  const country = useProfileStore(getCountyCode);
+  const currency = useProfileStore(getCurrencyCode);
+
+  const initialValues = {
+    country: country,
+    language: 'en',
+    currency: currency,
   };
 
+  const onSubmit = async (values: any) => {
+    await saveProfileDetails(values);
+    await fetchProfileDetails(/*force*/ true);
+  };
+
+  useEffect(() => {
+    fetchProfileDetails();
+  }, []);
+
   return (
-    <AppLayout>
+    <AppLayout loading={loading}>
       <div className="home-page">
-        <PageHeader title="Language and Region" />
+        <PageHeader title="Language and region" />
 
         <div className="tasks-info wedding-profile-form">
           <Form onSubmit={onSubmit} initialValues={initialValues}>
-            <CountrySelect name="country" label="Country" />
-            <LanguagesSelect name="language" label="Language" />
-            <CurrencySelect name="currency" label="Currency" />
-            <Button variant="success">Save the language and region</Button>
+            <CountrySelect name="country" label="Country" autodetect={false} />
+            <LanguagesSelect name="language" label="Language" country={country} />
+            <CurrencySelect name="currency" label="Currency" autodetect={false} />
+            <Button type="submit" variant="success">
+              {t('Save the language and region')}
+            </Button>
           </Form>
         </div>
       </div>

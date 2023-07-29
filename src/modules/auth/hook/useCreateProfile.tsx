@@ -33,7 +33,7 @@ export const useCreateProfile = () => {
       date: formatedDate,
       timezone: getTimezoneOffset(location?.timezone || ''),
       market:
-        currensies.find((currency) => currency.countryCode === location?.country)?.countryCode ||
+        currensies.find((currency) => currency.code === location?.country.toLowerCase())?.code ||
         '',
     };
   };

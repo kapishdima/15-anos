@@ -2,6 +2,7 @@ import React, { ChangeEvent, KeyboardEvent } from 'react';
 import { BaseInputProps, Input } from './Input';
 import classNames from 'classnames';
 import { ControllerRenderProps, FieldValues, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 type NumberFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -21,6 +22,7 @@ export const NumberField: React.FC<NumberFieldProps> = ({
   onChange,
   max,
 }) => {
+  const { t } = useTranslation();
   const { setValue } = useFormContext();
 
   const setDefaultValue = (field: ControllerRenderProps<FieldValues, any>) => {
@@ -48,7 +50,7 @@ export const NumberField: React.FC<NumberFieldProps> = ({
           <div className="form-field__container">
             {label && (
               <label htmlFor={name} className="form-field__label">
-                {label}
+                {t(label)}
               </label>
             )}
             <div

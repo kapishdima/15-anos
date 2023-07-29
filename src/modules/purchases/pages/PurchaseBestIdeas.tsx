@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppLayout, PageBanner, PageHeader, PageHint } from '@/components';
 import { useTranslation } from 'react-i18next';
 
 import { ProductsList } from '../ui/purchase-list/ProductsList';
 
-import MockPageBanner from '@/image/mock-purchase.jpg';
-import MockDress from '@/image/mock-dress.png';
-
-const products = Array(20)
-  .fill(0)
-  .map((_, index) => ({
-    image: MockDress,
-    name: 'Long chiffon dress',
-    popular: index % 2 === 0,
-  }));
+import { useProductsStore } from '../store/products';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useRecommendedShoppingStore } from '../store/shopping_recommended';
+import { getShoppingCategory } from '../store/shopping.selector';
+import { ProductTypes } from '../store/purcheses.types';
 
 export const PurchaseBestIdeas: React.FC = () => {
   const { t } = useTranslation();
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+
+  const fetchProductsByCategory = useProductsStore((state) => state.fetchProductsByCategory);
+  const clearProduct = useProductsStore((state) => state.clearProduct);
+
+  const products = useProductsStore((state) => state.products);
+  const shoppingCategory = useRecommendedShoppingStore((state) => getShoppingCategory(id, state));
+  const loading = useProductsStore((state) => state.loading);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+
+    clearProduct();
+    fetchProductsByCategory(id, searchParams.get('type') as ProductTypes, true);
+  }, []);
 
   return (
-    <AppLayout>
+    <AppLayout loading={loading}>
       <div className="best-ideas">
         <PageHeader title={t('Best ideas')} hasBackButton />
-        <PageBanner image={MockPageBanner} title="Dresses for bridesmaids" />
-        <PageHint>
-          Here you find the best offers selected by professionals. High qualit, low prices and an
-          opportunity to order delivery
-        </PageHint>
+        <PageBanner image={shoppingCategory?.imageHeader || ''} title={id || ''} />
 
         <ProductsList products={products} type="ideas" />
       </div>

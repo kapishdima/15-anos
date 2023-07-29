@@ -3,17 +3,19 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   onSnapshot,
   query,
   setDoc,
   updateDoc,
-  where,
 } from 'firebase/firestore';
 import { db } from './index';
 
-export function getSnapshotCollection<TData = any>(key: string, params: string[] = []) {
-  const ref = collection(db, key, ...params);
+export function getSnapshotCollection<TData = any>(
+  key: string,
+  params: string[] = [],
+  queries: any = [],
+) {
+  const ref = query(collection(db, key, ...params), ...queries);
 
   return new Promise<TData>((resolve, reject) => {
     try {
@@ -26,8 +28,6 @@ export function getSnapshotCollection<TData = any>(key: string, params: string[]
               ...doc.data(),
             };
           }) as TData;
-
-          console.log(docs);
 
           return resolve(docs);
         },

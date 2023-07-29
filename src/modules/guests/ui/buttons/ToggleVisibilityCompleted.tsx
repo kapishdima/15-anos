@@ -3,8 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@components/index';
 import { useGuestsStore } from '../../store/guests';
+import { useTranslation } from 'react-i18next';
 
 export const ToggleVisibilityConfirmed: React.FC = () => {
+  const { t } = useTranslation();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [confirmedVisible, setCompletedVisible] = useState(true);
 
@@ -41,7 +44,7 @@ export const ToggleVisibilityConfirmed: React.FC = () => {
   return (
     <div className="toggle-visibility">
       <Button appearance="ghost" variant="success" onClick={onClick}>
-        {confirmedVisible ? 'Hide confirmed guests' : 'Show confirmed guests'}
+        {confirmedVisible ? t('Hide confirmed guests') : t('Show confirmed guests')}
       </Button>
     </div>
   );

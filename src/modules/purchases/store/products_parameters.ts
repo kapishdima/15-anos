@@ -1,0 +1,45 @@
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+
+import { ProductsParameters } from './purcheses.types';
+import { getProductsParameters } from '../api/products.api';
+
+export interface ProductsParametersStore {
+  parameters: ProductsParameters | null;
+  loading: boolean;
+  fetchProductsParameters: (force?: boolean) => Promise<void>;
+}
+
+export const useProductParameters = create<ProductsParametersStore>()(
+  devtools(
+    persist(
+      (set, get) => ({
+        parameters: null,
+        loading: false,
+        fetchProductsParameters: async (force?: boolean) => {
+          set(() => ({
+            loading: true,
+          }));
+
+          const cacheProducts = get().parameters;
+
+          const hasCachedParameters = Boolean(cacheProducts);
+
+          const products =
+            hasCachedParameters && !force ? cacheProducts : await getProductsParameters();
+
+          set(() => ({
+            products,
+            loading: false,
+          }));
+        },
+      }),
+      {
+        name: 'products_parameters',
+        partialize: (state) => ({
+          products: state.parameters,
+        }),
+      },
+    ),
+  ),
+);

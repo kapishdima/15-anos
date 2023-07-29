@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 
 type Tab = {
@@ -13,6 +14,7 @@ type TabsProps = {
 };
 
 export const Tabs: React.FC<TabsProps> = ({ tabs, extra }) => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [activeTab, setActiveTab] = useState(0);
@@ -36,7 +38,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, extra }) => {
             className={classNames('tabs-pill', { 'tabs-pill--active': index === activeTab })}
             onClick={() => changeTab(index)}
             key={tab.title}>
-            {tab.title}
+            {t(tab.title)}
           </div>
         ))}
       </div>

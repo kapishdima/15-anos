@@ -31,8 +31,8 @@
   "Payments": "Платежи",
   "Payment details": "Детали платежа",
 
-  "Enter payment name": "Введите название платежа",
-  "Enter task name": "Введите название задачи",
+  "Payment name": "Введите название платежа",
+  "Task name": "Введите название задачи",
 
   "Select date": "Выберите дату",
   "Amount payable": "Подлежащая уплате сумма",
@@ -48,7 +48,7 @@
 
   "Guests list": "Список гостей",
   "Guest": "Гость",
-  "Save the guest": "Сохранить гостя",
+  "Add guests": "Сохранить гостя",
   "Guest name": "Имя",
   "Enter guest name": "Введите имя",
   "Set guest status": "Выберите статус гостя",
