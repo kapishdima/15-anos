@@ -7,9 +7,10 @@ import { CreateTaskModal } from '../create-task/CreateTaskModal';
 import isToday from 'date-fns/isToday';
 import isPast from 'date-fns/isPast';
 import { CreateTaskActions } from '../buttons/CreateTaskActions/CreateTaskActions';
+import { getCategoryImage } from './TaskImage';
 
 type TaskCardProps = {
-  image: string;
+  // image: string;
   title: string;
   id: string;
   categoryId: string;
@@ -24,7 +25,7 @@ type TaskCardProps = {
 export const TaskCard: React.FC<TaskCardProps> = ({
   id,
   title,
-  image,
+  // image,
   completed,
   categoryId,
   date,
@@ -75,7 +76,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       <Card
         id={id}
         title={title}
-        icon={image}
+        icon={getCategoryImage(categoryId as any)}
         color={color}
         completed={completed}
         removal={isRemoval}

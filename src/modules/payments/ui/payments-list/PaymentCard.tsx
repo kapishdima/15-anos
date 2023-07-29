@@ -9,6 +9,7 @@ import { TogglePaymentStatus } from '../buttons/TogglePaymentStatus';
 import { Events, EventEmitter } from '@/app/transport/event-bus';
 import { CreatePaymentActions } from '../buttons/CreatePaymentActions';
 import { useTranslation } from 'react-i18next';
+import { getCategoryImage } from '@/modules/tasks/ui/tasks-list/TaskImage';
 
 type PaymentCardProps = {
   image: string;
@@ -80,7 +81,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
       <Card
         id={id}
         title={title}
-        icon={image}
+        icon={getCategoryImage(categoryId as any)}
         color={color}
         completed={isCompleted}
         removal={isRemoval}

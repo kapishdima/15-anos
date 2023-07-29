@@ -36,12 +36,12 @@ export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks, hasCardHint 
             {dayTasks.map((task) => {
               const category = getCategoryById(categoriesStore.categories, task.categoryId);
 
+              console.log(task);
               return (
                 <TaskCard
                   key={task.id}
                   id={task.id}
                   title={typeof task.title === 'string' ? task.title : task.title['en']}
-                  image={MockTaskIcon}
                   completed={task.isCompleted}
                   color={`#${category?.color}`}
                   categoryId={category?.id || ''}
