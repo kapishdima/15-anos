@@ -27,7 +27,7 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
   const options = languages.map((language) => ({
     icon: language.flag,
     label: language.name,
-    value: language.code,
+    value: language.code.toLowerCase(),
   }));
 
   const changeLanguage = (value: string) => {
@@ -35,16 +35,14 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
   };
 
   useEffect(() => {
-    setValue(
-      name,
-      languages.find((language) => location?.country.toLowerCase() === language.code) || 'en',
-    );
-  }, [location, location?.country]);
+    setValue(name, i18n.language);
+  }, [i18n.language]);
 
   return (
     <SelectField
       name={name}
       label={label}
+      defaultSelected={i18n.language}
       placeholder={placeholder}
       options={options}
       onSelect={changeLanguage}

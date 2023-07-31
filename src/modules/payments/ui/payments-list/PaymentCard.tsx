@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+import { useTranslation } from 'react-i18next';
 
 import { Card, useModal } from '@/components';
 import { usePaymentsStore } from '@modules/payments';
+import { getCategoryImage } from '@/app/utils/category-icon';
 
 import { CreatePaymentModal } from '../create-payment/CreatePaymentModal';
 import { createPaymentSchemaValidation } from '../../validations/payments.schema';
-import { TogglePaymentStatus } from '../buttons/TogglePaymentStatus';
-import { Events, EventEmitter } from '@/app/transport/event-bus';
 import { CreatePaymentActions } from '../buttons/CreatePaymentActions';
-import { useTranslation } from 'react-i18next';
-import { getCategoryImage } from '@/modules/tasks/ui/tasks-list/TaskImage';
+import { Translated } from '@/app/utils/locale';
 
 type PaymentCardProps = {
-  image: string;
-  title: string;
   id: string;
+  title: Translated;
   categoryId: string;
   date: Date;
   pay: number;
@@ -30,7 +29,6 @@ type PaymentCardProps = {
 export const PaymentCard: React.FC<PaymentCardProps> = ({
   id,
   title,
-  image,
   categoryId,
   date,
   notes,

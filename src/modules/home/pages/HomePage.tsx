@@ -33,7 +33,6 @@ export const HomePage: React.FC = () => {
       <div className="home-page">
         <PageHeader
           title="Tasks"
-          hint="We have compiled a list of tasks for you. Now you can change or delete them and add your own."
           actions={
             <>
               <CreateTask />

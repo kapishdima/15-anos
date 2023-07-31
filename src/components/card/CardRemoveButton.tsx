@@ -42,6 +42,7 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
           <AngleRightIcon />
         ) : (
           <IconButton
+            variant="error"
             classes="card__remove-button"
             onClick={openConfirmationModal}
             loading={loading}>

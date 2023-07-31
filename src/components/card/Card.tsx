@@ -1,12 +1,14 @@
 import classNames from 'classnames';
 import React, { MouseEvent } from 'react';
 
-import { CheckIcon, AngleRightIcon, IconButton, TrashIcon, Spinner } from '@components/index';
+import { CheckIcon, Spinner } from '@components/index';
+import { Translated, translated } from '@/app/utils/locale';
+
 import { CardRemoveButton } from './CardRemoveButton';
 
 type CardProps = {
   id: string;
-  title: string;
+  title: Translated;
   icon: string;
   color: string;
   completed?: boolean;
@@ -17,7 +19,7 @@ type CardProps = {
   hint?: string;
   showHint?: boolean;
   showDescription?: boolean;
-  description?: string;
+  description?: Translated;
   expires?: boolean;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
@@ -62,7 +64,7 @@ export const Card: React.FC<CardProps> = ({
       })}
       onClick={onOpen}>
       <div className="card__image" onClick={handleIconClick}>
-        <div className="card__icon" style={{ backgroundColor: color }}>
+        <div className="card__icon" style={{ backgroundColor: `#${color}` }}>
           {loading ? <Spinner variant="white" /> : <img src={icon} alt="" />}
         </div>
         <div className="card__checked-icon">
@@ -70,9 +72,11 @@ export const Card: React.FC<CardProps> = ({
         </div>
       </div>
       <div className="card__info">
-        <div className="card__name">{title}</div>
+        <div className="card__name">{translated(title)}</div>
         {hint && showHint && <div className="card__hint">{hint}</div>}
-        {description && showDescription && <div className="card__hint">{description}</div>}
+        {description && showDescription && (
+          <div className="card__hint">{translated(description)}</div>
+        )}
       </div>
       <div className="card-actions">
         {extra}

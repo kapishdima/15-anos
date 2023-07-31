@@ -20,7 +20,7 @@ export const CloseConfirmationModal: React.FC<CloseConfirmationModalProps> = ({
   return (
     <Modal
       id={`${id}_${CLOSE_CONFIRMATION_MODAL}`}
-      title={t('Are you sure you want to exit without saving?')}
+      title={t('Are you sure you want to exit without saving the changes?')}
       hasCloseIconButton={false}
       confirmButtonText={t('Yes')}
       cancelButtonText={t('No')}

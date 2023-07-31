@@ -54,7 +54,7 @@ export const GuestProgress = () => {
       value={value}
       hint={`${confirmedGuestsWithExtraGuest} ${t('guests_confirmations_2')} ${guests} ${t(
         'guests_confirmations_3',
-      )}. ${kidsGuests > 0 ? `${t('pluskids1')} ${kidsGuests}` : ''}`}
+      )} ${kidsGuests > 0 ? `${t('pluskids1')} ${kidsGuests}` : ''}`}
       bgColor={progressBarBgGradient}
       fullWithBar
     />

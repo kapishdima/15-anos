@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useCategoriesStore } from '@/modules/categories';
+import { getCategoryImage } from '@/app/utils/category-icon';
+
 import { SelectField } from './SelectField';
 import { BaseInputProps } from './Input';
-import { useCategoriesStore } from '@/modules/categories';
-import { getCategoryImage } from '@/modules/tasks/ui/tasks-list/TaskImage';
-// import { useFormContext } from 'react-hook-form';
+import { translated } from '@/app/utils/locale';
 
 type CategoriesSelectProps = BaseInputProps & {
   placeholder?: string | null;
@@ -13,10 +14,9 @@ export const CategoriesSelect: React.FC<CategoriesSelectProps> = ({ name, label,
   const categoriesStore = useCategoriesStore();
 
   const options = categoriesStore?.categories.map((category) => {
-    console.log(category.color);
     return {
       value: category.id,
-      label: typeof category.title === 'string' ? category.title : category.title['en'],
+      label: translated(category.title),
       icon: (
         <div className="category-select-icon" style={{ backgroundColor: `#${category.color}` }}>
           <img src={getCategoryImage(category.id as any)} alt="" />
@@ -25,7 +25,7 @@ export const CategoriesSelect: React.FC<CategoriesSelectProps> = ({ name, label,
     };
   });
 
-  if (!options) {
+  if (!options || !options.length) {
     return null;
   }
 

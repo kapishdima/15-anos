@@ -10,8 +10,6 @@ import { TasksDay } from './TasksDay';
 import { TaskViewModal, useTasksStore } from '../../store/tasks';
 import { groupedByDate } from '../../store/tasks.selectors';
 
-import MockTaskIcon from '@image/icons/task-icon.svg';
-
 type TaskGroupProps = {
   title: string;
   tasks: TaskViewModal[];
@@ -36,14 +34,13 @@ export const TaskGroup: React.FC<TaskGroupProps> = ({ title, tasks, hasCardHint 
             {dayTasks.map((task) => {
               const category = getCategoryById(categoriesStore.categories, task.categoryId);
 
-              console.log(task);
               return (
                 <TaskCard
                   key={task.id}
                   id={task.id}
-                  title={typeof task.title === 'string' ? task.title : task.title['en']}
+                  title={task.title}
                   completed={task.isCompleted}
-                  color={`#${category?.color}`}
+                  color={category?.color}
                   categoryId={category?.id || ''}
                   date={task.date}
                   notes={task.notes}

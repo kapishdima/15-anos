@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Tabs, AppLayout, PageHeader } from '@components/index';
 
@@ -40,7 +39,6 @@ export const PaymentsIndex: React.FC = () => {
       <div className="home-page">
         <PageHeader
           title="Payments"
-          hint="We have compiled a list of payments for you. Now you can change or delete them and add your own."
           actions={
             <>
               <CreatePayment />

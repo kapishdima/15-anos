@@ -7,7 +7,6 @@ import { PaymentCard } from './PaymentCard';
 import { PaymentsMonth } from './PaymentsMonth';
 import { PaymentDay } from './PaymentsDay';
 
-import MockTaskIcon from '@image/icons/task-icon.svg';
 import { useTranslation } from 'react-i18next';
 
 type PaymentGroupProps = {
@@ -41,9 +40,8 @@ export const PaymentGroup: React.FC<PaymentGroupProps> = ({ title, payments, has
               return (
                 <PaymentCard
                   id={payment.id}
-                  title={typeof payment.title === 'string' ? payment.title : payment.title['en']}
-                  image={MockTaskIcon}
-                  color={`#${category?.color}`}
+                  title={payment.title}
+                  color={category?.color}
                   categoryId={
                     typeof category?.title === 'string'
                       ? category.title

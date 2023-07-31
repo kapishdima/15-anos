@@ -74,7 +74,7 @@ export const CreatePaymentModal: React.FC<CreatePaymentModalProps> = ({
         <>
           {hasDeleteButton ? (
             <Button variant="error" onClick={onDelete}>
-              Delete payment
+              {t('Delete')}
             </Button>
           ) : null}
           {actions}

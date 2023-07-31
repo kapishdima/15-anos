@@ -6,7 +6,6 @@ import { devtools } from 'zustand/middleware';
 import { getCompletedTasks } from './tasks.selectors';
 
 export type Translations = { [key: string]: string };
-
 export type Statuses = 'done' | 'undone';
 
 export type Task = {
@@ -35,6 +34,14 @@ export type TaskViewModal = {
 
 export type GroupedTasks = { [key: string]: TaskViewModal[] };
 
+export type TaskFormValues = {
+  id: string;
+  title: string;
+  categoryId: string;
+  date: Date;
+  notes: string;
+};
+
 export interface TasksStore {
   tasks: TaskViewModal[];
   tasksForView: TaskViewModal[];
@@ -51,6 +58,8 @@ export interface TasksStore {
   updateTask: (id: string, payload: any) => void;
   addTask: (payload: any) => void;
   changeTaskStatus: (id: string, status: 'undone' | 'done') => void;
+  storeTask: (task: TaskFormValues) => void;
+  getStoredTask: () => TaskFormValues;
 }
 
 export const useTasksStore = create<TasksStore>()(
@@ -147,6 +156,19 @@ export const useTasksStore = create<TasksStore>()(
             console.error(error);
             set(() => ({ loading: false }));
           }
+        },
+
+        storeTask: (task: TaskFormValues) => {
+          window.localStorage.setItem('task', JSON.stringify(task));
+        },
+        getStoredTask: () => {
+          const taks = window.localStorage.getItem('task');
+
+          if (!taks) {
+            return null;
+          }
+
+          return JSON.parse(taks);
         },
       }),
       {

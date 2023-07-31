@@ -12,6 +12,8 @@ import { WeddingProfileIndex } from '@/modules/administrative/wedding-profile';
 import { RegionSettingsIndex } from '@/modules/administrative/region-settings';
 import { DesignSettingsIndex } from '@/modules/administrative/design-settings';
 
+import { SignleTaskPage } from '@/modules/tasks/pages/SignleTaskPage';
+
 export const router = createBrowserRouter([
   {
     path: AppRoutes.LOGIN,
@@ -26,6 +28,14 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <HomePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.SINGLE_TASK,
+    element: (
+      <ProtectedRoute>
+        <SignleTaskPage />
       </ProtectedRoute>
     ),
   },

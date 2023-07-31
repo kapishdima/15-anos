@@ -72,7 +72,7 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         <>
           {hasDeleteButton ? (
             <Button variant="error" onClick={onDelete}>
-              Delete task
+              {t('Delete')}
             </Button>
           ) : null}
           {actions}

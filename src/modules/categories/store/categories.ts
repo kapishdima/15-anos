@@ -1,18 +1,16 @@
 import { create } from 'zustand';
-import { getCategories } from '../api/categories.api';
-import { EVENT_DETAILS } from '../../../app/constants/local-storage-keys';
 import { persist } from 'zustand/middleware';
-
-export type Translations = { [key: string]: string };
+import { Translated } from '@/app/utils/locale';
+import { getCategories } from '../api/categories.api';
 
 export type Category = {
   id: string;
   color: string;
   icon: string;
-  title: Translations;
+  title: Translated;
 };
 
-interface CategoriesStore {
+export interface CategoriesStore {
   categories: Category[];
   loading: boolean;
   fetchCategories: () => Promise<void>;
@@ -28,17 +26,15 @@ export const useCategoriesStore = create<CategoriesStore>()(
       categories: [],
       loading: false,
       fetchCategories: async () => {
-        const cachedTasks = get().categories;
-        if (cachedTasks && cachedTasks.length) {
-          return;
-        }
-
         set(() => ({
           loading: true,
         }));
-        const eventDetails = JSON.parse(window.localStorage.getItem(EVENT_DETAILS) || '{}');
-        const event = `event${eventDetails.eventNumber}`;
-        const categories = await getCategories(event);
+
+        const cachedCategories = get().categories;
+        const hasCacheCategories = Boolean(cachedCategories && cachedCategories.length);
+        const categories = hasCacheCategories ? cachedCategories : await getCategories();
+
+        console.log(categories);
 
         set(() => ({ categories, loading: false }));
       },

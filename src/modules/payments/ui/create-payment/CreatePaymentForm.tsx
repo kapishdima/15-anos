@@ -24,7 +24,7 @@ export const CreatePaymentForm = () => {
       <CurrencyField name="paid" label={t('Paid')} />
       <CategoriesSelect
         name="categoryId"
-        label={t('Task category')}
+        label={t('Select category')}
         placeholder={t('Select category')}
       />
       <TextAreaField name="notes" label={t('Notes')} placeholder={t('Enter notes')} />

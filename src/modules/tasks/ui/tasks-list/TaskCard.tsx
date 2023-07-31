@@ -1,17 +1,20 @@
 import React from 'react';
 
-import { Card, useModal } from '@/components';
-import { useTasksStore } from '@modules/tasks';
-
-import { CreateTaskModal } from '../create-task/CreateTaskModal';
 import isToday from 'date-fns/isToday';
 import isPast from 'date-fns/isPast';
+
+import { Card, useModal } from '@/components';
+import { useTasksStore } from '@modules/tasks';
+import { getCategoryImage } from '@/app/utils/category-icon';
+
+import { CreateTaskModal } from '../create-task/CreateTaskModal';
 import { CreateTaskActions } from '../buttons/CreateTaskActions/CreateTaskActions';
-import { getCategoryImage } from './TaskImage';
+import { Translated, translated } from '@/app/utils/locale';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '@/app/router/routes';
 
 type TaskCardProps = {
-  // image: string;
-  title: string;
+  title: Translated;
   id: string;
   categoryId: string;
   date: Date;
@@ -25,19 +28,19 @@ type TaskCardProps = {
 export const TaskCard: React.FC<TaskCardProps> = ({
   id,
   title,
-  // image,
   completed,
-  categoryId,
   date,
   notes,
   isRemoval,
   hint,
+  categoryId = '',
   color = '#db5b78',
 }) => {
   const updateTask = useTasksStore((state) => state.updateTask);
   const removeTask = useTasksStore((state) => state.removeTask);
   const fetchTasks = useTasksStore((state) => state.fetchTasks);
   const changeTaskStatus = useTasksStore((state) => state.changeTaskStatus);
+  const storeTask = useTasksStore((state) => state.storeTask);
 
   const loading = useTasksStore((state) => state.loading);
   const taskInProcessing = useTasksStore((state) => state.taskInProcessing);
@@ -69,6 +72,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     await changeTaskStatus(id, status);
     close(TASK_MODAL_ID);
     fetchTasks(/*force*/ true);
+  };
+
+  const beforeOpenTask = () => {
+    storeTask({ id, title: translated(title), categoryId, date, notes });
   };
 
   return (
