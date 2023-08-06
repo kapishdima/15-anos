@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const SCROLL_OFFSET = 200;
 
-export const useScroll = (scrollArea: React.MutableRefObject<HTMLDivElement | null>) => {
+export const useScroll = (
+  scrollArea: React.MutableRefObject<HTMLDivElement | null>
+) => {
   const [position, setPosition] = useState(0);
 
   if (!scrollArea.current) {
@@ -16,7 +18,7 @@ export const useScroll = (scrollArea: React.MutableRefObject<HTMLDivElement | nu
 
     scrollArea.current.scrollTo({
       left: value,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -46,11 +48,8 @@ export const useScroll = (scrollArea: React.MutableRefObject<HTMLDivElement | nu
     setPosition(scrollLeft);
   };
 
-  console.log('p', position);
-  console.log(
-    scrollArea.current && scrollArea.current.getBoundingClientRect().width - SCROLL_OFFSET,
-  );
-  const hasNext = position < scrollArea.current.getBoundingClientRect().width - SCROLL_OFFSET;
+  const hasNext =
+    position < scrollArea.current.getBoundingClientRect().width - SCROLL_OFFSET;
   const hasPrev = position !== 0;
 
   return {

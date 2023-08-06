@@ -1,34 +1,34 @@
-import { Collections } from '@app/constants/collections';
+import { Collections } from "@app/constants/collections";
 import {
   getSnapshotCollection,
   getSnapshotDocument,
   pushData,
   toDate,
   deleteDocument,
-} from '@modules/firebase/firestore';
+} from "@modules/firebase/firestore";
 
 import {
   Product,
   ProductTypes,
   ProductViewModal,
   ProductsParameters,
-} from '../store/purcheses.types';
-import { orderBy, where } from 'firebase/firestore';
-import { getEventId } from '@/modules/event';
-import { upload } from '@/modules/firebase/firestorage';
+} from "../store/purcheses.types";
+import { orderBy, where } from "firebase/firestore";
+import { getEventId } from "@/modules/event";
+import { upload } from "@/modules/firebase/firestorage";
 
 export const getProductsByCategory = async (
   id: string,
-  type: ProductTypes,
+  type: ProductTypes
 ): Promise<ProductViewModal[]> => {
   const shoppingProducts = await getSnapshotCollection<Product[]>(
     type,
     /*params*/ [Collections.PRODUCTS_LIST],
     [
-      where('group', '==', id),
-      where('market', 'array-contains-any', ['ww']),
-      orderBy('popularity', 'desc'),
-    ],
+      where("group", "==", id),
+      where("market", "array-contains-any", ["ww"]),
+      orderBy("popularity", "desc"),
+    ]
   );
 
   if (!shoppingProducts) {
@@ -37,17 +37,23 @@ export const getProductsByCategory = async (
 
   return shoppingProducts.map((product) => ({
     ...product,
-
     addedData: new Date(toDate(product.addedDate)),
   }));
 };
 
 export const getProductsParameters = async (): Promise<ProductsParameters> => {
-  const productsParameters = await getSnapshotDocument(Collections.PRODUCTS_PARAMETERS);
+  const eventId = getEventId();
+  const productsParameters = await getSnapshotDocument(Collections.EVENTS, [
+    eventId,
+    Collections.PRODUCTS_PARAMETERS,
+  ]);
   return productsParameters;
 };
 
-export const addManualProduct = async (type: ProductTypes, productData: any): Promise<void> => {
+export const addManualProduct = async (
+  type: ProductTypes,
+  productData: any
+): Promise<void> => {
   const eventId = getEventId();
 
   // const image = await upload(productData.image);
@@ -61,11 +67,14 @@ export const addManualProduct = async (type: ProductTypes, productData: any): Pr
   return pushData(
     Collections.EVENTS,
     [eventId, type, productPayloadData.id || productPayloadData.title],
-    productPayloadData,
+    productPayloadData
   );
 };
 
-export const deleteProduct = (id: string, type: ProductTypes): Promise<void> => {
+export const deleteProduct = (
+  id: string,
+  type: ProductTypes
+): Promise<void> => {
   const eventId = getEventId();
 
   return deleteDocument(Collections.EVENTS, [eventId, type, id]);

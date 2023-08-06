@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
-import { ProductsParameters } from './purcheses.types';
-import { getProductsParameters } from '../api/products.api';
+import { ProductsParameters } from "./purcheses.types";
+import { getProductsParameters } from "../api/products.api";
 
 export interface ProductsParametersStore {
   parameters: ProductsParameters | null;
@@ -26,7 +26,9 @@ export const useProductParameters = create<ProductsParametersStore>()(
           const hasCachedParameters = Boolean(cacheProducts);
 
           const products =
-            hasCachedParameters && !force ? cacheProducts : await getProductsParameters();
+            hasCachedParameters && !force
+              ? cacheProducts
+              : await getProductsParameters();
 
           set(() => ({
             products,
@@ -35,11 +37,11 @@ export const useProductParameters = create<ProductsParametersStore>()(
         },
       }),
       {
-        name: 'products_parameters',
+        name: "products_parameters",
         partialize: (state) => ({
-          products: state.parameters,
+          parameters: state.parameters,
         }),
-      },
-    ),
-  ),
+      }
+    )
+  )
 );

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { EventEmitter, Events } from '@/app/transport/event-bus';
-import { Button } from '@/components';
+import React, { useEffect, useState } from "react";
+import { EventEmitter, Events } from "@/app/transport/event-bus";
+import { Button } from "@/components";
 
-import { ToggleTaskStatus } from '../ToggleTaskStatus/ToggleTaskStatus';
+import { useTranslation } from "react-i18next";
+
+import { ToggleTaskStatus } from "../ToggleTaskStatus/ToggleTaskStatus";
 
 type CreateTaskActionsProps = {
   modalId: string;
@@ -15,6 +17,7 @@ export const CreateTaskActions: React.FC<CreateTaskActionsProps> = ({
   isCompleted,
   updateTaskStatus,
 }) => {
+  const { t } = useTranslation();
   const [showConfirmButton, setShowConfirmButton] = useState(false);
 
   useEffect(() => {
@@ -27,15 +30,18 @@ export const CreateTaskActions: React.FC<CreateTaskActionsProps> = ({
   return (
     <>
       {!showConfirmButton ? (
-        <ToggleTaskStatus onClick={updateTaskStatus} isCompleted={Boolean(isCompleted)} />
+        <ToggleTaskStatus
+          onClick={updateTaskStatus}
+          isCompleted={Boolean(isCompleted)}
+        />
       ) : null}
       {showConfirmButton ? (
         <Button
           aria-label="Close this dialog window"
           variant="success"
-          // loading={loading}
-          type="submit">
-          Confirm
+          type="submit"
+        >
+          {t("Confirm")}
         </Button>
       ) : null}
     </>

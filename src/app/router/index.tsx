@@ -1,18 +1,25 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from "react-router-dom";
 
-import { ProtectedRoute } from './ProtectedRoute';
-import { AppRoutes } from './routes';
+import { ProtectedRoute } from "./ProtectedRoute";
+import { AppRoutes } from "./routes";
 
-import { CreateProfilePage, LoginPage } from '@modules/auth';
-import { HomePage } from '@modules/home/';
-import { PaymentsIndex } from '@/modules/payments';
-import { GuestsIndex } from '@/modules/guests';
-import { PurchaseBestIdeas, PurchasesIndex, SinglePurchasePage } from '@/modules/purchases';
-import { WeddingProfileIndex } from '@/modules/administrative/wedding-profile';
-import { RegionSettingsIndex } from '@/modules/administrative/region-settings';
-import { DesignSettingsIndex } from '@/modules/administrative/design-settings';
+import { CreateProfilePage, LoginPage } from "@modules/auth";
+import { HomePage } from "@modules/home/";
+import { PaymentsIndex } from "@/modules/payments";
+import { GuestsIndex } from "@/modules/guests";
+import {
+  PurchaseBestIdeas,
+  PurchasesIndex,
+  SinglePurchasePage,
+  ManualProductList,
+} from "@/modules/purchases";
 
-import { SignleTaskPage } from '@/modules/tasks/pages/SignleTaskPage';
+import { WeddingProfileIndex } from "@/modules/administrative/wedding-profile";
+import { RegionSettingsIndex } from "@/modules/administrative/region-settings";
+import { DesignSettingsIndex } from "@/modules/administrative/design-settings";
+
+import { SignleTaskPage } from "@/modules/tasks/pages/SignleTaskPage";
+import { PostsIndex, SinglePost } from "@/modules/posts";
 
 export const router = createBrowserRouter([
   {
@@ -71,12 +78,19 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-
   {
     path: `${AppRoutes.PURCHASES_BEST_IDEAS}`,
     element: (
       <ProtectedRoute>
         <SinglePurchasePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.MANUAL_PURCHAES_LIST}`,
+    element: (
+      <ProtectedRoute>
+        <ManualProductList />
       </ProtectedRoute>
     ),
   },
@@ -101,6 +115,22 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <DesignSettingsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.POSTS}`,
+    element: (
+      <ProtectedRoute>
+        <PostsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.POST}`,
+    element: (
+      <ProtectedRoute>
+        <SinglePost />
       </ProtectedRoute>
     ),
   },

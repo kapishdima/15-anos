@@ -31,16 +31,32 @@
       object-fit: contain;
     }
 
-    .purchase-like {
+    .purchase-actions {
       position: absolute;
+      z-index: 2;
       right: 5%;
       top: 5%;
+
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+    }
+
+    .purchase-like.liked {
+      will-change: transform;
+      animation: like 400ms ease both;
+
+      svg {
+        path {
+          animation: likeFill 400ms ease both;
+        }
+      }
     }
 
     .purchase-share {
-      position: absolute;
-      right: 5%;
-      top: 12%;
+      // position: absolute;
+      // right: 5%;
+      // top: 12%;
 
       svg {
         path {
@@ -239,6 +255,13 @@
           }
         }
       }
+    }
+  }
+
+  .purchase-image-slider {
+    height: 100%;
+    .swiper {
+      height: 100%;
     }
   }
 }

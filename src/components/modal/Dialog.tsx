@@ -1,13 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 
-import Micromodal from 'micromodal';
-import { Button, Form, useClickOutside, useMediaQuery, useModal } from '@components/index';
-import { useTranslation } from 'react-i18next';
-import { FieldValues, UseFormReset } from 'react-hook-form';
+import Micromodal from "micromodal";
+import {
+  Button,
+  Form,
+  useClickOutside,
+  useMediaQuery,
+  useModal,
+} from "@components/index";
+import { useTranslation } from "react-i18next";
+import { FieldValues, UseFormReset } from "react-hook-form";
 
-import { CLOSE_CONFIRMATION_MODAL, CloseConfirmationModal } from './CloseConfirmationModal';
-import { EventEmitter, Events } from '@/app/transport/event-bus';
+import {
+  CLOSE_CONFIRMATION_MODAL,
+  CloseConfirmationModal,
+} from "./CloseConfirmationModal";
+import { EventEmitter, Events } from "@/app/transport/event-bus";
 
 type ModalProps = React.PropsWithChildren & {
   id: string;
@@ -45,7 +54,7 @@ export const Dialog: React.FC<ModalProps> = ({
   const { open, close } = useModal();
 
   const modalRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const [shouldCloseConfirmation, setShouldConfirmation] = useState(false);
 
@@ -90,9 +99,10 @@ export const Dialog: React.FC<ModalProps> = ({
               aria-modal="true"
               aria-labelledby={`${id}-title`}
               style={{
-                minHeight: !isMobile ? minHeight : '',
-                minWidth: !isMobile ? minWidth : '',
-              }}>
+                minHeight: !isMobile ? minHeight : "",
+                minWidth: !isMobile ? minWidth : "",
+              }}
+            >
               <div className="">
                 <header className="modal__header">
                   <h2 className="modal__title" id={`${id}-title`}>
@@ -101,15 +111,28 @@ export const Dialog: React.FC<ModalProps> = ({
                   <button
                     className="modal__close"
                     aria-label="Close modal"
-                    onClick={handleClose}></button>
+                    onClick={handleClose}
+                  ></button>
                 </header>
-                <Form id={id} onSubmit={onSubmit} initialValues={initialValues} schema={validation}>
-                  <main className="modal__content dialog__content" id={`${id}-content`}>
+                <Form
+                  id={id}
+                  onSubmit={onSubmit}
+                  initialValues={initialValues}
+                  schema={validation}
+                >
+                  <main
+                    className="modal__content dialog__content"
+                    id={`${id}-content`}
+                  >
                     {children}
                   </main>
                   <footer className="modal__footer">
-                    <Button onClick={handleClose} appearance="ghost" variant="error">
-                      {cancelButtonText || t('Cancel')}
+                    <Button
+                      onClick={handleClose}
+                      appearance="ghost"
+                      variant="error"
+                    >
+                      {cancelButtonText || t("Cancel")}
                     </Button>
                     {actions}
                     {hasConfirmButton && (
@@ -117,8 +140,9 @@ export const Dialog: React.FC<ModalProps> = ({
                         aria-label="Close this dialog window"
                         variant="success"
                         loading={loading}
-                        type="submit">
-                        {confirmButtonText || t('Confirm')}
+                        type="submit"
+                      >
+                        {confirmButtonText || t("Confirm")}
                       </Button>
                     )}
                   </footer>
@@ -127,7 +151,7 @@ export const Dialog: React.FC<ModalProps> = ({
             </div>
           </div>
         </div>,
-        document.body,
+        document.body
       )}
       <CloseConfirmationModal
         id={id}

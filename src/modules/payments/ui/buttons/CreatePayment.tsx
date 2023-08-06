@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { PlusIcon } from '@components/icons';
-import { IconButton, useModal } from '@components/index';
+import { PlusIcon } from "@components/icons";
+import { AddFilledIcon, IconButton, useModal } from "@components/index";
 
-import { Protected, RoleActions } from '@modules/roles';
-import { CreatePaymentModal } from '../create-payment/CreatePaymentModal';
-import { usePaymentsStore } from '../../store/payments';
-import { createPaymentSchemaValidation } from '../../validations/payments.schema';
+import { Protected, RoleActions } from "@modules/roles";
+import { CreatePaymentModal } from "../create-payment/CreatePaymentModal";
+import { usePaymentsStore } from "../../store/payments";
+import { createPaymentSchemaValidation } from "../../validations/payments.schema";
 
-const CREATE_PAYMENT_MODAL = 'create_payment';
+const CREATE_PAYMENT_MODAL = "create_payment";
 
 export const CreatePayment: React.FC = () => {
   const { open, close } = useModal();
@@ -30,7 +30,7 @@ export const CreatePayment: React.FC = () => {
   return (
     <Protected action={RoleActions.CREATE_TASK}>
       <IconButton appearance="filled" variant="white" onClick={onClick}>
-        <PlusIcon />
+        <AddFilledIcon />
       </IconButton>
       <CreatePaymentModal
         id={CREATE_PAYMENT_MODAL}

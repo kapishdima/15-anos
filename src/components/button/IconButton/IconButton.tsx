@@ -1,10 +1,11 @@
-import { Spinner } from '@/components';
-import classNames from 'classnames';
-import React, { MouseEvent, PropsWithChildren } from 'react';
+import { Spinner } from "@/components";
+import { SpinnerVariant } from "@/components/layout/Loader/Spinner";
+import classNames from "classnames";
+import React, { MouseEvent, PropsWithChildren } from "react";
 
-type IconButtonVariants = 'success' | 'primary' | 'error' | 'white';
-type IconButtonApearence = 'filled' | 'outline';
-type IconButtonSizes = 'md' | 'lg';
+type IconButtonVariants = "success" | "primary" | "error" | "white";
+type IconButtonApearence = "filled" | "outline";
+type IconButtonSizes = "md" | "lg";
 
 type IconButtonProps = PropsWithChildren & {
   onClick?: () => void;
@@ -13,6 +14,7 @@ type IconButtonProps = PropsWithChildren & {
   size?: IconButtonSizes;
   classes?: string;
   loading?: boolean;
+  loadingVariant?: SpinnerVariant;
 };
 
 export const IconButton: React.FC<IconButtonProps> = ({
@@ -20,9 +22,10 @@ export const IconButton: React.FC<IconButtonProps> = ({
   children,
   classes,
   loading,
-  variant = 'primary',
-  appearance = 'filled',
-  size = 'md',
+  variant = "primary",
+  appearance = "filled",
+  loadingVariant = "white",
+  size = "md",
 }) => {
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -35,9 +38,10 @@ export const IconButton: React.FC<IconButtonProps> = ({
 
   return (
     <button
-      className={classNames('icon-button', variant, appearance, size, classes)}
-      onClick={handleClick}>
-      {loading ? <Spinner variant="white" /> : children}
+      className={classNames("icon-button", variant, appearance, size, classes)}
+      onClick={handleClick}
+    >
+      {loading ? <Spinner variant={loadingVariant} /> : children}
     </button>
   );
 };

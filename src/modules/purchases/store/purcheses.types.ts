@@ -1,6 +1,10 @@
-import { Timestamp } from 'firebase/firestore';
+import { Timestamp } from "firebase/firestore";
 
 export type Product = {
+  "0-favourites": number;
+  "0-purchased": number;
+  "0-views": number;
+  "0-visits": number;
   id: string;
   favourites: number;
   views: number;
@@ -53,4 +57,4 @@ export type ProductsParameters = {
   updates: any;
 };
 
-export type ProductTypes = 'shopping' | 'registry';
+export type ProductTypes = "shopping" | "registry";

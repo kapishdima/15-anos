@@ -1,0 +1,30 @@
+@import "./ui/post-card/post-card.scss";
+
+.post-page {
+  margin-top: 8%;
+}
+
+.post-content {
+  font-family: $anevir-ff;
+  color: $darkColor;
+
+  margin-top: 5%;
+
+  h2 {
+    font-family: $recoleta-ff;
+    color: $darkColor;
+
+    margin-bottom: 2%;
+  }
+
+  ul {
+    margin-inline-start: 2%;
+    li {
+      margin-bottom: 2%;
+    }
+  }
+
+  img {
+    margin: 2% 0;
+  }
+}

@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { IconButton, PlusIcon, useModal } from '@/components';
-import { Protected, RoleActions } from '@/modules/roles';
+import { AddFilledIcon, IconButton, useModal } from "@/components";
+import { Protected, RoleActions } from "@/modules/roles";
 
-import { CreateGuestModal } from '../create-guest/CreateGuestModal';
-import { useGuestsStore } from '../../store/guests';
-import { createGuestSchemaValidation } from '../../validation/guests.schema';
+import { CreateGuestModal } from "../create-guest/CreateGuestModal";
+import { useGuestsStore } from "../../store/guests";
+import { createGuestSchemaValidation } from "../../validation/guests.schema";
 
-const CREATE_GUEST_MODAL = 'create_guest';
+const CREATE_GUEST_MODAL = "create_guest";
 
 export const CreateGuest: React.FC = () => {
   const { open, close } = useModal();
@@ -28,7 +28,7 @@ export const CreateGuest: React.FC = () => {
   return (
     <Protected action={RoleActions.CREATE_GUEST}>
       <IconButton appearance="filled" variant="white" onClick={onClick}>
-        <PlusIcon />
+        <AddFilledIcon />
       </IconButton>
       <CreateGuestModal
         id={CREATE_GUEST_MODAL}

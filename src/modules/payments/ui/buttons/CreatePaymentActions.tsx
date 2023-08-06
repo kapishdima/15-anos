@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { EventEmitter, Events } from '@/app/transport/event-bus';
-import { TogglePaymentStatus } from './TogglePaymentStatus';
-import { Button } from '@/components';
+import React, { useEffect, useState } from "react";
+import { EventEmitter, Events } from "@/app/transport/event-bus";
+import { Button } from "@/components";
+
+import { useTranslation } from "react-i18next";
+
+import { TogglePaymentStatus } from "./TogglePaymentStatus";
 
 type CreatePaymentActionsProps = {
   modalId: string;
@@ -14,6 +17,7 @@ export const CreatePaymentActions: React.FC<CreatePaymentActionsProps> = ({
   isCompleted,
   updatePaymentStatus,
 }) => {
+  const { t } = useTranslation();
   const [showConfirmButton, setShowConfirmButton] = useState(false);
 
   useEffect(() => {
@@ -26,15 +30,18 @@ export const CreatePaymentActions: React.FC<CreatePaymentActionsProps> = ({
   return (
     <>
       {!showConfirmButton ? (
-        <TogglePaymentStatus onClick={updatePaymentStatus} isCompleted={Boolean(isCompleted)} />
+        <TogglePaymentStatus
+          onClick={updatePaymentStatus}
+          isCompleted={Boolean(isCompleted)}
+        />
       ) : null}
       {showConfirmButton ? (
         <Button
           aria-label="Close this dialog window"
           variant="success"
-          // loading={loading}
-          type="submit">
-          Confirm
+          type="submit"
+        >
+          {t("Confirm")}
         </Button>
       ) : null}
     </>

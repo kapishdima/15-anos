@@ -1,15 +1,15 @@
-import React from 'react';
-import { Card, useModal } from '@/components';
-import { Guest, GuestStatuses, useGuestsStore } from '../../store/guests';
+import React from "react";
+import { Card, useModal } from "@/components";
+import { Guest, GuestStatuses, useGuestsStore } from "../../store/guests";
 
-import QuestionIcon from '@image/icons/question.svg';
-import ConfirmedIcon from '@image/icons/confirmed.svg';
-import InvitedIcon from '@image/icons/invited.svg';
-import WontComeIcon from '@image/icons/wont_come.svg';
+import QuestionIcon from "@image/icons/question.svg";
+import ConfirmedIcon from "@image/icons/confirmed.svg";
+import InvitedIcon from "@image/icons/invited.svg";
+import WontComeIcon from "@image/icons/wont_come.svg";
 
-import { GuestsStatus } from '../buttons/GuestStatus';
-import { CreateGuestModal } from '../create-guest/CreateGuestModal';
-import { createGuestSchemaValidation } from '../../validation/guests.schema';
+import { GuestsStatus } from "../buttons/GuestStatus";
+import { CreateGuestModal } from "../create-guest/CreateGuestModal";
+import { createGuestSchemaValidation } from "../../validation/guests.schema";
 
 type GuestCardProps = Guest & {};
 
@@ -23,12 +23,12 @@ const statusesIcons = {
 };
 
 const statusColors = {
-  none: '#aeaba8',
-  confirmed: '#2ecc71',
-  confirmedGuest: '#2ecc71',
-  invited: '#f1c40f',
-  declined: '#e74c3c',
-  declinedGuest: '#e74c3c',
+  none: "aeaba8",
+  confirmed: "2ecc71",
+  confirmedGuest: "2ecc71",
+  invited: "f1c40f",
+  declined: "e74c3c",
+  declinedGuest: "e74c3c",
 };
 
 export const GuestCard: React.FC<GuestCardProps> = ({
@@ -43,9 +43,10 @@ export const GuestCard: React.FC<GuestCardProps> = ({
 }) => {
   const GUEST_MODAL_ID = `guest-modal-${id}`;
 
-  const guestsTitle = guests > 0 ? ` +${guests}` : '';
-  const kidsTitle = kids > 0 ? ` +${kids} (kids)` : '';
-  const cardTitle = name + guestsTitle + (guestsTitle && kidsTitle ? ', ' : '') + kidsTitle;
+  const guestsTitle = guests > 0 ? ` +${guests}` : "";
+  const kidsTitle = kids > 0 ? ` +${kids} (kids)` : "";
+  const cardTitle =
+    name + guestsTitle + (guestsTitle && kidsTitle ? ", " : "") + kidsTitle;
 
   const { open, close } = useModal();
 
@@ -94,7 +95,15 @@ export const GuestCard: React.FC<GuestCardProps> = ({
       <CreateGuestModal
         id={GUEST_MODAL_ID}
         guestId={id}
-        initialValues={{ name, status, guests, kids, nameGuest, guestsGuest, kidsGuest }}
+        initialValues={{
+          name,
+          status,
+          guests,
+          kids,
+          nameGuest,
+          guestsGuest,
+          kidsGuest,
+        }}
         onSubmit={onUpdateGuest}
         loading={loading}
         validation={createGuestSchemaValidation}

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { PlusIcon } from '@components/icons';
-import { IconButton, useModal } from '@components/index';
+import { PlusIcon } from "@components/icons";
+import { AddFilledIcon, IconButton, useModal } from "@components/index";
 
-import { Protected, RoleActions } from '@modules/roles';
-import { CreateTaskModal } from '../../create-task/CreateTaskModal';
-import { useTasksStore } from '@/modules/tasks/store/tasks';
-import { createTaskSchemaValidation } from '@/modules/tasks/validations/task.schema';
+import { Protected, RoleActions } from "@modules/roles";
+import { CreateTaskModal } from "../../create-task/CreateTaskModal";
+import { useTasksStore } from "@/modules/tasks/store/tasks";
+import { createTaskSchemaValidation } from "@/modules/tasks/validations/task.schema";
 
-const CREATE_TASK_MODAL = 'create_task';
+const CREATE_TASK_MODAL = "create_task";
 
 export const CreateTask: React.FC = () => {
   const { open, close } = useModal();
@@ -30,7 +30,7 @@ export const CreateTask: React.FC = () => {
   return (
     <Protected action={RoleActions.CREATE_TASK}>
       <IconButton appearance="filled" variant="white" onClick={onClick}>
-        <PlusIcon />
+        <AddFilledIcon />
       </IconButton>
       <CreateTaskModal
         id={CREATE_TASK_MODAL}

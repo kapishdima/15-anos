@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { logout } from '@modules/firebase/auth';
-import { AppRoutes } from '@app/router/routes';
-import { LogoutIcon } from '@/components';
+import { logout } from "@modules/firebase/auth";
+import { AppRoutes } from "@app/router/routes";
+import { LogoutIcon } from "@/components";
 
 export const Logout: React.FC = () => {
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ export const Logout: React.FC = () => {
   };
   return (
     <div className="logout" onClick={onClick}>
-      Logout
       <LogoutIcon />
+      Logout
     </div>
   );
 };

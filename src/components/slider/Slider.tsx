@@ -1,13 +1,16 @@
-import React, { PropsWithChildren } from 'react';
-import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react';
+import React, { PropsWithChildren } from "react";
+import { Swiper, SwiperSlide, SwiperProps } from "swiper/react";
 
-import 'swiper/css';
+import "swiper/css";
 
 type SliderProps = PropsWithChildren & SwiperProps;
 
-export const Slider: React.FC<SliderProps> = ({ children, ...sliderOptions }) => {
+export const Slider: React.FC<SliderProps> = ({
+  children,
+  ...sliderOptions
+}) => {
   return (
-    <Swiper {...sliderOptions} className="slider">
+    <Swiper className="slider" {...sliderOptions}>
       {React.Children.map(children, (child) => (
         <SwiperSlide className="slider-slide">{child}</SwiperSlide>
       ))}

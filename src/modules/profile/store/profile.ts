@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
-import { saveProfile, getProfileDetails } from '../api/profile.api';
+import { saveProfile, getProfileDetails } from "../../profile/api/profile.api";
 
 export type ProfileDetails = {
   country: string;
@@ -32,7 +32,10 @@ export const useProfileStore = create<ProfileStore>()(
 
           const hasCachedRegion = Boolean(cacheProfile);
 
-          const profile = hasCachedRegion && !force ? cacheProfile : await getProfileDetails();
+          const profile =
+            hasCachedRegion && !force
+              ? cacheProfile
+              : await getProfileDetails();
 
           set(() => ({
             profile,
@@ -51,11 +54,11 @@ export const useProfileStore = create<ProfileStore>()(
         },
       }),
       {
-        name: 'profile_details',
+        name: "profile_details",
         partialize: (state) => ({
-          products: state.profile,
+          profile: state.profile,
         }),
-      },
-    ),
-  ),
+      }
+    )
+  )
 );
