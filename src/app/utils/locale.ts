@@ -7,5 +7,7 @@ export const translated = (text: string | Translated) => {
     return text;
   }
 
+  console.log("[i18n.language]:", i18n.language);
+  console.log("[translation]:", text[i18n.language || "en"]);
   return text[i18n.language || "en"];
 };
