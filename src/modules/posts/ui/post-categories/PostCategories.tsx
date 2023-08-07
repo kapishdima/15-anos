@@ -15,7 +15,9 @@ export const PostCategories: React.FC = () => {
   const storedTags = searchParams.get("tags");
 
   const onTagClick = (tag: string) => {
-    let tags = storedTags?.split(",") || [];
+    let tags = (storedTags?.split(",") || []).filter((tag) =>
+      Boolean(tag.length)
+    );
 
     if (tags.includes(tag)) {
       tags = tags.filter((tagId) => tagId !== tag);
@@ -23,7 +25,7 @@ export const PostCategories: React.FC = () => {
       tags.push(tag);
     }
 
-    if (tag === "All") {
+    if (tag === "All" || !tags.length) {
       searchParams.delete("tags");
     } else {
       searchParams.set("tags", tags.join(","));
