@@ -25,6 +25,8 @@ export interface PostsStore {
   savePost: (post: Post) => void;
   clearPost: () => void;
   getPost: () => Post;
+  setPostReaded: (postId: string) => void;
+  getPostReaded: () => string[];
 }
 
 export const usePostsStore = create<PostsStore>()(
@@ -146,6 +148,22 @@ export const usePostsStore = create<PostsStore>()(
           }
 
           return JSON.parse(post);
+        },
+        setPostReaded: (postId: string) => {
+          const readedPosts = JSON.parse(
+            window.localStorage.getItem("readed-posts") || "[]"
+          );
+          window.localStorage.setItem(
+            "readed-posts",
+            JSON.stringify([...readedPosts, postId])
+          );
+        },
+        getPostReaded: () => {
+          const readedPosts = JSON.parse(
+            window.localStorage.getItem("readed-posts") || "[]"
+          );
+
+          return readedPosts;
         },
       }),
       {
