@@ -13,4 +13,7 @@ export enum AppRoutes {
   DESIGN_SETTINGS = "/design-settings",
   POSTS = "/posts",
   POST = "/post",
+  VENDORS = "/vendors",
+  SEARCH_VENDORS = "/vendors/search",
+  SINGLE_VENDOR = "/vendor",
 }

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 
-import Micromodal from 'micromodal';
-import { Button } from '@components/index';
-import { useTranslation } from 'react-i18next';
+import Micromodal from "micromodal";
+import { Button } from "@components/index";
+import { useTranslation } from "react-i18next";
 
 type ModalProps = React.PropsWithChildren & {
   id: string;
@@ -17,12 +17,15 @@ type ModalProps = React.PropsWithChildren & {
   loading?: boolean;
   onConfirm?: () => void;
   onCancel?: () => void;
+  hasFooter?: boolean;
   hasCloseIconButton?: boolean;
+  description?: string;
 };
 
 export const Modal: React.FC<ModalProps> = ({
   id,
   title,
+  description,
   children,
   confirmButtonText,
   cancelButtonText,
@@ -33,6 +36,7 @@ export const Modal: React.FC<ModalProps> = ({
   loading,
   onCancel,
   onConfirm,
+  hasFooter = true,
   hasCloseIconButton = true,
 }) => {
   const { t } = useTranslation();
@@ -49,17 +53,26 @@ export const Modal: React.FC<ModalProps> = ({
           role="dialog"
           aria-modal="true"
           aria-labelledby={`${id}-title`}
-          style={{ minHeight, minWidth }}>
+          style={{ minHeight, minWidth }}
+        >
           <div className="">
             <header className="modal__header">
-              <h2 className="modal__title" id={`${id}-title`}>
-                {title}
-              </h2>
+              <div className="modal__header-text">
+                {title && (
+                  <h2 className="modal__title" id={`${id}-title`}>
+                    {title}
+                  </h2>
+                )}
+                {description && (
+                  <p className="modal__description">{description}</p>
+                )}
+              </div>
               {hasCloseIconButton && (
                 <button
                   className="modal__close"
                   aria-label="Close modal"
-                  data-micromodal-close></button>
+                  data-micromodal-close
+                ></button>
               )}
             </header>
             {children && (
@@ -67,26 +80,30 @@ export const Modal: React.FC<ModalProps> = ({
                 {children}
               </main>
             )}
-            <footer className="modal__footer">
-              <Button
-                data-micromodal-close
-                appearance="ghost"
-                variant={cancelButtonColor || 'error'}
-                onClick={onCancel}>
-                {cancelButtonText || t('Cancel')}
-              </Button>
-              <Button
-                aria-label="Close this dialog window"
-                variant={confirmButtonColor || 'success'}
-                loading={loading}
-                onClick={onConfirm}>
-                {confirmButtonText || t('Confirm')}
-              </Button>
-            </footer>
+            {hasFooter && (
+              <footer className="modal__footer">
+                <Button
+                  data-micromodal-close
+                  appearance="ghost"
+                  variant={cancelButtonColor || "error"}
+                  onClick={onCancel}
+                >
+                  {cancelButtonText || t("Cancel")}
+                </Button>
+                <Button
+                  aria-label="Close this dialog window"
+                  variant={confirmButtonColor || "success"}
+                  loading={loading}
+                  onClick={onConfirm}
+                >
+                  {confirmButtonText || t("Confirm")}
+                </Button>
+              </footer>
+            )}
           </div>
         </div>
       </div>
     </div>,
-    document.body,
+    document.body
   );
 };

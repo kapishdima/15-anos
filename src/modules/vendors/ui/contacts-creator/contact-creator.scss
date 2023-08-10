@@ -1,0 +1,41 @@
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  //   row-gap: 14px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.875rem 0;
+  border-bottom: 1px solid $lightGrayColor;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+  }
+
+  &__image {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
+  &__remove {
+    cursor: pointer;
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import React, { HTMLInputTypeAttribute } from "react";
 import {
   Controller,
   ControllerFieldState,
@@ -6,7 +6,7 @@ import {
   FieldValues,
   UseFormStateReturn,
   useFormContext,
-} from 'react-hook-form';
+} from "react-hook-form";
 
 type Children = ({
   field,
@@ -23,7 +23,8 @@ export type BaseInputProps = {
   label?: string | null;
   suffix?: string;
   type?: HTMLInputTypeAttribute;
-  variant?: 'filled' | 'outline';
+  variant?: "filled" | "outline";
+  style?: React.CSSProperties;
 };
 
 type InputProps = BaseInputProps & {

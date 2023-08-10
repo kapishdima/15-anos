@@ -66,6 +66,7 @@ import { SearchIcon } from "./icons/SearchIcon";
 import { AddFilledIcon } from "./icons/AddFilledIcon";
 import { ArrowRight } from "./icons/ArrowRight";
 import { CloseIcon } from "./icons/CloseIcon";
+import { VendorsIcon } from "./icons/VendorsIcon";
 
 import { AppContent } from "./layout/AppContent/AppContent";
 import { AppLayout } from "./layout/AppLayout/AppLayout";
@@ -185,4 +186,5 @@ export {
   AddFilledIcon,
   ArrowRight,
   CloseIcon,
+  VendorsIcon,
 };

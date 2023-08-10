@@ -20,6 +20,7 @@ import { DesignSettingsIndex } from "@/modules/administrative/design-settings";
 
 import { SignleTaskPage } from "@/modules/tasks/pages/SignleTaskPage";
 import { PostsIndex, SinglePost } from "@/modules/posts";
+import { SingleVendor, VendorsIndex, VendorsList } from "@/modules/vendors";
 
 export const router = createBrowserRouter([
   {
@@ -131,6 +132,30 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <SinglePost />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.VENDORS}`,
+    element: (
+      <ProtectedRoute>
+        <VendorsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.SEARCH_VENDORS}`,
+    element: (
+      <ProtectedRoute>
+        <VendorsList />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.SINGLE_VENDOR}`,
+    element: (
+      <ProtectedRoute>
+        <SingleVendor />
       </ProtectedRoute>
     ),
   },

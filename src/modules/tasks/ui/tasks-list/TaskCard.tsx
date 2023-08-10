@@ -9,9 +9,7 @@ import { getCategoryImage } from "@/app/utils/category-icon";
 
 import { CreateTaskModal } from "../create-task/CreateTaskModal";
 import { CreateTaskActions } from "../buttons/CreateTaskActions/CreateTaskActions";
-import { Translated, translated } from "@/app/utils/locale";
-import { Link } from "react-router-dom";
-import { AppRoutes } from "@/app/router/routes";
+import { Translated } from "@/app/utils/locale";
 
 type TaskCardProps = {
   title: Translated;
@@ -40,7 +38,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const removeTask = useTasksStore((state) => state.removeTask);
   const fetchTasks = useTasksStore((state) => state.fetchTasks);
   const changeTaskStatus = useTasksStore((state) => state.changeTaskStatus);
-  const storeTask = useTasksStore((state) => state.storeTask);
 
   const loading = useTasksStore((state) => state.loading);
   const taskInProcessing = useTasksStore((state) => state.taskInProcessing);

@@ -1,4 +1,4 @@
-@import './datepicker-field.scss';
+@import "./datepicker-field.scss";
 
 .form-field__container {
   display: flex;
@@ -15,10 +15,6 @@
   width: 100%;
   padding: $input-padding-y $input-padding-x;
 
-  background-color: transparent;
-  border: 1px solid #cbcbcb;
-  border-radius: 12px;
-
   @include inputValue;
 
   &::placeholder {
@@ -27,6 +23,17 @@
 
   &__error {
     @include inputError;
+  }
+
+  &.outline {
+    background-color: transparent;
+    border: 1px solid #cbcbcb;
+    border-radius: 12px;
+  }
+  &.filled {
+    background-color: #fff;
+    border: 1px solid #cbcbcb;
+    border-radius: 12px;
   }
 }
 

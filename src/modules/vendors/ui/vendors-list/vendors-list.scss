@@ -1,0 +1,59 @@
+.vendors-list-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  row-gap: 16px;
+
+  height: 70vh;
+
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__title {
+    max-width: 25vw;
+    font-family: $anevir-ff;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $darkColor;
+    text-align: center;
+  }
+}
+
+.search-vendors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  &--loading {
+    width: 100vh;
+    height: 50vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.vendor-categories__list {
+  margin-top: 5%;
+}
+
+.manual-vendors-list {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 5%;
+
+  &__title {
+    font-family: $recoleta-alt-ff;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: $darkColor;
+
+    margin-bottom: 14px;
+  }
+}

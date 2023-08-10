@@ -1,23 +1,23 @@
-@import 'fonts';
-@import 'variables';
-@import 'mixins';
+@import "fonts";
+@import "variables";
+@import "mixins";
 
 // ---------------------------
 // Components
 // ---------------------------
 
-@import '../components/index.scss';
+@import "../components/index.scss";
 
 // ---------------------------
 // Modules
 // ---------------------------
 
-@import '../modules/index.scss';
+@import "../modules/index.scss";
 
 // ---------------------------
 // Libraries
 // ---------------------------
-@import '~react-toastify/dist/ReactToastify.css';
+@import "~react-toastify/dist/ReactToastify.css";
 
 * {
   margin: 0;

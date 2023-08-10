@@ -7,6 +7,7 @@ import {
   SettingsIcon,
   TasksIcon,
   UsersIcon,
+  VendorsIcon,
 } from "@/components/index";
 import { AppRoutes } from "./routes";
 
@@ -45,6 +46,9 @@ export const createMenu = () => {
       },
     ],
     Guides: [{ icon: <TasksIcon />, title: "Posts", path: AppRoutes.POSTS }],
+    Vendors: [
+      { icon: <VendorsIcon />, title: "Vendors", path: AppRoutes.VENDORS },
+    ],
     "Administrative tools": [
       {
         icon: <ProfileIcon />,

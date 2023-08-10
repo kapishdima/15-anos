@@ -1,0 +1,28 @@
+.search-address-form {
+  margin-top: 3%;
+  &__title {
+    font-family: $recoleta-alt-ff;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5%;
+
+    .form-field__container {
+      display: flex;
+
+      flex: 0 1 50%;
+    }
+  }
+}

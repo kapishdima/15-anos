@@ -1,0 +1,54 @@
+.vendor-category-card {
+  height: 15vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 24%;
+
+  position: relative;
+  z-index: 1;
+
+  overflow: hidden;
+  border-radius: $base-br;
+
+  cursor: pointer;
+
+  &:hover {
+    .vendor-category-card__image img {
+      transform: scale(1.1);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    z-index: -1;
+
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform 0.25s ease;
+      will-change: transform;
+    }
+  }
+
+  &__title {
+    font-family: $anevir-ff;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+  }
+}

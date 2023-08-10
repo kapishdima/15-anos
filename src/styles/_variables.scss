@@ -2,10 +2,10 @@
 // Fonts
 // ------------------------------
 
-$recoleta-ff: 'Recoleta';
-$recoleta-alt-ff: 'Recoleta Alt';
+$recoleta-ff: "Recoleta";
+$recoleta-alt-ff: "Recoleta Alt";
 
-$anevir-ff: 'Avenir';
+$anevir-ff: "Avenir";
 
 // ------------------------------
 // Sizes
@@ -182,10 +182,18 @@ $page-banner-padding-x: 16px;
   }
 }
 
-// The style is used for page title;
+// The style is used for modal title;
 @mixin modalTitle {
   font-family: $recoleta-alt-ff;
   font-size: 1.5rem;
+  font-weight: 400;
+  color: $darkColor;
+}
+
+// The style is used for modal description;
+@mixin modalDescription {
+  font-family: $anevir-ff;
+  font-size: 0.875rem;
   font-weight: 400;
   color: $darkColor;
 }
@@ -208,3 +216,7 @@ $button-text-bg: $darkColor;
 $button-text-hover-bg: darken($darkColor, 5);
 
 $success-success-hover-bg: darken($successColor, 5);
+
+.without-decoration {
+  text-decoration: none;
+}

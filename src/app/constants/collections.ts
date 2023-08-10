@@ -16,4 +16,7 @@ export enum Collections {
   POSTS = "articles/items/list",
   POSTS_CATEGORY = "articles/groups/list",
   POSTS_LIKED = "articles",
+  SEARCH_VENDORS = "vendors/items/list",
+  VENDOR_GROUP_CATEGORIES = "vendors/groups/list",
+  MANUAL_VENDORS = "vendors",
 }
