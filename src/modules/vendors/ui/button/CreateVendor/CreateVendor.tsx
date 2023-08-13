@@ -6,7 +6,7 @@ import { Protected, RoleActions } from "@modules/roles";
 import { CreateVendorModal } from "../../create-vendor/CreateVendorModal";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 
-const CREATE_VENDOR_MODAL = "create_vendor";
+export const CREATE_VENDOR_MODAL = "create_vendor";
 
 export const CreateVendor: React.FC = () => {
   const { open, close } = useModal();
@@ -19,7 +19,7 @@ export const CreateVendor: React.FC = () => {
     open(CREATE_VENDOR_MODAL);
   };
 
-  const createTask = async (values: any) => {
+  const createVendor = async (values: any) => {
     await addVendor(values);
     close(CREATE_VENDOR_MODAL);
     fetchManualVendor(/*force*/ true);
@@ -32,7 +32,7 @@ export const CreateVendor: React.FC = () => {
       </IconButton>
       <CreateVendorModal
         id={CREATE_VENDOR_MODAL}
-        onSubmit={createTask}
+        onSubmit={createVendor}
         loading={loading}
       />
     </Protected>

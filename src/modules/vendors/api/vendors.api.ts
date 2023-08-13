@@ -5,11 +5,28 @@ import {
   pushData,
   toDate,
   deleteDocument,
+  updateDocument,
 } from "@modules/firebase/firestore";
 
-import { SearchedVendor } from "../store/vendors.types";
+import { SearchedVendor, VendorContact } from "../store/vendors.types";
 
 import { getEventId } from "@/modules/event";
+
+const toContacts = (vendor: SearchedVendor) => {
+  const contactArray: VendorContact[] = Array.isArray(vendor.contacts)
+    ? vendor.contacts
+    : Object.values(vendor.contacts);
+
+  const contactsWithRequiredFields = contactArray?.map(
+    (contact: VendorContact) => ({
+      person: contact.person || "",
+      type: contact.person || "",
+      contact: contact.person || "",
+    })
+  );
+
+  return contactsWithRequiredFields;
+};
 
 export const getManualVendors = async (): Promise<SearchedVendor[]> => {
   const eventId = getEventId();
@@ -28,11 +45,17 @@ export const getManualVendors = async (): Promise<SearchedVendor[]> => {
 export const addManualVendor = async (vendorData: any): Promise<void> => {
   const eventId = getEventId();
 
-  console.log(vendorData);
+  const contacts = toContacts(vendorData);
+
+  const vendorPayload = {
+    ...vendorData,
+    contacts: contacts || [],
+  };
+
   return pushData(
     Collections.EVENTS,
-    [eventId, Collections.MANUAL_VENDORS, vendorData.id],
-    vendorData
+    [eventId, Collections.MANUAL_VENDORS, vendorData.id || vendorData.title],
+    vendorPayload
   );
 };
 
@@ -44,4 +67,24 @@ export const deleteVendor = (id: string): Promise<void> => {
     Collections.MANUAL_VENDORS,
     id,
   ]);
+};
+
+export const updateVendor = (
+  id: string,
+  vendor: SearchedVendor
+): Promise<void> => {
+  const eventId = getEventId();
+
+  const contacts = toContacts(vendor);
+
+  const vendorPayload = {
+    ...vendor,
+    contacts: contacts || [],
+  };
+
+  return updateDocument(
+    Collections.EVENTS,
+    [eventId, Collections.MANUAL_VENDORS, id],
+    vendorPayload
+  );
 };

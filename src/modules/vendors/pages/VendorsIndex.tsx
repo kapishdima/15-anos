@@ -10,6 +10,10 @@ import { SearchVendorIntoMap } from "../ui/button/SearchVendorIntoMap/SearchVend
 export const VendorsIndex: React.FC = () => {
   const { t } = useTranslation();
 
+  // useEffect(() => {
+  //   deleteVendor("BanquetesLemontsOficial108MexicoCity");
+  // }, []);
+
   return (
     <AppLayout>
       <PageHeader

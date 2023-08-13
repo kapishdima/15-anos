@@ -1,14 +1,14 @@
-import React from 'react';
-import { BaseInputProps, Input } from './Input';
-import { Option, Select } from '../select/Select';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { BaseInputProps, Input } from "./Input";
+import { Option, Select } from "../select/Select";
+import { useTranslation } from "react-i18next";
 
 type SelectFieldProps = BaseInputProps & {
   options: Option[];
   placeholder?: string;
   defaultSelected?: string;
   onSelect?: (value: string) => void;
-  variant?: 'select' | 'button';
+  variant?: "select" | "button";
 };
 
 export const SelectField: React.FC<SelectFieldProps> = ({
@@ -24,7 +24,6 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   return (
     <Input name={name}>
       {({ field, fieldState }) => {
-        console.log('field.value', field.value);
         return (
           <div className="form-field__container">
             {label && (
@@ -33,7 +32,9 @@ export const SelectField: React.FC<SelectFieldProps> = ({
               </label>
             )}
             <Select
-              defaultSelected={defaultSelected || field.value || options[0].value}
+              defaultSelected={
+                defaultSelected || field.value || options[0].value
+              }
               placeholder={placeholder}
               options={options}
               invalid={Boolean(fieldState.error)}
@@ -45,7 +46,9 @@ export const SelectField: React.FC<SelectFieldProps> = ({
               }}
             />
             {fieldState.error && (
-              <div className="form-field__error">{fieldState.error.message}</div>
+              <div className="form-field__error">
+                {fieldState.error.message}
+              </div>
             )}
           </div>
         );

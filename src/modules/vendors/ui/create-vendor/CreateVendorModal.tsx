@@ -22,6 +22,7 @@ const defaultValues = {
   categoryId: "Artists",
   notes: "",
   title: "",
+  contacts: {},
 };
 
 export const CreateVendorModal: React.FC<CreateVendorModalProps> = ({

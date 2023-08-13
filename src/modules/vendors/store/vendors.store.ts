@@ -5,6 +5,7 @@ import {
   addManualVendor,
   deleteVendor,
   getManualVendors,
+  updateVendor,
 } from "../api/vendors.api";
 
 export interface VendorsStore {
@@ -19,6 +20,7 @@ export interface VendorsStore {
   likeVendor: (vendor: SearchedVendor) => void;
   dislikeVendor: (id: string) => void;
   fetchManualVendor: (force?: boolean) => Promise<void>;
+  updateVendor: (id: string, vendor: any) => Promise<void>;
 }
 
 export const useVendorsStore = create<VendorsStore>()(
@@ -77,6 +79,11 @@ export const useVendorsStore = create<VendorsStore>()(
             vendors,
             loading: false,
           }));
+        },
+        updateVendor: async (id: string, vendor: any) => {
+          set(() => ({ actionLoading: true, actionId: vendor.id }));
+          await updateVendor(id, vendor);
+          set(() => ({ actionLoading: false, actionId: null }));
         },
       }),
       {
