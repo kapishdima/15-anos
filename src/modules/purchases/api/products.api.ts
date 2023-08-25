@@ -42,11 +42,10 @@ export const getProductsByCategory = async (
 };
 
 export const getProductsParameters = async (): Promise<ProductsParameters> => {
-  const eventId = getEventId();
-  const productsParameters = await getSnapshotDocument(Collections.EVENTS, [
-    eventId,
-    Collections.PRODUCTS_PARAMETERS,
-  ]);
+  const productsParameters = await getSnapshotDocument(
+    Collections.PRODUCTS_PARAMETERS
+  );
+
   return productsParameters;
 };
 

@@ -27,7 +27,7 @@ export const ManualWishList: React.FC = () => {
             to={`${AppRoutes.MANUAL_PURCHAES_LIST}?type=registry`}
             className="manual-list__link"
           >
-            All products
+            {t("Show more")}
             <ArrowRight />
           </Link>
         )}

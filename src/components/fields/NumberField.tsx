@@ -1,8 +1,12 @@
-import React, { ChangeEvent, KeyboardEvent } from 'react';
-import { BaseInputProps, Input } from './Input';
-import classNames from 'classnames';
-import { ControllerRenderProps, FieldValues, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import React, { ChangeEvent, KeyboardEvent } from "react";
+import { BaseInputProps, Input } from "./Input";
+import classNames from "classnames";
+import {
+  ControllerRenderProps,
+  FieldValues,
+  useFormContext,
+} from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type NumberFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -21,15 +25,19 @@ export const NumberField: React.FC<NumberFieldProps> = ({
   iconBefore,
   onChange,
   max,
+  variant = "outline",
 }) => {
   const { t } = useTranslation();
   const { setValue } = useFormContext();
 
   const setDefaultValue = (field: ControllerRenderProps<FieldValues, any>) => {
-    setValue(name, field.value || '0');
+    setValue(name, field.value || "0");
   };
 
-  const handleChange = (event: ChangeEvent, onChange: (event: ChangeEvent) => void) => {
+  const handleChange = (
+    event: ChangeEvent,
+    onChange: (event: ChangeEvent) => void
+  ) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
 
@@ -41,7 +49,7 @@ export const NumberField: React.FC<NumberFieldProps> = ({
   };
 
   const acceptOnlyDigits = (evt: KeyboardEvent) =>
-    ['e', 'E', '+', '-'].includes(evt.key) && evt.preventDefault();
+    ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault();
 
   return (
     <Input name={name}>
@@ -54,17 +62,29 @@ export const NumberField: React.FC<NumberFieldProps> = ({
               </label>
             )}
             <div
-              className={classNames('form-input__container', { 'with-icon': Boolean(iconBefore) })}>
+              className={classNames("form-input__container", {
+                "with-icon": Boolean(iconBefore),
+              })}
+            >
               {iconBefore ? (
-                <img className="form-input__before-icon" src={iconBefore} alt="" />
+                <img
+                  className="form-input__before-icon"
+                  src={iconBefore}
+                  alt=""
+                />
               ) : null}
               <input
                 id={name}
-                type={'number'}
-                placeholder={placeholder || ''}
-                className={classNames('form-field', 'text-form-field', {
-                  'form-field--error': fieldState.error,
-                })}
+                type={"number"}
+                placeholder={placeholder || ""}
+                className={classNames(
+                  "form-field",
+                  "text-form-field",
+                  variant,
+                  {
+                    "form-field--error": fieldState.error,
+                  }
+                )}
                 name={field.name}
                 value={field.value}
                 onChange={(event) => handleChange(event, field.onChange)}
@@ -76,7 +96,9 @@ export const NumberField: React.FC<NumberFieldProps> = ({
               {suffix && <div className="form-input__suffix">{suffix}</div>}
             </div>
             {fieldState.error && (
-              <div className="form-field__error">{fieldState.error.message}</div>
+              <div className="form-field__error">
+                {fieldState.error.message}
+              </div>
             )}
           </div>
         );

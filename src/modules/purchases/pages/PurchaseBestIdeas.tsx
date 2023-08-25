@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AppLayout, PageBanner, PageHeader, PageHint } from "@/components";
+import { AppLayout, PageBanner, PageHeader } from "@/components";
 import { useTranslation } from "react-i18next";
 
 import { ProductsList } from "../ui/purchase-list/ProductsList";
@@ -9,15 +9,24 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useRecommendedShoppingStore } from "../store/shopping_recommended";
 import { getShoppingCategory } from "../store/shopping.selector";
 import { ProductTypes } from "../store/purcheses.types";
+import { useProfileStore } from "@/modules/profile/store/profile";
+import { useProductParameters } from "../store/products_parameters";
 
 export const PurchaseBestIdeas: React.FC = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
+
   const type = searchParams.get("type") as ProductTypes;
 
+  const fetchProfileDetails = useProfileStore(
+    (state) => state.fetchProfileDetails
+  );
   const fetchProductsByCategory = useProductsStore(
     (state) => state.fetchProductsByCategory
+  );
+  const fetchPurchaseParametrs = useProductParameters(
+    (state) => state.fetchProductsParameters
   );
   const clearProduct = useProductsStore((state) => state.clearProduct);
 
@@ -33,6 +42,8 @@ export const PurchaseBestIdeas: React.FC = () => {
     }
 
     clearProduct();
+    fetchPurchaseParametrs();
+    fetchProfileDetails();
     fetchProductsByCategory(id, type, true);
   }, []);
 

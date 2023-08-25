@@ -30,7 +30,7 @@ export const ManualShopingList: React.FC = () => {
             to={`${AppRoutes.MANUAL_PURCHAES_LIST}?type=shopping`}
             className="manual-list__link"
           >
-            All products
+            {t("Show more")}
             <ArrowRight />
           </Link>
         )}

@@ -25,11 +25,16 @@
     @include inputError;
   }
 
+  background-color: transparent;
+  border: 1px solid #cbcbcb;
+  border-radius: 12px;
+
   &.outline {
     background-color: transparent;
     border: 1px solid #cbcbcb;
     border-radius: 12px;
   }
+
   &.filled {
     background-color: #fff;
     border: 1px solid #cbcbcb;

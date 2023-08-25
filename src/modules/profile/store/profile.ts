@@ -30,10 +30,10 @@ export const useProfileStore = create<ProfileStore>()(
 
           const cacheProfile = get().profile;
 
-          const hasCachedRegion = Boolean(cacheProfile);
+          const hasCachedProfile = Boolean(cacheProfile);
 
           const profile =
-            hasCachedRegion && !force
+            hasCachedProfile && !force
               ? cacheProfile
               : await getProfileDetails();
 

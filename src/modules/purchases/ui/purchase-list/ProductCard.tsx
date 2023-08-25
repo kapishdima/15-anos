@@ -7,7 +7,7 @@ import { translated } from "@/app/utils/locale";
 
 import { ProductViewModal } from "../../store/purcheses.types";
 import { useLike } from "../../hooks/useLike";
-import { usePriceConverter } from "../../hooks/usePriceConverter";
+import { usePrice } from "../../hooks/usePriceConverter";
 
 type ProductCardProps = {
   product: ProductViewModal;
@@ -16,7 +16,8 @@ type ProductCardProps = {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { image, imageSmall, title, price, colors } = product;
   const { t } = useTranslation();
-  usePriceConverter(price);
+
+  const { symbol } = usePrice(price);
 
   const { likeProduct, disslikeProduct, liked, loading } = useLike(product);
 
@@ -34,7 +35,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="product-card__info">
           {price && (
             <div className="product-card__price">
-              {t("from")} {price}
+              {t("from")} {price} {symbol}
             </div>
           )}
           <h4 className="product-card__name">{translated(title)}</h4>
@@ -43,7 +44,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {colors.map((color) => (
                 <div
                   className="product-card__color"
-                  style={{ backgroundColor: color }}
+                  style={{
+                    backgroundColor: color,
+                    border: color === "white" ? "1px solid #ccc" : "",
+                  }}
                 ></div>
               ))}
             </div>

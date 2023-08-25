@@ -17,7 +17,10 @@ export const getProfileDetails = async (): Promise<any> => {
     [eventId, Collections.PROFILE]
   );
 
-  return profileDetails;
+  return {
+    ...profileDetails,
+    budget: (profileDetails?.budget || "").toString(),
+  };
 };
 
 export const saveProfile = async (
@@ -34,8 +37,12 @@ export const saveProfile = async (
 
   const profilePayloadData = {
     ...profileData,
-    country: `${country?.code};${country?.emoji}:${country?.name}`,
-    currency: `${currency?.code};${currency?.name_plural}:${currency?.symbol}`,
+    country: country
+      ? `${country?.code};${country?.emoji}:${country?.name}`
+      : profileData.country,
+    currency: currency
+      ? `${currency?.code};${currency?.name_plural}:${currency?.symbol}`
+      : profileData.currency,
   };
 
   return updateDocument(
