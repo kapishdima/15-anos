@@ -27,7 +27,7 @@ export const WeddingProfileIndex: React.FC = () => {
 
   const initialValues = {
     date: new Date(),
-    budget: profile?.budget,
+    budget: profile?.budget.toString() || "0",
     guests: profile?.guests,
   };
 
