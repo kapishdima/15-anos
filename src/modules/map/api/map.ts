@@ -24,6 +24,7 @@ export const getPositionFromAddress = (address: string) => {
       }
 
       if (status === "OK") {
+        savePosition(results[0].geometry.location);
         return resolve(results[0].geometry.location);
       }
     });

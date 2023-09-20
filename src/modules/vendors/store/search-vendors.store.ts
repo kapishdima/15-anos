@@ -7,6 +7,7 @@ export interface VendorCategoriesStore {
   vendors: SearchedVendor[];
   loading: boolean;
   searchVendor: (categoryId: string, force?: boolean) => Promise<void>;
+  clearVendors: () => void;
 }
 
 export const useSearchVendorStore = create<VendorCategoriesStore>()(
@@ -23,7 +24,6 @@ export const useSearchVendorStore = create<VendorCategoriesStore>()(
           const cacheVendors = get().vendors;
 
           const hasCachedVendors = Boolean(cacheVendors && cacheVendors.length);
-
           const vendors =
             hasCachedVendors && !force
               ? cacheVendors
@@ -32,6 +32,11 @@ export const useSearchVendorStore = create<VendorCategoriesStore>()(
           set(() => ({
             vendors,
             loading: false,
+          }));
+        },
+        clearVendors: () => {
+          set(() => ({
+            vendors: [],
           }));
         },
       }),

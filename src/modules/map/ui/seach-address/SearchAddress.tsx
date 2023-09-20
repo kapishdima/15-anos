@@ -6,6 +6,7 @@ import { Button, Form, TextField, useModal } from "@/components";
 import { AppRoutes } from "@/app/router/routes";
 import { getGeolocation, getPositionFromAddress } from "../../api/map";
 import { LOCATION_MODAL_ID } from "@/modules/vendors/ui/modals/LocationModal";
+import { useSearchVendorStore } from "@/modules/vendors/store/search-vendors.store";
 
 type SearchAddressProps = {
   setCenter: (center: google.maps.LatLngLiteral) => void;
@@ -28,6 +29,7 @@ export const SearchAddress: React.FC<SearchAddressProps> = ({
       setTimeout(() => {
         navigate(AppRoutes.SEARCH_VENDORS);
         close(LOCATION_MODAL_ID);
+        window.location.reload();
       }, 500);
     } catch (error) {
       toast.error(error as string);

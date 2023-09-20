@@ -17,6 +17,7 @@ export const SearchVendorList: React.FC = () => {
   );
 
   useEffect(() => {
+    console.log("selectedCategoryId", selectedCategoryId);
     if (!selectedCategoryId) {
       return;
     }
