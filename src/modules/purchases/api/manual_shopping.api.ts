@@ -3,7 +3,7 @@ import {
   getSnapshotCollection,
   pushData,
   toDate,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 import { getEventId } from "@/modules/event";
 
 import { Product, ProductViewModal } from "../store/purcheses.types";

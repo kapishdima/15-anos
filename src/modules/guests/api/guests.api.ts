@@ -1,13 +1,13 @@
-import { Collections } from '@app/constants/collections';
+import { Collections } from "@app/constants/collections";
 import {
   deleteDocument,
   getSnapshotDocument,
   pushData,
   updateDocument,
-} from '@modules/firebase/firestore';
-import { getEventId } from '@/modules/event';
+} from "@/modules/firebase/firestore";
+import { getEventId } from "@/modules/event";
 
-import { Guest, GuestStatuses, GuestViewModal } from '../store/guests';
+import { Guest, GuestStatuses, GuestViewModal } from "../store/guests";
 
 type GuestsResponse = {
   id: string;
@@ -16,11 +16,10 @@ type GuestsResponse = {
 
 export const getGuests = async (): Promise<GuestViewModal[]> => {
   const eventId = getEventId();
-  const guestsList = await getSnapshotDocument<GuestsResponse>(Collections.EVENTS, [
-    eventId,
-    Collections.GUESTS,
-    Collections.LIST,
-  ]);
+  const guestsList = await getSnapshotDocument<GuestsResponse>(
+    Collections.EVENTS,
+    [eventId, Collections.GUESTS, Collections.LIST]
+  );
 
   if (!guestsList) {
     return [];
@@ -34,23 +33,34 @@ export const removeGuest = async (id: string, guests: Guest[]) => {
 
   const updatedGuests = guests.filter((guest) => guest.id !== id);
 
-  return updateDocument(Collections.EVENTS, [eventId, Collections.GUESTS, Collections.LIST], {
-    list: updatedGuests,
-  });
+  return updateDocument(
+    Collections.EVENTS,
+    [eventId, Collections.GUESTS, Collections.LIST],
+    {
+      list: updatedGuests,
+    }
+  );
 };
 
-export const updateGuest = async (id: string, guests: Guest[], payload: any) => {
+export const updateGuest = async (
+  id: string,
+  guests: Guest[],
+  payload: any
+) => {
   const eventId = getEventId();
 
-  const updateGuestData = Object.keys(payload).reduce((acc: any, value: string) => {
-    const payloadValue = payload[value];
+  const updateGuestData = Object.keys(payload).reduce(
+    (acc: any, value: string) => {
+      const payloadValue = payload[value];
 
-    if (payloadValue) {
-      acc[value] = payloadValue;
-    }
+      if (payloadValue) {
+        acc[value] = payloadValue;
+      }
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    {}
+  );
 
   console.log(id);
 
@@ -65,9 +75,13 @@ export const updateGuest = async (id: string, guests: Guest[], payload: any) => 
     return guest;
   });
 
-  return updateDocument(Collections.EVENTS, [eventId, Collections.GUESTS, Collections.LIST], {
-    list: updatedGuests,
-  });
+  return updateDocument(
+    Collections.EVENTS,
+    [eventId, Collections.GUESTS, Collections.LIST],
+    {
+      list: updatedGuests,
+    }
+  );
 };
 
 export const createGuest = async (guests: Guest[], payload: any) => {
@@ -79,12 +93,20 @@ export const createGuest = async (guests: Guest[], payload: any) => {
     kids: payload.kids || 0,
   };
 
-  return pushData(Collections.EVENTS, [eventId, Collections.GUESTS, Collections.LIST], {
-    list: [...guests, newGuest],
-  });
+  return pushData(
+    Collections.EVENTS,
+    [eventId, Collections.GUESTS, Collections.LIST],
+    {
+      list: [...guests, newGuest],
+    }
+  );
 };
 
-export const updateGuestStatus = async (id: string, guests: Guest[], status: GuestStatuses) => {
+export const updateGuestStatus = async (
+  id: string,
+  guests: Guest[],
+  status: GuestStatuses
+) => {
   const updatePaidStatusData = {
     status,
   };

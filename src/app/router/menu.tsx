@@ -4,7 +4,7 @@ import {
   PaymentsIcon,
   ProfileIcon,
   PurchaseIcon,
-  SettingsIcon,
+  ArticlesIcon,
   TasksIcon,
   UsersIcon,
   VendorsIcon,
@@ -45,7 +45,7 @@ export const createMenu = () => {
         path: AppRoutes.PURCHASES_LIST,
       },
     ],
-    Guides: [{ icon: <TasksIcon />, title: "Posts", path: AppRoutes.POSTS }],
+    Guides: [{ icon: <ArticlesIcon />, title: "Posts", path: AppRoutes.POSTS }],
     Vendors: [
       { icon: <VendorsIcon />, title: "Vendors", path: AppRoutes.VENDORS },
     ],

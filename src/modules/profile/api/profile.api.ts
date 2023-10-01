@@ -2,7 +2,7 @@ import { Collections } from "@app/constants/collections";
 import {
   getSnapshotDocument,
   updateDocument,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 
 import { getEventId } from "@/modules/event";
 import { ProfileDetails } from "../store/profile";

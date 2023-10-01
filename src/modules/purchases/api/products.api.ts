@@ -5,7 +5,7 @@ import {
   pushData,
   toDate,
   deleteDocument,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 
 import {
   Product,

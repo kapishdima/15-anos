@@ -18,7 +18,7 @@ export const PostsIndex: React.FC = () => {
 
   return (
     <AppLayout loading={loading}>
-      <PageHeader title={t("Posts")} hasBackButton />
+      <PageHeader title={t("Posts")} hasBackButton={false} />
       <div className="post-page">
         <PostCategories />
         <PostList posts={posts} />

@@ -3,7 +3,7 @@ import {
   deleteDocument,
   getSnapshotCollection,
   pushData,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 import { getEventId } from "@/modules/event";
 
 import { LikedPost, Post, PostCategory } from "../store/posts.type";

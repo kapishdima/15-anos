@@ -19,7 +19,7 @@ export interface PostsStore {
   fetchPosts: (force?: boolean) => void;
   fetchPostsCategory: (force?: boolean) => void;
   fetchLikedPosts: (force?: boolean) => void;
-  filterPosts: (tagId?: string[]) => void;
+  filterPosts: (tagId?: string | null) => void;
   likePost: (postId: string) => void;
   disslikePost: (postId: string) => void;
   savePost: (post: Post) => void;
@@ -95,20 +95,17 @@ export const usePostsStore = create<PostsStore>()(
             loading: false,
           }));
         },
-        filterPosts: (tagIds?: string[]) => {
+        filterPosts: (tagId?: string | null) => {
           const posts = get().posts;
 
-          console.log(tagIds);
-          if (!tagIds) {
+          if (!tagId) {
             set(() => ({
               postsForView: posts,
             }));
             return;
           }
 
-          const filteredPosts = posts.filter((post) =>
-            tagIds.includes(post.tagId)
-          );
+          const filteredPosts = posts.filter((post) => post.tagId === tagId);
 
           set(() => ({
             postsForView: filteredPosts,

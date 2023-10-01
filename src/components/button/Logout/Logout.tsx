@@ -2,7 +2,7 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { logout } from "@modules/firebase/auth";
+import { logout } from "@/modules/firebase/auth";
 import { AppRoutes } from "@app/router/routes";
 import { LogoutIcon } from "@/components";
 

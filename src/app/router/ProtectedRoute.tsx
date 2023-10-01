@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import React, { PropsWithChildren, useEffect, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 
-import { forceRefreshUser } from '../../modules/firebase/auth';
-import { auth } from '../../modules/firebase';
-import { User } from 'firebase/auth';
-import { AppRoutes } from './routes';
+import { forceRefreshUser } from "../../modules/firebase/auth";
+import { auth } from "../../modules/firebase";
+import { User } from "firebase/auth";
+import { AppRoutes } from "./routes";
 
 export const ProtectedRoute: React.FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>();

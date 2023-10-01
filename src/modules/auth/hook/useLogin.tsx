@@ -1,21 +1,29 @@
-import { getFunctions } from 'firebase/functions';
-import { useHttpsCallable } from 'react-firebase-hooks/functions';
-import { useNavigate } from 'react-router-dom';
+import { getFunctions } from "firebase/functions";
+import { useHttpsCallable } from "react-firebase-hooks/functions";
+import { useNavigate } from "react-router-dom";
 
-import { CloutFunctionResponse } from '../../../app/http/http';
-import { useError } from './useError';
-import { EVENT_DETAILS, INVALID_LOGIN_ATTEMPT } from '../../../app/constants/local-storage-keys';
-import { EventDetails, LoginCredentials, LoginPayload, UserRoles } from '../@types';
-import { AppRoutes } from '../../../app/router/routes';
-import { authAnonymously, forceRefreshUser } from '../../firebase/auth';
-import { auth } from '../../firebase';
-import { CloudFunctionsRoutes } from '../../../app/constants/cloud-functions';
+import { CloutFunctionResponse } from "../../../app/http/http";
+import { useError } from "./useError";
+import {
+  EVENT_DETAILS,
+  INVALID_LOGIN_ATTEMPT,
+} from "../../../app/constants/local-storage-keys";
+import {
+  EventDetails,
+  LoginCredentials,
+  LoginPayload,
+  UserRoles,
+} from "../@types";
+import { AppRoutes } from "../../../app/router/routes";
+import { authAnonymously, forceRefreshUser } from "../../firebase/auth";
+import { auth } from "../../firebase";
+import { CloudFunctionsRoutes } from "../../../app/constants/cloud-functions";
 
 export const useLogin = () => {
-  const [exucute, isLoading, error] = useHttpsCallable<LoginPayload, CloutFunctionResponse>(
-    getFunctions(),
-    CloudFunctionsRoutes.LOGIN,
-  );
+  const [exucute, isLoading, error] = useHttpsCallable<
+    LoginPayload,
+    CloutFunctionResponse
+  >(getFunctions(), CloudFunctionsRoutes.LOGIN);
   const { canLogin, detectCanLogin, handleError } = useError();
   const navigate = useNavigate();
 
@@ -95,7 +103,7 @@ const getUserRole = (password: string): UserRoles => {
   const isOwner = /.*[A-Z]$/gm.test(password);
   const isAssistant = /.*[a-z]$/gm.test(password);
 
-  return isOwner ? 'owner' : isAssistant ? 'assistant' : 'viewer';
+  return isOwner ? "owner" : isAssistant ? "assistant" : "viewer";
 };
 
 const toLoginPayload = (values: LoginCredentials): LoginPayload => {

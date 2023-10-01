@@ -3,7 +3,7 @@ import {
   getSnapshotCollection,
   pushData,
   toDate,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 
 import { SearchedVendor } from "../store/vendors.types";
 import { getPosition } from "@/modules/map/api/map";

@@ -12,7 +12,19 @@
   margin-top: 5%;
 
   h2 {
-    font-family: $recoleta-ff;
+    font-size: 18pt;
+  }
+  h5 {
+    font-size: 18px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: $recoleta-alt-ff;
+    font-weight: normal;
     color: $darkColor;
 
     margin-bottom: 2%;
@@ -25,7 +37,16 @@
     }
   }
 
+  strong {
+    font-weight: 600;
+  }
+
   img {
     margin: 2% 0;
+  }
+
+  a {
+    display: inline-block;
+    padding-bottom: 2%;
   }
 }

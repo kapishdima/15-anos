@@ -1,4 +1,4 @@
-import { Collections } from '@app/constants/collections';
+import { Collections } from "@app/constants/collections";
 import {
   deleteDocument,
   fromDate,
@@ -6,13 +6,13 @@ import {
   pushData,
   toDate,
   updateDocument,
-} from '@modules/firebase/firestore';
-import { getEventId } from '@/modules/event';
+} from "@/modules/firebase/firestore";
+import { getEventId } from "@/modules/event";
 
-import { Payment, PaymentViewModal } from '../store/payments';
-import { PaymentDetails } from '../store/payment-details';
+import { Payment, PaymentViewModal } from "../store/payments";
+import { PaymentDetails } from "../store/payment-details";
 
-export type PaidStatus = 'paid' | 'not_paid';
+export type PaidStatus = "paid" | "not_paid";
 
 export const getPayments = async (): Promise<PaymentViewModal[]> => {
   const eventId = getEventId();
@@ -28,7 +28,7 @@ export const getPayments = async (): Promise<PaymentViewModal[]> => {
   console.log(payments);
 
   return payments.map((payment) => {
-    console.log('was paid', payment.title, payment.wasPaid);
+    console.log("was paid", payment.title, payment.wasPaid);
 
     return {
       ...payment,
@@ -41,10 +41,10 @@ export const getPayments = async (): Promise<PaymentViewModal[]> => {
 
 export const getPaymentDetails = async (): Promise<PaymentDetails | null> => {
   const eventId = getEventId();
-  const paymentDetails = await getSnapshotCollection<PaymentDetails[]>(Collections.EVENTS, [
-    eventId,
-    Collections.PROFILE_DETAILS,
-  ]);
+  const paymentDetails = await getSnapshotCollection<PaymentDetails[]>(
+    Collections.EVENTS,
+    [eventId, Collections.PROFILE_DETAILS]
+  );
 
   if (!paymentDetails) {
     return null;
@@ -55,12 +55,20 @@ export const getPaymentDetails = async (): Promise<PaymentDetails | null> => {
 
 export const removePayment = async (id: string) => {
   const eventId = getEventId();
-  return deleteDocument(Collections.EVENTS, [eventId, Collections.PAYMENTS, id]);
+  return deleteDocument(Collections.EVENTS, [
+    eventId,
+    Collections.PAYMENTS,
+    id,
+  ]);
 };
 
 export const updatePayment = async (id: string, payload: any) => {
   const eventId = getEventId();
-  return updateDocument(Collections.EVENTS, [eventId, Collections.PAYMENTS, id], payload);
+  return updateDocument(
+    Collections.EVENTS,
+    [eventId, Collections.PAYMENTS, id],
+    payload
+  );
 };
 
 export const createPayment = async (payload: any) => {
@@ -69,17 +77,26 @@ export const createPayment = async (payload: any) => {
   const paymentData = {
     ...payload,
     wasPaid: false,
-    status: 'undone',
+    status: "undone",
     completed: fromDate(payload.date),
     date: fromDate(payload.date),
-    vendorId: 'none',
-    referencedShoppingItem: '',
+    vendorId: "none",
+    referencedShoppingItem: "",
   };
-  return pushData(Collections.EVENTS, [eventId, Collections.PAYMENTS, payload.title], paymentData);
+  return pushData(
+    Collections.EVENTS,
+    [eventId, Collections.PAYMENTS, payload.title],
+    paymentData
+  );
 };
 
-export const updatePaymentStatus = async (id: string, pay: number, status: PaidStatus) => {
-  const updatePaidStatusData = status === 'paid' ? createPaidData(pay) : createNotPaidData(pay);
+export const updatePaymentStatus = async (
+  id: string,
+  pay: number,
+  status: PaidStatus
+) => {
+  const updatePaidStatusData =
+    status === "paid" ? createPaidData(pay) : createNotPaidData(pay);
 
   return await updatePayment(id, updatePaidStatusData);
 };

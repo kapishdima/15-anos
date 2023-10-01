@@ -9,6 +9,11 @@ export const SinglePost: React.FC = () => {
   const setPostReaded = usePostsStore((state) => state.setPostReaded);
 
   const post = getPost();
+  const postContent = translated(post.text);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   useEffect(() => {
     setPostReaded(post.id);
@@ -20,7 +25,9 @@ export const SinglePost: React.FC = () => {
       <PageBanner image={post.image} title={translated(post.title)} />
       <div
         className="post-content"
-        dangerouslySetInnerHTML={{ __html: translated(post.text) }}
+        dangerouslySetInnerHTML={{
+          __html: postContent.replaceAll("data-src", "src"),
+        }}
       ></div>
     </AppLayout>
   );

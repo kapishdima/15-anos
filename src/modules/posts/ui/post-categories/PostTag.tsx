@@ -8,18 +8,24 @@ import { PostCategory } from "../../store/posts.type";
 type PostTagProps = {
   tag: PostCategory;
   onClick: () => void;
-  shouldRemove: boolean;
+  activeTag: boolean;
 };
 
 export const PostTag: React.FC<PostTagProps> = ({
   tag,
   onClick,
-  shouldRemove,
+  activeTag,
 }) => {
   return (
-    <Button style={{ backgroundColor: `#${tag.color}` }} onClick={onClick}>
+    <Button
+      style={{
+        backgroundColor: `#${tag.color}`,
+        opacity: activeTag ? 1 : 0.5,
+        minWidth: "60px",
+      }}
+      onClick={onClick}
+    >
       {translated(tag.title)}
-      {shouldRemove && <CloseIcon />}
     </Button>
   );
 };

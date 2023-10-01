@@ -12,23 +12,13 @@ export const PostCategories: React.FC = () => {
   const filterPosts = usePostsStore((state) => state.filterPosts);
   const tags = usePostsStore((state) => state.categories);
 
-  const storedTags = searchParams.get("tags");
+  const storedTag = searchParams.get("tag");
 
   const onTagClick = (tag: string) => {
-    let tags = (storedTags?.split(",") || []).filter((tag) =>
-      Boolean(tag.length)
-    );
-
-    if (tags.includes(tag)) {
-      tags = tags.filter((tagId) => tagId !== tag);
+    if (tag === "All") {
+      searchParams.delete("tag");
     } else {
-      tags.push(tag);
-    }
-
-    if (tag === "All" || !tags.length) {
-      searchParams.delete("tags");
-    } else {
-      searchParams.set("tags", tags.join(","));
+      searchParams.set("tag", tag);
     }
     setSearchParams(searchParams);
   };
@@ -38,18 +28,20 @@ export const PostCategories: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    filterPosts(storedTags?.split(","));
+    filterPosts(storedTag);
   }, [searchParams]);
 
   return (
     <ScrollXArea>
-      {tags.map((tag) => (
-        <PostTag
-          tag={tag}
-          onClick={() => onTagClick(tag.tagId)}
-          shouldRemove={Boolean(storedTags?.split(",").includes(tag.tagId))}
-        />
-      ))}
+      {tags.map((tag) => {
+        return (
+          <PostTag
+            tag={tag}
+            onClick={() => onTagClick(tag.tagId)}
+            activeTag={tag.tagId === storedTag || storedTag === null}
+          />
+        );
+      })}
     </ScrollXArea>
   );
 };

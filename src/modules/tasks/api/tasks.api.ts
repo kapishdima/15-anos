@@ -1,4 +1,4 @@
-import { Collections } from '@app/constants/collections';
+import { Collections } from "@app/constants/collections";
 import {
   deleteDocument,
   fromDate,
@@ -6,10 +6,10 @@ import {
   pushData,
   toDate,
   updateDocument,
-} from '@modules/firebase/firestore';
-import { getEventId } from '@/modules/event';
+} from "@/modules/firebase/firestore";
+import { getEventId } from "@/modules/event";
 
-import { Task, TaskViewModal } from '../store/tasks';
+import { Task, TaskViewModal } from "../store/tasks";
 
 export const getTasks = async (): Promise<TaskViewModal[]> => {
   const eventId = getEventId();
@@ -26,7 +26,7 @@ export const getTasks = async (): Promise<TaskViewModal[]> => {
     ...task,
     date: new Date(toDate(task.date)),
     completed: new Date(toDate(task.completed)),
-    isCompleted: task.status !== 'undone',
+    isCompleted: task.status !== "undone",
   }));
 };
 
@@ -37,7 +37,11 @@ export const removeTask = async (id: string) => {
 
 export const updateTask = async (id: string, payload: any) => {
   const eventId = getEventId();
-  return updateDocument(Collections.EVENTS, [eventId, Collections.TASKS, id], payload);
+  return updateDocument(
+    Collections.EVENTS,
+    [eventId, Collections.TASKS, id],
+    payload
+  );
 };
 
 export const createTask = async (payload: any) => {
@@ -45,13 +49,20 @@ export const createTask = async (payload: any) => {
 
   const taskData = {
     ...payload,
-    status: 'undone',
-    vendorId: 'none',
+    status: "undone",
+    vendorId: "none",
     date: fromDate(payload.date),
   };
-  return pushData(Collections.EVENTS, [eventId, Collections.TASKS, payload.title], taskData);
+  return pushData(
+    Collections.EVENTS,
+    [eventId, Collections.TASKS, payload.title],
+    taskData
+  );
 };
 
-export const updateTaskStatus = async (id: string, status: 'undone' | 'done') => {
+export const updateTaskStatus = async (
+  id: string,
+  status: "undone" | "done"
+) => {
   return await updateTask(id, { status });
 };

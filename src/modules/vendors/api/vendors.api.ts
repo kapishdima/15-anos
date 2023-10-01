@@ -6,7 +6,7 @@ import {
   toDate,
   deleteDocument,
   updateDocument,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 
 import { SearchedVendor, VendorContact } from "../store/vendors.types";
 

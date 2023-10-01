@@ -3,7 +3,7 @@ import {
   getSnapshotCollection,
   pushData,
   toDate,
-} from "@modules/firebase/firestore";
+} from "@/modules/firebase/firestore";
 
 import { Category } from "../store/vendors.types";
 import { orderBy } from "firebase/firestore";
