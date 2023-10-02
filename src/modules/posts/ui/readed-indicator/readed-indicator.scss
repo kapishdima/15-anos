@@ -4,4 +4,8 @@
 
   background-color: $errorColor;
   border-radius: 50%;
+
+  @include mobile {
+    flex: 0 0 8px;
+  }
 }

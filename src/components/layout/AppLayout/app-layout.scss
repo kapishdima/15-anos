@@ -11,8 +11,12 @@
 
     max-width: 50vw;
 
-    @include desctopSM {
-      max-width: 70vw;
+    // @include desctopSM {
+    //   max-width: 50vw;
+    // }
+
+    @include tablet {
+      max-width: calc(80%);
     }
 
     @include mobile {

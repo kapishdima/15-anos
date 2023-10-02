@@ -21,9 +21,10 @@ export const PostTag: React.FC<PostTagProps> = ({
       style={{
         backgroundColor: `#${tag.color}`,
         opacity: activeTag ? 1 : 0.5,
-        minWidth: "60px",
+        minWidth: "80px",
       }}
       onClick={onClick}
+      propagateEvent
     >
       {translated(tag.title)}
     </Button>

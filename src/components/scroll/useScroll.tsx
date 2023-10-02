@@ -48,6 +48,18 @@ export const useScroll = (
     setPosition(scrollLeft);
   };
 
+  const scrollIntoElement = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    // console.log(target);
+    // const rect = target.getBoundingClientRect();
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+    // scroll(rect.width);
+  };
+
   const hasNext =
     position < scrollArea.current.getBoundingClientRect().width - SCROLL_OFFSET;
   const hasPrev = position !== 0;
@@ -58,5 +70,6 @@ export const useScroll = (
     onChangePosition,
     hasNext,
     hasPrev,
+    scrollIntoElement,
   };
 };

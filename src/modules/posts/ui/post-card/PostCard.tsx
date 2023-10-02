@@ -30,30 +30,38 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <div className="post-card__image">
           <img src={imageSmall} alt={translated(title)} />
         </div>
-        <div className="post-card__info">
-          <div className="post-card__header">
-            <ReadedIndicator postId={post.id} />
-            <h4 className="post-card__title">{translated(title)}</h4>
-          </div>
-          <p className="post-card__description">
-            {truncate(translated(description), { length: 150 })}
-          </p>
+        <div className="post-action">
+          <IconButton
+            appearance="outline"
+            loadingVariant="accent"
+            classes={classNames("like-button", {
+              liked,
+            })}
+            onClick={liked ? disslikePost : likePost}
+          >
+            <LikeIcon />
+          </IconButton>
+        </div>
 
-          <div className="post-action">
-            <IconButton
-              appearance="outline"
-              loadingVariant="accent"
-              classes={classNames("like-button", {
-                liked,
-              })}
-              onClick={liked ? disslikePost : likePost}
-            >
-              <LikeIcon />
-            </IconButton>
+        <div className="post-card__info">
+          <div className="post-card__content">
+            <div className="post-card__header">
+              <ReadedIndicator postId={post.id} />
+              <h4 className="post-card__title">{translated(title)}</h4>
+            </div>
+            <p className="post-card__description">
+              {truncate(translated(description), { length: 150 })}
+            </p>
           </div>
 
           <div className="post-footer">
-            <Button style={{ backgroundColor: `#${category?.color}` }} disabled>
+            <Button
+              style={{
+                backgroundColor: `#${category?.color}`,
+                minWidth: "80px",
+              }}
+              disabled
+            >
               {translated(category?.title || "")}
             </Button>
           </div>
