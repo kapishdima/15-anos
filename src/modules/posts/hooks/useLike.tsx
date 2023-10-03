@@ -2,7 +2,7 @@ import { isPostLiked } from "../store/posts.selector";
 import { usePostsStore } from "../store/posts.store";
 
 export const useLike = (postId: string) => {
-  const loading = usePostsStore((state) => state.loading);
+  const loading = usePostsStore((state) => state.likeLoading);
   const liked = usePostsStore((state) => isPostLiked(postId, state));
 
   const sendLikedPost = usePostsStore((state) => state.likePost);

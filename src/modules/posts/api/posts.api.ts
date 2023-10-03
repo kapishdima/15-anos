@@ -9,6 +9,9 @@ import { getEventId } from "@/modules/event";
 import { LikedPost, Post, PostCategory } from "../store/posts.type";
 import { orderBy } from "firebase/firestore";
 
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { CloudFunctionsRoutes } from "@/app/constants/cloud-functions";
+
 export const getPosts = async (): Promise<Post[]> => {
   const posts = await getSnapshotCollection<Post[]>(
     Collections.POSTS,
@@ -54,19 +57,41 @@ export const getPostsLiked = async (): Promise<LikedPost[]> => {
 };
 
 export const sendLikedPost = async (postId: string): Promise<void> => {
-  const eventId = getEventId();
+  // const eventId = getEventId();
+  // await pushData(Collections.EVENTS, [eventId, Collections.POSTS_LIKED], {
+  //   inititalId: postId,
+  // });
 
-  await pushData(Collections.EVENTS, [eventId, Collections.POSTS_LIKED], {
-    inititalId: postId,
-  });
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_ARTICLE_POST
+  );
+
+  await callPostAction({ articleId: postId, action: "favourite" });
 };
 
 export const sendDisslikedPost = async (postId: string): Promise<void> => {
-  const eventId = getEventId();
+  // const eventId = getEventId();
 
-  await deleteDocument(Collections.EVENTS, [
-    eventId,
-    Collections.POSTS_LIKED,
-    postId,
-  ]);
+  // await deleteDocument(Collections.EVENTS, [
+  //   eventId,
+  //   Collections.POSTS_LIKED,
+  //   postId,
+  // ]);
+
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_ARTICLE_POST
+  );
+
+  await callPostAction({ articleId: postId, action: "-favourite" });
+};
+
+export const sendPostViewed = async (postId: string): Promise<void> => {
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_ARTICLE_POST
+  );
+
+  await callPostAction({ articleId: postId, action: "view" });
 };

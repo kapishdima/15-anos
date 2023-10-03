@@ -37,7 +37,10 @@ export const PostCategories: React.FC = () => {
         <PostTag
           tag={tag}
           onClick={() => onTagClick(tag.tagId)}
-          activeTag={tag.tagId === storedTag || storedTag === null}
+          activeTag={
+            tag.tagId === storedTag ||
+            (tag.tagId === "All" && storedTag === null)
+          }
         />
       ))}
     </ScrollXArea>

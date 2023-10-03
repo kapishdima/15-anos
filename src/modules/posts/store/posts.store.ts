@@ -8,6 +8,7 @@ import {
   getPostsLiked,
   sendDisslikedPost,
   sendLikedPost,
+  sendPostViewed,
 } from "../api/posts.api";
 
 export interface PostsStore {
@@ -15,7 +16,9 @@ export interface PostsStore {
   postsForView: Post[];
   categories: PostCategory[];
   likedPosts: LikedPost[];
+  postInProcessing: string;
   loading: boolean;
+  likeLoading: boolean;
   fetchPosts: (force?: boolean) => void;
   fetchPostsCategory: (force?: boolean) => void;
   fetchLikedPosts: (force?: boolean) => void;
@@ -38,6 +41,8 @@ export const usePostsStore = create<PostsStore>()(
         categories: [],
         likedPosts: [],
         loading: false,
+        likeLoading: false,
+        postInProcessing: "",
         fetchPosts: async (force?: boolean) => {
           set(() => ({
             loading: true,
@@ -113,22 +118,22 @@ export const usePostsStore = create<PostsStore>()(
         },
         likePost: async (postId: string) => {
           try {
-            set(() => ({ loading: true }));
+            set(() => ({ likeLoading: true, postInProcessing: postId }));
             await sendLikedPost(postId);
-            set(() => ({ loading: false }));
+            set(() => ({ likeLoading: false, postInProcessing: postId }));
           } catch (error) {
             console.error(error);
-            set(() => ({ loading: false }));
+            set(() => ({ likeLoading: false, postInProcessing: postId }));
           }
         },
         disslikePost: async (postId: string) => {
           try {
-            set(() => ({ loading: true }));
+            set(() => ({ likeLoading: true, postInProcessing: postId }));
             await sendDisslikedPost(postId);
-            set(() => ({ loading: false }));
+            set(() => ({ likeLoading: false, postInProcessing: postId }));
           } catch (error) {
             console.error(error);
-            set(() => ({ loading: false }));
+            set(() => ({ likeLoading: false, postInProcessing: postId }));
           }
         },
         savePost: (post: Post) => {
@@ -154,6 +159,8 @@ export const usePostsStore = create<PostsStore>()(
             "readed-posts",
             JSON.stringify([...readedPosts, postId])
           );
+
+          sendPostViewed(postId);
         },
         getPostReaded: () => {
           const readedPosts = JSON.parse(

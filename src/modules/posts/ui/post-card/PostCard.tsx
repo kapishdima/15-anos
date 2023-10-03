@@ -22,6 +22,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
   const savePost = usePostsStore((state) => state.savePost);
   const category = usePostsStore((state) => getCategory(post.tagId, state));
+  const postInProccessing = usePostsStore((state) => state.postInProcessing);
   const { likePost, disslikePost, liked, loading } = useLike(post.id);
 
   return (
@@ -37,6 +38,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
             classes={classNames("like-button", {
               liked,
             })}
+            loading={postInProccessing === post.id && loading}
             onClick={liked ? disslikePost : likePost}
           >
             <LikeIcon />

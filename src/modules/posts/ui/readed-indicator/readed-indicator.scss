@@ -1,11 +1,9 @@
 .readed-indicator {
   width: 8px;
   height: 8px;
+  flex: 0 0 8px;
+  margin-top: 4px;
 
   background-color: $errorColor;
   border-radius: 50%;
-
-  @include mobile {
-    flex: 0 0 8px;
-  }
 }

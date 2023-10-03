@@ -2,22 +2,22 @@ import { getFunctions } from "firebase/functions";
 import { useHttpsCallable } from "react-firebase-hooks/functions";
 import { useNavigate } from "react-router-dom";
 
-import { CloutFunctionResponse } from "../../../app/http/http";
-import { useError } from "./useError";
+import { CloutFunctionResponse } from "@app/http/http";
 import {
   EVENT_DETAILS,
   INVALID_LOGIN_ATTEMPT,
-} from "../../../app/constants/local-storage-keys";
+} from "@app/constants/local-storage-keys";
+import { AppRoutes } from "@app/router/routes";
+import { CloudFunctionsRoutes } from "@app/constants/cloud-functions";
 import {
   EventDetails,
   LoginCredentials,
   LoginPayload,
   UserRoles,
 } from "../@types";
-import { AppRoutes } from "../../../app/router/routes";
 import { authAnonymously, forceRefreshUser } from "../../firebase/auth";
 import { auth } from "../../firebase";
-import { CloudFunctionsRoutes } from "../../../app/constants/cloud-functions";
+import { useError } from "./useError";
 
 export const useLogin = () => {
   const [exucute, isLoading, error] = useHttpsCallable<
