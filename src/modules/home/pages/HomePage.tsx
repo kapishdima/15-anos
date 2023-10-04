@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { Tabs, AppLayout, PageHeader } from '@components/index';
+import { Tabs, AppLayout, PageHeader } from "@components/index";
 
 import {
   CreateTask,
@@ -12,9 +12,9 @@ import {
   TaskListByDate,
   TaskListByCategories,
   ToggleVisibilityCompleted,
-} from '@modules/tasks';
+} from "@modules/tasks";
 
-import { useCategoriesStore } from '@modules/categories';
+import { useCategoriesStore } from "@modules/categories";
 
 export const HomePage: React.FC = () => {
   const fetchTasks = useTasksStore((state) => state.fetchTasks);
@@ -35,8 +35,8 @@ export const HomePage: React.FC = () => {
           title="Tasks"
           actions={
             <>
-              <CreateTask />
               <RemoveTask />
+              <CreateTask />
             </>
           }
         />
@@ -46,8 +46,8 @@ export const HomePage: React.FC = () => {
           <Tabs
             extra={<ToggleVisibilityCompleted />}
             tabs={[
-              { title: 'By date', component: <TaskListByDate /> },
-              { title: 'By category', component: <TaskListByCategories /> },
+              { title: "By date", component: <TaskListByDate /> },
+              { title: "By category", component: <TaskListByCategories /> },
             ]}
           />
         </div>

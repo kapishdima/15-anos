@@ -21,8 +21,7 @@ export const PostTag: React.FC<PostTagProps> = ({
       style={{
         backgroundColor: `#${tag.color}`,
         opacity: activeTag ? 1 : 0.5,
-        minWidth: "80px",
-        maxWidth: "min-content",
+        minWidth: "86px",
       }}
       onClick={onClick}
       propagateEvent

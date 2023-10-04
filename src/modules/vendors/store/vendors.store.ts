@@ -5,14 +5,18 @@ import {
   addManualVendor,
   deleteVendor,
   getManualVendors,
+  sendVendorViewed,
   updateVendor,
 } from "../api/vendors.api";
+import { translated } from "@/app/utils/locale";
 
 export interface VendorsStore {
   vendors: SearchedVendor[];
+  vendorsForView: SearchedVendor[];
   loading: boolean;
   actionLoading: boolean;
   actionId: string | null;
+  isRemoval: boolean;
   saveVendor: (vendor: SearchedVendor) => void;
   getVendor: () => SearchedVendor;
   clearVendor: () => void;
@@ -20,7 +24,11 @@ export interface VendorsStore {
   likeVendor: (vendor: SearchedVendor) => void;
   dislikeVendor: (id: string) => void;
   fetchManualVendor: (force?: boolean) => Promise<void>;
+  removeManualVendor: (id: string) => Promise<void>;
   updateVendor: (id: string, vendor: any) => Promise<void>;
+  toggleVendorsRemoval: () => void;
+  setVendorViewed: (id: string) => void;
+  searchVendor: () => void;
 }
 
 export const useVendorsStore = create<VendorsStore>()(
@@ -28,11 +36,18 @@ export const useVendorsStore = create<VendorsStore>()(
     persist(
       (set, get) => ({
         vendors: [],
+        vendorsForView: [],
         actionLoading: false,
         actionId: null,
         loading: false,
+        isRemoval: false,
         saveVendor: (vendor: SearchedVendor) => {
           window.localStorage.setItem("vendor", JSON.stringify(vendor));
+        },
+        toggleVendorsRemoval: () => {
+          set((state) => {
+            return { isRemoval: !state.isRemoval };
+          });
         },
         getVendor: () => {
           const vendor = window.localStorage.getItem("vendor");
@@ -77,6 +92,7 @@ export const useVendorsStore = create<VendorsStore>()(
 
           set(() => ({
             vendors,
+            vendorsForView: vendors,
             loading: false,
           }));
         },
@@ -84,6 +100,38 @@ export const useVendorsStore = create<VendorsStore>()(
           set(() => ({ actionLoading: true, actionId: vendor.id }));
           await updateVendor(id, vendor);
           set(() => ({ actionLoading: false, actionId: null }));
+        },
+        removeManualVendor: async (id: string) => {
+          set(() => ({ actionLoading: true, actionId: id }));
+          await deleteVendor(id);
+          set(() => ({ actionLoading: false, actionId: null }));
+        },
+        setVendorViewed: async (id: string) => {
+          await sendVendorViewed(id);
+        },
+        searchVendor: () => {
+          set((state) => {
+            const query =
+              new URLSearchParams(window.location.search).get("q") || "";
+
+            const filteredVendors = state.vendors.filter(
+              (vendor) =>
+                translated(vendor.title)
+                  .toLowerCase()
+                  .includes(query.toLowerCase()) ||
+                vendor.contacts.some(
+                  (contact) =>
+                    contact.contact
+                      .toLowerCase()
+                      .includes(query.toLowerCase()) ||
+                    contact.person?.toLowerCase().includes(query.toLowerCase())
+                )
+            );
+
+            return {
+              vendorsForView: filteredVendors,
+            };
+          });
         },
       }),
       {

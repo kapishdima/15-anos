@@ -4,13 +4,16 @@ import { CheckIcon, IconButton } from "@components/index";
 
 import { Protected, RoleActions } from "@modules/roles";
 import { useTasksStore } from "@/modules/tasks";
+import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 
 export const RemoveVendor: React.FC = () => {
-  const toggleTaskRemoval = useTasksStore((state) => state.toggleTaskRemoval);
+  const toggleVendorsRemoval = useVendorsStore(
+    (state) => state.toggleVendorsRemoval
+  );
   const removal = useTasksStore((state) => state.isRemoval);
 
   const onClick = () => {
-    toggleTaskRemoval();
+    toggleVendorsRemoval();
   };
 
   return (

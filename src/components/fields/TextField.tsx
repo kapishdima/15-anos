@@ -1,14 +1,16 @@
 import React, { ChangeEvent } from "react";
-import { BaseInputProps, Input } from "./Input";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
+
+import { BaseInputProps, Input } from "./Input";
 
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
   color?: string;
   iconBefore?: string | any;
   iconAfter?: JSX.Element | string;
-  onChange?: (event: ChangeEvent<any>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
 };
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -22,6 +24,8 @@ export const TextField: React.FC<TextFieldProps> = ({
   iconAfter,
   style,
   onChange,
+  onKeyDown,
+  capitilizedInput = false,
   variant = "outline",
 }) => {
   const { t } = useTranslation();
@@ -54,7 +58,10 @@ export const TextField: React.FC<TextFieldProps> = ({
               ) : null}
               <input
                 id={name}
+                ref={field.ref}
                 type={type || "text"}
+                name={field.name}
+                value={field.value}
                 placeholder={t(placeholder || "") || ""}
                 className={classNames(
                   "form-field",
@@ -62,13 +69,12 @@ export const TextField: React.FC<TextFieldProps> = ({
                   variant,
                   {
                     "form-field--error": fieldState.error,
+                    "form-field--capitalized": capitilizedInput,
                   }
                 )}
-                name={field.name}
-                value={field.value}
                 onChange={onChange || field.onChange}
                 onBlur={field.onBlur}
-                ref={field.ref}
+                onKeyDown={onKeyDown}
                 style={{ color, ...style }}
               />
               <div className="form-input__after-icon">

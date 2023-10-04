@@ -8,7 +8,12 @@ export const CreateVendorForm: React.FC = () => {
 
   return (
     <>
-      <TextField name="title" label={t("Name")} placeholder={t("Name")} />
+      <TextField
+        name="title"
+        label={t("Name")}
+        placeholder={t("Name")}
+        capitilizedInput
+      />
       <CategoriesSelect
         name="categoryId"
         label={t("Select category")}
@@ -19,6 +24,7 @@ export const CreateVendorForm: React.FC = () => {
         name="notes"
         label={t("Notes")}
         placeholder={t("Enter notes")}
+        capitilizedInput
       />
     </>
   );

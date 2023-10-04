@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 
+import { EventEmitter, Events } from "@/app/transport/event-bus";
 import { Status, Wrapper } from "@googlemaps/react-wrapper";
-import { GoogleMap } from "./GoogleMap";
+
 import { Spinner } from "@/components";
+
+import { GoogleMap } from "./GoogleMap";
 import { Marker } from "./Marker";
+import { SearchAddressForm } from "../seach-address/SearchAddressForm";
 
 import MarkerIcon from "@/image/marker.png";
-import { SearchAddress } from "../seach-address/SearchAddress";
-import { savePosition } from "../../api/map";
 
 const render = (status: Status) => {
   if (status === Status.LOADING) {
@@ -25,20 +27,20 @@ export const Map: React.FC = () => {
     lng: 0,
   });
 
-  const onClick = (e: google.maps.MapMouseEvent) => {
-    setMarker(e.latLng);
+  const onClick = (event: google.maps.MapMouseEvent) => {
+    setMarker(event.latLng);
   };
 
-  const onIdle = (m: google.maps.Map) => {
-    setZoom(m.getZoom()!);
-    setCenter(m.getCenter()!.toJSON());
+  const onIdle = (map: google.maps.Map) => {
+    setZoom(map.getZoom()!);
+    setCenter(map.getCenter()!.toJSON());
   };
 
   useEffect(() => {
-    if (marker || (center.lat !== 0 && center.lng !== 0)) {
-      savePosition(center);
-    }
-  }, [center, marker]);
+    EventEmitter.dispatch(Events.POSITION_MODIFY, {
+      modified: Boolean(marker),
+    });
+  }, [marker]);
 
   return (
     <div className="map-container">
@@ -61,12 +63,17 @@ export const Map: React.FC = () => {
             position={marker}
             icon={{
               url: MarkerIcon,
-              // scaledSize: new window.google.maps.Size(48, 48),
+              // @ts-ignore
+              scaledSize: { width: 48, height: 48 },
             }}
           />
         </GoogleMap>
       </Wrapper>
-      <SearchAddress setCenter={setCenter} setMarker={setMarker} />
+      <SearchAddressForm
+        setCenter={setCenter}
+        setMarker={setMarker}
+        position={marker}
+      />
     </div>
   );
 };

@@ -1,21 +1,25 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent } from "react";
+import { useFormContext } from "react-hook-form";
 
-import { TextField } from './TextField';
+import { TextField } from "./TextField";
 
-import { useFormContext } from 'react-hook-form';
-import { ClearIcon } from '../icons/ClearIcon';
-import { SearchIcon } from '../icons/SearchIcon';
+import { ClearIcon } from "../icons/ClearIcon";
+import { SearchIcon } from "../icons/SearchIcon";
 
 type SearchFieldProps = {
   onSearch: (value: string) => void;
+  placeholder?: string;
 };
 
-export const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
+export const SearchField: React.FC<SearchFieldProps> = ({
+  onSearch,
+  placeholder,
+}) => {
   const { setValue } = useFormContext();
 
   const onClear = () => {
-    setValue('search', '');
-    onSearch('');
+    setValue("search", "");
+    onSearch("");
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +30,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
   return (
     <TextField
       name="search"
-      label="Search by name"
-      placeholder="Enter guest name"
+      placeholder={placeholder}
       iconBefore={<SearchIcon />}
       iconAfter={
         <div className="clear-icon" onClick={onClear}>

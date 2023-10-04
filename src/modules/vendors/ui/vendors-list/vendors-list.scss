@@ -24,9 +24,13 @@
 }
 
 .search-vendors-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 
   &--loading {
     width: 100vh;

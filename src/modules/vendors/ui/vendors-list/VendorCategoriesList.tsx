@@ -15,7 +15,7 @@ export const VendorCategoriesList: React.FC = () => {
 
   return (
     <div className="vendor-categories__list">
-      <ScrollXArea>
+      <ScrollXArea containerStyle={{ width: "100%" }}>
         {categories.map((category) => (
           <VendorCategoryCard {...category} />
         ))}

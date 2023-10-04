@@ -6,7 +6,7 @@ export const isVendorLiked = (id: string, state: VendorsStore) => {
 };
 
 export const groupByCategory = (state: VendorsStore) => {
-  return state.vendors.reduce((acc, vendor) => {
+  return state.vendorsForView.reduce((acc, vendor) => {
     const key = vendor.categoryId;
 
     acc[key] = [...(acc[key] || []), vendor];

@@ -57,7 +57,7 @@ export const CreateVendorModal: React.FC<CreateVendorModalProps> = ({
     <Dialog
       id={id}
       title={t("Vendor details")}
-      confirmButtonText={t("Save the task")}
+      confirmButtonText={t("Save the vendor")}
       minWidth="50vw"
       minHeight="90vh"
       loading={loading}

@@ -1,6 +1,7 @@
 import { Translated, translated } from "@/app/utils/locale";
 import { useVendorCategories } from "@/modules/vendors/store/categories-vendors";
 import { useSearchVendorStore } from "@/modules/vendors/store/search-vendors.store";
+import classNames from "classnames";
 import React from "react";
 
 type VendorCategoryCardProps = {
@@ -16,6 +17,9 @@ export const VendorCategoryCard: React.FC<VendorCategoryCardProps> = ({
 }) => {
   const selectCategory = useVendorCategories((state) => state.selectCategory);
   const searchVendors = useSearchVendorStore((state) => state.searchVendor);
+  const selectedCategoroId = useVendorCategories(
+    (state) => state.selectedCategoryId
+  );
 
   const onClick = () => {
     selectCategory(id);
@@ -23,7 +27,12 @@ export const VendorCategoryCard: React.FC<VendorCategoryCardProps> = ({
   };
 
   return (
-    <div className="vendor-category-card" onClick={onClick}>
+    <div
+      className={classNames("vendor-category-card", {
+        "vendor-category-card--selected": selectedCategoroId === id,
+      })}
+      onClick={onClick}
+    >
       <div className="vendor-category-card__image">
         <img src={image} alt={translated(title)} />
       </div>

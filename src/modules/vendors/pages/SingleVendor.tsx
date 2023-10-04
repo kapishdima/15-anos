@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -19,9 +19,16 @@ export const SingleVendor: React.FC = () => {
   const { t } = useTranslation();
 
   const getVendor = useVendorsStore((state) => state.getVendor);
+  const setVendorViewed = useVendorsStore((state) => state.setVendorViewed);
   const vendor = getVendor();
 
   const { likeVendor, disslikeVendor, liked, loading } = useLike(vendor);
+
+  const description = translated(vendor.description);
+
+  useEffect(() => {
+    setVendorViewed(vendor.id);
+  }, []);
 
   return (
     <AppLayout>
@@ -46,7 +53,7 @@ export const SingleVendor: React.FC = () => {
         </div>
         <h4 className="vendor-page__title">{translated(vendor.title)}</h4>
         <p className="vendor-page__description">
-          {translated(vendor.description)}
+          {description.replaceAll("<n>", "\n")}
         </p>
         {/* TODO if liked  */}
         {liked && (

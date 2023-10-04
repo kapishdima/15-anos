@@ -1,8 +1,19 @@
+import { rejects } from "assert";
+
+export const toPositionLiteral = (
+  position: google.maps.LatLng
+): google.maps.LatLngLiteral => {
+  return {
+    lat: position.lat(),
+    lng: position.lng(),
+  };
+};
+
 export const getGeolocation = () => {
-  return new Promise((resolve) => {
+  return new Promise<any>((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((position) => {
       if (!position) {
-        return resolve(null);
+        return reject("City not found");
       }
 
       const latlng = {
@@ -14,7 +25,9 @@ export const getGeolocation = () => {
   });
 };
 
-export const getPositionFromAddress = (address: string) => {
+export const getPositionFromAddress = (
+  address: string
+): Promise<google.maps.LatLng> => {
   return new Promise((resolve, reject) => {
     const geocoder = new google.maps.Geocoder();
 
@@ -24,7 +37,6 @@ export const getPositionFromAddress = (address: string) => {
       }
 
       if (status === "OK") {
-        savePosition(results[0].geometry.location);
         return resolve(results[0].geometry.location);
       }
     });

@@ -17,6 +17,8 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
   const { likeVendor, disslikeVendor, liked, loading } = useLike(vendor);
   const saveVendor = useVendorsStore((state) => state.saveVendor);
 
+  const translatedDescription = translated(description);
+
   const onClick = () => {
     saveVendor(vendor);
   };
@@ -33,7 +35,7 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
       <div className="vendor-card__content">
         <h3 className="vendor-card__title">{translated(title)}</h3>
         <p className="vendor-card__description">
-          {truncateText(translated(description), 100)}
+          {translatedDescription.replaceAll("<n>", "\n")}
         </p>
       </div>
       <div className="vendor-card__actions">

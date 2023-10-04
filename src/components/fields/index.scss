@@ -10,6 +10,10 @@
   @include inputLabel;
 }
 
+.form-field--capitalized {
+  text-transform: capitalize;
+}
+
 .form-field,
 .form-field__container input {
   width: 100%;

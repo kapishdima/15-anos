@@ -27,6 +27,10 @@
     &__icon {
       width: 24px;
       height: 24px;
+
+      img {
+        width: 100%;
+      }
     }
   }
 
@@ -80,6 +84,12 @@
 
     &:hover {
       background-color: $lightGrayColor;
+    }
+
+    &-icon {
+      img {
+        width: 24px;
+      }
     }
   }
 

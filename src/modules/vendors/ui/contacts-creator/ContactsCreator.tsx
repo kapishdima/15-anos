@@ -10,6 +10,14 @@ import { Email } from "./types/Email";
 import { Instagram } from "./types/Instagram";
 import { Facebook } from "./types/Facebook";
 
+import { Option } from "@/components/select/Select";
+
+import AddressIcon from "@/image/icons/address.svg";
+import EmailIcon from "@/image/icons/mail.svg";
+import FacebookIcon from "@/image/icons/facebook.svg";
+import InstagramIcon from "@/image/icons/instagram.svg";
+import PhoneIcon from "@/image/icons/phone.svg";
+
 const contactsComponents = {
   phone: Phone,
   mail: Email,
@@ -18,12 +26,12 @@ const contactsComponents = {
   instagram: Instagram,
 };
 
-const contactsOptions = [
-  { value: "phone", label: "Phone" },
-  { value: "mail", label: "Email" },
-  { value: "address", label: "Address" },
-  { value: "facebook", label: "Facebook" },
-  { value: "instagram", label: "Instagram" },
+const contactsOptions: Option[] = [
+  { value: "phone", label: "Phone", icon: <img src={PhoneIcon} /> },
+  { value: "mail", label: "Email", icon: <img src={EmailIcon} /> },
+  { value: "address", label: "Address", icon: <img src={AddressIcon} /> },
+  { value: "facebook", label: "Facebook", icon: <img src={FacebookIcon} /> },
+  { value: "instagram", label: "Instagram", icon: <img src={InstagramIcon} /> },
 ];
 
 export const ContactsCreator: React.FC = () => {
@@ -52,13 +60,6 @@ export const ContactsCreator: React.FC = () => {
 
   return (
     <>
-      <SelectField
-        options={contactsOptions || []}
-        onSelect={onContactSelect}
-        placeholder="Add a contact"
-        name={""}
-        label="Select contact type"
-      />
       <div className="contacts-list">
         {selectedContacts.map((contact, index) => {
           const SelectedContact = contactsComponents[contact];
@@ -71,6 +72,13 @@ export const ContactsCreator: React.FC = () => {
           return <SelectedContact index={index} onDelete={onDelete} />;
         })}
       </div>
+      <SelectField
+        options={contactsOptions || []}
+        onSelect={onContactSelect}
+        placeholder="Add a contact"
+        name={""}
+        label="Select contact type"
+      />
     </>
   );
 };

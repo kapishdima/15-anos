@@ -1,10 +1,10 @@
-import classNames from 'classnames';
-import React, { MouseEvent } from 'react';
+import classNames from "classnames";
+import React, { MouseEvent } from "react";
 
-import { CheckIcon, Spinner } from '@components/index';
-import { Translated, translated } from '@/app/utils/locale';
+import { CheckIcon, Spinner } from "@components/index";
+import { Translated, translated } from "@/app/utils/locale";
 
-import { CardRemoveButton } from './CardRemoveButton';
+import { CardRemoveButton } from "./CardRemoveButton";
 
 type CardProps = {
   id: string;
@@ -21,6 +21,7 @@ type CardProps = {
   showDescription?: boolean;
   description?: Translated;
   expires?: boolean;
+  hasVisibleIcon?: boolean;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
@@ -44,6 +45,7 @@ export const Card: React.FC<CardProps> = ({
   showHint = true,
   showDescription = false,
   hoverable = true,
+  hasVisibleIcon = true,
 }) => {
   const handleIconClick = (event: MouseEvent) => {
     event.stopPropagation();
@@ -57,19 +59,22 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={classNames('card', {
-        'card--completed': completed,
-        'card--hoverable': hoverable,
-        'card--expires': expires,
+      className={classNames("card", {
+        "card--completed": completed,
+        "card--hoverable": hoverable,
+        "card--expires": expires,
       })}
-      onClick={onOpen}>
+      onClick={onOpen}
+    >
       <div className="card__image" onClick={handleIconClick}>
         <div className="card__icon" style={{ backgroundColor: `#${color}` }}>
           {loading ? <Spinner variant="white" /> : <img src={icon} alt="" />}
         </div>
-        <div className="card__checked-icon">
-          <CheckIcon />
-        </div>
+        {hasVisibleIcon && (
+          <div className="card__checked-icon">
+            <CheckIcon />
+          </div>
+        )}
       </div>
       <div className="card__info">
         <div className="card__name">{translated(title)}</div>

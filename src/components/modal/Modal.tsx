@@ -41,6 +41,14 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  const handleCancel = (event: React.MouseEvent) => {
+    event.preventDefault();
+    if (!onCancel) {
+      return;
+    }
+    onCancel();
+  };
+
   useEffect(() => {
     Micromodal.init();
   }, []);
@@ -71,7 +79,7 @@ export const Modal: React.FC<ModalProps> = ({
                 <button
                   className="modal__close"
                   aria-label="Close modal"
-                  data-micromodal-close
+                  onClick={handleCancel}
                 ></button>
               )}
             </header>
@@ -87,6 +95,7 @@ export const Modal: React.FC<ModalProps> = ({
                   appearance="ghost"
                   variant={cancelButtonColor || "error"}
                   onClick={onCancel}
+                  propagateEvent={false}
                 >
                   {cancelButtonText || t("Cancel")}
                 </Button>
@@ -95,6 +104,7 @@ export const Modal: React.FC<ModalProps> = ({
                   variant={confirmButtonColor || "success"}
                   loading={loading}
                   onClick={onConfirm}
+                  propagateEvent={false}
                 >
                   {confirmButtonText || t("Confirm")}
                 </Button>

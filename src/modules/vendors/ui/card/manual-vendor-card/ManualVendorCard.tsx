@@ -9,13 +9,17 @@ import { CreateVendorModal } from "../../create-vendor/CreateVendorModal";
 
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 
-type ManualVendorCardProps = SearchedVendor & { color: string };
+type ManualVendorCardProps = SearchedVendor & {
+  color: string;
+  isRemoval: boolean;
+};
 
 export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
   color,
+  isRemoval,
   ...vendor
 }) => {
-  const { id, title, categoryId } = vendor;
+  const { id, title, categoryId, contacts } = vendor;
 
   const UPDATE_VENDOR_MODAL_ID = `vendor-modal-${id}`;
 
@@ -23,12 +27,20 @@ export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
   const { open, close } = useModal();
 
   const updateVendor = useVendorsStore((state) => state.updateVendor);
+  const removeVendor = useVendorsStore((state) => state.removeManualVendor);
   const fetchManualVendors = useVendorsStore(
     (state) => state.fetchManualVendor
   );
+  const actionId = useVendorsStore((state) => state.actionId);
+  const actionLoading = useVendorsStore((state) => state.actionLoading);
 
   const onOpen = () => {
     open(UPDATE_VENDOR_MODAL_ID);
+  };
+
+  const onDelete = (id: string) => {
+    removeVendor(id);
+    fetchManualVendors(/*force*/ true);
   };
 
   const updateVendorOnClick = async (values: any) => {
@@ -44,11 +56,16 @@ export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
         title={title}
         icon={getCategoryImage(categoryId as any)}
         color={color}
-        extra={<Button variant="success">{t("Contact")}</Button>}
+        extra={
+          Boolean(contacts?.length) ? (
+            <Button variant="success">{t("Contact")}</Button>
+          ) : undefined
+        }
         onOpen={onOpen}
-        onDelete={function (id: string): void {
-          throw new Error("Function not implemented.");
-        }}
+        onDelete={onDelete}
+        hasVisibleIcon={false}
+        removal={isRemoval}
+        loading={actionLoading && actionId === id}
       />
       <CreateVendorModal
         id={UPDATE_VENDOR_MODAL_ID}

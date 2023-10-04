@@ -9,6 +9,7 @@ export const ManualVendorsList: React.FC = () => {
   const fetchManualVendor = useVendorsStore((state) => state.fetchManualVendor);
   const groupedVendors = useVendorsStore(groupByCategory);
   const categoriesStore = useCategoriesStore();
+  const isRemoval = useVendorsStore((state) => state.isRemoval);
 
   useEffect(() => {
     fetchManualVendor();
@@ -27,6 +28,7 @@ export const ManualVendorsList: React.FC = () => {
             <h4 className="manual-vendors-list__title">{group}</h4>
             {groupedVendors[group].map((vendor) => (
               <ManualVendorCard
+                isRemoval={isRemoval}
                 color={category?.color || "83dd8b"}
                 {...vendor}
               />

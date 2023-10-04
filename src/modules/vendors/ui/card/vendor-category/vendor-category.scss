@@ -15,6 +15,10 @@
 
   cursor: pointer;
 
+  &--selected .vendor-category-card__title {
+    opacity: 1;
+  }
+
   &:hover {
     .vendor-category-card__image img {
       transform: scale(1.1);
@@ -50,5 +54,6 @@
     font-size: 1rem;
     font-weight: 600;
     color: #fff;
+    opacity: 0.5;
   }
 }

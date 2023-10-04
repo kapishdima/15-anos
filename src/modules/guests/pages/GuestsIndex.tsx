@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { AppLayout, Form, PageHeader } from '@components/index';
-import { SearchField } from '@/components/fields/SearchField';
+import { AppLayout, Form, PageHeader } from "@components/index";
+import { SearchField } from "@/components/fields/SearchField";
 
-import { CreateGuest } from '../ui/buttons/CreateGuest';
-import { useGuestsStore } from '../store/guests';
-import { GuestList } from '../ui/guest-list/GuestsLists';
-import { GuestProgress } from '../ui/guest-progress/GuestProgress';
+import { CreateGuest } from "../ui/buttons/CreateGuest";
+import { useGuestsStore } from "../store/guests";
+import { GuestList } from "../ui/guest-list/GuestsLists";
+import { GuestProgress } from "../ui/guest-progress/GuestProgress";
 
-import { sortedByNameAlphabet } from '../store/guests.selector';
-import { RemoveGuest } from '../ui/buttons/RemoveGuest';
-import { ToggleVisibilityConfirmed } from '../ui/buttons/ToggleVisibilityCompleted';
-import { useSearchParams } from 'react-router-dom';
+import { sortedByNameAlphabet } from "../store/guests.selector";
+import { RemoveGuest } from "../ui/buttons/RemoveGuest";
+import { ToggleVisibilityConfirmed } from "../ui/buttons/ToggleVisibilityCompleted";
+import { useSearchParams } from "react-router-dom";
 
 export const GuestsIndex: React.FC = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -22,7 +22,7 @@ export const GuestsIndex: React.FC = () => {
   const loading = useGuestsStore((state) => state.loading);
 
   const onSearch = (value: string) => {
-    searchParams.set('q', value);
+    searchParams.set("q", value);
     setSearchParams(searchParams);
     searchGuest(value);
   };
@@ -38,8 +38,8 @@ export const GuestsIndex: React.FC = () => {
           title="Guests list"
           actions={
             <>
-              <CreateGuest />
               <RemoveGuest />
+              <CreateGuest />
             </>
           }
         />
@@ -47,8 +47,11 @@ export const GuestsIndex: React.FC = () => {
         {guests && (
           <div className="guests-info">
             <GuestProgress />
-            <Form onSubmit={() => {}} initialValues={{ search: searchParams.get('q') || '' }}>
-              <SearchField onSearch={onSearch} />
+            <Form
+              onSubmit={() => {}}
+              initialValues={{ search: searchParams.get("q") || "" }}
+            >
+              <SearchField onSearch={onSearch} placeholder="Enter guest name" />
             </Form>
             <ToggleVisibilityConfirmed />
             <GuestList guests={guests} />

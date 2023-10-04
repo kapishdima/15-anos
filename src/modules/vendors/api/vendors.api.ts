@@ -11,6 +11,8 @@ import {
 import { SearchedVendor, VendorContact } from "../store/vendors.types";
 
 import { getEventId } from "@/modules/event";
+import { CloudFunctionsRoutes } from "@/app/constants/cloud-functions";
+import { httpsCallable, getFunctions } from "firebase/functions";
 
 const toContacts = (vendor: SearchedVendor) => {
   const contactArray: VendorContact[] = Array.isArray(vendor.contacts)
@@ -45,6 +47,11 @@ export const getManualVendors = async (): Promise<SearchedVendor[]> => {
 export const addManualVendor = async (vendorData: any): Promise<void> => {
   const eventId = getEventId();
 
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_VENDOR_ACTION
+  );
+
   const contacts = toContacts(vendorData);
 
   const vendorPayload = {
@@ -52,21 +59,46 @@ export const addManualVendor = async (vendorData: any): Promise<void> => {
     contacts: contacts || [],
   };
 
-  return pushData(
-    Collections.EVENTS,
-    [eventId, Collections.MANUAL_VENDORS, vendorData.id || vendorData.title],
-    vendorPayload
-  );
+  await Promise.all([
+    await callPostAction({ vendorId: vendorData.id, action: "favourite" }),
+    await pushData(
+      Collections.EVENTS,
+      [eventId, Collections.MANUAL_VENDORS, vendorData.id || vendorData.title],
+      vendorPayload
+    ),
+  ]);
+
+  return;
 };
 
-export const deleteVendor = (id: string): Promise<void> => {
+export const sendVendorViewed = async (id: string): Promise<void> => {
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_VENDOR_ACTION
+  );
+
+  await callPostAction({ vendorId: id, action: "view" });
+};
+
+export const deleteVendor = async (id: string): Promise<void> => {
   const eventId = getEventId();
 
-  return deleteDocument(Collections.EVENTS, [
-    eventId,
-    Collections.MANUAL_VENDORS,
-    id,
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_VENDOR_ACTION
+  );
+
+  await Promise.all([
+    await callPostAction({ vendorId: id, action: "-favourite" }),
+
+    await deleteDocument(Collections.EVENTS, [
+      eventId,
+      Collections.MANUAL_VENDORS,
+      id,
+    ]),
   ]);
+
+  return;
 };
 
 export const updateVendor = (

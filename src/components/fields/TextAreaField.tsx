@@ -1,6 +1,6 @@
-import React from 'react';
-import { BaseInputProps, Input } from './Input';
-import classNames from 'classnames';
+import React from "react";
+import { BaseInputProps, Input } from "./Input";
+import classNames from "classnames";
 
 type TextAreaFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -10,7 +10,7 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
   name,
   placeholder,
   label,
-  suffix,
+  capitilizedInput = false,
 }) => {
   return (
     <Input name={name}>
@@ -24,8 +24,10 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
           <div className="form-input__container form-textarea__container">
             <textarea
               id={name}
-              placeholder={placeholder || ''}
-              className={classNames('form-field', 'text-form-field')}
+              placeholder={placeholder || ""}
+              className={classNames("form-field", "text-form-field", {
+                "form-field--capitalized": capitilizedInput,
+              })}
               name={field.value}
               value={field.value}
               onChange={field.onChange}
@@ -33,7 +35,9 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
               ref={field.ref}
             />
           </div>
-          {fieldState.error && <div className="form-field__error">{fieldState.error.message}</div>}
+          {fieldState.error && (
+            <div className="form-field__error">{fieldState.error.message}</div>
+          )}
         </div>
       )}
     </Input>

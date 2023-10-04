@@ -63,7 +63,7 @@ export const sendLikedPost = async (postId: string): Promise<void> => {
 
     const callPostAction = httpsCallable(
       getFunctions(),
-      CloudFunctionsRoutes.ADD_ARTICLE_POST
+      CloudFunctionsRoutes.ADD_ARTICLE_ACTION
     );
 
     await Promise.all([
@@ -90,7 +90,7 @@ export const sendDisslikedPost = async (
 
     const callPostAction = httpsCallable(
       getFunctions(),
-      CloudFunctionsRoutes.ADD_ARTICLE_POST
+      CloudFunctionsRoutes.ADD_ARTICLE_ACTION
     );
 
     await Promise.all([
@@ -110,7 +110,7 @@ export const sendDisslikedPost = async (
 export const sendPostViewed = async (postId: string): Promise<void> => {
   const callPostAction = httpsCallable(
     getFunctions(),
-    CloudFunctionsRoutes.ADD_ARTICLE_POST
+    CloudFunctionsRoutes.ADD_ARTICLE_ACTION
   );
 
   await callPostAction({ articleId: postId, action: "view" });
