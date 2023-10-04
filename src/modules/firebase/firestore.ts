@@ -1,5 +1,6 @@
 import {
   Timestamp,
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -7,13 +8,13 @@ import {
   query,
   setDoc,
   updateDoc,
-} from 'firebase/firestore';
-import { db } from './index';
+} from "firebase/firestore";
+import { db } from "./index";
 
 export function getSnapshotCollection<TData = any>(
   key: string,
   params: string[] = [],
-  queries: any = [],
+  queries: any = []
 ) {
   const ref = query(collection(db, key, ...params), ...queries);
 
@@ -33,7 +34,7 @@ export function getSnapshotCollection<TData = any>(
         },
         (error) => {
           return reject(error);
-        },
+        }
       );
     } catch (error) {
       console.log(error);
@@ -42,7 +43,10 @@ export function getSnapshotCollection<TData = any>(
   });
 }
 
-export async function getSnapshotDocument<TData = any>(key: string, params: string[] = []) {
+export async function getSnapshotDocument<TData = any>(
+  key: string,
+  params: string[] = []
+) {
   const ref = doc(db, key, ...params);
 
   return new Promise<TData | null>((resolve, reject) => {
@@ -62,7 +66,7 @@ export async function getSnapshotDocument<TData = any>(key: string, params: stri
         },
         (error) => {
           return reject(error);
-        },
+        }
       );
     } catch (error) {
       console.log(error);
@@ -76,14 +80,31 @@ export const deleteDocument = async (key: string, params: string[] = []) => {
   await deleteDoc(document);
 };
 
-export const updateDocument = async (key: string, params: string[] = [], payload: any) => {
+export const updateDocument = async (
+  key: string,
+  params: string[] = [],
+  payload: any
+) => {
   const document = doc(db, key, ...params);
   return await updateDoc(document, payload);
 };
 
-export const pushData = async (key: string, params: string[] = [], payload: any) => {
+export const pushData = async (
+  key: string,
+  params: string[] = [],
+  payload: any
+) => {
   const document = doc(db, key, ...params);
   return setDoc(document, payload);
+};
+
+export const createDocumentWithAutoID = async (
+  key: string,
+  params: string[] = [],
+  payload: any
+) => {
+  const collectionRef = collection(db, key, ...params);
+  return addDoc(collectionRef, payload);
 };
 
 export const toDate = (date: any) => {

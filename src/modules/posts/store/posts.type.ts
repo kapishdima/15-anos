@@ -20,5 +20,6 @@ export type PostCategory = {
 };
 
 export type LikedPost = {
-  initialId: string;
+  id: string;
+  inititalId: string;
 };

@@ -97,3 +97,30 @@
     border-width: 1px;
   }
 }
+
+.like-button {
+  &.liked {
+    will-change: transform;
+    animation: like 400ms ease both;
+
+    svg {
+      path {
+        animation: likeFill 400ms ease both;
+      }
+    }
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+    path {
+      transition: all 0.25s ease;
+    }
+  }
+  &:hover {
+    svg {
+      path {
+        fill: $accentColor;
+      }
+    }
+  }
+}

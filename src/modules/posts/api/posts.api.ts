@@ -1,5 +1,6 @@
 import { Collections } from "@app/constants/collections";
 import {
+  createDocumentWithAutoID,
   deleteDocument,
   getSnapshotCollection,
   pushData,
@@ -57,34 +58,53 @@ export const getPostsLiked = async (): Promise<LikedPost[]> => {
 };
 
 export const sendLikedPost = async (postId: string): Promise<void> => {
-  // const eventId = getEventId();
-  // await pushData(Collections.EVENTS, [eventId, Collections.POSTS_LIKED], {
-  //   inititalId: postId,
-  // });
+  try {
+    const eventId = getEventId();
 
-  const callPostAction = httpsCallable(
-    getFunctions(),
-    CloudFunctionsRoutes.ADD_ARTICLE_POST
-  );
+    const callPostAction = httpsCallable(
+      getFunctions(),
+      CloudFunctionsRoutes.ADD_ARTICLE_POST
+    );
 
-  await callPostAction({ articleId: postId, action: "favourite" });
+    await Promise.all([
+      await createDocumentWithAutoID(
+        Collections.EVENTS,
+        [eventId, Collections.POSTS_LIKED],
+        {
+          inititalId: postId,
+        }
+      ),
+      await callPostAction({ articleId: postId, action: "favourite" }),
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export const sendDisslikedPost = async (postId: string): Promise<void> => {
-  // const eventId = getEventId();
+export const sendDisslikedPost = async (
+  documentId: string,
+  postId: string
+): Promise<void> => {
+  try {
+    const eventId = getEventId();
 
-  // await deleteDocument(Collections.EVENTS, [
-  //   eventId,
-  //   Collections.POSTS_LIKED,
-  //   postId,
-  // ]);
+    const callPostAction = httpsCallable(
+      getFunctions(),
+      CloudFunctionsRoutes.ADD_ARTICLE_POST
+    );
 
-  const callPostAction = httpsCallable(
-    getFunctions(),
-    CloudFunctionsRoutes.ADD_ARTICLE_POST
-  );
+    await Promise.all([
+      await deleteDocument(Collections.EVENTS, [
+        eventId,
+        Collections.POSTS_LIKED,
+        documentId,
+      ]),
 
-  await callPostAction({ articleId: postId, action: "-favourite" });
+      await callPostAction({ articleId: postId, action: "-favourite" }),
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const sendPostViewed = async (postId: string): Promise<void> => {

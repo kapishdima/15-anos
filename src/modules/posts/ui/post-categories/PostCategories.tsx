@@ -32,7 +32,7 @@ export const PostCategories: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <ScrollXArea scrollWhenClick containerStyle={{ width: "100%" }}>
+    <ScrollXArea scrollWhenClick={false} containerStyle={{ width: "100%" }}>
       {tags.map((tag) => (
         <PostTag
           tag={tag}
