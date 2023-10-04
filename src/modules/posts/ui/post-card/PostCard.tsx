@@ -51,9 +51,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
               <ReadedIndicator postId={post.id} />
               <h4 className="post-card__title">{translated(title)}</h4>
             </div>
-            <p className="post-card__description">
-              {truncate(translated(description), { length: 150 })}
-            </p>
+            <p className="post-card__description">{translated(description)}</p>
           </div>
 
           <div className="post-footer">
