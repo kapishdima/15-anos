@@ -38,8 +38,8 @@ export const GuestsIndex: React.FC = () => {
           title="Guests list"
           actions={
             <>
-              <RemoveGuest />
               <CreateGuest />
+              <RemoveGuest />
             </>
           }
         />

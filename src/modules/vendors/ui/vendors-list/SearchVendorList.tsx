@@ -6,7 +6,7 @@ import { useSearchVendorStore } from "../../store/search-vendors.store";
 import { Spinner } from "@/components";
 
 export const SearchVendorList: React.FC = () => {
-  const vendors = useSearchVendorStore((state) => state.vendors);
+  const vendors = useSearchVendorStore((state) => state.vendorsForView);
   const loading = useSearchVendorStore((state) => state.loading);
   const selectedCategoryId = useVendorCategories(
     (state) => state.selectedCategoryId
@@ -17,13 +17,16 @@ export const SearchVendorList: React.FC = () => {
   );
 
   useEffect(() => {
-    console.log("selectedCategoryId", selectedCategoryId);
     if (!selectedCategoryId) {
       return;
     }
 
-    searchVendorByPosition(selectedCategoryId);
+    searchVendorByPosition(selectedCategoryId, /*force*/ true);
   }, [selectedCategoryId]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   if (loading) {
     return (

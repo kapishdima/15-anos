@@ -29,8 +29,8 @@ export const VendorsIndex: React.FC = () => {
         hasBackButton={false}
         actions={
           <>
-            <RemoveVendor />
             <CreateVendor />
+            <RemoveVendor />
           </>
         }
       />

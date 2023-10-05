@@ -23,7 +23,7 @@ export const VendorCategoryCard: React.FC<VendorCategoryCardProps> = ({
 
   const onClick = () => {
     selectCategory(id);
-    searchVendors(id, /* force */ true);
+    searchVendors(id);
   };
 
   return (

@@ -52,10 +52,12 @@ export const SingleVendor: React.FC = () => {
           </div>
         </div>
         <h4 className="vendor-page__title">{translated(vendor.title)}</h4>
-        <p className="vendor-page__description">
-          {description.replaceAll("<n>", "\n")}
-        </p>
-        {/* TODO if liked  */}
+        <p
+          className="vendor-page__description"
+          dangerouslySetInnerHTML={{
+            __html: description.replaceAll("<n>", "<br/>"),
+          }}
+        ></p>
         {liked && (
           <div className="vendor-page__details">
             <Button variant="text" appearance="ghost">

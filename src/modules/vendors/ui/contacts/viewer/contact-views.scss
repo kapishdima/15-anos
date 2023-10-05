@@ -1,0 +1,26 @@
+#tooltip {
+  display: none;
+  z-index: 99;
+  padding: $popover-padding-y $popover-padding-x;
+  background-color: #fff;
+  border-radius: $base-br;
+  box-shadow: $task-progressbar-shadow;
+
+  .contact-item {
+    display: block;
+    padding: 8px 0;
+    font-family: $recoleta-ff;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+#tooltip[data-show="true"] {
+  display: block;
+}

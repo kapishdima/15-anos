@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { SelectField } from "@/components";
 
 import { useFormContext } from "react-hook-form";
-import { VendorContacts, VendorContactsTypes } from "../../store/vendors.types";
+import {
+  VendorContact,
+  VendorContacts,
+  VendorContactsTypes,
+} from "../../../store/vendors.types";
 import { Phone } from "./types/Phone";
 import { Address } from "./types/Address";
 import { Email } from "./types/Email";
@@ -36,19 +40,13 @@ const contactsOptions: Option[] = [
 
 export const ContactsCreator: React.FC = () => {
   const { getValues } = useFormContext();
-  const contacts = getValues("contacts");
-
-  const defaultContacts: VendorContacts = Array.isArray(contacts)
-    ? contacts
-    : Object.values(contacts);
-
-  const contactsWithValues = defaultContacts.filter((c) => Boolean(c.contact));
-
-  console.log(defaultContacts);
+  const contacts: VendorContact[] = Array.isArray(getValues("contacts"))
+    ? getValues("contacts")
+    : [];
 
   const [selectedContacts, setSelectedContacts] = useState<
     VendorContactsTypes[]
-  >(contactsWithValues.map((c) => c.type || "phone") || []);
+  >(contacts?.map((c) => c.type || "phone") || []);
 
   const onContactSelect = (contact: any) => {
     setSelectedContacts((_contacts) => [..._contacts, contact]);

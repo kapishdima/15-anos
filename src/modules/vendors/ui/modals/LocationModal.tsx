@@ -11,12 +11,14 @@ import {
   CloseConfirmationModal,
 } from "@/components/modal/CloseConfirmationModal";
 
-export const LOCATION_MODAL_ID = "location_modal";
-const closeConfirmationModalId = `${LOCATION_MODAL_ID}_${CLOSE_CONFIRMATION_MODAL}`;
+type LocationModalProps = {
+  id: string;
+};
 
-export const LocationModal: React.FC = () => {
+export const LocationModal: React.FC<LocationModalProps> = ({ id }) => {
   const { t } = useTranslation();
   const { close, open } = useModal();
+  const closeConfirmationModalId = `${id}_${CLOSE_CONFIRMATION_MODAL}`;
 
   const [shouldCloseConfirmation, setShouldConfirmation] = useState(false);
 
@@ -25,13 +27,13 @@ export const LocationModal: React.FC = () => {
     if (shouldCloseConfirmation) {
       open(closeConfirmationModalId);
     } else {
-      close(LOCATION_MODAL_ID);
+      close(id);
     }
   };
 
   const onConfirmedClose = () => {
     close(closeConfirmationModalId);
-    close(LOCATION_MODAL_ID);
+    close(id);
     EventEmitter.dispatch(Events.CLOSE_MODAL);
   };
 
@@ -48,8 +50,8 @@ export const LocationModal: React.FC = () => {
   return (
     <>
       <Modal
-        id={LOCATION_MODAL_ID}
-        title={t("Your location")}
+        id={id}
+        title={t("City")}
         description={
           t(
             "To find local vendors mark your city on the map or enter its name"
@@ -63,7 +65,7 @@ export const LocationModal: React.FC = () => {
         <Map />
       </Modal>
       <CloseConfirmationModal
-        id={LOCATION_MODAL_ID}
+        id={id}
         onCancelClose={onCancelClose}
         onConfirmedClose={onConfirmedClose}
       />

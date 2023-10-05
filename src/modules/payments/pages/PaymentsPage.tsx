@@ -47,8 +47,8 @@ export const PaymentsIndex: React.FC = () => {
           title="Payments"
           actions={
             <>
-              <RemovePayment />
               <CreatePayment />
+              <RemovePayment />
             </>
           }
         />

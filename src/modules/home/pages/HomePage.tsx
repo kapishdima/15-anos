@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 
-import { useTranslation } from "react-i18next";
-
 import { Tabs, AppLayout, PageHeader } from "@components/index";
 
 import {
@@ -28,6 +26,10 @@ export const HomePage: React.FC = () => {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   return (
     <AppLayout loading={tasksLoading && categoriesLoading}>
       <div className="home-page">
@@ -35,8 +37,8 @@ export const HomePage: React.FC = () => {
           title="Tasks"
           actions={
             <>
-              <RemoveTask />
               <CreateTask />
+              <RemoveTask />
             </>
           }
         />

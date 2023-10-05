@@ -1,11 +1,16 @@
-import React, { PropsWithChildren, useEffect } from 'react';
-import { FieldValues, FormProvider, UseFormReset, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import React, { PropsWithChildren, useEffect } from "react";
+import {
+  FieldValues,
+  FormProvider,
+  UseFormReset,
+  useForm,
+} from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ObjectSchema } from 'yup';
-import classNames from 'classnames';
+import { ObjectSchema } from "yup";
+import classNames from "classnames";
 
-import { Events, EventEmitter } from '@app/transport/event-bus';
+import { Events, EventEmitter } from "@app/transport/event-bus";
 
 type FormProps = PropsWithChildren & {
   id?: string;
@@ -13,6 +18,7 @@ type FormProps = PropsWithChildren & {
   initialValues?: any;
   classes?: string;
   schema?: ObjectSchema<any>;
+  submitAfterDelay?: boolean;
 };
 
 export const Form: React.FC<FormProps> = ({
@@ -22,6 +28,7 @@ export const Form: React.FC<FormProps> = ({
   classes,
   schema,
   id,
+  submitAfterDelay,
 }) => {
   const form = useForm({
     defaultValues: initialValues,
@@ -49,12 +56,31 @@ export const Form: React.FC<FormProps> = ({
   }, []);
 
   useEffect(() => {
-    EventEmitter.dispatch(Events.FORM_MODIFY, { isDirty: form.formState.isDirty, id });
+    EventEmitter.dispatch(Events.FORM_MODIFY, {
+      isDirty: form.formState.isDirty,
+      id,
+    });
   }, [form.formState.isDirty]);
+
+  // useEffect(() => {
+  //   if (!submitAfterDelay) {
+  //     return;
+  //   }
+
+  //   const id = setTimeout(() => {
+  //     console.log("FORM");
+  //     onSubmit(form.getValues());
+  //   }, 3000);
+
+  //   return () => clearTimeout(id);
+  // }, []);
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(submit)} className={classNames('form-container', classes)}>
+      <form
+        onSubmit={form.handleSubmit(submit)}
+        className={classNames("form-container", classes)}
+      >
         {children}
       </form>
     </FormProvider>

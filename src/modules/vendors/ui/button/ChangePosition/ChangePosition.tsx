@@ -2,8 +2,10 @@ import { Button, useModal } from "@/components";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { LOCATION_MODAL_ID, LocationModal } from "../../modals/LocationModal";
+import { LocationModal } from "../../modals/LocationModal";
 import { clearPosition } from "@/modules/map/api/map";
+
+const CHANGE_LOCATION_MODAL_ID = "change_address_modal";
 
 export const ChangePosition: React.FC = () => {
   const { t } = useTranslation();
@@ -12,7 +14,7 @@ export const ChangePosition: React.FC = () => {
 
   const onClick = () => {
     clearPosition();
-    open(LOCATION_MODAL_ID);
+    open(CHANGE_LOCATION_MODAL_ID);
   };
 
   return (
@@ -22,7 +24,7 @@ export const ChangePosition: React.FC = () => {
           {t("Change the city")}
         </Button>
       </div>
-      <LocationModal />
+      <LocationModal id={CHANGE_LOCATION_MODAL_ID} />
     </>
   );
 };

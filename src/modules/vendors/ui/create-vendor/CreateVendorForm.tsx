@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, CategoriesSelect, TextAreaField } from "@/components";
 import { useTranslation } from "react-i18next";
-import { ContactsCreator } from "../contacts-creator/ContactsCreator";
+import { ContactsCreator } from "../contacts/creator/ContactsCreator";
 
 export const CreateVendorForm: React.FC = () => {
   const { t } = useTranslation();

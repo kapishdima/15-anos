@@ -1,6 +1,5 @@
 import { AppRoutes } from "@/app/router/routes";
 import { translated } from "@/app/utils/locale";
-import { truncateText } from "@/app/utils/text";
 import { IconButton, LikeIcon } from "@/components";
 import { useLike } from "@/modules/vendors/hooks/useLike";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
@@ -34,9 +33,12 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
       </div>
       <div className="vendor-card__content">
         <h3 className="vendor-card__title">{translated(title)}</h3>
-        <p className="vendor-card__description">
-          {translatedDescription.replaceAll("<n>", "\n")}
-        </p>
+        <p
+          className="vendor-card__description"
+          dangerouslySetInnerHTML={{
+            __html: translatedDescription.replaceAll("<n>", "<br/>"),
+          }}
+        ></p>
       </div>
       <div className="vendor-card__actions">
         <IconButton

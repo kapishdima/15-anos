@@ -6,7 +6,9 @@ import { Button, useModal } from "@/components";
 import { getPosition } from "@/modules/map/api/map";
 import { AppRoutes } from "@/app/router/routes";
 
-import { LocationModal, LOCATION_MODAL_ID } from "../../modals/LocationModal";
+import { LocationModal } from "../../modals/LocationModal";
+
+const SET_LOCATION_MODAL_ID = "set_location_modal";
 
 export const SearchVendorIntoMap = () => {
   const { t } = useTranslation();
@@ -15,7 +17,7 @@ export const SearchVendorIntoMap = () => {
   const position = getPosition();
 
   const onClick = () => {
-    open(LOCATION_MODAL_ID);
+    open(SET_LOCATION_MODAL_ID);
   };
 
   if (position) {
@@ -33,7 +35,7 @@ export const SearchVendorIntoMap = () => {
       <div className="search-vendor-bar">
         <Button onClick={onClick}>{t("Search for local vendors")}</Button>
       </div>
-      <LocationModal />
+      <LocationModal id={SET_LOCATION_MODAL_ID} />
     </>
   );
 };

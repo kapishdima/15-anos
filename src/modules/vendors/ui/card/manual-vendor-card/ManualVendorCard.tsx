@@ -8,6 +8,7 @@ import { SearchedVendor } from "@/modules/vendors/store/vendors.types";
 import { CreateVendorModal } from "../../create-vendor/CreateVendorModal";
 
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
+import { ContactViewer } from "../../contacts/viewer/ContactsViewer";
 
 type ManualVendorCardProps = SearchedVendor & {
   color: string;
@@ -56,11 +57,7 @@ export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
         title={title}
         icon={getCategoryImage(categoryId as any)}
         color={color}
-        extra={
-          Boolean(contacts?.length) ? (
-            <Button variant="success">{t("Contact")}</Button>
-          ) : undefined
-        }
+        extra={<ContactViewer contacts={contacts} />}
         onOpen={onOpen}
         onDelete={onDelete}
         hasVisibleIcon={false}

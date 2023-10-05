@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, Form, TextField, useModal } from "@/components";
 import { AppRoutes } from "@/app/router/routes";
-import { LOCATION_MODAL_ID } from "@/modules/vendors/ui/modals/LocationModal";
 
 import {
   getGeolocation,
@@ -16,12 +15,16 @@ import {
 type SearchAddressProps = {
   setCenter: (center: google.maps.LatLngLiteral) => void;
   setMarker: (position: google.maps.LatLng) => void;
+  setZoom: (zoom: number) => void;
   position: google.maps.LatLng | null;
 };
+
+const SET_LOCATION_MODAL_ID = "set_location_modal";
 
 export const SearchAddressForm: React.FC<SearchAddressProps> = ({
   setCenter,
   setMarker,
+  setZoom,
   position,
 }) => {
   const navigate = useNavigate();
@@ -32,6 +35,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
       const position = await getPositionFromAddress(values.address);
       setCenter(toPositionLiteral(position));
       setMarker(position);
+      setZoom(8);
     } catch (error) {
       toast.error(error as string);
     }
@@ -42,7 +46,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
       return toast.error("City not found");
     }
     navigate(AppRoutes.SEARCH_VENDORS);
-    close(LOCATION_MODAL_ID);
+    close(SET_LOCATION_MODAL_ID);
     savePosition(position);
     window.location.reload();
   };
@@ -67,6 +71,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
       <Form
         classes="search-address-form__container"
         onSubmit={searchAndApplyPosition}
+        submitAfterDelay
       >
         <TextField
           name="address"
@@ -76,7 +81,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
         />
         <div className="search-address-form__actions">
           <Button
-            appearance="ghost"
+            appearance="outline"
             variant="success"
             type="button"
             onClick={onGeolocationClick}

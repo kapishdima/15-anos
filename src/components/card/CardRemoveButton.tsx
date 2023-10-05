@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { AngleRightIcon, TrashIcon } from '../icons';
-import { IconButton } from '../button/IconButton/IconButton';
-import { Modal } from '../modal/Modal';
-import { useModal } from '../modal/useModal';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { AngleRightIcon, TrashIcon } from "../icons";
+import { IconButton } from "../button/IconButton/IconButton";
+import { Modal } from "../modal/Modal";
+import { useModal } from "../modal/useModal";
+import { useTranslation } from "react-i18next";
 
 type CardRemoveButtonProps = {
   id: string;
@@ -45,7 +45,8 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
             variant="error"
             classes="card__remove-button"
             onClick={openConfirmationModal}
-            loading={loading}>
+            loading={loading}
+          >
             <TrashIcon />
           </IconButton>
         )}
@@ -54,9 +55,9 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
         id={confirmationModalId}
         onConfirm={onConfirm}
         onCancel={onCancel}
-        title={t('Are you sure you want to delete?')}
-        confirmButtonText={t('Yes')}
-        cancelButtonText={t('No')}
+        title={t("Are you sure you want to delete?")}
+        confirmButtonText={t("Yes")}
+        cancelButtonText={t("No")}
         hasCloseIconButton={false}
       />
     </>

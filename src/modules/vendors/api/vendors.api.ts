@@ -8,7 +8,11 @@ import {
   updateDocument,
 } from "@/modules/firebase/firestore";
 
-import { SearchedVendor, VendorContact } from "../store/vendors.types";
+import {
+  SearchedVendor,
+  VendorContact,
+  VendorContacts,
+} from "../store/vendors.types";
 
 import { getEventId } from "@/modules/event";
 import { CloudFunctionsRoutes } from "@/app/constants/cloud-functions";
@@ -19,13 +23,15 @@ const toContacts = (vendor: SearchedVendor) => {
     ? vendor.contacts
     : Object.values(vendor.contacts);
 
-  const contactsWithRequiredFields = contactArray?.map(
-    (contact: VendorContact) => ({
+  const contactsWithRequiredFields = contactArray
+    ?.filter((contact: VendorContact) =>
+      Boolean(contact.contact && contact.contact.length)
+    )
+    .map((contact: VendorContact) => ({
       person: contact.person || "",
       type: contact.person || "",
       contact: contact.person || "",
-    })
-  );
+    }));
 
   return contactsWithRequiredFields;
 };
@@ -41,7 +47,21 @@ export const getManualVendors = async (): Promise<SearchedVendor[]> => {
     return [];
   }
 
-  return vendors;
+  return vendors.map((vendor) => {
+    const contacts = vendor.contacts;
+    const defaultContacts: VendorContacts = Array.isArray(contacts)
+      ? contacts
+      : Object.values(contacts);
+
+    const contactsWithValues = defaultContacts.filter((c) =>
+      Boolean(c.contact)
+    );
+
+    return {
+      ...vendor,
+      contacts: contactsWithValues,
+    };
+  });
 };
 
 export const addManualVendor = async (vendorData: any): Promise<void> => {

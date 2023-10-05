@@ -21,14 +21,16 @@ const render = (status: Status) => {
 
 export const Map: React.FC = () => {
   const [marker, setMarker] = React.useState<google.maps.LatLng | null>(null);
-  const [zoom, setZoom] = React.useState(3);
+  const [zoom, setZoom] = React.useState(2.58);
   const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
-    lat: 0,
-    lng: 0,
+    lat: 4.5651835,
+    lng: -85.0214022,
   });
 
   const onClick = (event: google.maps.MapMouseEvent) => {
     setMarker(event.latLng);
+    setCenter({ lat: event.latLng?.lat() || 0, lng: event.latLng?.lng() || 0 });
+    setZoom(8);
   };
 
   const onIdle = (map: google.maps.Map) => {
@@ -72,6 +74,7 @@ export const Map: React.FC = () => {
       <SearchAddressForm
         setCenter={setCenter}
         setMarker={setMarker}
+        setZoom={setZoom}
         position={marker}
       />
     </div>
