@@ -1,11 +1,11 @@
 import { Collections } from "@app/constants/collections";
 import {
   getSnapshotCollection,
-  getSnapshotDocument,
   pushData,
-  toDate,
   deleteDocument,
   updateDocument,
+  createDocumentWithAutoID,
+  toDate,
 } from "@/modules/firebase/firestore";
 
 import {
@@ -17,6 +17,9 @@ import {
 import { getEventId } from "@/modules/event";
 import { CloudFunctionsRoutes } from "@/app/constants/cloud-functions";
 import { httpsCallable, getFunctions } from "firebase/functions";
+import { getPosition } from "@/modules/map/api/map";
+import { Timestamp, where } from "firebase/firestore";
+import { Task } from "@/modules/tasks/store/tasks";
 
 const toContacts = (vendor: SearchedVendor) => {
   const contactArray: VendorContact[] = Array.isArray(vendor.contacts)
@@ -29,8 +32,8 @@ const toContacts = (vendor: SearchedVendor) => {
     )
     .map((contact: VendorContact) => ({
       person: contact.person || "",
-      type: contact.person || "",
-      contact: contact.person || "",
+      type: contact.type || "",
+      contact: contact.contact || "",
     }));
 
   return contactsWithRequiredFields;
@@ -67,11 +70,6 @@ export const getManualVendors = async (): Promise<SearchedVendor[]> => {
 export const addManualVendor = async (vendorData: any): Promise<void> => {
   const eventId = getEventId();
 
-  const callPostAction = httpsCallable(
-    getFunctions(),
-    CloudFunctionsRoutes.ADD_VENDOR_ACTION
-  );
-
   const contacts = toContacts(vendorData);
 
   const vendorPayload = {
@@ -79,16 +77,11 @@ export const addManualVendor = async (vendorData: any): Promise<void> => {
     contacts: contacts || [],
   };
 
-  await Promise.all([
-    await callPostAction({ vendorId: vendorData.id, action: "favourite" }),
-    await pushData(
-      Collections.EVENTS,
-      [eventId, Collections.MANUAL_VENDORS, vendorData.id || vendorData.title],
-      vendorPayload
-    ),
-  ]);
-
-  return;
+  return pushData(
+    Collections.EVENTS,
+    [eventId, Collections.MANUAL_VENDORS, vendorData.id || vendorData.title],
+    vendorPayload
+  );
 };
 
 export const sendVendorViewed = async (id: string): Promise<void> => {
@@ -103,22 +96,11 @@ export const sendVendorViewed = async (id: string): Promise<void> => {
 export const deleteVendor = async (id: string): Promise<void> => {
   const eventId = getEventId();
 
-  const callPostAction = httpsCallable(
-    getFunctions(),
-    CloudFunctionsRoutes.ADD_VENDOR_ACTION
-  );
-
-  await Promise.all([
-    await callPostAction({ vendorId: id, action: "-favourite" }),
-
-    await deleteDocument(Collections.EVENTS, [
-      eventId,
-      Collections.MANUAL_VENDORS,
-      id,
-    ]),
+  return deleteDocument(Collections.EVENTS, [
+    eventId,
+    Collections.MANUAL_VENDORS,
+    id,
   ]);
-
-  return;
 };
 
 export const updateVendor = (
@@ -134,9 +116,53 @@ export const updateVendor = (
     contacts: contacts || [],
   };
 
+  console.log("UPDATE", vendorPayload);
+
   return updateDocument(
     Collections.EVENTS,
     [eventId, Collections.MANUAL_VENDORS, id],
     vendorPayload
   );
+};
+
+export const likeVendor = async (vendorId: string) => {
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_VENDOR_ACTION
+  );
+
+  await callPostAction({ vendorId, action: "favourite" });
+};
+
+export const disslikeVendor = async (vendorId: string) => {
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_VENDOR_ACTION
+  );
+
+  await callPostAction({ vendorId, action: "-favourite" });
+};
+
+export const addVendorAction = async (vendorId: string, action: string) => {
+  const callPostAction = httpsCallable(
+    getFunctions(),
+    CloudFunctionsRoutes.ADD_VENDOR_ACTION
+  );
+
+  await callPostAction({ vendorId, action });
+};
+
+export const sendEmptyStatus = async (categoryId: string) => {
+  const eventId = getEventId();
+  const position = getPosition();
+
+  const emptyRequest = {
+    eventNumber: eventId,
+    latitude: position.lat,
+    longitude: position.lng,
+    categoryId,
+    date: Timestamp.fromDate(new Date()),
+  };
+
+  await createDocumentWithAutoID(Collections.EMPTY_VENDORS, [], emptyRequest);
 };

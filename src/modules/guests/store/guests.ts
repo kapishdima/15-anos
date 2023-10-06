@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 import {
   getGuests,
@@ -7,16 +7,16 @@ import {
   updateGuestStatus,
   removeGuest,
   createGuest,
-} from '../api/guests.api';
-import { exceptConfirmedGuests, filterGuestsByName } from './guests.selector';
+} from "../api/guests.api";
+import { exceptConfirmedGuests, filterGuestsByName } from "./guests.selector";
 
 export type GuestStatuses =
-  | 'none'
-  | 'invited'
-  | 'declined'
-  | 'confirmed'
-  | 'confirmedGuest'
-  | 'declinedGuest';
+  | "none"
+  | "invited"
+  | "declined"
+  | "confirmed"
+  | "confirmedGuest"
+  | "declinedGuest";
 
 export type Guest = {
   id: string;
@@ -41,6 +41,7 @@ export type GuestViewModal = {
 };
 
 export interface GuestsStore {
+  currentGuest: Guest | null;
   guests: Guest[];
   guestsForView: Guest[];
   total: number;
@@ -57,19 +58,22 @@ export interface GuestsStore {
   changeGuestStatus: (id: string, status: GuestStatuses) => Promise<void>;
   removeGuest: (id: string) => Promise<void>;
   searchGuest: (query: string) => void;
+  setCurrentGuest: (guest: Guest) => void;
+  clearCurrentGuest: () => void;
 }
 
 export const useGuestsStore = create<GuestsStore>()(
   devtools(
     persist(
       (set, get) => ({
+        currentGuest: null,
         guests: [],
         guestsForView: [],
         total: 0,
         confirmed: 0,
         loading: false,
         isRemoval: false,
-        guestInProcessing: '',
+        guestInProcessing: "",
         fetchGuests: async (force?: boolean) => {
           set(() => ({
             loading: true,
@@ -79,21 +83,30 @@ export const useGuestsStore = create<GuestsStore>()(
           const cachedGuestsForView = get().guestsForView;
 
           const hasCacheGuests = Boolean(cachedGuests && cachedGuests.length);
-          const hasCachedGuestsForView = Boolean(cachedGuestsForView && cachedGuestsForView.length);
+          const hasCachedGuestsForView = Boolean(
+            cachedGuestsForView && cachedGuestsForView.length
+          );
 
-          const guests = hasCacheGuests && !force ? cachedGuests : await getGuests();
+          const guests =
+            hasCacheGuests && !force ? cachedGuests : await getGuests();
 
           const total = guests.length;
-          const confirmed = guests.filter((guest) => guest.status === 'confirmed').length;
+          const confirmed = guests.filter(
+            (guest) => guest.status === "confirmed"
+          ).length;
 
-          const guestsForView = hasCachedGuestsForView && !force ? cachedGuestsForView : guests;
+          const guestsForView =
+            hasCachedGuestsForView && !force ? cachedGuestsForView : guests;
           const showConfirmed = JSON.parse(
-            new URLSearchParams(window.location.search).get('showCompleted') || 'true',
+            new URLSearchParams(window.location.search).get("showCompleted") ||
+              "true"
           );
 
           set(() => ({
             guests,
-            guestsForView: showConfirmed ? guestsForView : exceptConfirmedGuests(guests),
+            guestsForView: showConfirmed
+              ? guestsForView
+              : exceptConfirmedGuests(guests),
             loading: false,
             total,
             confirmed,
@@ -102,7 +115,7 @@ export const useGuestsStore = create<GuestsStore>()(
         showConfirmed: () =>
           set((state) => {
             const querySearch = new URLSearchParams(window.location.search);
-            const query = querySearch.get('q');
+            const query = querySearch.get("q");
 
             if (!query) {
               return {
@@ -119,7 +132,7 @@ export const useGuestsStore = create<GuestsStore>()(
         hideConfirmed: () =>
           set((state) => {
             const querySearch = new URLSearchParams(window.location.search);
-            const query = querySearch.get('q');
+            const query = querySearch.get("q");
 
             if (!query) {
               return {
@@ -143,13 +156,15 @@ export const useGuestsStore = create<GuestsStore>()(
 
             set((state) => {
               return {
-                guestsForView: state.guestsForView.filter((guest) => guest.id !== id),
+                guestsForView: state.guestsForView.filter(
+                  (guest) => guest.id !== id
+                ),
                 loading: false,
-                guestInProcessing: '',
+                guestInProcessing: "",
               };
             });
           } catch (error) {
-            set(() => ({ loading: false, guestInProcessing: '' }));
+            set(() => ({ loading: false, guestInProcessing: "" }));
           }
         },
 
@@ -168,9 +183,9 @@ export const useGuestsStore = create<GuestsStore>()(
           try {
             set(() => ({ loading: true, guestInProcessing: id }));
             await updateGuestStatus(id, get().guests, status);
-            set(() => ({ loading: false, guestInProcessing: '' }));
+            set(() => ({ loading: false, guestInProcessing: "" }));
           } catch (error) {
-            set(() => ({ loading: false, guestInProcessing: '' }));
+            set(() => ({ loading: false, guestInProcessing: "" }));
           }
         },
 
@@ -187,7 +202,9 @@ export const useGuestsStore = create<GuestsStore>()(
         searchGuest: (query: string) => {
           set((state) => {
             const querySearch = new URLSearchParams(window.location.search);
-            const showConfirmed = JSON.parse(querySearch.get('showCompleted') || 'true');
+            const showConfirmed = JSON.parse(
+              querySearch.get("showCompleted") || "true"
+            );
 
             const guests =
               showConfirmed === undefined || showConfirmed === true
@@ -199,14 +216,29 @@ export const useGuestsStore = create<GuestsStore>()(
             };
           });
         },
+        setCurrentGuest: (guest: Guest) => {
+          set(() => {
+            return {
+              currentGuest: guest,
+            };
+          });
+        },
+        clearCurrentGuest: () => {
+          set(() => {
+            return {
+              currentGuest: null,
+            };
+          });
+        },
       }),
       {
-        name: 'guests',
+        name: "guests",
         partialize: (state) => ({
           guests: state.guests,
           guestsForView: state.guestsForView,
+          currentGuest: state.currentGuest
         }),
-      },
-    ),
-  ),
+      }
+    )
+  )
 );

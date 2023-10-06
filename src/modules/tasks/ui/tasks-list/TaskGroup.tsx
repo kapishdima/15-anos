@@ -48,13 +48,9 @@ export const TaskGroup: React.FC<TaskGroupProps> = ({
               return (
                 <TaskCard
                   key={task.id}
-                  id={task.id}
-                  title={task.title}
-                  completed={task.isCompleted}
+                  task={task}
                   color={category?.color}
                   categoryId={category?.id || ""}
-                  date={task.date}
-                  notes={task.notes}
                   hint={hasCardHint ? formattedDate : undefined}
                   isRemoval={isRemoval}
                 />

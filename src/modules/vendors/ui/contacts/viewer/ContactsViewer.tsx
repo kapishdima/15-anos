@@ -10,9 +10,13 @@ import { Address } from "./types/Address";
 import { Email } from "./types/Email";
 import { Instagram } from "./types/Instagram";
 import { Facebook } from "./types/Facebook";
+import { Placement } from "@popperjs/core";
+import { Website } from "./types/Website";
 
 type ContactViewerProps = {
   contacts: VendorContacts;
+  placement?: Placement;
+  buttonText?: string;
 };
 
 const contactsComponents = {
@@ -21,16 +25,21 @@ const contactsComponents = {
   address: Address,
   facebook: Facebook,
   instagram: Instagram,
+  website: Website,
 };
 
-export const ContactViewer: React.FC<ContactViewerProps> = ({ contacts }) => {
+export const ContactViewer: React.FC<ContactViewerProps> = ({
+  contacts,
+  placement = "bottom-end",
+  buttonText = "Contact",
+}) => {
   const { t } = useTranslation();
 
   const [opened, setOpened] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: "bottom-end",
+    placement,
     modifiers: [
       {
         name: "offset",
@@ -57,7 +66,7 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({ contacts }) => {
         onClick={toogleOpened}
         propagateEvent={false}
       >
-        {t("Contact")}
+        {t(buttonText)}
       </Button>
       <div
         id="tooltip"

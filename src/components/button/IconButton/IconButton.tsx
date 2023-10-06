@@ -15,6 +15,7 @@ type IconButtonProps = PropsWithChildren & {
   classes?: string;
   loading?: boolean;
   loadingVariant?: SpinnerVariant;
+  propagateEvent?: boolean;
 };
 
 export const IconButton: React.FC<IconButtonProps> = ({
@@ -26,10 +27,13 @@ export const IconButton: React.FC<IconButtonProps> = ({
   appearance = "filled",
   loadingVariant = "white",
   size = "md",
+  propagateEvent = true,
 }) => {
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+    if (!propagateEvent) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
 
     if (onClick) {
       onClick();

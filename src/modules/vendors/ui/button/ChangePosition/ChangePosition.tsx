@@ -1,20 +1,16 @@
-import { Button, useModal } from "@/components";
 import React from "react";
+import { Button } from "@/components";
 import { useTranslation } from "react-i18next";
 
-import { LocationModal } from "../../modals/LocationModal";
-import { clearPosition } from "@/modules/map/api/map";
-
-const CHANGE_LOCATION_MODAL_ID = "change_address_modal";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "@/app/router/routes";
 
 export const ChangePosition: React.FC = () => {
   const { t } = useTranslation();
-
-  const { open } = useModal();
+  const navigate = useNavigate();
 
   const onClick = () => {
-    clearPosition();
-    open(CHANGE_LOCATION_MODAL_ID);
+    navigate(AppRoutes.SET_USER_LOCATION);
   };
 
   return (
@@ -24,7 +20,6 @@ export const ChangePosition: React.FC = () => {
           {t("Change the city")}
         </Button>
       </div>
-      <LocationModal id={CHANGE_LOCATION_MODAL_ID} />
     </>
   );
 };

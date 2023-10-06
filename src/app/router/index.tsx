@@ -4,9 +4,16 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { AppRoutes } from "./routes";
 
 import { CreateProfilePage, LoginPage } from "@modules/auth";
-import { HomePage } from "@modules/home/";
-import { PaymentsIndex } from "@/modules/payments";
-import { GuestsIndex } from "@/modules/guests";
+import {
+  CreatePaymentPage,
+  PaymentsIndex,
+  UpdatePaymentPage,
+} from "@/modules/payments";
+import {
+  CreateGuestPage,
+  GuestsIndex,
+  UpdateGuestPage,
+} from "@/modules/guests";
 import {
   PurchaseBestIdeas,
   PurchasesIndex,
@@ -18,9 +25,16 @@ import { WeddingProfileIndex } from "@/modules/administrative/wedding-profile";
 import { RegionSettingsIndex } from "@/modules/administrative/region-settings";
 import { DesignSettingsIndex } from "@/modules/administrative/design-settings";
 
-import { SignleTaskPage } from "@/modules/tasks/pages/SignleTaskPage";
 import { PostsIndex, SinglePost } from "@/modules/posts";
-import { SingleVendor, VendorsIndex, VendorsList } from "@/modules/vendors";
+import {
+  SingleVendor,
+  VendorsIndex,
+  ResultSearchVendors,
+  CreateVendorPage,
+  UpdateVendorPage,
+  SetUserLocationPage,
+} from "@/modules/vendors";
+import { CreateTaskPage, UpdateTaskPage, TasksListPage } from "@/modules/tasks";
 
 export const router = createBrowserRouter([
   {
@@ -35,15 +49,23 @@ export const router = createBrowserRouter([
     path: AppRoutes.ROOT,
     element: (
       <ProtectedRoute>
-        <HomePage />
+        <TasksListPage />
       </ProtectedRoute>
     ),
   },
   {
-    path: AppRoutes.SINGLE_TASK,
+    path: AppRoutes.CREATE_TASK,
     element: (
       <ProtectedRoute>
-        <SignleTaskPage />
+        <CreateTaskPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.UPDATE_TASK,
+    element: (
+      <ProtectedRoute>
+        <UpdateTaskPage />
       </ProtectedRoute>
     ),
   },
@@ -56,10 +78,42 @@ export const router = createBrowserRouter([
     ),
   },
   {
+    path: AppRoutes.CREATE_PAYMENT,
+    element: (
+      <ProtectedRoute>
+        <CreatePaymentPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.UPDATE_PAYMENT,
+    element: (
+      <ProtectedRoute>
+        <UpdatePaymentPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: AppRoutes.GUESTS_LIST,
     element: (
       <ProtectedRoute>
         <GuestsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.CREATE_GUEST,
+    element: (
+      <ProtectedRoute>
+        <CreateGuestPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.UPDATE_GUEST,
+    element: (
+      <ProtectedRoute>
+        <UpdateGuestPage />
       </ProtectedRoute>
     ),
   },
@@ -147,7 +201,7 @@ export const router = createBrowserRouter([
     path: `${AppRoutes.SEARCH_VENDORS}`,
     element: (
       <ProtectedRoute>
-        <VendorsList />
+        <ResultSearchVendors />
       </ProtectedRoute>
     ),
   },
@@ -156,6 +210,30 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <SingleVendor />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.CREATE_VENDOR}`,
+    element: (
+      <ProtectedRoute>
+        <CreateVendorPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.UPDATE_VENDOR}`,
+    element: (
+      <ProtectedRoute>
+        <UpdateVendorPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.SET_USER_LOCATION}`,
+    element: (
+      <ProtectedRoute>
+        <SetUserLocationPage />
       </ProtectedRoute>
     ),
   },

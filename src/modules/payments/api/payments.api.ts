@@ -25,11 +25,7 @@ export const getPayments = async (): Promise<PaymentViewModal[]> => {
     return [];
   }
 
-  console.log(payments);
-
   return payments.map((payment) => {
-    console.log("was paid", payment.title, payment.wasPaid);
-
     return {
       ...payment,
       isCompleted: payment.wasPaid,
@@ -80,7 +76,7 @@ export const createPayment = async (payload: any) => {
     status: "undone",
     completed: fromDate(payload.date),
     date: fromDate(payload.date),
-    vendorId: "none",
+    vendorId: payload.vendorId || "none",
     referencedShoppingItem: "",
   };
   return pushData(

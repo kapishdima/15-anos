@@ -14,7 +14,7 @@ import {
 
 import { useCategoriesStore } from "@modules/categories";
 
-export const HomePage: React.FC = () => {
+export const TasksListPage: React.FC = () => {
   const fetchTasks = useTasksStore((state) => state.fetchTasks);
   const tasksLoading = useTasksStore((state) => state.loading);
 

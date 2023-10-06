@@ -1,99 +1,95 @@
-import React from 'react';
+import React from "react";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { Card, useModal } from '@/components';
-import { usePaymentsStore } from '@modules/payments';
-import { getCategoryImage } from '@/app/utils/category-icon';
+import { Card } from "@/components";
+import { usePaymentsStore } from "@modules/payments";
+import { getCategoryImage } from "@/app/utils/category-icon";
 
-import { CreatePaymentModal } from '../create-payment/CreatePaymentModal';
-import { createPaymentSchemaValidation } from '../../validations/payments.schema';
-import { CreatePaymentActions } from '../buttons/CreatePaymentActions';
-import { Translated } from '@/app/utils/locale';
+import { PaymentViewModal } from "../../store/payments";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "@/app/router/routes";
 
 type PaymentCardProps = {
-  id: string;
-  title: Translated;
+  payment: PaymentViewModal;
   categoryId: string;
-  date: Date;
-  pay: number;
-  paid: number;
-  notes: string;
   color?: string;
   hint?: string;
   isRemoval?: boolean;
-  isCompleted?: boolean;
-  completedDate?: string;
+  onUpdateStatusSuccess?: () => void;
 };
 
 export const PaymentCard: React.FC<PaymentCardProps> = ({
-  id,
-  title,
-  categoryId,
-  date,
-  notes,
+  payment,
   isRemoval,
+  categoryId,
   hint,
-  paid,
-  pay,
-  isCompleted,
-  completedDate,
-  color = '#db5b78',
+  onUpdateStatusSuccess,
+  color = "#db5b78",
 }) => {
   const { t } = useTranslation();
-  const PAYMENT_MODAL_ID = `payment-modal-${id}`;
+  const navigate = useNavigate();
 
+  const formatCompletedDate = t("Format Date", {
+    date: new Date(payment.completed),
+  });
+
+  const setCurrentPayment = usePaymentsStore(
+    (state) => state.setCurrentPayment
+  );
   const removePayment = usePaymentsStore((state) => state.removePayment);
   const fetchPayments = usePaymentsStore((state) => state.fetchPayments);
-  const updatePayment = usePaymentsStore((state) => state.updatePayment);
-  const changePaymentStatus = usePaymentsStore((state) => state.changePaymentStatus);
+  const changePaymentStatus = usePaymentsStore(
+    (state) => state.changePaymentStatus
+  );
+  const paymentProccessingId = usePaymentsStore(
+    (state) => state.paymentInProcessing
+  );
 
   const loading = usePaymentsStore((state) => state.loading);
 
-  const { open, close } = useModal();
-
   const onOpen = () => {
-    open(PAYMENT_MODAL_ID);
+    setCurrentPayment(payment);
+    navigate(AppRoutes.UPDATE_PAYMENT);
   };
 
-  const onDelete = (id: string) => {
-    removePayment(id);
+  const onDelete = () => {
+    removePayment(payment.id);
     fetchPayments(/*force*/ true);
   };
 
-  const onUpdatePayment = async (values: any) => {
-    await updatePayment(id, values);
-    close(PAYMENT_MODAL_ID);
+  const onUpdatePaymentStatus = async () => {
+    const status = payment.isCompleted ? "not_paid" : "paid";
+    await changePaymentStatus(payment.id, payment.pay, status);
     fetchPayments(/*force*/ true);
-  };
-
-  const onUpdatePaymentStatus = async (id: string) => {
-    const status = isCompleted ? 'not_paid' : 'paid';
-    await changePaymentStatus(id, pay, status);
-    close(PAYMENT_MODAL_ID);
-    fetchPayments(/*force*/ true);
+    if (onUpdateStatusSuccess) {
+      onUpdateStatusSuccess();
+    }
   };
 
   return (
     <>
       <Card
-        id={id}
-        title={title}
+        id={payment.id}
+        title={payment.title}
         icon={getCategoryImage(categoryId as any)}
         color={color}
-        completed={isCompleted}
+        completed={payment.isCompleted}
         removal={isRemoval}
         onOpen={onOpen}
         onDelete={onDelete}
         onIconClick={onUpdatePaymentStatus}
         hint={hint}
-        showHint={!isCompleted}
-        showDescription={paid > 0}
+        showHint={!payment.isCompleted}
+        showDescription={payment.paid > 0}
+        loading={loading && paymentProccessingId === payment.id}
         description={
-          isCompleted ? `${t('Paid')} ${completedDate}` : `${t('Already paid')}: ${paid} $`
+          payment.isCompleted
+            ? `${t("Paid")} ${formatCompletedDate}`
+            : `${t("Already paid")}: ${payment.paid} $`
         }
       />
-      <CreatePaymentModal
+      {/* <CreatePaymentModal
         id={PAYMENT_MODAL_ID}
         paymentId={id}
         initialValues={{
@@ -116,7 +112,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
         }
         hasDeleteButton
         hasConfirmButton={false}
-      />
+      /> */}
     </>
   );
 };

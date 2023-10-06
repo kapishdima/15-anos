@@ -11,6 +11,7 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
   placeholder,
   label,
   capitilizedInput = false,
+  variant,
 }) => {
   return (
     <Input name={name}>
@@ -25,7 +26,7 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
             <textarea
               id={name}
               placeholder={placeholder || ""}
-              className={classNames("form-field", "text-form-field", {
+              className={classNames("form-field", "text-form-field", variant, {
                 "form-field--capitalized": capitilizedInput,
               })}
               name={field.value}

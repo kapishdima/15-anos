@@ -10,8 +10,10 @@ import WontComeIcon from "@image/icons/wont_come.svg";
 import { GuestsStatus } from "../buttons/GuestStatus";
 import { CreateGuestModal } from "../create-guest/CreateGuestModal";
 import { createGuestSchemaValidation } from "../../validation/guests.schema";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "@/app/router/routes";
 
-type GuestCardProps = Guest & {};
+type GuestCardProps = { guest: Guest };
 
 const statusesIcons = {
   none: QuestionIcon,
@@ -31,45 +33,31 @@ const statusColors = {
   declinedGuest: "e74c3c",
 };
 
-export const GuestCard: React.FC<GuestCardProps> = ({
-  id,
-  name,
-  status,
-  guests,
-  kids,
-  nameGuest,
-  guestsGuest,
-  kidsGuest,
-}) => {
-  const GUEST_MODAL_ID = `guest-modal-${id}`;
+export const GuestCard: React.FC<GuestCardProps> = ({ guest }) => {
+  const { id, name, status, guests, kids } = guest;
 
   const guestsTitle = guests > 0 ? ` +${guests}` : "";
   const kidsTitle = kids > 0 ? ` +${kids} (kids)` : "";
   const cardTitle =
     name + guestsTitle + (guestsTitle && kidsTitle ? ", " : "") + kidsTitle;
 
-  const { open, close } = useModal();
+  const navigate = useNavigate();
 
+  const setCurrentGuest = useGuestsStore((state) => state.setCurrentGuest);
   const removeGuest = useGuestsStore((state) => state.removeGuest);
   const fetchGuests = useGuestsStore((state) => state.fetchGuests);
-  const updateGuest = useGuestsStore((state) => state.updateGuest);
   const changeGuestStatus = useGuestsStore((state) => state.changeGuestStatus);
-  const isRemoval = useGuestsStore((state) => state.isRemoval);
 
+  const isRemoval = useGuestsStore((state) => state.isRemoval);
   const loading = useGuestsStore((state) => state.loading);
 
   const onOpen = () => {
-    open(GUEST_MODAL_ID);
+    setCurrentGuest(guest);
+    navigate(AppRoutes.UPDATE_GUEST);
   };
 
   const onDelete = (id: string) => {
     removeGuest(id);
-    fetchGuests(/*force*/ true);
-  };
-
-  const onUpdateGuest = async (values: any) => {
-    await updateGuest(id, values);
-    close(GUEST_MODAL_ID);
     fetchGuests(/*force*/ true);
   };
 
@@ -91,23 +79,6 @@ export const GuestCard: React.FC<GuestCardProps> = ({
         hoverable={false}
         loading={loading}
         removal={isRemoval}
-      />
-      <CreateGuestModal
-        id={GUEST_MODAL_ID}
-        guestId={id}
-        initialValues={{
-          name,
-          status,
-          guests,
-          kids,
-          nameGuest,
-          guestsGuest,
-          kidsGuest,
-        }}
-        onSubmit={onUpdateGuest}
-        loading={loading}
-        validation={createGuestSchemaValidation}
-        hasDeleteButton
       />
     </>
   );

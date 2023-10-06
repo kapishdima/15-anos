@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { AngleRightIcon, TrashIcon } from "../icons";
 import { IconButton } from "../button/IconButton/IconButton";
 import { Modal } from "../modal/Modal";
@@ -46,6 +46,7 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
             classes="card__remove-button"
             onClick={openConfirmationModal}
             loading={loading}
+            propagateEvent={false}
           >
             <TrashIcon />
           </IconButton>

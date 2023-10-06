@@ -28,11 +28,13 @@ export const Phone = ({
             name={`contacts.${index}.person`}
             placeholder="Contact person"
             label="Contact person"
+            variant="filled"
           />
           <TextField
             name={`contacts.${index}.contact`}
             label="Phone number"
             placeholder="Phone number"
+            variant="filled"
           />
         </div>
       </div>

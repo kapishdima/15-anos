@@ -25,9 +25,12 @@ export const ManualVendorsList: React.FC = () => {
         const category = getCategoryById(categoriesStore.categories, group);
         return (
           <>
-            <h4 className="manual-vendors-list__title">{group}</h4>
+            <h4 className="manual-vendors-list__title" key={group}>
+              {group}
+            </h4>
             {groupedVendors[group].map((vendor) => (
               <ManualVendorCard
+                key={vendor.id}
                 isRemoval={isRemoval}
                 color={category?.color || "83dd8b"}
                 {...vendor}

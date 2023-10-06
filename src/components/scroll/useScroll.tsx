@@ -50,14 +50,11 @@ export const useScroll = (
 
   const scrollIntoElement = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
-    // console.log(target);
-    // const rect = target.getBoundingClientRect();
     target.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
       inline: "center",
     });
-    // scroll(rect.width);
   };
 
   const hasNext =

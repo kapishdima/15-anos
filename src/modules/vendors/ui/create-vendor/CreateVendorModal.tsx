@@ -3,12 +3,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FieldValues, UseFormReset } from "react-hook-form";
 
-import { Dialog } from "@/components";
+import { Button, Dialog, useModal } from "@/components";
 import { CreateVendorForm } from "./CreateVendorForm";
+import { useVendorsStore } from "../../store/vendors.store";
 
 type CreateVendorModalProps = {
   id: string;
-  taskId?: string;
+  vendorId?: string;
   initialValues?: any;
   onSubmit: (values: any) => void;
   loading?: boolean;
@@ -27,7 +28,7 @@ const defaultValues = {
 
 export const CreateVendorModal: React.FC<CreateVendorModalProps> = ({
   id,
-  taskId,
+  vendorId,
   initialValues,
   loading,
   validation,
@@ -37,7 +38,14 @@ export const CreateVendorModal: React.FC<CreateVendorModalProps> = ({
   hasConfirmButton = true,
 }) => {
   const { t } = useTranslation();
+  const { close } = useModal();
 
+  const removeManualVendor = useVendorsStore(
+    (state) => state.removeManualVendor
+  );
+  const fetchManualVendors = useVendorsStore(
+    (state) => state.fetchManualVendor
+  );
   const submit = (values: any, reset?: UseFormReset<FieldValues>) => {
     onSubmit(values);
     if (reset) {
@@ -45,13 +53,14 @@ export const CreateVendorModal: React.FC<CreateVendorModalProps> = ({
     }
   };
 
-  //   const onDelete = () => {
-  //     if (!taskId) {
-  //       return;
-  //     }
-  //     removeTask(taskId);
-  //     fetchTasks(/*force*/ true);
-  //   };
+  const onDelete = () => {
+    if (!vendorId) {
+      return;
+    }
+    close(id);
+    removeManualVendor(vendorId);
+    fetchManualVendors(/*force*/ true);
+  };
 
   return (
     <Dialog
@@ -64,19 +73,19 @@ export const CreateVendorModal: React.FC<CreateVendorModalProps> = ({
       initialValues={initialValues || defaultValues}
       onSubmit={submit}
       validation={validation}
-      //   actions={
-      //     <>
-      //       {hasDeleteButton ? (
-      //         <Button variant="error" onClick={onDelete}>
-      //           {t("Delete")}
-      //         </Button>
-      //       ) : null}
-      //       {actions}
-      //     </>
-      //   }
+      actions={
+        <>
+          {hasDeleteButton ? (
+            <Button variant="error" onClick={onDelete}>
+              {t("Delete")}
+            </Button>
+          ) : null}
+          {actions}
+        </>
+      }
       hasConfirmButton={hasConfirmButton}
     >
-      <CreateVendorForm />
+      {/* <CreateVendorForm /> */}
     </Dialog>
   );
 };

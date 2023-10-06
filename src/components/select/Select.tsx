@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState, MouseEvent } from 'react';
+import React, { useEffect, useRef, useState, MouseEvent } from "react";
 
-import classNames from 'classnames';
-import { useClickOutside } from '@components/index';
-import { useTranslation } from 'react-i18next';
+import classNames from "classnames";
+import { useClickOutside } from "@components/index";
+import { useTranslation } from "react-i18next";
 
 export type Option = {
   icon?: string | JSX.Element;
@@ -15,7 +15,8 @@ type SelectProps = {
   onSelect?: (value: string) => void;
   placeholder?: string;
   defaultSelected?: string;
-  variant?: 'select' | 'button';
+  appearence?: "select" | "button";
+  variant?: "filled" | "outline";
   invalid?: boolean;
   showSelectedValue?: boolean;
 };
@@ -27,11 +28,14 @@ export const Select: React.FC<SelectProps> = ({
   defaultSelected,
   invalid,
   showSelectedValue = true,
-  variant = 'select',
+  appearence = "select",
+  variant = "outline",
 }) => {
   const { t } = useTranslation();
   const [selected, setSelected] = useState<Option | null>(
-    options.find((option) => option.value.toLowerCase() === defaultSelected?.toLowerCase()) || null,
+    options.find(
+      (option) => option.value.toLowerCase() === defaultSelected?.toLowerCase()
+    ) || null
   );
   const [opened, setOpened] = useState(false);
   const select = useRef<HTMLDivElement>(null);
@@ -61,25 +65,35 @@ export const Select: React.FC<SelectProps> = ({
     }
 
     setSelected(
-      options.find((option) => option.value.toLowerCase() === defaultSelected?.toLowerCase()) ||
-        null,
+      options.find(
+        (option) =>
+          option.value.toLowerCase() === defaultSelected?.toLowerCase()
+      ) || null
     );
   }, [defaultSelected]);
 
   return (
-    <div className={classNames('select', { opened })} ref={select}>
+    <div className={classNames("select", { opened })} ref={select}>
       <div
-        className={classNames('select-field', `select-field__${variant}`, {
-          'select-field--error': invalid,
-        })}
-        onClick={toggle}>
+        className={classNames(
+          "select-field",
+          `select-field__${appearence}`,
+          `select-field__${variant}`,
+          {
+            "select-field--error": invalid,
+          }
+        )}
+        onClick={toggle}
+      >
         {selected && showSelectedValue ? (
           <div className="select-value">
             <div className="select-value__icon">{selected.icon}</div>
             <div className="select-value__text">{t(selected.label)}</div>
           </div>
         ) : (
-          <div className="select-placeholder">{t(placeholder || '') || ''} </div>
+          <div className="select-placeholder">
+            {t(placeholder || "") || ""}{" "}
+          </div>
         )}
       </div>
       <div className="select-dropdown">
@@ -92,13 +106,16 @@ export const Select: React.FC<SelectProps> = ({
                 event.preventDefault();
                 event.stopPropagation();
                 onOptionClick(option);
-              }}>
-              {option.icon && <div className="select-option-icon">{option.icon}</div>}
+              }}
+            >
+              {option.icon && (
+                <div className="select-option-icon">{option.icon}</div>
+              )}
               <div className="select-option-label">{t(option.label)}</div>
             </div>
           ))
         ) : (
-          <div className="select-dropdown__empty">{t('Empty')}</div>
+          <div className="select-dropdown__empty">{t("Empty")}</div>
         )}
       </div>
     </div>

@@ -5,7 +5,6 @@ import { SelectField } from "@/components";
 import { useFormContext } from "react-hook-form";
 import {
   VendorContact,
-  VendorContacts,
   VendorContactsTypes,
 } from "../../../store/vendors.types";
 import { Phone } from "./types/Phone";
@@ -13,6 +12,7 @@ import { Address } from "./types/Address";
 import { Email } from "./types/Email";
 import { Instagram } from "./types/Instagram";
 import { Facebook } from "./types/Facebook";
+import { Website } from "./types/Website";
 
 import { Option } from "@/components/select/Select";
 
@@ -21,6 +21,7 @@ import EmailIcon from "@/image/icons/mail.svg";
 import FacebookIcon from "@/image/icons/facebook.svg";
 import InstagramIcon from "@/image/icons/instagram.svg";
 import PhoneIcon from "@/image/icons/phone.svg";
+import WebsiteIcon from "@/image/icons/website.svg";
 
 const contactsComponents = {
   phone: Phone,
@@ -28,6 +29,7 @@ const contactsComponents = {
   address: Address,
   facebook: Facebook,
   instagram: Instagram,
+  website: Website,
 };
 
 const contactsOptions: Option[] = [
@@ -36,6 +38,7 @@ const contactsOptions: Option[] = [
   { value: "address", label: "Address", icon: <img src={AddressIcon} /> },
   { value: "facebook", label: "Facebook", icon: <img src={FacebookIcon} /> },
   { value: "instagram", label: "Instagram", icon: <img src={InstagramIcon} /> },
+  { value: "website", label: "Website", icon: <img src={WebsiteIcon} /> },
 ];
 
 export const ContactsCreator: React.FC = () => {
@@ -76,6 +79,7 @@ export const ContactsCreator: React.FC = () => {
         placeholder="Add a contact"
         name={""}
         label="Select contact type"
+        variant="filled"
       />
     </>
   );

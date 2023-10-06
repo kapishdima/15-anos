@@ -102,13 +102,21 @@
     border-color: $errorColor;
   }
 
-  .select-field__select {
-    width: 100%;
-    padding: $input-padding-y $input-padding-x;
+  .select-field__filled {
+    background-color: #fff;
+    border: 1px solid #cbcbcb;
+    border-radius: 12px;
+  }
 
+  .select-field__outline {
     background-color: transparent;
     border: 1px solid #cbcbcb;
     border-radius: 12px;
+  }
+
+  .select-field__select {
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
   }
 
   .select-field__button {

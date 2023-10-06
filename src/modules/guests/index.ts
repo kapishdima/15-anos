@@ -1,3 +1,5 @@
-import { GuestsIndex } from './pages/GuestsIndex';
+import { GuestsIndex } from "./pages/GuestsIndex";
+import { CreateGuestPage } from "./pages/CreateGuestPage";
+import { UpdateGuestPage } from "./pages/UpdateGuestPage";
 
-export { GuestsIndex };
+export { GuestsIndex, CreateGuestPage, UpdateGuestPage };

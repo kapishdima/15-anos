@@ -28,6 +28,7 @@ export const Instagram = ({
             name={`contacts.${index}.contact`}
             placeholder="Instagram"
             label="Instagram"
+            variant="filled"
           />
         </div>
       </div>

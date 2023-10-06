@@ -11,6 +11,7 @@ import { ObjectSchema } from "yup";
 import classNames from "classnames";
 
 import { Events, EventEmitter } from "@app/transport/event-bus";
+import { useDebounce } from "usehooks-ts";
 
 type FormProps = PropsWithChildren & {
   id?: string;
@@ -34,6 +35,8 @@ export const Form: React.FC<FormProps> = ({
     defaultValues: initialValues,
     resolver: schema ? yupResolver(schema) : undefined,
   });
+
+  const debouncedValue = useDebounce<any>(form.getValues(), 3000);
 
   const submit = (values: any) => {
     onSubmit(values, form.reset);
@@ -61,19 +64,6 @@ export const Form: React.FC<FormProps> = ({
       id,
     });
   }, [form.formState.isDirty]);
-
-  // useEffect(() => {
-  //   if (!submitAfterDelay) {
-  //     return;
-  //   }
-
-  //   const id = setTimeout(() => {
-  //     console.log("FORM");
-  //     onSubmit(form.getValues());
-  //   }, 3000);
-
-  //   return () => clearTimeout(id);
-  // }, []);
 
   return (
     <FormProvider {...form}>

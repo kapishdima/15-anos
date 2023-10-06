@@ -5,6 +5,8 @@ import { AddFilledIcon, IconButton, useModal } from "@components/index";
 import { Protected, RoleActions } from "@modules/roles";
 import { CreateVendorModal } from "../../create-vendor/CreateVendorModal";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
+import { Link } from "react-router-dom";
+import { AppRoutes } from "@/app/router/routes";
 
 export const CREATE_VENDOR_MODAL = "create_vendor";
 
@@ -27,14 +29,16 @@ export const CreateVendor: React.FC = () => {
 
   return (
     <Protected action={RoleActions.CREATE_TASK}>
-      <IconButton appearance="filled" variant="white" onClick={onClick}>
-        <AddFilledIcon />
-      </IconButton>
-      <CreateVendorModal
+      <Link to={AppRoutes.CREATE_VENDOR}>
+        <IconButton appearance="filled" variant="white">
+          <AddFilledIcon />
+        </IconButton>
+      </Link>
+      {/* <CreateVendorModal
         id={CREATE_VENDOR_MODAL}
         onSubmit={createVendor}
         loading={loading}
-      />
+      /> */}
     </Protected>
   );
 };

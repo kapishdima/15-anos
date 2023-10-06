@@ -1,5 +1,11 @@
-import React from 'react';
-import { ConfirmedIcon, InvitedIcon, QuestionIcon, Select, WontComeIcon } from '@/components';
+import React from "react";
+import {
+  ConfirmedIcon,
+  InvitedIcon,
+  QuestionIcon,
+  Select,
+  WontComeIcon,
+} from "@/components";
 
 type GuestStatusesSelectProps = {
   onSelect?: (value: string) => void;
@@ -7,10 +13,14 @@ type GuestStatusesSelectProps = {
 };
 
 const statuses = [
-  { value: 'none', label: 'Not invited', icon: <QuestionIcon /> },
-  { value: 'invited', label: 'Invited', icon: <InvitedIcon /> },
-  { value: 'declined', label: "Wont't come", icon: <WontComeIcon /> },
-  { value: 'confirmed', label: 'Confirmed participation', icon: <ConfirmedIcon /> },
+  { value: "none", label: "Not invited", icon: <QuestionIcon /> },
+  { value: "invited", label: "Invited", icon: <InvitedIcon /> },
+  { value: "declined", label: "Wont't come", icon: <WontComeIcon /> },
+  {
+    value: "confirmed",
+    label: "Confirmed participation",
+    icon: <ConfirmedIcon />,
+  },
 ];
 
 export const GuestStatusesSelect: React.FC<GuestStatusesSelectProps> = ({
@@ -22,7 +32,7 @@ export const GuestStatusesSelect: React.FC<GuestStatusesSelectProps> = ({
       options={statuses}
       onSelect={onSelect}
       placeholder="Status"
-      variant="button"
+      appearence="button"
       showSelectedValue={false}
       defaultSelected={defaultSelect}
     />

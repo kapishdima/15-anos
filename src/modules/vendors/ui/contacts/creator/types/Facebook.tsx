@@ -28,6 +28,7 @@ export const Facebook = ({
             name={`contacts.${index}.contact`}
             placeholder="Facebook"
             label="Facebook"
+            variant="filled"
           />
         </div>
       </div>

@@ -13,11 +13,13 @@ export const CreateVendorForm: React.FC = () => {
         label={t("Name")}
         placeholder={t("Name")}
         capitilizedInput
+        variant="filled"
       />
       <CategoriesSelect
         name="categoryId"
         label={t("Select category")}
         placeholder={t("Select category")}
+        variant="filled"
       />
       <ContactsCreator />
       <TextAreaField
@@ -25,6 +27,7 @@ export const CreateVendorForm: React.FC = () => {
         label={t("Notes")}
         placeholder={t("Enter notes")}
         capitilizedInput
+        variant="filled"
       />
     </>
   );

@@ -7,43 +7,41 @@ import { useTranslation } from "react-i18next";
 import { ToggleTaskStatus } from "../ToggleTaskStatus/ToggleTaskStatus";
 
 type CreateTaskActionsProps = {
-  modalId: string;
   isCompleted: boolean;
+  loading: boolean;
   updateTaskStatus: () => void;
 };
 
 export const CreateTaskActions: React.FC<CreateTaskActionsProps> = ({
-  modalId,
   isCompleted,
+  loading,
   updateTaskStatus,
 }) => {
   const { t } = useTranslation();
   const [showConfirmButton, setShowConfirmButton] = useState(false);
 
   useEffect(() => {
-    EventEmitter.subscribe(Events.FORM_MODIFY, ({ isDirty, id }) => {
-      if (id === modalId) {
-        setShowConfirmButton(isDirty);
-      }
+    EventEmitter.subscribe(Events.FORM_MODIFY, ({ isDirty }) => {
+      setShowConfirmButton(isDirty);
     });
   }, []);
   return (
     <>
-      {!showConfirmButton ? (
-        <ToggleTaskStatus
-          onClick={updateTaskStatus}
-          isCompleted={Boolean(isCompleted)}
-        />
-      ) : null}
       {showConfirmButton ? (
         <Button
           aria-label="Close this dialog window"
           variant="success"
           type="submit"
         >
-          {t("Confirm")}
+          {t("Save the task")}
         </Button>
-      ) : null}
+      ) : (
+        <ToggleTaskStatus
+          loading={loading}
+          onClick={updateTaskStatus}
+          isCompleted={Boolean(isCompleted)}
+        />
+      )}
     </>
   );
 };

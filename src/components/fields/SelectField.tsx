@@ -8,7 +8,7 @@ type SelectFieldProps = BaseInputProps & {
   placeholder?: string;
   defaultSelected?: string;
   onSelect?: (value: string) => void;
-  variant?: "select" | "button";
+  appearence?: "select" | "button";
 };
 
 export const SelectField: React.FC<SelectFieldProps> = ({
@@ -17,6 +17,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   name,
   placeholder,
   defaultSelected,
+  variant,
   onSelect,
 }) => {
   const { t } = useTranslation();
@@ -44,6 +45,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
                 }
                 field.onChange(value);
               }}
+              variant={variant}
             />
             {fieldState.error && (
               <div className="form-field__error">

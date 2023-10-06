@@ -4,17 +4,12 @@ import { useFormContext } from "react-hook-form";
 import AddressIcon from "@/image/icons/address.svg";
 import { TextField } from "@/components";
 
-export const Address = ({
-  index,
-  onDelete,
-}: {
-  index: number;
-  onDelete: any;
-}) => {
+export const Address = ({ index }: { index: number }) => {
   const { setValue } = useFormContext();
 
   useEffect(() => {
     setValue(`contacts.${index}.type`, "address");
+    setValue(`contacts.${index}.contact`, "");
   }, []);
 
   return (
@@ -28,12 +23,10 @@ export const Address = ({
             name={`contacts.${index}.contact`}
             placeholder="Address"
             label="Address"
+            variant="filled"
           />
         </div>
       </div>
-      {/* <div className="contact-item__remove" onClick={() => onDelete("address")}>
-        <TrashIcon />
-      </div> */}
     </div>
   );
 };

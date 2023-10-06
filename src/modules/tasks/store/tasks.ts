@@ -1,12 +1,18 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { createTask, getTasks, removeTask, updateTask, updateTaskStatus } from '../api/tasks.api';
-import { Timestamp } from 'firebase/firestore';
-import { devtools } from 'zustand/middleware';
-import { getCompletedTasks } from './tasks.selectors';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import {
+  createTask,
+  getTasks,
+  removeTask,
+  updateTask,
+  updateTaskStatus,
+} from "../api/tasks.api";
+import { Timestamp } from "firebase/firestore";
+import { devtools } from "zustand/middleware";
+import { getCompletedTasks } from "./tasks.selectors";
 
 export type Translations = { [key: string]: string };
-export type Statuses = 'done' | 'undone';
+export type Statuses = "done" | "undone";
 
 export type Task = {
   id: string;
@@ -43,6 +49,7 @@ export type TaskFormValues = {
 };
 
 export interface TasksStore {
+  currentTask: TaskViewModal | null;
   tasks: TaskViewModal[];
   tasksForView: TaskViewModal[];
   total: number;
@@ -57,22 +64,25 @@ export interface TasksStore {
   removeTask: (id: string) => void;
   updateTask: (id: string, payload: any) => void;
   addTask: (payload: any) => void;
-  changeTaskStatus: (id: string, status: 'undone' | 'done') => void;
+  changeTaskStatus: (id: string, status: "undone" | "done") => void;
   storeTask: (task: TaskFormValues) => void;
   getStoredTask: () => TaskFormValues;
+  setCurrentTask: (task: TaskViewModal) => void;
+  clearCurrentTask: (task: TaskViewModal) => void;
 }
 
 export const useTasksStore = create<TasksStore>()(
   devtools(
     persist(
       (set, get) => ({
+        currentTask: null,
         tasks: [],
         tasksForView: [],
         completed: 0,
         total: 0,
         loading: false,
         isRemoval: false,
-        taskInProcessing: '',
+        taskInProcessing: "",
         fetchTasks: async (force?: boolean) => {
           set(() => ({
             loading: true,
@@ -82,21 +92,28 @@ export const useTasksStore = create<TasksStore>()(
           const cachedTasksForView = get().tasksForView;
 
           const hasCacheTasks = Boolean(cachedTasks && cachedTasks.length);
-          const hasCachedTasksForView = Boolean(cachedTasksForView && cachedTasksForView.length);
+          const hasCachedTasksForView = Boolean(
+            cachedTasksForView && cachedTasksForView.length
+          );
 
-          const tasks = hasCacheTasks && !force ? cachedTasks : await getTasks();
+          const tasks =
+            hasCacheTasks && !force ? cachedTasks : await getTasks();
 
           const total = tasks.length;
           const completed = tasks.filter((task) => task.isCompleted).length;
 
-          const tasksForView = hasCachedTasksForView && !force ? cachedTasksForView : tasks;
+          const tasksForView =
+            hasCachedTasksForView && !force ? cachedTasksForView : tasks;
           const showCompleted = JSON.parse(
-            new URLSearchParams(window.location.search).get('showCompleted') || 'true',
+            new URLSearchParams(window.location.search).get("showCompleted") ||
+              "true"
           );
 
           set(() => ({
             tasks,
-            tasksForView: showCompleted ? tasksForView : getCompletedTasks(tasksForView),
+            tasksForView: showCompleted
+              ? tasksForView
+              : getCompletedTasks(tasksForView),
             loading: false,
             total,
             completed,
@@ -104,7 +121,8 @@ export const useTasksStore = create<TasksStore>()(
         },
 
         showCompleted: () => set((state) => ({ tasksForView: state.tasks })),
-        hideCompleted: () => set((state) => ({ tasksForView: getCompletedTasks(state.tasks) })),
+        hideCompleted: () =>
+          set((state) => ({ tasksForView: getCompletedTasks(state.tasks) })),
         toggleTaskRemoval: () =>
           set((state) => {
             return { isRemoval: !state.isRemoval };
@@ -117,13 +135,15 @@ export const useTasksStore = create<TasksStore>()(
 
             set((state) => {
               return {
-                tasksForView: state.tasksForView.filter((task) => task.id !== id),
+                tasksForView: state.tasksForView.filter(
+                  (task) => task.id !== id
+                ),
                 loading: false,
-                taskInProcessing: '',
+                taskInProcessing: "",
               };
             });
           } catch (error) {
-            set(() => ({ loading: false, taskInProcessing: '' }));
+            set(() => ({ loading: false, taskInProcessing: "" }));
           }
         },
 
@@ -137,13 +157,13 @@ export const useTasksStore = create<TasksStore>()(
           }
         },
 
-        changeTaskStatus: async (id: string, status: 'undone' | 'done') => {
+        changeTaskStatus: async (id: string, status: "undone" | "done") => {
           try {
             set(() => ({ loading: true, taskInProcessing: id }));
             await updateTaskStatus(id, status);
-            set(() => ({ loading: false, taskInProcessing: '' }));
+            set(() => ({ loading: false, taskInProcessing: "" }));
           } catch (error) {
-            set(() => ({ loading: false, taskInProcessing: '' }));
+            set(() => ({ loading: false, taskInProcessing: "" }));
           }
         },
 
@@ -159,10 +179,10 @@ export const useTasksStore = create<TasksStore>()(
         },
 
         storeTask: (task: TaskFormValues) => {
-          window.localStorage.setItem('task', JSON.stringify(task));
+          window.localStorage.setItem("task", JSON.stringify(task));
         },
         getStoredTask: () => {
-          const taks = window.localStorage.getItem('task');
+          const taks = window.localStorage.getItem("task");
 
           if (!taks) {
             return null;
@@ -170,14 +190,30 @@ export const useTasksStore = create<TasksStore>()(
 
           return JSON.parse(taks);
         },
+
+        setCurrentTask: (task: TaskViewModal) => {
+          set(() => {
+            return {
+              currentTask: task,
+            };
+          });
+        },
+        clearCurrentTask: () => {
+          set(() => {
+            return {
+              currentTask: null,
+            };
+          });
+        },
       }),
       {
-        name: 'tasks',
+        name: "tasks",
         partialize: (state) => ({
           tasks: state.tasks,
           tasksForView: state.tasksForView,
+          currentTask: state.currentTask,
         }),
-      },
-    ),
-  ),
+      }
+    )
+  )
 );

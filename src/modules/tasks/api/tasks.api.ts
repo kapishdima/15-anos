@@ -50,7 +50,7 @@ export const createTask = async (payload: any) => {
   const taskData = {
     ...payload,
     status: "undone",
-    vendorId: "none",
+    vendorId: payload.vendorId || "none",
     date: fromDate(payload.date),
   };
   return pushData(

@@ -1,41 +1,18 @@
 import React from "react";
 
-import { AddFilledIcon, IconButton, useModal } from "@/components";
+import { AddFilledIcon, IconButton } from "@/components";
 import { Protected, RoleActions } from "@/modules/roles";
-
-import { CreateGuestModal } from "../create-guest/CreateGuestModal";
-import { useGuestsStore } from "../../store/guests";
-import { createGuestSchemaValidation } from "../../validation/guests.schema";
-
-const CREATE_GUEST_MODAL = "create_guest";
+import { Link } from "react-router-dom";
+import { AppRoutes } from "@/app/router/routes";
 
 export const CreateGuest: React.FC = () => {
-  const { open, close } = useModal();
-
-  const addGuest = useGuestsStore((state) => state.addGuest);
-  const fetchGuests = useGuestsStore((state) => state.fetchGuests);
-  const loading = useGuestsStore((state) => state.loading);
-
-  const onClick = () => {
-    open(CREATE_GUEST_MODAL);
-  };
-
-  const createGuest = async (values: any) => {
-    await addGuest(values);
-    close(CREATE_GUEST_MODAL);
-    fetchGuests(/*force*/ true);
-  };
   return (
     <Protected action={RoleActions.CREATE_GUEST}>
-      <IconButton appearance="filled" variant="white" onClick={onClick}>
-        <AddFilledIcon />
-      </IconButton>
-      <CreateGuestModal
-        id={CREATE_GUEST_MODAL}
-        onSubmit={createGuest}
-        loading={loading}
-        validation={createGuestSchemaValidation}
-      />
+      <Link to={AppRoutes.CREATE_GUEST}>
+        <IconButton appearance="filled" variant="white" propagateEvent>
+          <AddFilledIcon />
+        </IconButton>
+      </Link>
     </Protected>
   );
 };

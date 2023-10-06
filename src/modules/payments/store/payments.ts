@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
-import { Timestamp } from 'firebase/firestore';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { Timestamp } from "firebase/firestore";
 
 import {
   PaidStatus,
@@ -9,12 +9,12 @@ import {
   removePayment,
   updatePayment,
   updatePaymentStatus,
-} from '../api/payments.api';
-import { exceptCompletedPayments } from './payments.selectors';
+} from "../api/payments.api";
+import { exceptCompletedPayments } from "./payments.selectors";
 
 export type Translations = { [key: string]: string };
 
-export type Statuses = 'done' | 'undone';
+export type Statuses = "done" | "undone";
 
 export type Payment = {
   id: string;
@@ -50,6 +50,7 @@ export type PaymentViewModal = {
 export type GroupedPayments = { [key: string]: PaymentViewModal[] };
 
 export interface PaymentsStore {
+  currentPayment: PaymentViewModal | null;
   payments: PaymentViewModal[];
   paymentsForView: PaymentViewModal[];
   total: number;
@@ -65,19 +66,22 @@ export interface PaymentsStore {
   updatePayment: (id: string, payload: any) => void;
   addPayment: (payload: any) => void;
   changePaymentStatus: (id: string, pay: number, status: PaidStatus) => void;
+  setCurrentPayment: (payment: PaymentViewModal) => void;
+  clearCurrentPayment: () => void;
 }
 
 export const usePaymentsStore = create<PaymentsStore>()(
   devtools(
     persist(
       (set, get) => ({
+        currentPayment: null,
         payments: [],
         paymentsForView: [],
         completed: 0,
         total: 0,
         loading: false,
         isRemoval: false,
-        paymentInProcessing: '',
+        paymentInProcessing: "",
         fetchPayments: async (force?: boolean) => {
           set(() => ({
             loading: true,
@@ -86,20 +90,28 @@ export const usePaymentsStore = create<PaymentsStore>()(
           const cachedPayments = get().payments;
           const cachedPaymentsForView = get().paymentsForView;
 
-          const hasCachePayments = Boolean(cachedPayments && cachedPayments.length);
+          const hasCachePayments = Boolean(
+            cachedPayments && cachedPayments.length
+          );
           const hasCachedPaymentsForView = Boolean(
-            cachedPaymentsForView && cachedPaymentsForView.length,
+            cachedPaymentsForView && cachedPaymentsForView.length
           );
 
-          const payments = hasCachePayments && !force ? cachedPayments : await getPayments();
+          const payments =
+            hasCachePayments && !force ? cachedPayments : await getPayments();
 
           const total = payments.length;
-          const completed = payments.filter((payment) => payment.wasPaid).length;
+          const completed = payments.filter(
+            (payment) => payment.wasPaid
+          ).length;
 
           const paymentsForView =
-            hasCachedPaymentsForView && !force ? cachedPaymentsForView : payments;
+            hasCachedPaymentsForView && !force
+              ? cachedPaymentsForView
+              : payments;
           const showCompleted = JSON.parse(
-            new URLSearchParams(window.location.search).get('showCompleted') || 'true',
+            new URLSearchParams(window.location.search).get("showCompleted") ||
+              "true"
           );
 
           set(() => ({
@@ -113,9 +125,12 @@ export const usePaymentsStore = create<PaymentsStore>()(
           }));
         },
 
-        showCompleted: () => set((state) => ({ paymentsForView: state.payments })),
+        showCompleted: () =>
+          set((state) => ({ paymentsForView: state.payments })),
         hideCompleted: () =>
-          set((state) => ({ paymentsForView: exceptCompletedPayments(state.payments) })),
+          set((state) => ({
+            paymentsForView: exceptCompletedPayments(state.payments),
+          })),
         togglePaymentRemoval: () =>
           set((state) => {
             return { isRemoval: !state.isRemoval };
@@ -128,24 +143,26 @@ export const usePaymentsStore = create<PaymentsStore>()(
 
             set((state) => {
               return {
-                paymentsForView: state.paymentsForView.filter((payment) => payment.id !== id),
                 loading: false,
-                paymentInProcessing: '',
+                paymentInProcessing: "",
               };
             });
           } catch (error) {
-            set(() => ({ loading: false, paymentInProcessing: '' }));
+            set(() => ({ loading: false, paymentInProcessing: "" }));
           }
         },
 
         updatePayment: async (id: string, payload: any) => {
           try {
             set(() => ({ loading: true }));
-            const payment = get().payments.find((payment) => payment.id === id)!;
+            const payment = get().payments.find(
+              (payment) => payment.id === id
+            )!;
 
             const updatePaymentData = {
               ...payload,
-              wasPaid: (payload.paid || payment.paid) === (payload.pay || payment.pay),
+              wasPaid:
+                (payload.paid || payment.paid) === (payload.pay || payment.pay),
             };
             await updatePayment(id, updatePaymentData);
 
@@ -155,13 +172,17 @@ export const usePaymentsStore = create<PaymentsStore>()(
           }
         },
 
-        changePaymentStatus: async (id: string, pay: number, status: PaidStatus) => {
+        changePaymentStatus: async (
+          id: string,
+          pay: number,
+          status: PaidStatus
+        ) => {
           try {
             set(() => ({ loading: true, paymentInProcessing: id }));
             await updatePaymentStatus(id, pay, status);
-            set(() => ({ loading: false, paymentInProcessing: '' }));
+            set(() => ({ loading: false, paymentInProcessing: "" }));
           } catch (error) {
-            set(() => ({ loading: false, paymentInProcessing: '' }));
+            set(() => ({ loading: false, paymentInProcessing: "" }));
           }
         },
 
@@ -175,14 +196,29 @@ export const usePaymentsStore = create<PaymentsStore>()(
             set(() => ({ loading: false }));
           }
         },
+        setCurrentPayment: (payment: PaymentViewModal) => {
+          set(() => {
+            return {
+              currentPayment: payment,
+            };
+          });
+        },
+        clearCurrentPayment: () => {
+          set(() => {
+            return {
+              currentPayment: null,
+            };
+          });
+        },
       }),
       {
-        name: 'payments',
+        name: "payments",
         partialize: (state) => ({
           payments: state.payments,
           pamynetsForView: state.paymentsForView,
+          currentPayment: state.currentPayment,
         }),
-      },
-    ),
-  ),
+      }
+    )
+  )
 );

@@ -10,6 +10,10 @@ import { Marker } from "./Marker";
 import { SearchAddressForm } from "../seach-address/SearchAddressForm";
 
 import MarkerIcon from "@/image/marker.png";
+import { getPosition } from "../../api/map";
+
+export const WITH_MARKER_ZOOM = 8.5;
+const DEFAULT_ZOOM = 2.58;
 
 const render = (status: Status) => {
   if (status === Status.LOADING) {
@@ -20,17 +24,24 @@ const render = (status: Status) => {
 };
 
 export const Map: React.FC = () => {
-  const [marker, setMarker] = React.useState<google.maps.LatLng | null>(null);
-  const [zoom, setZoom] = React.useState(2.58);
-  const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
-    lat: 4.5651835,
-    lng: -85.0214022,
-  });
+  const position = getPosition();
+  const [marker, setMarker] = React.useState<google.maps.LatLng | null>(
+    position || null
+  );
+  const [zoom, setZoom] = React.useState(
+    position ? WITH_MARKER_ZOOM : DEFAULT_ZOOM
+  );
+  const [center, setCenter] = React.useState<google.maps.LatLngLiteral>(
+    position || {
+      lat: 4.5651835,
+      lng: -85.0214022,
+    }
+  );
 
   const onClick = (event: google.maps.MapMouseEvent) => {
     setMarker(event.latLng);
     setCenter({ lat: event.latLng?.lat() || 0, lng: event.latLng?.lng() || 0 });
-    setZoom(8);
+    setZoom(WITH_MARKER_ZOOM);
   };
 
   const onIdle = (map: google.maps.Map) => {

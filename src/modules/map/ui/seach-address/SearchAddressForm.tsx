@@ -2,7 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import { Button, Form, TextField, useModal } from "@/components";
+import { Button, Form, TextField } from "@/components";
 import { AppRoutes } from "@/app/router/routes";
 
 import {
@@ -11,6 +11,7 @@ import {
   savePosition,
   toPositionLiteral,
 } from "../../api/map";
+import { WITH_MARKER_ZOOM } from "../map/Map";
 
 type SearchAddressProps = {
   setCenter: (center: google.maps.LatLngLiteral) => void;
@@ -19,8 +20,6 @@ type SearchAddressProps = {
   position: google.maps.LatLng | null;
 };
 
-const SET_LOCATION_MODAL_ID = "set_location_modal";
-
 export const SearchAddressForm: React.FC<SearchAddressProps> = ({
   setCenter,
   setMarker,
@@ -28,14 +27,13 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
   position,
 }) => {
   const navigate = useNavigate();
-  const { close } = useModal();
 
   const searchAndApplyPosition = async (values: any) => {
     try {
       const position = await getPositionFromAddress(values.address);
       setCenter(toPositionLiteral(position));
       setMarker(position);
-      setZoom(8);
+      setZoom(WITH_MARKER_ZOOM);
     } catch (error) {
       toast.error(error as string);
     }
@@ -46,9 +44,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
       return toast.error("City not found");
     }
     navigate(AppRoutes.SEARCH_VENDORS);
-    close(SET_LOCATION_MODAL_ID);
     savePosition(position);
-    window.location.reload();
   };
 
   const onGeolocationClick = async () => {
@@ -73,12 +69,15 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
         onSubmit={searchAndApplyPosition}
         submitAfterDelay
       >
-        <TextField
-          name="address"
-          placeholder="Enter your address"
-          variant="filled"
-          capitilizedInput
-        />
+        <div className="search-address-form__row">
+          <TextField
+            name="address"
+            placeholder="Enter your address"
+            variant="filled"
+            capitilizedInput
+          />
+          <Button type="submit">Search</Button>
+        </div>
         <div className="search-address-form__actions">
           <Button
             appearance="outline"

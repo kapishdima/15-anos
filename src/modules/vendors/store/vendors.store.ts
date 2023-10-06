@@ -3,14 +3,18 @@ import { devtools, persist } from "zustand/middleware";
 import { SearchedVendor } from "./vendors.types";
 import {
   addManualVendor,
+  addVendorAction,
   deleteVendor,
+  disslikeVendor,
   getManualVendors,
+  likeVendor,
   sendVendorViewed,
   updateVendor,
 } from "../api/vendors.api";
 import { translated } from "@/app/utils/locale";
 
 export interface VendorsStore {
+  currentVendor: SearchedVendor | null;
   vendors: SearchedVendor[];
   vendorsForView: SearchedVendor[];
   loading: boolean;
@@ -29,12 +33,16 @@ export interface VendorsStore {
   toggleVendorsRemoval: () => void;
   setVendorViewed: (id: string) => void;
   searchVendor: () => void;
+  sendVendorAction: (vendorId: string, action: string) => void;
+  setCurrentVendor: (vendor: SearchedVendor) => void;
+  clearCurrentVendor: () => void;
 }
 
 export const useVendorsStore = create<VendorsStore>()(
   devtools(
     persist(
       (set, get) => ({
+        currentVendor: null,
         vendors: [],
         vendorsForView: [],
         actionLoading: false,
@@ -69,11 +77,13 @@ export const useVendorsStore = create<VendorsStore>()(
         likeVendor: async (vendor: SearchedVendor) => {
           set(() => ({ actionLoading: true, actionId: vendor.id }));
           await addManualVendor(vendor);
+          await likeVendor(vendor.id);
           set(() => ({ actionLoading: false, actionId: null }));
         },
         dislikeVendor: async (id: string) => {
           set(() => ({ actionLoading: true, actionId: id }));
           await deleteVendor(id);
+          await disslikeVendor(id);
           set(() => ({ actionLoading: false, actionId: null }));
         },
         fetchManualVendor: async (force?: boolean) => {
@@ -133,11 +143,29 @@ export const useVendorsStore = create<VendorsStore>()(
             };
           });
         },
+        sendVendorAction: async (vendorId: string, action: string) => {
+          await addVendorAction(vendorId, action);
+        },
+        setCurrentVendor: (vendor) => {
+          set(() => {
+            return {
+              currentVendor: vendor,
+            };
+          });
+        },
+        clearCurrentVendor: () => {
+          set(() => {
+            return {
+              currentVendor: null,
+            };
+          });
+        },
       }),
       {
         name: "manual_vendors",
         partialize: (state) => ({
           vendors: state.vendors,
+          currentVendor: state.currentVendor,
         }),
       }
     )
