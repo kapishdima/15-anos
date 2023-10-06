@@ -33,6 +33,7 @@ export const UpdateVendorPage: React.FC = () => {
     }
     removeVendor(vendor.id);
     fetchManualVendors(/*force*/ true);
+    navigate(-1);
   };
 
   const updateVendorOnClick = async (values: any) => {
