@@ -47,7 +47,7 @@ export const SearchVendorList: React.FC = () => {
     );
   }
 
-  if (!vendors || !vendors.length) {
+  if ((!loading && !vendors) || !vendors.length) {
     return <EmptyVendorsList />;
   }
 

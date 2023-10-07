@@ -1,33 +1,43 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   TextField,
   CategoriesSelect,
   DatepickerField,
   TextAreaField,
   CurrencyField,
-} from '@/components';
+} from "@/components";
 
 export const CreatePaymentForm = () => {
   const { t } = useTranslation();
 
   return (
     <>
-      <TextField name="title" label={t('Name')} placeholder={t('Payment name')} />
+      <TextField
+        name="title"
+        label={t("Name")}
+        placeholder={t("Payment name")}
+        capitilizedInput
+      />
       <DatepickerField
         name="date"
-        label={t('Date')}
-        placeholder={t('Select date')}
+        label={t("Date")}
+        placeholder={t("Select date")}
         showTimeSelect={false}
       />
-      <CurrencyField name="pay" label={t('Amount payable')} />
-      <CurrencyField name="paid" label={t('Paid')} />
+      <CurrencyField name="pay" label={t("Amount payable")} />
+      <CurrencyField name="paid" label={t("Paid")} />
       <CategoriesSelect
         name="categoryId"
-        label={t('Select category')}
-        placeholder={t('Select category')}
+        label={t("Select category")}
+        placeholder={t("Select category")}
       />
-      <TextAreaField name="notes" label={t('Notes')} placeholder={t('Enter notes')} />
+      <TextAreaField
+        name="notes"
+        label={t("Notes")}
+        placeholder={t("Enter notes")}
+        capitilizedInput
+      />
     </>
   );
 };

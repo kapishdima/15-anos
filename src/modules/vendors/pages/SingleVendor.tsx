@@ -83,6 +83,7 @@ export const SingleVendor: React.FC = () => {
             Quincy to check if there is a discount for you
           </h4>
           <ContactViewer
+            vendorId={vendor.id}
             contacts={vendor.contacts}
             placement="top-start"
             buttonText="Contact the vendor"

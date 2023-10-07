@@ -48,7 +48,7 @@ export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
       icon={getCategoryImage(categoryId as any)}
       color={color}
       removal={isRemoval}
-      extra={<ContactViewer contacts={contacts} />}
+      extra={<ContactViewer contacts={contacts} vendorId={id} />}
       hasVisibleIcon={false}
       loading={actionLoading && actionId === id}
       onOpen={onOpen}

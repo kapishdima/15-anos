@@ -12,7 +12,7 @@ import { SearchAddressForm } from "../seach-address/SearchAddressForm";
 import MarkerIcon from "@/image/marker.png";
 import { getPosition } from "../../api/map";
 
-export const WITH_MARKER_ZOOM = 8.5;
+export const WITH_MARKER_ZOOM = 10;
 const DEFAULT_ZOOM = 2.58;
 
 const render = (status: Status) => {
@@ -50,9 +50,12 @@ export const Map: React.FC = () => {
   };
 
   useEffect(() => {
-    EventEmitter.dispatch(Events.POSITION_MODIFY, {
-      modified: Boolean(marker),
-    });
+    const position = getPosition();
+    if (marker?.lat !== position?.lat || marker?.lng !== position?.lng) {
+      EventEmitter.dispatch(Events.POSITION_MODIFY, {
+        modified: Boolean(marker),
+      });
+    }
   }, [marker]);
 
   return (

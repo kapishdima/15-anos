@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
 
@@ -12,11 +12,14 @@ import { Instagram } from "./types/Instagram";
 import { Facebook } from "./types/Facebook";
 import { Placement } from "@popperjs/core";
 import { Website } from "./types/Website";
+import { useOnClickOutside } from "usehooks-ts";
+import { useFormContext } from "react-hook-form";
 
 type ContactViewerProps = {
   contacts: VendorContacts;
   placement?: Placement;
   buttonText?: string;
+  vendorId: string;
 };
 
 const contactsComponents = {
@@ -30,25 +33,32 @@ const contactsComponents = {
 
 export const ContactViewer: React.FC<ContactViewerProps> = ({
   contacts,
+  vendorId,
   placement = "bottom-end",
   buttonText = "Contact",
 }) => {
   const { t } = useTranslation();
 
   const [opened, setOpened] = useState(false);
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement,
-    modifiers: [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 8],
+  const referenceElement = useRef(null);
+  const popperElement = useRef<HTMLDivElement | null>(null);
+  const { styles, attributes } = usePopper(
+    referenceElement.current,
+    popperElement.current,
+    {
+      placement,
+      modifiers: [
+        {
+          name: "offset",
+          options: {
+            offset: [0, 8],
+          },
         },
-      },
-    ],
-  });
+      ],
+    }
+  );
+
+  useOnClickOutside<HTMLDivElement>(popperElement, () => setOpened(false));
 
   const toogleOpened = () => {
     setOpened((_opened) => !_opened);
@@ -61,7 +71,7 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({
   return (
     <>
       <Button
-        ref={setReferenceElement}
+        ref={referenceElement}
         variant="success"
         onClick={toogleOpened}
         propagateEvent={false}
@@ -71,7 +81,7 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({
       <div
         id="tooltip"
         data-show={opened}
-        ref={setPopperElement as any}
+        ref={popperElement}
         style={styles.popper}
         {...attributes.popper}
       >
@@ -80,7 +90,13 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({
           if (!Component) {
             return null;
           }
-          return <Component value={contact.contact} />;
+          return (
+            <Component
+              value={contact.contact}
+              vendorId={vendorId}
+              action={contact.type}
+            />
+          );
         })}
       </div>
     </>

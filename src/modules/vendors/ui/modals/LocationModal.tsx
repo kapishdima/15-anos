@@ -43,7 +43,6 @@ export const LocationModal: React.FC<LocationModalProps> = ({ id }) => {
 
   useEffect(() => {
     EventEmitter.subscribe(Events.POSITION_MODIFY, ({ modified }) => {
-      console.log(Events.POSITION_MODIFY, modified);
       setShouldConfirmation(modified);
     });
   }, []);

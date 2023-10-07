@@ -11,7 +11,10 @@
 }
 
 .form-field--capitalized {
-  text-transform: capitalize;
+  display: block;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .form-field,

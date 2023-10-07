@@ -31,7 +31,14 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
               })}
               name={field.value}
               value={field.value}
-              onChange={field.onChange}
+              onChange={(event) => {
+                const value = event.target.value;
+                const capitalizedValue = capitilizedInput
+                  ? value.charAt(0).toUpperCase() + value.slice(1)
+                  : value;
+
+                field.onChange(capitalizedValue);
+              }}
               onBlur={field.onBlur}
               ref={field.ref}
             />

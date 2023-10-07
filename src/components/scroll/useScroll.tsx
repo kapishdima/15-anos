@@ -7,9 +7,9 @@ export const useScroll = (
 ) => {
   const [position, setPosition] = useState(0);
 
-  if (!scrollArea.current) {
-    return null;
-  }
+  // if (!scrollArea.current) {
+  //   return null;
+  // }
 
   const scroll = (value: number) => {
     if (!scrollArea?.current) {
@@ -58,6 +58,7 @@ export const useScroll = (
   };
 
   const hasNext =
+    scrollArea?.current &&
     position < scrollArea.current.getBoundingClientRect().width - SCROLL_OFFSET;
   const hasPrev = position !== 0;
 

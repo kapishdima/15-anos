@@ -57,6 +57,12 @@ export const BackButton: React.FC<BackButtonProps> = ({ onBack, backURL }) => {
     });
   }, []);
 
+  useEffect(() => {
+    EventEmitter.subscribe(Events.POSITION_MODIFY, ({ modified }) => {
+      setShouldConfirmation(modified);
+    });
+  }, []);
+
   return (
     <>
       <div className="back-button" onClick={handleClose}>

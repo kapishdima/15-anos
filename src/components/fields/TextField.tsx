@@ -72,7 +72,18 @@ export const TextField: React.FC<TextFieldProps> = ({
                     "form-field--capitalized": capitilizedInput,
                   }
                 )}
-                onChange={onChange || field.onChange}
+                onChange={(event) => {
+                  if (onChange) {
+                    onChange(event);
+                  }
+
+                  const value = event.target.value;
+                  const capitalizedValue = capitilizedInput
+                    ? value.charAt(0).toUpperCase() + value.slice(1)
+                    : value;
+
+                  field.onChange(capitalizedValue);
+                }}
                 onBlur={field.onBlur}
                 onKeyDown={onKeyDown}
                 style={{ color, ...style }}
