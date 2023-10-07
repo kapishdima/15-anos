@@ -40,6 +40,7 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({
   const { t } = useTranslation();
 
   const [opened, setOpened] = useState(false);
+  const containerElement = useRef(null);
   const referenceElement = useRef(null);
   const popperElement = useRef<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(
@@ -58,18 +59,19 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({
     }
   );
 
-  useOnClickOutside<HTMLDivElement>(popperElement, () => setOpened(false));
+  useOnClickOutside<HTMLDivElement>(containerElement, () => setOpened(false));
 
   const toogleOpened = () => {
     setOpened((_opened) => !_opened);
   };
 
+  console.log(contacts);
   if (!contacts || !contacts.length) {
     return null;
   }
 
   return (
-    <>
+    <div ref={containerElement}>
       <Button
         ref={referenceElement}
         variant="success"
@@ -99,6 +101,6 @@ export const ContactViewer: React.FC<ContactViewerProps> = ({
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
