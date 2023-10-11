@@ -11,7 +11,7 @@ export enum Collections {
   RECOMMENDED_SHOPING_LIST = "shopping/groups/list",
   RECOMMENDED_WISH_LIST = "registry/groups/list",
   PRODUCTS_LIST = "items/list",
-  PRODUCTS_PARAMETERS = "shopping/parametrs",
+  PRODUCTS_PARAMETERS = "shopping/parameters",
   PROFILE = "details/profile",
   POSTS = "articles/items/list",
   POSTS_CATEGORY = "articles/groups/list",

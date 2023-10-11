@@ -1,11 +1,12 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
-import { getRecommendedShoppingList } from '../api/shopping_recommended.api';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { getRecommendedShoppingList } from "../api/shopping_recommended.api";
 
-import { ProductsCategory } from './purcheses.types';
+import { ProductsCategory } from "./purcheses.types";
 
 export interface RecommendedShoppingStore {
   products: ProductsCategory[];
+
   loading: boolean;
   fetchRecommendedShoppingList: (force?: boolean) => Promise<void>;
 }
@@ -23,10 +24,14 @@ export const useRecommendedShoppingStore = create<RecommendedShoppingStore>()(
 
           const cacheProducts = get().products;
 
-          const hasCachedProducts = Boolean(cacheProducts && cacheProducts.length);
+          const hasCachedProducts = Boolean(
+            cacheProducts && cacheProducts.length
+          );
 
           const products =
-            hasCachedProducts && !force ? cacheProducts : await getRecommendedShoppingList();
+            hasCachedProducts && !force
+              ? cacheProducts
+              : await getRecommendedShoppingList();
 
           set(() => ({
             products,
@@ -35,11 +40,11 @@ export const useRecommendedShoppingStore = create<RecommendedShoppingStore>()(
         },
       }),
       {
-        name: 'recommended_shopping',
+        name: "recommended_shopping",
         partialize: (state) => ({
           products: state.products,
         }),
-      },
-    ),
-  ),
+      }
+    )
+  )
 );

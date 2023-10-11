@@ -8,7 +8,7 @@ export const getRecommendedWishList = async (): Promise<ProductsCategory[]> => {
   const wishList = await getSnapshotCollection<ProductsCategory[]>(
     Collections.RECOMMENDED_WISH_LIST,
     [],
-    [orderBy("popularity")]
+    [orderBy("popularity", "desc")]
   );
 
   return wishList || [];

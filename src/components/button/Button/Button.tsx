@@ -3,7 +3,7 @@ import React, { HTMLAttributes, PropsWithChildren, MouseEvent } from "react";
 
 import { Spinner } from "@components/index";
 
-type ButtonVariants = "primary" | "error" | "text" | "success";
+type ButtonVariants = "primary" | "error" | "text" | "success" | "secondary";
 type ButtonAppearance = "filled" | "ghost" | "outline";
 
 type ButtonProps = PropsWithChildren &

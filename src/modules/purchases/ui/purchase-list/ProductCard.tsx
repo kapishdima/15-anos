@@ -8,6 +8,7 @@ import { translated } from "@/app/utils/locale";
 import { ProductViewModal } from "../../store/purcheses.types";
 import { useLike } from "../../hooks/useLike";
 import { usePrice } from "../../hooks/usePriceConverter";
+import { usePopular } from "../../hooks/usePopulary";
 
 type ProductCardProps = {
   product: ProductViewModal;
@@ -17,25 +18,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { image, imageSmall, title, price, colors } = product;
   const { t } = useTranslation();
 
-  const { symbol } = usePrice(price);
-
+  const { symbol, convertedPrice } = usePrice(price);
   const { likeProduct, disslikeProduct, liked, loading } = useLike(product);
+  const popular = usePopular(product["0-favourites"]);
 
   return (
     <div className="product-card">
       <div className="product-card__image">
-        {/* {popular && (
+        {popular && (
           <div className="product-card__popular">
             <PopularIcon />
           </div>
-        )} */}
+        )}
         <img src={imageSmall || image} alt={translated(title)} />
       </div>
       <div className="product-card__footer">
         <div className="product-card__info">
           {price && (
             <div className="product-card__price">
-              {t("from")} {price} {symbol}
+              {t("from")} {convertedPrice} {symbol}
             </div>
           )}
           <h4 className="product-card__name">{translated(title)}</h4>

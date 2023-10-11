@@ -5,7 +5,7 @@ export const getCountyCode = (state: ProfileStore) => {
 };
 
 export const getCurrencyCode = (state: ProfileStore) => {
-  return state.profile?.currency.split(";")[0];
+  return state.profile?.currency.split(";")[0] || "USD";
 };
 
 export const getCurrencySymbol = (state: ProfileStore) => {

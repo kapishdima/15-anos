@@ -1,3 +1,4 @@
+import { Translated } from "@/app/utils/locale";
 import { Timestamp } from "firebase/firestore";
 
 export type Product = {
@@ -50,8 +51,15 @@ export type ProductsCategory = {
   title: any;
 };
 
+type ProductColor = {
+  [key: string]: {
+    title: Translated;
+    color: string;
+  };
+};
+
 export type ProductsParameters = {
-  colors: string[];
+  colors: ProductColor;
   popularChoice: number;
   rates: any;
   updates: any;

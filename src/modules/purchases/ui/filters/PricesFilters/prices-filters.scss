@@ -1,0 +1,15 @@
+.prices-filters {
+  &__list {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+  }
+
+  &__title {
+    font-family: $anevir-ff;
+    font-weight: normal;
+    font-size: 14px;
+    color: $darkGrayColor;
+    margin-bottom: 8px;
+  }
+}

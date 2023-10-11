@@ -10,7 +10,7 @@ export const getRecommendedShoppingList = async (): Promise<
   const shoppingList = await getSnapshotCollection<ProductsCategory[]>(
     Collections.RECOMMENDED_SHOPING_LIST,
     [],
-    [orderBy("popularity")]
+    [orderBy("popularity", "desc")]
   );
 
   return shoppingList || [];

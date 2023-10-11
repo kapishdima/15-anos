@@ -12,6 +12,8 @@ export enum AppRoutes {
   CREATE_PAYMENT = "/payments/create",
   UPDATE_PAYMENT = "/payments/update",
   PURCHASES_LIST = "/purchases/list",
+  CREATE_PURCHASE = "/purchases/create",
+  UPDATE_PURCHASE = "/purchases/update",
   PURCHASES_BEST_IDEAS = "/purchases/best-ideas",
   MANUAL_PURCHAES_LIST = "/purchases/manual",
   WEDDING_PROFILE = "/wedding-profile",

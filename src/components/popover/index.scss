@@ -1,0 +1,12 @@
+#tooltip {
+  display: none;
+  z-index: 99;
+  padding: $popover-padding-y $popover-padding-x;
+  background-color: #fff;
+  border-radius: $base-br;
+  box-shadow: $task-progressbar-shadow;
+}
+
+#tooltip[data-show="true"] {
+  display: block;
+}

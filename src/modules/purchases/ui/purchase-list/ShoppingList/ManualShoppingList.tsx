@@ -45,18 +45,16 @@ export const ManualShopingList: React.FC = () => {
           <CreatePurchase as="button" />
         </div>
       ) : (
-        <div className="products-list">
-          <Slider
-            slidesPerView={3}
-            spaceBetween={10}
-            breakpoints={{ 768: { slidesPerView: 3 } }}
-            className="products-list"
-          >
-            {products.slice(0, 3).map((product) => (
-              <ProductManualCard product={product} type="shopping" />
-            ))}
-          </Slider>
-        </div>
+        <Slider
+          slidesPerView={1}
+          spaceBetween={10}
+          breakpoints={{ 768: { slidesPerView: 3 } }}
+          className="products-list"
+        >
+          {products.slice(0, 3).map((product) => (
+            <ProductManualCard product={product} type="shopping" />
+          ))}
+        </Slider>
       )}
     </div>
   );

@@ -19,6 +19,8 @@ import { useLike } from "../../hooks/useLike";
 import { ProductViewModal } from "../../store/purcheses.types";
 import { translated } from "@/app/utils/locale";
 import classNames from "classnames";
+import { usePrice } from "../../hooks/usePriceConverter";
+import { usePopular } from "../../hooks/usePopulary";
 
 type PurchaseProductProps = {
   product: ProductViewModal;
@@ -44,7 +46,9 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
   } = product;
   const { t } = useTranslation();
 
+  const { symbol, convertedPrice } = usePrice(price);
   const { likeProduct, disslikeProduct, liked, loading } = useLike(product);
+  const popular = usePopular(popularCount);
 
   return (
     <div className="purchase-product">
@@ -77,7 +81,7 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
       <div className="purchase-info">
         <div className="purchase-labels">
           <div className="purchase-label purchase-popular">
-            {true && (
+            {popular && (
               <div className="purchase-label__title">
                 <PopularIcon />
                 {t("Popular choice")}
@@ -98,7 +102,7 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
         </div>
         {price && (
           <div className="purchase-price">
-            {t("from")} {price}
+            {t("from")} {convertedPrice} {symbol}
             <div className="purchase-price__tooltip">
               <InfoIcon />
               <div className="purchase-price__tooltip-value">

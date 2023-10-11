@@ -7,8 +7,15 @@ import {
   deleteProduct,
   getProductsByCategory,
 } from "../api/products.api";
+import { PriceRange } from "./products_search";
+import orderBy from "lodash/orderBy";
 
+type ProductsFilters = {
+  prices: PriceRange[];
+  colors: string[];
+};
 export interface ProductsStore {
+  productsForView: ProductViewModal[];
   products: ProductViewModal[];
   loading: boolean;
   actionLoading: boolean;
@@ -23,12 +30,15 @@ export interface ProductsStore {
     type: ProductTypes,
     force?: boolean
   ) => Promise<void>;
+  searchProducts: (filters: ProductsFilters) => void;
+  sortProducts: (type: "asc" | "desc", by: string) => void;
 }
 
 export const useProductsStore = create<ProductsStore>()(
   devtools(
     persist(
       (set, get) => ({
+        productsForView: [],
         products: [],
         loading: false,
         actionLoading: false,
@@ -54,6 +64,37 @@ export const useProductsStore = create<ProductsStore>()(
 
           set(() => ({
             products,
+            productsForView: products,
+            loading: false,
+          }));
+        },
+        searchProducts: (filters: ProductsFilters) => {
+          const products = get().products;
+
+          const filteredProducts = products.filter((product) => {
+            const withPrice = filters.prices.some((price, index) => {
+              if (index === filters.prices.length - 1) {
+                return product.price >= price.from;
+              }
+              return product.price >= price.from && product.price <= price.to;
+            });
+
+            const withColors = product.colors?.some((color) =>
+              filters.colors.includes(color)
+            );
+
+            return withPrice && withColors;
+          });
+          set(() => ({
+            productsForView: filteredProducts,
+            loading: false,
+          }));
+        },
+        sortProducts: (type: "asc" | "desc", by: string) => {
+          const products = get().products;
+
+          set(() => ({
+            productsForView: orderBy<any>(products, by, type),
             loading: false,
           }));
         },

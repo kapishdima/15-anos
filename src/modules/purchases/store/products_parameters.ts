@@ -22,16 +22,17 @@ export const useProductParameters = create<ProductsParametersStore>()(
           }));
 
           const cacheProducts = get().parameters;
+          console.log(cacheProducts);
 
           const hasCachedParameters = Boolean(cacheProducts);
 
-          const products =
+          const parameters =
             hasCachedParameters && !force
               ? cacheProducts
               : await getProductsParameters();
 
           set(() => ({
-            products,
+            parameters,
             loading: false,
           }));
         },

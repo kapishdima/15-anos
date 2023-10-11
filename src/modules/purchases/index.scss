@@ -1,4 +1,10 @@
-@import './ui/purchase-categories/purchase-categories.scss';
-@import './ui/purchase-list/manual-list.scss';
-@import './ui/purchase-list/products.scss';
-@import './ui/purchase-product/purchase-product.scss';
+@import "./ui/purchase-categories/purchase-categories.scss";
+@import "./ui/purchase-list/manual-list.scss";
+@import "./ui/purchase-list/products.scss";
+@import "./ui/purchase-product/purchase-product.scss";
+
+@import "./ui/filters/ColorFilters/color-filters.scss";
+@import "./ui/filters/PricesFilters/prices-filters.scss";
+@import "./ui/filters/index.scss";
+@import "./ui/actions/ProductActions/index.scss";
+@import "./ui/sort/ProductsSort/index.scss";

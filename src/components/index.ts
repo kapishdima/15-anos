@@ -103,6 +103,8 @@ import { PageBanner } from "./banners/PageBanner";
 import { Dropzone } from "./dropzone/Dropzone";
 import { ScrollXArea } from "./scroll/ScrollXArea";
 
+import { Popover } from "./popover/Popover";
+
 export {
   Button,
   IconButton,
@@ -195,4 +197,5 @@ export {
   WebsiteIcon,
   FormActions,
   FormContent,
+  Popover,
 };

@@ -19,6 +19,7 @@ import {
   PurchasesIndex,
   SinglePurchasePage,
   ManualProductList,
+  CreatePurchasePage,
 } from "@/modules/purchases";
 
 import { WeddingProfileIndex } from "@/modules/administrative/wedding-profile";
@@ -122,6 +123,14 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <PurchasesIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: AppRoutes.CREATE_PURCHASE,
+    element: (
+      <ProtectedRoute>
+        <CreatePurchasePage />
       </ProtectedRoute>
     ),
   },

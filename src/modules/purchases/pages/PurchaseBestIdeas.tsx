@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
 import { AppLayout, PageBanner, PageHeader } from "@/components";
 import { useTranslation } from "react-i18next";
+import { useParams, useSearchParams } from "react-router-dom";
 
+import { ProductFilters } from "../ui/filters/ProductFilters";
 import { ProductsList } from "../ui/purchase-list/ProductsList";
 
 import { useProductsStore } from "../store/products";
-import { useParams, useSearchParams } from "react-router-dom";
 import { useRecommendedShoppingStore } from "../store/shopping_recommended";
 import { getShoppingCategory } from "../store/shopping.selector";
 import { ProductTypes } from "../store/purcheses.types";
-import { useProfileStore } from "@/modules/profile/store/profile";
 import { useProductParameters } from "../store/products_parameters";
+
+import { useProfileStore } from "@/modules/profile/store/profile";
+import { ProductActions } from "../ui/actions/ProductActions/ProductActions";
 
 export const PurchaseBestIdeas: React.FC = () => {
   const { t } = useTranslation();
@@ -30,11 +33,12 @@ export const PurchaseBestIdeas: React.FC = () => {
   );
   const clearProduct = useProductsStore((state) => state.clearProduct);
 
-  const products = useProductsStore((state) => state.products);
+  const products = useProductsStore((state) => state.productsForView);
   const shoppingCategory = useRecommendedShoppingStore((state) =>
     getShoppingCategory(id, state)
   );
   const loading = useProductsStore((state) => state.loading);
+  const paramentsLoading = useProductParameters((state) => state.loading);
 
   useEffect(() => {
     if (!id) {
@@ -48,7 +52,7 @@ export const PurchaseBestIdeas: React.FC = () => {
   }, []);
 
   return (
-    <AppLayout loading={loading}>
+    <AppLayout loading={loading && paramentsLoading}>
       <div className="best-ideas">
         <PageHeader title={t("Best ideas")} hasBackButton />
         <PageBanner
@@ -56,6 +60,7 @@ export const PurchaseBestIdeas: React.FC = () => {
           title={id || ""}
         />
 
+        <ProductActions category={shoppingCategory} />
         <ProductsList products={products} type={type} />
       </div>
     </AppLayout>

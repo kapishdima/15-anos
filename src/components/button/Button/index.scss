@@ -32,6 +32,10 @@
     width: 12px;
     height: 12px;
   }
+  img {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 // ----------------------------------
@@ -45,6 +49,17 @@
   &:hover {
     background-color: $button-hover-bg;
   }
+
+  svg {
+    path {
+      fill: #fff;
+    }
+  }
+}
+
+.filled.secondary {
+  color: $darkColor;
+  background-color: $buttonSecondaryColor;
 
   svg {
     path {
