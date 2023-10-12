@@ -5,6 +5,7 @@ import { translated } from "@/app/utils/locale";
 
 import { ProductTypes, ProductViewModal } from "../../store/purcheses.types";
 import { useProductsStore } from "../../store/products";
+import { AspectRatio } from "@/components";
 
 type ProductManualCardProps = {
   product: ProductViewModal;
@@ -21,13 +22,16 @@ export const ProductManualCard: React.FC<ProductManualCardProps> = ({
     <Link
       to={`${AppRoutes.PURCHASES_BEST_IDEAS}?type=${type}`}
       onClick={() => saveProduct(product)}
+      className="without-decoration"
     >
-      <div className="product-item">
-        <div className="product-item__image">
-          <img src={product.imageSmall || product.image} alt="" />
+      <AspectRatio>
+        <div className="product-item">
+          <div className="product-item__image">
+            <img src={product.imageSmall || product.image} alt="" />
+          </div>
+          <div className="product-item__name">{translated(product.title)}</div>
         </div>
-        <div className="product-item__name">{translated(product.title)}</div>
-      </div>
+      </AspectRatio>
     </Link>
   );
 };

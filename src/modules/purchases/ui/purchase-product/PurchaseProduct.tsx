@@ -1,4 +1,8 @@
 import React from "react";
+import classNames from "classnames";
+import { useTranslation } from "react-i18next";
+
+import { translated } from "@/app/utils/locale";
 
 import {
   IconButton,
@@ -9,26 +13,28 @@ import {
   FillHeartIcon,
   ExternalLink,
   PercentIcon,
-  DeliveryIcon,
-  ReturnIcon,
   InfoIcon,
+  AspectRatio,
 } from "@/components";
-import { useTranslation } from "react-i18next";
 import { PurchaseImageSlider } from "./PurchaseImageSlider";
 import { useLike } from "../../hooks/useLike";
 import { ProductViewModal } from "../../store/purcheses.types";
-import { translated } from "@/app/utils/locale";
-import classNames from "classnames";
 import { usePrice } from "../../hooks/usePriceConverter";
 import { usePopular } from "../../hooks/usePopulary";
 
+import TailorIcon from "@image/icons/tailor.png";
+import DeliveryIcon from "@image/icons/delivery.png";
+import ReturnIcon from "@image/icons/return.png";
+
 type PurchaseProductProps = {
+  ratio: number;
   product: ProductViewModal;
   onLikeClick?: () => void;
 };
 
 export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
   product,
+  ratio,
 }) => {
   const {
     image,
@@ -50,6 +56,10 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
   const { likeProduct, disslikeProduct, liked, loading } = useLike(product);
   const popular = usePopular(popularCount);
 
+  const hasManyImages = Boolean(
+    images?.filter((image) => Boolean(image.length)).length
+  );
+
   return (
     <div className="purchase-product">
       <div className="purchase-image">
@@ -57,7 +67,7 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
           <IconButton
             loading={loading}
             loadingVariant="accent"
-            appearance="outline"
+            appearance="filled"
             classes={classNames("purchase-like", {
               liked,
             })}
@@ -66,40 +76,19 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
           >
             <LikeIcon />
           </IconButton>
-          <IconButton appearance="outline" classes="purchase-share" size="lg">
-            <OutlineShareIcon />
-          </IconButton>
         </div>
 
-        {images ? (
-          <PurchaseImageSlider images={images} />
+        {hasManyImages ? (
+          <PurchaseImageSlider images={images} ratio={ratio} />
         ) : (
-          <img src={image} alt="Purchase" />
+          <AspectRatio ratio={ratio?.toString()}>
+            <img src={image} alt="Purchase" />
+          </AspectRatio>
         )}
       </div>
 
       <div className="purchase-info">
-        <div className="purchase-labels">
-          <div className="purchase-label purchase-popular">
-            {popular && (
-              <div className="purchase-label__title">
-                <PopularIcon />
-                {t("Popular choice")}
-              </div>
-            )}
-          </div>
-          <div className="purchase-label purchase-special">
-            {offer && (
-              <div className="purchase-label__title">
-                <PercentIcon />
-                {t("Special offer")}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="purchase-label__hint">
-          {popularCount} {t("added_to_shopping_list_2")}
-        </div>
+        <h3 className="purchase-title">{translated(title)}</h3>
         {price && (
           <div className="purchase-price">
             {t("from")} {convertedPrice} {symbol}
@@ -112,7 +101,14 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
             </div>
           </div>
         )}
-        <h3 className="purchase-title">{translated(title)}</h3>
+        <div className="purchase-label purchase-special">
+          {offer && (
+            <div className="purchase-label__title">
+              <PercentIcon />
+              {t("Special offer")}
+            </div>
+          )}
+        </div>
         <p className="purchase-description">{translated(description)}</p>
 
         {colors && colors.length > 1 && (
@@ -135,7 +131,7 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
           <div className="purchase-feature">
             <h4 className="purchase-feature__label">{t("Sizes")}:</h4>
             <div className="purchase-feature__value">
-              <DeliveryIcon />
+              <img src={TailorIcon} alt="" />
               {t("Bespoke tailoring available")}
             </div>
           </div>
@@ -144,7 +140,8 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
           <div className="purchase-feature">
             <h4 className="purchase-feature__label">{t("Delivery")}:</h4>
             <div className="purchase-feature__value">
-              <DeliveryIcon />
+              <img src={DeliveryIcon} alt="" />
+
               {t("Delivery available")}
             </div>
           </div>
@@ -153,11 +150,22 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
           <div className="purchase-feature">
             <h4 className="purchase-feature__label">{t("Return")}:</h4>
             <div className="purchase-feature__value">
-              <ReturnIcon />
+              <img src={ReturnIcon} alt="" />
               {t("Return policy available")}
             </div>
           </div>
         )}
+        <div className="purchase-label purchase-popular">
+          {popular && (
+            <div className="purchase-label__title">
+              <PopularIcon />
+              {t("Popular choice")}
+            </div>
+          )}
+        </div>
+        <div className="purchase-label__hint">
+          {popularCount} {t("added_to_shopping_list_2")}
+        </div>
         <div className="purchase-actions">
           <Button>
             <FillHeartIcon />
@@ -172,6 +180,10 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
             <ExternalLink />
             {t("Go to Store")}
           </a>
+          <Button variant="success">
+            <OutlineShareIcon />
+            {t("Share")}
+          </Button>
         </div>
       </div>
     </div>

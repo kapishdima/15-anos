@@ -22,15 +22,6 @@ export const ManualWishList: React.FC = () => {
     <div className="manual-shopping-list">
       <div className="manual-list__header">
         <ListTitle>{t("My wishlist")}</ListTitle>
-        {products.length >= 3 && (
-          <Link
-            to={`${AppRoutes.MANUAL_PURCHAES_LIST}?type=registry`}
-            className="manual-list__link"
-          >
-            {t("Show more")}
-            <ArrowRight />
-          </Link>
-        )}
       </div>
       {!products.length ? (
         <div className="empty-list">
@@ -41,16 +32,20 @@ export const ManualWishList: React.FC = () => {
           <CreatePurchase as="button" />
         </div>
       ) : (
-        <Slider
-          slidesPerView={1}
-          spaceBetween={10}
-          breakpoints={{ 768: { slidesPerView: 3 } }}
-          className="products-list"
-        >
+        <div className="products-manual-list">
           {products.slice(0, 3).map((product) => (
             <ProductManualCard product={product} type="shopping" />
           ))}
-        </Slider>
+          {products.length >= 3 && (
+            <Link
+              to={`${AppRoutes.MANUAL_PURCHAES_LIST}?type=registry`}
+              className="manual-list__link"
+            >
+              {t("Show more")}
+              <ArrowRight />
+            </Link>
+          )}
+        </div>
       )}
     </div>
   );

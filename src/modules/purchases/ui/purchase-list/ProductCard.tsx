@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { IconButton, LikeIcon, PopularIcon } from "@/components";
+import { AspectRatio, IconButton, LikeIcon, PopularIcon } from "@/components";
 import { translated } from "@/app/utils/locale";
 
 import { ProductViewModal } from "../../store/purcheses.types";
@@ -12,9 +12,13 @@ import { usePopular } from "../../hooks/usePopulary";
 
 type ProductCardProps = {
   product: ProductViewModal;
+  ratio?: number;
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  ratio = 1,
+}) => {
   const { image, imageSmall, title, price, colors } = product;
   const { t } = useTranslation();
 
@@ -30,7 +34,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <PopularIcon />
           </div>
         )}
-        <img src={imageSmall || image} alt={translated(title)} />
+        <AspectRatio ratio={ratio?.toString()}>
+          <img src={imageSmall || image} alt={translated(title)} />
+        </AspectRatio>
       </div>
       <div className="product-card__footer">
         <div className="product-card__info">

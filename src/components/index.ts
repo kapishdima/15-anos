@@ -104,6 +104,7 @@ import { Dropzone } from "./dropzone/Dropzone";
 import { ScrollXArea } from "./scroll/ScrollXArea";
 
 import { Popover } from "./popover/Popover";
+import { AspectRatio } from "./aspect-ratio/AspectRatio";
 
 export {
   Button,
@@ -198,4 +199,5 @@ export {
   FormActions,
   FormContent,
   Popover,
+  AspectRatio,
 };

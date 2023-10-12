@@ -9,15 +9,13 @@
   }
 
   .purchase-image {
-    width: 30vw;
-    height: 80vh;
-
     position: relative;
 
-    padding: 2vw;
+    width: 30vw;
 
     background-color: #fff;
     border-radius: 28px;
+    overflow: hidden;
 
     @include mobile {
       width: 100%;
@@ -27,8 +25,8 @@
 
     img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      // height: 100%;
+      // object-fit: contain;
     }
 
     .purchase-actions {
@@ -42,6 +40,11 @@
       row-gap: 8px;
     }
 
+    .icon-button.purchase-like {
+      background-color: #fff;
+      border-radius: 100%;
+      box-shadow: $task-progressbar-shadow;
+    }
     .purchase-like.liked {
       will-change: transform;
       animation: like 400ms ease both;
@@ -72,6 +75,7 @@
     }
 
     .purchase-popular {
+      margin-top: 5%;
       .purchase-label__title {
         color: $warningColor;
       }
@@ -128,7 +132,7 @@
       font-size: 1.125rem;
       color: $darkGrayColor;
 
-      margin-top: 6%;
+      margin-top: 2%;
       margin-bottom: 1.5%;
 
       &__tooltip {
@@ -185,6 +189,7 @@
       font-size: 400;
       color: $darkColor;
 
+      margin-top: 3%;
       margin-bottom: 5%;
 
       @include mobile {
@@ -223,12 +228,11 @@
     .purchase-feature {
       display: flex;
       align-items: center;
-
+      column-gap: 12px;
       margin-top: 2%;
 
       &__label {
         display: flex;
-        flex: 1;
         font-family: $anevir-ff;
         font-size: 0.875rem;
         font-weight: 400;
@@ -239,14 +243,14 @@
         display: flex;
         align-items: center;
         column-gap: 6px;
-        flex: 5;
 
         font-family: $anevir-ff;
         font-size: 0.875rem;
         font-weight: 400;
         color: $successColor;
 
-        svg {
+        svg,
+        img {
           width: 18px;
           height: 18px;
 
@@ -259,9 +263,28 @@
   }
 
   .purchase-image-slider {
-    height: 100%;
-    .swiper {
-      height: 100%;
+    .swiper-pagination {
+      position: absolute;
+      bottom: 8px;
+      z-index: 1;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 4px;
+
+      .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        background-color: transparent;
+        border: 2px solid $accentColor;
+        transition: background-color 0.25s ease;
+      }
+      .swiper-pagination-bullet-active {
+        background-color: $accentColor;
+      }
     }
   }
 }

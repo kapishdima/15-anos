@@ -61,7 +61,11 @@ export const PurchaseBestIdeas: React.FC = () => {
         />
 
         <ProductActions category={shoppingCategory} />
-        <ProductsList products={products} type={type} />
+        <ProductsList
+          products={products}
+          type={type}
+          ratio={shoppingCategory?.ratio || 1}
+        />
       </div>
     </AppLayout>
   );
