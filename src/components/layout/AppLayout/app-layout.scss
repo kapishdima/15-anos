@@ -16,7 +16,7 @@
     // }
 
     @include tablet {
-      max-width: calc(80%);
+      max-width: auto;
     }
 
     @include mobile {

@@ -35,9 +35,9 @@
 
   width: 12vw;
 
-  @include tablet {
-    width: 20vw;
-  }
+  // @include tablet {
+  //   width: 20vw;
+  // }
 
   @include mobile {
     width: 40vw;

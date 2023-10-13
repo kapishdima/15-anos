@@ -15,7 +15,6 @@ import {
 } from "../store/purcheses.types";
 import { orderBy, where } from "firebase/firestore";
 import { getEventId } from "@/modules/event";
-import { upload } from "@/modules/firebase/firestorage";
 
 export const getProductsByCategory = async (
   id: string,
