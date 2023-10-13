@@ -19,7 +19,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   ratio = 1,
 }) => {
-  const { image, imageSmall, title, price, colors } = product;
+  const { image, title, price, colors } = product;
   const { t } = useTranslation();
 
   const { symbol, convertedPrice } = usePrice(price);
@@ -35,7 +35,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
         <AspectRatio ratio={ratio?.toString()}>
-          <img src={imageSmall || image} alt={translated(title)} />
+          <img src={image} alt={translated(title)} />
         </AspectRatio>
       </div>
       <div className="product-card__footer">

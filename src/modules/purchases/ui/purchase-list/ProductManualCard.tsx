@@ -24,14 +24,14 @@ export const ProductManualCard: React.FC<ProductManualCardProps> = ({
       onClick={() => saveProduct(product)}
       className="without-decoration"
     >
-      <AspectRatio>
-        <div className="product-item">
-          <div className="product-item__image">
-            <img src={product.imageSmall || product.image} alt="" />
-          </div>
-          <div className="product-item__name">{translated(product.title)}</div>
+      <div className="product-item">
+        <div className="product-item__image">
+          <AspectRatio>
+            <img src={product.image} alt="" />
+          </AspectRatio>
         </div>
-      </AspectRatio>
+        <div className="product-item__name">{translated(product.title)}</div>
+      </div>
     </Link>
   );
 };

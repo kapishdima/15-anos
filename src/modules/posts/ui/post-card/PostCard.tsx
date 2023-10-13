@@ -11,8 +11,6 @@ import { usePostsStore } from "../../store/posts.store";
 import { getCategory } from "../../store/posts.selector";
 import { ReadedIndicator } from "../readed-indicator/ReadedIndicator";
 
-import truncate from "lodash/truncate";
-
 type PostCardProps = {
   post: Post;
 };
