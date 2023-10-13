@@ -4,6 +4,7 @@ import { PurchaseCategoryCard } from "./PurchaseCategoryCard";
 
 import { useRecommendedShoppingStore } from "../../store/shopping_recommended";
 import { useTranslation } from "react-i18next";
+import { Mousewheel, Scrollbar } from "swiper";
 
 export const RecommendedShoppingList: React.FC = () => {
   const { t } = useTranslation();
@@ -22,6 +23,8 @@ export const RecommendedShoppingList: React.FC = () => {
     <div className="purchase-categories-list">
       <ListTitle>{t("Best ideas")}</ListTitle>
       <Slider
+        modules={[Mousewheel]}
+        mousewheel
         slidesPerView={2}
         spaceBetween={10}
         autoHeight
