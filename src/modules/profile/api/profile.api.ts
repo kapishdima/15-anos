@@ -41,7 +41,7 @@ export const saveProfile = async (
       ? `${country?.code};${country?.emoji}:${country?.name}`
       : profileData.country,
     currency: currency
-      ? `${currency?.code};${currency?.name_plural}:${currency?.symbol_native}`
+      ? `${currency?.code};${currency?.symbol}:${currency?.symbol_native}`
       : profileData.currency,
   };
 
