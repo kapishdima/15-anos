@@ -26,9 +26,9 @@ export const ProductManualCard: React.FC<ProductManualCardProps> = ({
     >
       <div className="product-item">
         <div className="product-item__image">
-          <AspectRatio>
-            <img src={product.image} alt="" />
-          </AspectRatio>
+          {/* <AspectRatio> */}
+          <img src={product.image} alt="" />
+          {/* </AspectRatio> */}
         </div>
         <div className="product-item__name">{translated(product.title)}</div>
       </div>
