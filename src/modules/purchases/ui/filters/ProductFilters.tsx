@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { ColorFilters } from "./ColorFilters/ColorFilters";
-import { ProductsCategory } from "../../store/purcheses.types";
-import { PriceFilters } from "./PricesFilters/PricesFilters";
-import { useProfileStore } from "@/modules/profile/store/profile";
-import { getCurrencyCode } from "@/modules/profile/store/selector/profile.selector";
+import React from "react";
+
+import { useProfileStore, getCurrencyCode } from "@/modules/profile";
 import { Button } from "@/components";
+
+import { ColorFilters } from "./ColorFilters/ColorFilters";
+import { PriceFilters } from "./PricesFilters/PricesFilters";
+import { ProductsCategory } from "../../store/purcheses.types";
 import { useProductsStore } from "../../store/products";
 import { useProductsSearch } from "../../store/products_search";
 
@@ -21,8 +22,6 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
   const searchProducts = useProductsStore((state) => state.searchProducts);
   const prices = useProductsSearch((state) => state.prices);
   const colors = useProductsSearch((state) => state.colors);
-
-  console.log(category);
 
   if (!opened) {
     return null;

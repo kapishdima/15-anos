@@ -1,6 +1,6 @@
 import React from "react";
 import { AspectRatio, Slider } from "@/components";
-import { Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper";
 
 type PurchaseImageSliderProps = {
   images: string[];
@@ -11,10 +11,15 @@ export const PurchaseImageSlider: React.FC<PurchaseImageSliderProps> = ({
   images,
   ratio,
 }) => {
-  console.log(ratio?.toString());
   return (
     <div className="purchase-image-slider">
-      <Slider loop spaceBetween={10} modules={[Pagination]} pagination>
+      <Slider
+        loop
+        spaceBetween={10}
+        modules={[Pagination, Navigation]}
+        pagination
+        navigation
+      >
         {images.map((image) => (
           <AspectRatio ratio={ratio?.toString()}>
             <img src={image} alt="Purchase" />

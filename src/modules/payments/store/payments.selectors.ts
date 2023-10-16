@@ -1,9 +1,9 @@
-import format from 'date-fns/format';
-import { GroupedPayments, PaymentViewModal, PaymentsStore } from './payments';
+import format from "date-fns/format";
+import { GroupedPayments, PaymentViewModal, PaymentsStore } from "./payments";
 
-import sortBy from 'lodash.sortby';
-import { orderBy } from 'lodash';
-import { PaymentDetailsStore } from './payment-details';
+import sortBy from "lodash.sortby";
+import { orderBy } from "lodash";
+import { PaymentDetailsStore } from "./payment-details";
 
 export const exceptCompletedPayments = (payments: PaymentViewModal[]) => {
   return payments.filter((payment) => !payment.wasPaid);
@@ -11,7 +11,7 @@ export const exceptCompletedPayments = (payments: PaymentViewModal[]) => {
 
 export const groupByMonth = (payments: PaymentViewModal[]) => {
   const groupedPayments = payments.reduce((acc, payment) => {
-    const key = format(new Date(payment.date), 'MMMM, yyyy');
+    const key = format(new Date(payment.date), "MMMM, yyyy");
     acc[key] = [...(acc[key] || []), payment];
 
     return acc;
@@ -40,20 +40,29 @@ export const paymentsVM = (state: PaymentsStore) => {
 };
 
 export const sortedByDate = (payments: PaymentViewModal[]) => {
-  const sorted = orderBy(payments, (payment) => new Date(payment.date), 'asc');
+  const sorted = orderBy(payments, (payment) => new Date(payment.date), "asc");
 
   return groupByMonth(sorted);
 };
 
-export const sortedByCategoriesAlphabet = (payments: PaymentViewModal[]): GroupedPayments => {
-  const sorted = sortBy(payments, (payment) => payment.categoryId.toLowerCase());
+export const sortedByCategoriesAlphabet = (
+  payments: PaymentViewModal[]
+): GroupedPayments => {
+  const sorted = sortBy(payments, (payment) =>
+    payment.categoryId.toLowerCase()
+  );
+  const orderByDate = orderBy(
+    sorted,
+    (payment) => new Date(payment.date),
+    "asc"
+  );
 
-  return groupByCategory(sorted);
+  return groupByCategory(orderByDate);
 };
 
 export const groupedByDate = (payments: PaymentViewModal[]) => {
   return payments.reduce((acc, payment) => {
-    const key = format(new Date(payment.date), 'EEEE, dd MMMM yyyy');
+    const key = format(new Date(payment.date), "EEEE, dd MMMM yyyy");
     acc[key] = [...(acc[key] || []), payment];
 
     return acc;
@@ -70,32 +79,43 @@ export const scheduledPayments = (state: PaymentsStore) => {
 };
 
 export const alreadyPaid = (state: PaymentsStore) => {
-  return state.payments.reduce((acc, value) => {
-    const paid = typeof value.paid === 'string' ? parseInt(value.paid) : value.paid;
+  const paid = state.payments.reduce((acc, value) => {
+    const paid =
+      typeof value.paid === "string" ? parseInt(value.paid) : value.paid;
     acc += paid;
 
     return acc;
   }, 0);
+
+  return paid > 0 ? paid : 0;
 };
 
-export const availableBudget = (state: PaymentDetailsStore, alreadyPaid: number) => {
+export const availableBudget = (
+  state: PaymentDetailsStore,
+  alreadyPaid: number
+) => {
   if (!state.paymentDetails || !state.paymentDetails.budget) {
     return 0;
   }
 
-  return state.paymentDetails.budget - alreadyPaid;
+  const paid = state.paymentDetails.budget - alreadyPaid;
+
+  return paid > 0 ? paid : 0;
 };
 
 export const paymentsAmount = (state: PaymentsStore) => {
   return state.payments.reduce((acc, value) => {
-    const pay = typeof value.pay === 'string' ? parseInt(value.pay) : value.pay;
+    const pay = typeof value.pay === "string" ? parseInt(value.pay) : value.pay;
     acc += pay;
 
     return acc;
   }, 0);
 };
 
-export const perGuest = (state: PaymentDetailsStore, paymentsAmount: number) => {
+export const perGuest = (
+  state: PaymentDetailsStore,
+  paymentsAmount: number
+) => {
   const guests = state.paymentDetails?.guests;
 
   if (!guests || guests === 0) {

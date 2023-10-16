@@ -11,6 +11,7 @@ import {
   updatePaymentStatus,
 } from "../api/payments.api";
 import { exceptCompletedPayments } from "./payments.selectors";
+import { translated } from "@/app/utils/locale";
 
 export type Translations = { [key: string]: string };
 
@@ -39,7 +40,7 @@ export type PaymentViewModal = {
   notes: string;
   status: Statuses;
   suggestions: any[];
-  title: Translations;
+  title: any;
   vendorId: string;
   wasPaid: boolean;
   pay: number;
@@ -199,7 +200,7 @@ export const usePaymentsStore = create<PaymentsStore>()(
         setCurrentPayment: (payment: PaymentViewModal) => {
           set(() => {
             return {
-              currentPayment: payment,
+              currentPayment: { ...payment, title: translated(payment.title) },
             };
           });
         },

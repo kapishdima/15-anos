@@ -1,13 +1,18 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { saveProfile, getProfileDetails } from "../../profile/api/profile.api";
+import {
+  saveProfile,
+  getProfileDetails,
+  getProfileMainImage,
+} from "../../profile/api/profile.api";
 
 export type ProfileDetails = {
   country: string;
   currency: string;
   budget: number;
   guests: number;
+  date: Date;
 };
 
 export interface ProfileStore {
@@ -15,6 +20,7 @@ export interface ProfileStore {
   loading: boolean;
   fetchProfileDetails: (force?: boolean) => Promise<void>;
   saveProfileDetails: (detailsData: ProfileDetails) => void;
+  fethcProfileMainImage: () => Promise<void>;
 }
 
 export const useProfileStore = create<ProfileStore>()(
@@ -46,6 +52,16 @@ export const useProfileStore = create<ProfileStore>()(
           try {
             set(() => ({ loading: true }));
             await saveProfile(values);
+            set(() => ({ loading: false }));
+          } catch (error) {
+            console.error(error);
+            set(() => ({ loading: false }));
+          }
+        },
+        fethcProfileMainImage: async () => {
+          try {
+            set(() => ({ loading: true }));
+            await getProfileMainImage();
             set(() => ({ loading: false }));
           } catch (error) {
             console.error(error);

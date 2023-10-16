@@ -45,7 +45,13 @@ export const createMenu = () => {
         path: AppRoutes.PURCHASES_LIST,
       },
     ],
-    Guides: [{ icon: <ArticlesIcon />, title: "Posts", path: AppRoutes.POSTS }],
+    "Guides & Inspiration": [
+      {
+        icon: <ArticlesIcon />,
+        title: "Guides and tips",
+        path: AppRoutes.POSTS,
+      },
+    ],
     Vendors: [
       { icon: <VendorsIcon />, title: "Vendors", path: AppRoutes.VENDORS },
     ],

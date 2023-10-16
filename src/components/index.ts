@@ -3,8 +3,6 @@ import { IconButton } from "./button/IconButton/IconButton";
 import { Logout } from "./button/Logout/Logout";
 import { BackButton } from "./button/BackButton/BackButton";
 
-import { EventCard } from "./event/EventCard/EventCard";
-
 import { CountrySelect } from "./fields/CountrySelect";
 import { CurrencyField } from "./fields/CurrencyField/CurrencyField";
 import { CurrencySelect } from "./fields/CurrencySelect";
@@ -110,7 +108,6 @@ export {
   Button,
   IconButton,
   Logout,
-  EventCard,
   CountrySelect,
   CurrencyField,
   CurrencySelect,

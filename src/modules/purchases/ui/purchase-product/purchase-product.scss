@@ -1,3 +1,8 @@
+:root {
+  --swiper-navigation-size: 14px;
+  --swiper-navigation-color: #fff;
+}
+
 .purchase-product {
   display: flex;
   column-gap: 5%;
@@ -265,8 +270,9 @@
   .purchase-image-slider {
     .swiper-pagination {
       position: absolute;
-      bottom: 8px;
+      bottom: 18px;
       z-index: 1;
+
       width: 100%;
 
       display: flex;
@@ -274,17 +280,37 @@
       justify-content: center;
       column-gap: 4px;
 
+      &::before {
+        content: "";
+
+        position: absolute;
+        z-index: -1;
+        width: 30%;
+
+        padding: 10px;
+        background-color: rgba(#000, 20%);
+        border-radius: $base-br;
+      }
+
       .swiper-pagination-bullet {
         width: 8px;
         height: 8px;
         border-radius: 100%;
         background-color: transparent;
-        border: 2px solid $accentColor;
+        border: 2px solid #fff;
         transition: background-color 0.25s ease;
       }
       .swiper-pagination-bullet-active {
-        background-color: $accentColor;
+        background-color: #fff;
       }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(#000, 20%);
     }
   }
 }

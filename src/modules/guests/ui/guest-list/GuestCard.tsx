@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, useModal } from "@/components";
+import { Card } from "@/components";
 import { Guest, GuestStatuses, useGuestsStore } from "../../store/guests";
 
 import QuestionIcon from "@image/icons/question.svg";
@@ -8,8 +8,7 @@ import InvitedIcon from "@image/icons/invited.svg";
 import WontComeIcon from "@image/icons/wont_come.svg";
 
 import { GuestsStatus } from "../buttons/GuestStatus";
-import { CreateGuestModal } from "../create-guest/CreateGuestModal";
-import { createGuestSchemaValidation } from "../../validation/guests.schema";
+
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
 import Emptyphoto from "@/image/emptyphoto.png";
 import { translated } from "@/app/utils/locale";
+import { AspectRatio } from "@/components";
 
 type PurchaseCategoryCardProps = {
   id: string;
@@ -21,12 +22,16 @@ export const PurchaseCategoryCard: React.FC<PurchaseCategoryCardProps> = ({
   const url = AppRoutes.PURCHASES_BEST_IDEAS + "/" + id + `?type=${type}`;
   return (
     <Link to={url} className="purchase-category-card__link">
-      <div
-        className="purchase-category-card"
-        style={{ backgroundImage: `url(${image || Emptyphoto})` }}
-      >
-        <div className="purchase-category-card__title">{translated(name)}</div>
-      </div>
+      <AspectRatio ratio="4/6">
+        <div
+          className="purchase-category-card"
+          style={{ backgroundImage: `url(${image || Emptyphoto})` }}
+        >
+          <div className="purchase-category-card__title">
+            {translated(name)}
+          </div>
+        </div>
+      </AspectRatio>
     </Link>
   );
 };

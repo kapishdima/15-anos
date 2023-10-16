@@ -1,0 +1,8 @@
+.progress-card__extra-item {
+  &.exceeded {
+    .progress-card__extra-item__amount,
+    .progress-card__extra-item__label {
+      color: $errorColor;
+    }
+  }
+}

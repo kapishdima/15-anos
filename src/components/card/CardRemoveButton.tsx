@@ -60,6 +60,8 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
         confirmButtonText={t("Yes")}
         cancelButtonText={t("No")}
         hasCloseIconButton={false}
+        confirmButtonColor="error"
+        cancelButtonColor="success"
       />
     </>
   );

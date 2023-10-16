@@ -89,30 +89,6 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
             : `${t("Already paid")}: ${payment.paid} $`
         }
       />
-      {/* <CreatePaymentModal
-        id={PAYMENT_MODAL_ID}
-        paymentId={id}
-        initialValues={{
-          title,
-          categoryId,
-          date,
-          notes,
-          paid: paid.toString(),
-          pay: pay.toString(),
-        }}
-        validation={createPaymentSchemaValidation}
-        onSubmit={onUpdatePayment}
-        loading={loading}
-        actions={
-          <CreatePaymentActions
-            modalId={PAYMENT_MODAL_ID}
-            isCompleted={Boolean(isCompleted)}
-            updatePaymentStatus={() => onUpdatePaymentStatus(id)}
-          />
-        }
-        hasDeleteButton
-        hasConfirmButton={false}
-      /> */}
     </>
   );
 };

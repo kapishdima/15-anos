@@ -215,5 +215,17 @@
   "Days": "Días",
   "Hours": "Horas",
   "Minutes": "Minutos",
-  "Seconds": "Segundos"
+  "Seconds": "Segundos",
+
+  "Guides & Inspiration": "Guides & Inspiration",
+  "Guides and tips": "Guides and tips",
+
+  "Price: High to Low": "Precio descendente",
+  "Price: Low to High": "Precio ascendente",
+  "Popularity: High to Low": "Popularidad: de alta a baja",
+
+  "Log out": "Cerrar sesión",
+  "You did not specify the event name. Without it, you can’t log in. Please specify it.": "No has indicado el nombre del evento. Sin el no se puede acceder al perfil. Por favor, indícalo.",
+  "Specify": "Indicar",
+  "Are you sure you want to log out?": "¿Seguro que quieres cerrar sesión?"
 }

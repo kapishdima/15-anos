@@ -1,9 +1,9 @@
-import format from 'date-fns/format';
-import { translated } from '@/app/utils/locale';
-import { GroupedTasks, TaskViewModal, TasksStore } from './tasks';
+import format from "date-fns/format";
+import { translated } from "@/app/utils/locale";
+import { GroupedTasks, TaskViewModal, TasksStore } from "./tasks";
 
-import sortBy from 'lodash.sortby';
-import { orderBy } from 'lodash';
+import sortBy from "lodash.sortby";
+import { orderBy } from "lodash";
 
 export const getCompletedTasks = (tasks: TaskViewModal[]) => {
   return tasks.filter((task) => !task.isCompleted);
@@ -11,7 +11,7 @@ export const getCompletedTasks = (tasks: TaskViewModal[]) => {
 
 export const groupByMonth = (tasks: TaskViewModal[]) => {
   const groupedTask = tasks.reduce((acc, task) => {
-    const key = format(task.date, 'MMMM, yyyy');
+    const key = format(task.date, "MMMM, yyyy");
     acc[key] = [...(acc[key] || []), task];
 
     return acc;
@@ -40,20 +40,23 @@ export const tasksVM = (state: TasksStore) => {
 };
 
 export const sortedByDate = (tasks: TaskViewModal[]) => {
-  const sorted = orderBy(tasks, (task) => new Date(task.date), 'asc');
+  const sorted = orderBy(tasks, (task) => new Date(task.date), "asc");
 
   return groupByMonth(sorted);
 };
 
-export const sortedByCategoriesAlphabet = (tasks: TaskViewModal[]): GroupedTasks => {
+export const sortedByCategoriesAlphabet = (
+  tasks: TaskViewModal[]
+): GroupedTasks => {
   const sorted = sortBy(tasks, (task) => task.categoryId.toLowerCase());
+  const orderByDate = orderBy(sorted, (task) => new Date(task.date), "asc");
 
-  return groupByCategory(sorted);
+  return groupByCategory(orderByDate);
 };
 
 export const groupedByDate = (tasks: TaskViewModal[]) => {
   return tasks.reduce((acc, task) => {
-    const key = format(task.date, 'EEEE, dd MMMM yyyy');
+    const key = format(task.date, "EEEE, dd MMMM yyyy");
     acc[key] = [...(acc[key] || []), task];
 
     return acc;

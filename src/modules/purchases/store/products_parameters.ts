@@ -22,7 +22,6 @@ export const useProductParameters = create<ProductsParametersStore>()(
           }));
 
           const cacheProducts = get().parameters;
-          console.log(cacheProducts);
 
           const hasCachedParameters = Boolean(cacheProducts);
 

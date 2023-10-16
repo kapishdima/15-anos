@@ -1,3 +1,3 @@
-import { getEvent, getEventId } from './api/event';
+import { getEvent, getEventId, getEventTitle } from "./api/event";
 
-export { getEvent, getEventId };
+export { getEvent, getEventId, getEventTitle };

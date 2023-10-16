@@ -4,8 +4,10 @@ import { Button, Popover } from "@/components";
 import { useProductsStore } from "@/modules/purchases/store/products";
 
 import SortIcon from "@image/icons/sort.svg";
+import { useTranslation } from "react-i18next";
 
 export const ProductsSort: React.FC = () => {
+  const { t } = useTranslation();
   const [opened, setOpened] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const sortProducts = useProductsStore((state) => state.sortProducts);
@@ -16,6 +18,7 @@ export const ProductsSort: React.FC = () => {
 
   const sort = (type: "asc" | "desc", by: string) => {
     sortProducts(type, by);
+    setOpened(false);
   };
 
   return (
@@ -32,13 +35,13 @@ export const ProductsSort: React.FC = () => {
       }
     >
       <div className="sort-item" onClick={() => sort("asc", "price")}>
-        Price: Low to Hight
+        {t("Price: Low to Hight")}
       </div>
       <div className="sort-item" onClick={() => sort("desc", "price")}>
-        Price: Hight to Low
+        {t("Price: Hight to Low")}
       </div>
       <div className="sort-item" onClick={() => sort("desc", "popularity")}>
-        Popularity: Hight to Low
+        {t("Popularity: Hight to Low")}
       </div>
     </Popover>
   );

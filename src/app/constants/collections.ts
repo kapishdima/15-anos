@@ -20,4 +20,5 @@ export enum Collections {
   VENDOR_GROUP_CATEGORIES = "vendors/groups/list",
   MANUAL_VENDORS = "vendors",
   EMPTY_VENDORS = "vendors/requests/empty",
+  MAIN_IMAGE = "images",
 }

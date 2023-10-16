@@ -31,7 +31,7 @@
     padding-top: 16px;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     column-gap: 10%;
 
@@ -53,6 +53,13 @@
         font-family: $anevir-ff;
         font-size: 0.875rem;
         font-weight: 500;
+        color: $darkGrayColor;
+      }
+
+      &__hint {
+        font-family: $anevir-ff;
+        font-size: 0.75rem;
+        font-weight: 400;
         color: $darkGrayColor;
       }
     }

@@ -210,5 +210,17 @@
   "Minutes": "Minutes",
   "Seconds": "Seconds",
 
-  "Posts": "Posts"
+  "Posts": "Posts",
+
+  "Guides & Inspiration": "Guides & Inspiration",
+  "Guides and tips": "Guides and tips",
+
+  "Price: High to Low": "Price: High to Low",
+  "Price: Low to High": "Price: Low to High",
+  "Popularity: High to Low": "Popularity: High to Low",
+
+  "Log out": "Log out",
+  "You did not specify the event name. Without it, you can’t log in. Please specify it.": "You did not specify the event name. Without it, you can’t log in. Please specify it.",
+  "Specify": "Specify",
+  "Are you sure you want to log out?": "Are you sure you want to log out?"
 }

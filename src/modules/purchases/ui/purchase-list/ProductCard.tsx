@@ -42,7 +42,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="product-card__info">
           {price && (
             <div className="product-card__price">
-              {t("from")} {convertedPrice} {symbol}
+              {t("from")} {symbol}
+              {convertedPrice}
             </div>
           )}
           <h4 className="product-card__name">{translated(title)}</h4>

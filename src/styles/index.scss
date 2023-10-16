@@ -3,6 +3,12 @@
 @import "mixins";
 
 // ---------------------------
+// Libraries
+// ---------------------------
+@import "~react-toastify/dist/ReactToastify.css";
+@import "~swiper/css/navigation";
+
+// ---------------------------
 // Components
 // ---------------------------
 
@@ -13,11 +19,6 @@
 // ---------------------------
 
 @import "../modules/index.scss";
-
-// ---------------------------
-// Libraries
-// ---------------------------
-@import "~react-toastify/dist/ReactToastify.css";
 
 * {
   margin: 0;
@@ -35,9 +36,7 @@ body {
   width: 100%;
   max-width: 100%;
   max-height: 100vh;
-  // CSS Grid/Flexbox bug size workaround
-  // @see https://github.com/kenwheeler/slick/issues/982
-  // @see https://github.com/nolimits4web/swiper/issues/3599
+
   min-height: 0;
   min-width: 0;
 }

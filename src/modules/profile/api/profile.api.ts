@@ -1,6 +1,7 @@
 import { Collections } from "@app/constants/collections";
 import {
   getSnapshotDocument,
+  toDate,
   updateDocument,
 } from "@/modules/firebase/firestore";
 
@@ -20,6 +21,7 @@ export const getProfileDetails = async (): Promise<any> => {
   return {
     ...profileDetails,
     budget: (profileDetails?.budget || "").toString(),
+    date: new Date(toDate(profileDetails?.date)),
   };
 };
 
@@ -50,4 +52,16 @@ export const saveProfile = async (
     [eventId, Collections.PROFILE],
     profilePayloadData
   );
+};
+
+export const getProfileMainImage = async () => {
+  const eventId = getEventId();
+
+  const mainImage = await getSnapshotDocument<ProfileDetails>(
+    Collections.EVENTS,
+    [eventId, Collections.MAIN_IMAGE]
+  );
+
+  console.log(mainImage);
+  return mainImage;
 };

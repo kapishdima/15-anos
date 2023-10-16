@@ -12,6 +12,7 @@ import { sortedByNameAlphabet } from "../store/guests.selector";
 import { RemoveGuest } from "../ui/buttons/RemoveGuest";
 import { ToggleVisibilityConfirmed } from "../ui/buttons/ToggleVisibilityCompleted";
 import { useSearchParams } from "react-router-dom";
+import { GuestEmptyList } from "../ui/guest-list/GuestsEmptyList";
 
 export const GuestsIndex: React.FC = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -31,6 +32,8 @@ export const GuestsIndex: React.FC = () => {
     fetchGuests();
   }, []);
 
+  console.log(guests.length);
+
   return (
     <AppLayout loading={loading}>
       <div className="home-page">
@@ -44,7 +47,10 @@ export const GuestsIndex: React.FC = () => {
           }
         />
 
-        {guests && (
+        {/* @ts-ignore */}
+        {Boolean((!guests || !guests.length) && !loading) && <GuestEmptyList />}
+
+        {Boolean(guests && guests.length) && (
           <div className="guests-info">
             <GuestProgress />
             <Form

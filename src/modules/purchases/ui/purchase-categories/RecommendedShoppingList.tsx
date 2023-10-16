@@ -22,7 +22,17 @@ export const RecommendedShoppingList: React.FC = () => {
   return (
     <div className="purchase-categories-list">
       <ListTitle>{t("Best ideas")}</ListTitle>
-      <Slider
+      <div className="recommented-product-list">
+        {shoppingProducts.map((shoppingProduct) => (
+          <PurchaseCategoryCard
+            id={shoppingProduct.id}
+            image={shoppingProduct.image}
+            name={shoppingProduct.title}
+            type="shopping"
+          />
+        ))}
+      </div>
+      {/* <Slider
         modules={[Mousewheel]}
         mousewheel
         slidesPerView={2}
@@ -38,7 +48,7 @@ export const RecommendedShoppingList: React.FC = () => {
             type="shopping"
           />
         ))}
-      </Slider>
+      </Slider> */}
     </div>
   );
 };

@@ -91,7 +91,8 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
         <h3 className="purchase-title">{translated(title)}</h3>
         {price && (
           <div className="purchase-price">
-            {t("from")} {convertedPrice} {symbol}
+            {t("from")} {symbol}
+            {convertedPrice}
             <div className="purchase-price__tooltip">
               <InfoIcon />
               <div className="purchase-price__tooltip-value">
