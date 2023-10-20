@@ -48,7 +48,7 @@ export interface ProfileStore {
   fethcProfileMainImage: () => Promise<void>;
   fetchEventTitle: () => void;
   fetchPasswords: () => Promise<void>;
-  saveProfileDetails: (detailsData: ProfileDetails) => void;
+  saveProfileDetails: (detailsData: any) => void;
   saveImageMain: (file: File) => void;
   saveEventTitle: (eventTitle: string) => Promise<void>;
 }

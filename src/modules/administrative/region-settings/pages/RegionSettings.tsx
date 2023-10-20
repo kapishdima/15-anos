@@ -30,7 +30,9 @@ export const RegionSettingsIndex: React.FC = () => {
   const saveLoading = useProfileStore((state) => state.saveLoading);
   const country = useProfileStore(getCountyCode);
   const currency = useProfileStore(getCurrencyCode);
+  const profile = useProfileStore((state) => state.profile);
 
+  console.log(profile);
   const initialValues = {
     country: country,
     language: "en",
@@ -38,7 +40,11 @@ export const RegionSettingsIndex: React.FC = () => {
   };
 
   const onSubmit = async (values: any) => {
-    await saveProfileDetails(values);
+    const payload = {
+      country: values.country,
+      currency: values.currency,
+    };
+    await saveProfileDetails(payload);
     await fetchProfileDetails();
   };
 

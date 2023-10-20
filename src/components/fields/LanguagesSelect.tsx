@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { countries } from "@app/data/countries";
 import { languages } from "@app/data/languages";
-import { useUserLocation } from "@app/location/useUserLocation";
 
 import { SelectField } from "./SelectField";
 import { BaseInputProps } from "./Input";
@@ -20,8 +18,6 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
   placeholder,
   country,
 }) => {
-  const { setValue, getValues } = useFormContext();
-
   const { i18n } = useTranslation();
 
   const options = languages.map((language) => ({
@@ -34,17 +30,13 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
     i18n.changeLanguage(value.toLowerCase());
   };
 
-  useEffect(() => {
-    const locale =
-      !i18n.language || i18n.language === "ru" ? "en" : i18n.language;
-    setValue(name, locale);
-  }, [i18n.language]);
-
   return (
     <SelectField
       name={name}
       label={label}
-      defaultSelected={getValues(name)}
+      defaultSelected={
+        !i18n.language || i18n.language === "ru" ? "en" : i18n.language
+      }
       placeholder={placeholder}
       options={options}
       onSelect={changeLanguage}
