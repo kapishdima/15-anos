@@ -20,7 +20,8 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
   placeholder,
   country,
 }) => {
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext();
+
   const { i18n } = useTranslation();
 
   const options = languages.map((language) => ({
@@ -43,7 +44,7 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
     <SelectField
       name={name}
       label={label}
-      defaultSelected={i18n.language}
+      defaultSelected={getValues(name)}
       placeholder={placeholder}
       options={options}
       onSelect={changeLanguage}

@@ -1,12 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-import './styles/index.scss';
-import { ToastContainer } from 'react-toastify';
-import { UserLocationProvider } from './app/location/UserLocationProvider';
+import "./styles/index.scss";
+import { ToastContainer } from "react-toastify";
+import { UserLocationProvider } from "./app/location/UserLocationProvider";
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 
 root.render(
   <React.StrictMode>
@@ -19,5 +21,5 @@ root.render(
     <UserLocationProvider>
       <App />
     </UserLocationProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

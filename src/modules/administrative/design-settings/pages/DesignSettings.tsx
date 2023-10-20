@@ -96,9 +96,9 @@ export const DesignSettingsIndex: React.FC = () => {
     await fetchProfileDetails();
   };
 
-  const onImageMainUpload = (file: File) => {
-    saveImageMain(file);
-    fetchProfileMainImage();
+  const onImageMainUpload = async (file: File) => {
+    await saveImageMain(file);
+    await fetchProfileMainImage();
   };
 
   useEffect(() => {
