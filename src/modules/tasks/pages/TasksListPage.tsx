@@ -31,7 +31,7 @@ export const TasksListPage: React.FC = () => {
   }, []);
 
   return (
-    <AppLayout loading={tasksLoading && categoriesLoading}>
+    <AppLayout loading={tasksLoading || categoriesLoading}>
       <div className="home-page">
         <PageHeader
           title="Tasks"

@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
-import { getPaymentDetails } from '../api/payments.api';
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { getPaymentDetails } from "../api/payments.api";
 
 export type PaymentDetails = {
   budget: number;
@@ -15,35 +15,20 @@ export interface PaymentDetailsStore {
 }
 
 export const usePaymentDetailsStore = create<PaymentDetailsStore>()(
-  devtools(
-    persist(
-      (set, get) => ({
-        paymentDetails: null,
+  devtools((set, get) => ({
+    paymentDetails: null,
+    loading: false,
+    fetchPaymentDetails: async (force?: boolean) => {
+      set(() => ({
+        loading: true,
+      }));
+
+      const paymentDetails = await getPaymentDetails();
+
+      set(() => ({
+        paymentDetails,
         loading: false,
-        fetchPaymentDetails: async (force?: boolean) => {
-          set(() => ({
-            loading: true,
-          }));
-
-          const cachedPaymentDetails = get().paymentDetails;
-
-          const hasCachedPaymentDetails = Boolean(cachedPaymentDetails);
-
-          const paymentDetails =
-            hasCachedPaymentDetails && !force ? cachedPaymentDetails : await getPaymentDetails();
-
-          set(() => ({
-            paymentDetails,
-            loading: false,
-          }));
-        },
-      }),
-      {
-        name: 'payments-details',
-        partialize: (state) => ({
-          paymentDetails: state.paymentDetails,
-        }),
-      },
-    ),
-  ),
+      }));
+    },
+  }))
 );

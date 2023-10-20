@@ -72,148 +72,124 @@ export interface TasksStore {
 }
 
 export const useTasksStore = create<TasksStore>()(
-  devtools(
-    persist(
-      (set, get) => ({
-        currentTask: null,
-        tasks: [],
-        tasksForView: [],
-        completed: 0,
-        total: 0,
+  devtools((set, get) => ({
+    currentTask: null,
+    tasks: [],
+    tasksForView: [],
+    completed: 0,
+    total: 0,
+    loading: false,
+    isRemoval: false,
+    taskInProcessing: "",
+    fetchTasks: async (force?: boolean) => {
+      set(() => ({
+        loading: true,
+      }));
+
+      const tasks = await getTasks();
+
+      const total = tasks.length;
+      const completed = tasks.filter((task) => task.isCompleted).length;
+
+      const tasksForView = tasks;
+      const showCompleted = JSON.parse(
+        new URLSearchParams(window.location.search).get("showCompleted") ||
+          "true"
+      );
+
+      set(() => ({
+        tasks,
+        tasksForView: showCompleted
+          ? tasksForView
+          : getCompletedTasks(tasksForView),
         loading: false,
-        isRemoval: false,
-        taskInProcessing: "",
-        fetchTasks: async (force?: boolean) => {
-          set(() => ({
-            loading: true,
-          }));
+        total,
+        completed,
+      }));
+    },
 
-          const cachedTasks = get().tasks;
-          const cachedTasksForView = get().tasksForView;
-
-          const hasCacheTasks = Boolean(cachedTasks && cachedTasks.length);
-          const hasCachedTasksForView = Boolean(
-            cachedTasksForView && cachedTasksForView.length
-          );
-
-          const tasks =
-            hasCacheTasks && !force ? cachedTasks : await getTasks();
-
-          const total = tasks.length;
-          const completed = tasks.filter((task) => task.isCompleted).length;
-
-          const tasksForView =
-            hasCachedTasksForView && !force ? cachedTasksForView : tasks;
-          const showCompleted = JSON.parse(
-            new URLSearchParams(window.location.search).get("showCompleted") ||
-              "true"
-          );
-
-          set(() => ({
-            tasks,
-            tasksForView: showCompleted
-              ? tasksForView
-              : getCompletedTasks(tasksForView),
-            loading: false,
-            total,
-            completed,
-          }));
-        },
-
-        showCompleted: () => set((state) => ({ tasksForView: state.tasks })),
-        hideCompleted: () =>
-          set((state) => ({ tasksForView: getCompletedTasks(state.tasks) })),
-        toggleTaskRemoval: () =>
-          set((state) => {
-            return { isRemoval: !state.isRemoval };
-          }),
-
-        removeTask: async (id: string) => {
-          try {
-            set(() => ({ loading: true, taskInProcessing: id }));
-            await removeTask(id);
-
-            set((state) => {
-              return {
-                tasksForView: state.tasksForView.filter(
-                  (task) => task.id !== id
-                ),
-                loading: false,
-                taskInProcessing: "",
-              };
-            });
-          } catch (error) {
-            set(() => ({ loading: false, taskInProcessing: "" }));
-          }
-        },
-
-        updateTask: async (id: string, payload: any) => {
-          try {
-            set(() => ({ loading: true }));
-            await updateTask(id, payload);
-            set(() => ({ loading: false }));
-          } catch (error) {
-            set(() => ({ loading: false }));
-          }
-        },
-
-        changeTaskStatus: async (id: string, status: "undone" | "done") => {
-          try {
-            set(() => ({ loading: true, taskInProcessing: id }));
-            await updateTaskStatus(id, status);
-            set(() => ({ loading: false, taskInProcessing: "" }));
-          } catch (error) {
-            set(() => ({ loading: false, taskInProcessing: "" }));
-          }
-        },
-
-        addTask: async (payload: any) => {
-          try {
-            set(() => ({ loading: true }));
-            await createTask(payload);
-            set(() => ({ loading: false }));
-          } catch (error) {
-            console.error(error);
-            set(() => ({ loading: false }));
-          }
-        },
-
-        storeTask: (task: TaskFormValues) => {
-          window.localStorage.setItem("task", JSON.stringify(task));
-        },
-        getStoredTask: () => {
-          const taks = window.localStorage.getItem("task");
-
-          if (!taks) {
-            return null;
-          }
-
-          return JSON.parse(taks);
-        },
-
-        setCurrentTask: (task: TaskViewModal) => {
-          set(() => {
-            return {
-              currentTask: task,
-            };
-          });
-        },
-        clearCurrentTask: () => {
-          set(() => {
-            return {
-              currentTask: null,
-            };
-          });
-        },
+    showCompleted: () => set((state) => ({ tasksForView: state.tasks })),
+    hideCompleted: () =>
+      set((state) => ({ tasksForView: getCompletedTasks(state.tasks) })),
+    toggleTaskRemoval: () =>
+      set((state) => {
+        return { isRemoval: !state.isRemoval };
       }),
-      {
-        name: "tasks",
-        partialize: (state) => ({
-          tasks: state.tasks,
-          tasksForView: state.tasksForView,
-          currentTask: state.currentTask,
-        }),
+
+    removeTask: async (id: string) => {
+      try {
+        set(() => ({ loading: true, taskInProcessing: id }));
+        await removeTask(id);
+
+        set((state) => {
+          return {
+            tasksForView: state.tasksForView.filter((task) => task.id !== id),
+            loading: false,
+            taskInProcessing: "",
+          };
+        });
+      } catch (error) {
+        set(() => ({ loading: false, taskInProcessing: "" }));
       }
-    )
-  )
+    },
+
+    updateTask: async (id: string, payload: any) => {
+      try {
+        set(() => ({ loading: true }));
+        await updateTask(id, payload);
+        set(() => ({ loading: false }));
+      } catch (error) {
+        set(() => ({ loading: false }));
+      }
+    },
+
+    changeTaskStatus: async (id: string, status: "undone" | "done") => {
+      try {
+        set(() => ({ loading: true, taskInProcessing: id }));
+        await updateTaskStatus(id, status);
+        set(() => ({ loading: false, taskInProcessing: "" }));
+      } catch (error) {
+        set(() => ({ loading: false, taskInProcessing: "" }));
+      }
+    },
+
+    addTask: async (payload: any) => {
+      try {
+        set(() => ({ loading: true }));
+        await createTask(payload);
+        set(() => ({ loading: false }));
+      } catch (error) {
+        console.error(error);
+        set(() => ({ loading: false }));
+      }
+    },
+
+    storeTask: (task: TaskFormValues) => {
+      window.localStorage.setItem("task", JSON.stringify(task));
+    },
+    getStoredTask: () => {
+      const taks = window.localStorage.getItem("task");
+
+      if (!taks) {
+        return null;
+      }
+
+      return JSON.parse(taks);
+    },
+
+    setCurrentTask: (task: TaskViewModal) => {
+      set(() => {
+        return {
+          currentTask: task,
+        };
+      });
+    },
+    clearCurrentTask: () => {
+      set(() => {
+        return {
+          currentTask: null,
+        };
+      });
+    },
+  }))
 );

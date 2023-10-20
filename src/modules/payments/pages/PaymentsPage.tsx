@@ -18,16 +18,16 @@ import { usePaymentDetailsStore } from "../store/payment-details";
 
 export const PaymentsIndex: React.FC = () => {
   const payments = usePaymentsStore((state) => state.paymentsForView);
-  const paymentsLoading = usePaymentsStore((state) => state.loading);
 
   const fetchPayments = usePaymentsStore((state) => state.fetchPayments);
   const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
 
-  const categoriesLoading = useCategoriesStore((state) => state.loading);
-
   const fetchPaymentDetails = usePaymentDetailsStore(
     (state) => state.fetchPaymentDetails
   );
+
+  const paymentsLoading = usePaymentsStore((state) => state.loading);
+  const categoriesLoading = useCategoriesStore((state) => state.loading);
   const paymentDetailsLoading = usePaymentDetailsStore(
     (state) => state.loading
   );
@@ -40,7 +40,7 @@ export const PaymentsIndex: React.FC = () => {
 
   return (
     <AppLayout
-      loading={paymentsLoading && categoriesLoading && paymentDetailsLoading}
+      loading={paymentsLoading || categoriesLoading || paymentDetailsLoading}
     >
       <div className="home-page">
         <PageHeader
