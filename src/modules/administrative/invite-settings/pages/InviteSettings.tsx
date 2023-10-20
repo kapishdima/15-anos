@@ -48,17 +48,17 @@ export const InviteSettingsIndex: React.FC = () => {
             <PasswordItem
               role="Owner"
               description="This role the same access as yours. To log in, you will need to specify the name of the event"
-              password={passwords?.ownerPassword || ""}
+              password={passwords?.ownerPassword || "Loading..."}
             />
             <PasswordItem
               role="Assistant"
               description="This role does not allow access to the settings, on the Home screen and does not allow to delete anything, but allows to edit and add information"
-              password={passwords?.assistantPassword || ""}
+              password={passwords?.assistantPassword || "Loading..."}
             />
             <PasswordItem
               role="Viewer"
               description="This role does not allow to settings on the Home screen and does not allow to add, edit or delete information"
-              password={passwords?.viewerPassword || ""}
+              password={passwords?.viewerPassword || "Loading..."}
             />
           </div>
           <Form onSubmit={onSubmit} initialValues={initialValues}>
