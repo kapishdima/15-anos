@@ -25,6 +25,7 @@ export type BaseInputProps = {
   type?: HTMLInputTypeAttribute;
   variant?: "filled" | "outline";
   capitilizedInput?: boolean;
+  capitilizedWords?: boolean;
   style?: React.CSSProperties;
 };
 

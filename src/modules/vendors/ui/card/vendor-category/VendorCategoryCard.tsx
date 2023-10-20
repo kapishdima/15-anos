@@ -1,4 +1,5 @@
 import { Translated, translated } from "@/app/utils/locale";
+import { AspectRatio } from "@/components";
 import { useVendorCategories } from "@/modules/vendors/store/categories-vendors";
 import { useSearchVendorStore } from "@/modules/vendors/store/search-vendors.store";
 import classNames from "classnames";
@@ -34,7 +35,9 @@ export const VendorCategoryCard: React.FC<VendorCategoryCardProps> = ({
       onClick={onClick}
     >
       <div className="vendor-category-card__image">
-        <img src={image} alt={translated(title)} />
+        <AspectRatio ratio="8/1">
+          <img src={image} alt={translated(title)} />
+        </AspectRatio>
       </div>
       <h4 className="vendor-category-card__title">{translated(title)}</h4>
     </div>

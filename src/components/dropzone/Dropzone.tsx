@@ -1,55 +1,82 @@
-import React, { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { UploadIcon } from '../icons/UploadIcon';
-import { Button } from '../button/Button/Button';
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { UploadIcon } from "../icons/UploadIcon";
+import { Button } from "../button/Button/Button";
+import { Image } from "../image/Image";
 
-type FileItem = File & {
+type AcceptedFileItem = File & {
+  preview: string;
+};
+
+export type DefaultFileItem = {
+  name?: string;
   preview: string;
 };
 
 type DropzoneProps = {
-  onAccept?: (files: File[]) => void;
+  onUpload: (files: File) => void;
+  defaultFile?: DefaultFileItem;
+  loading?: boolean;
 };
 
-export const Dropzone: React.FC<DropzoneProps> = ({ onAccept }) => {
-  const [files, setFiles] = useState<FileItem[]>([]);
+export const Dropzone: React.FC<DropzoneProps> = ({
+  onUpload,
+  loading,
+  defaultFile = null,
+}) => {
+  const [file, setFile] = useState<AcceptedFileItem | DefaultFileItem | null>(
+    defaultFile
+  );
 
   const onDrop = (acceptedFiles: File[]) => {
-    setFiles(
-      acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        }),
-      ),
+    const acceptedFile = acceptedFiles[0];
+    setFile(
+      Object.assign(acceptedFile, {
+        preview: URL.createObjectURL(acceptedFile),
+      })
     );
-
-    onAccept && onAccept(acceptedFiles);
   };
-  const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, open } = useDropzone({
+    maxFiles: 1,
+    onDrop,
+  });
 
+  useEffect(() => {
+    setFile(defaultFile);
+  }, [defaultFile]);
   return (
     <div className="dropzone">
       <div className="dropzone-container" {...getRootProps()}>
         <input {...getInputProps()} className="dropzone-input" />
         <UploadIcon />
-        <p className="dropzone-label">Drag 'n' drop some files here, or click to select files</p>
+        <p className="dropzone-label">
+          Drag 'n' drop some files here, or click to select files
+        </p>
         <p className="dropzone-available">.png, .jpg, .jpeg </p>
-        {files && files.length > 0 && (
-          <div className="dropzone-actions">
-            <Button onClick={open}>Upload</Button>
-          </div>
-        )}
+
         <div className="dropzone-file-bg">
-          {files && files.length > 0 && (
-            <img
-              alt={files[0].name}
-              src={files[0].preview}
+          {file && (
+            <Image
+              // alt={file.name}
+              src={file.preview}
               onLoad={() => {
-                URL.revokeObjectURL(files[0].preview);
+                URL.revokeObjectURL(file.preview);
               }}
             />
           )}
         </div>
+      </div>
+      <div className="dropzone-actions">
+        {file && (
+          <Button
+            loading={loading}
+            variant="success"
+            onClick={() => onUpload(file as AcceptedFileItem)}
+          >
+            Upload
+          </Button>
+        )}
+        {file && <Button onClick={open}>Change image</Button>}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ type ModalProps = React.PropsWithChildren & {
   cancelButtonColor?: any;
   title?: string | null;
   minWidth?: string;
+  maxWidth?: string;
   minHeight?: string;
   loading?: boolean;
   onConfirm?: () => void;
@@ -33,6 +34,7 @@ export const Modal: React.FC<ModalProps> = ({
   cancelButtonColor,
   minHeight,
   minWidth,
+  maxWidth,
   loading,
   onCancel,
   onConfirm,
@@ -61,7 +63,7 @@ export const Modal: React.FC<ModalProps> = ({
           role="dialog"
           aria-modal="true"
           aria-labelledby={`${id}-title`}
-          style={{ minHeight, minWidth }}
+          style={{ minHeight, minWidth, maxWidth }}
         >
           <div className="">
             <header className="modal__header">

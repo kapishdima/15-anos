@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-import { currensies } from '@app/data/currencies';
-import { useUserLocation } from '@app/location/useUserLocation';
+import { currensies } from "@app/data/currencies";
+import { useUserLocation } from "@app/location/useUserLocation";
 
-import { SelectField } from './SelectField';
-import { BaseInputProps } from './Input';
+import { SelectField } from "./SelectField";
+import { BaseInputProps } from "./Input";
 
 type CurrencySelectProps = BaseInputProps & {
   placeholder?: string;
@@ -26,6 +26,7 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
     label: currency.name,
     value: currency.code,
     icon: currency.symbol_native,
+    title: currency.symbol,
   }));
 
   useEffect(() => {
@@ -35,5 +36,12 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
     setValue(name, location?.currency);
   }, [location, location?.country]);
 
-  return <SelectField name={name} label={label} placeholder={placeholder} options={options} />;
+  return (
+    <SelectField
+      name={name}
+      label={label}
+      placeholder={placeholder}
+      options={options}
+    />
+  );
 };

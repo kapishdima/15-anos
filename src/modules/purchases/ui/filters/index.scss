@@ -1,10 +1,12 @@
 .product-filters {
   &__actions {
-    width: 30%;
+    display: flex;
+    justify-content: center;
+
     margin-top: 18px;
 
     .button {
-      width: 100%;
+      width: 30%;
     }
   }
   &__container {

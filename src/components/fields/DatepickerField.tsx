@@ -1,11 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import DatePicker from 'react-datepicker';
+import { useTranslation } from "react-i18next";
+import i18n from "@/modules/i18n";
+import DatePicker from "react-datepicker";
 
-import 'react-datepicker/dist/react-datepicker.css';
+import { BaseInputProps, Input } from "./Input";
 
-import { BaseInputProps, Input } from './Input';
-import { useTranslation } from 'react-i18next';
+import es from "date-fns/locale/es";
+import pt from "date-fns/locale/pt";
+import en from "date-fns/locale/en-US";
+
+import "react-datepicker/dist/react-datepicker.css";
+
+const locales = { es, pt, en };
 
 type DatepickerFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -21,6 +28,8 @@ export const DatepickerField: React.FC<DatepickerFieldProps> = ({
   showTimeSelect = true,
 }) => {
   const { t } = useTranslation();
+  const locale =
+    !i18n.language || i18n.language === "ru" ? "en" : i18n.language;
 
   return (
     <Input name={name}>
@@ -37,12 +46,18 @@ export const DatepickerField: React.FC<DatepickerFieldProps> = ({
               showTimeSelect={showTimeSelect}
               onChange={(date: any) => field.onChange(date)}
               timeFormat="HH:mm"
-              dateFormat={showTimeSelect ? 'MMMM d yyyy - HH:mm' : 'MMMM d yyyy'}
+              dateFormat={
+                showTimeSelect ? "MMMM d yyyy - HH:mm" : "MMMM d yyyy"
+              }
               minDate={min ? new Date(min) : null}
+              // @ts-ignore
+              locale={locales[locale]}
             />
 
             {fieldState.error && (
-              <div className="form-field__error">{fieldState.error.message}</div>
+              <div className="form-field__error">
+                {fieldState.error.message}
+              </div>
             )}
           </div>
         );

@@ -2,10 +2,10 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
-import { AppLayout, FormContent, PageHeader, Slider } from "@/components";
+import { AppLayout, FormContent, PageHeader } from "@/components";
 
 import { Map } from "@/modules/map";
-import { Autoplay } from "swiper";
+
 import { VendorBanner } from "../ui/vendor-banner/VendorBanner";
 
 export const SetUserLocationPage: React.FC = () => {

@@ -8,6 +8,7 @@ export type Option = {
   icon?: string | JSX.Element;
   label: string;
   value: string;
+  title?: string;
 };
 
 type SelectProps = {
@@ -88,7 +89,9 @@ export const Select: React.FC<SelectProps> = ({
         {selected && showSelectedValue ? (
           <div className="select-value">
             <div className="select-value__icon">{selected.icon}</div>
-            <div className="select-value__text">{t(selected.label)}</div>
+            <div className="select-value__text">
+              {t(selected.title || selected.label)}
+            </div>
           </div>
         ) : (
           <div className="select-placeholder">

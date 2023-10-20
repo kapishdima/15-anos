@@ -1,0 +1,13 @@
+.invite-settings {
+  margin-top: 5%;
+}
+
+.password-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  padding-bottom: 4%;
+  margin-bottom: 4%;
+  border-bottom: 1px solid rgba($darkGrayColor, 0.15);
+}

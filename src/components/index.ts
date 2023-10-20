@@ -104,6 +104,8 @@ import { ScrollXArea } from "./scroll/ScrollXArea";
 import { Popover } from "./popover/Popover";
 import { AspectRatio } from "./aspect-ratio/AspectRatio";
 
+import { Image } from "./image/Image";
+
 export {
   Button,
   IconButton,
@@ -197,4 +199,5 @@ export {
   FormContent,
   Popover,
   AspectRatio,
+  Image,
 };

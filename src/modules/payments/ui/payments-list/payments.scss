@@ -41,3 +41,20 @@
     opacity: 1;
   }
 }
+
+.payment-price {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  &__value {
+    font-family: $anevir-ff;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $darkColor;
+  }
+  &__symbol {
+    font-family: $anevir-ff;
+    font-size: 0.875rem;
+    color: $darkGrayColor;
+  }
+}

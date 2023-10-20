@@ -69,11 +69,15 @@ export const updatePayment = async (id: string, payload: any) => {
 
 export const createPayment = async (payload: any) => {
   const eventId = getEventId();
+  const wasPaid = payload.pay === payload.paid;
+  const status = wasPaid ? "paid" : "undone";
+  console.log("payload", payload);
+  console.log("status", status);
 
   const paymentData = {
     ...payload,
-    wasPaid: false,
-    status: "undone",
+    wasPaid,
+    status,
     completed: fromDate(payload.date),
     date: fromDate(payload.date),
     vendorId: payload.vendorId || "none",

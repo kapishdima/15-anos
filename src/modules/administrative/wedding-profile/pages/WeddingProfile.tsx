@@ -22,18 +22,19 @@ export const WeddingProfileIndex: React.FC = () => {
     (state) => state.saveProfileDetails
   );
 
-  const loading = useProfileStore((state) => state.loading);
+  const loading = useProfileStore((state) => state.fetchLoading);
+  const saveLoading = useProfileStore((state) => state.saveLoading);
   const profile = useProfileStore((state) => state.profile);
 
   const initialValues = {
-    date: new Date(),
+    date: profile?.date || new Date(),
     budget: profile?.budget.toString() || "0",
     guests: profile?.guests,
   };
 
   const onSubmit = async (values: any) => {
     await saveProfileDetails(values);
-    await fetchProfileDetails(/*force*/ true);
+    await fetchProfileDetails();
   };
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export const WeddingProfileIndex: React.FC = () => {
               label="Number of guests"
               color="#2ecc71"
             />
-            <Button type="submit" variant="success">
+            <Button type="submit" variant="success" loading={saveLoading}>
               {t("Save details")}
             </Button>
           </Form>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { ColorResult, SketchPicker } from 'react-color';
-import { Input } from './Input';
-import { useFormContext } from 'react-hook-form';
+import { ColorResult, ChromePicker } from "react-color";
+import { Input } from "./Input";
+import { useFormContext } from "react-hook-form";
 
 type ColorPickerFieldProps = {
   name: string;
@@ -17,7 +17,13 @@ export const ColorPickerField: React.FC<ColorPickerFieldProps> = ({ name }) => {
 
   return (
     <Input name={name}>
-      {({ field }) => <SketchPicker color={field.value} onChange={onColorChange} />}
+      {({ field }) => (
+        <ChromePicker
+          color={field.value}
+          onChange={onColorChange}
+          disableAlpha
+        />
+      )}
     </Input>
   );
 };

@@ -25,6 +25,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   style,
   onChange,
   onKeyDown,
+  capitilizedWords = false,
   capitilizedInput = false,
   variant = "outline",
 }) => {
@@ -69,7 +70,7 @@ export const TextField: React.FC<TextFieldProps> = ({
                   variant,
                   {
                     "form-field--error": fieldState.error,
-                    "form-field--capitalized": capitilizedInput,
+                    "form-field--capitalized": capitilizedWords,
                   }
                 )}
                 onChange={(event) => {
@@ -78,9 +79,10 @@ export const TextField: React.FC<TextFieldProps> = ({
                   }
 
                   const value = event.target.value;
-                  const capitalizedValue = capitilizedInput
-                    ? value.charAt(0).toUpperCase() + value.slice(1)
-                    : value;
+                  const capitalizedValue =
+                    capitilizedInput && !capitilizedWords
+                      ? value.charAt(0).toUpperCase() + value.slice(1)
+                      : value;
 
                   field.onChange(capitalizedValue);
                 }}

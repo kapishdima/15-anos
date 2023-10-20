@@ -36,7 +36,7 @@ export const CreateGuestForm: React.FC = () => {
         name={hasNameGuest ? "nameGuest" : "name"}
         label={t("Guest name")}
         placeholder={t("Enter guest name")}
-        capitilizedInput
+        capitilizedWords
       />
       <SelectField
         name="status"

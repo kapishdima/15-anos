@@ -2,7 +2,13 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { AspectRatio, IconButton, LikeIcon, PopularIcon } from "@/components";
+import {
+  AspectRatio,
+  IconButton,
+  Image,
+  LikeIcon,
+  PopularIcon,
+} from "@/components";
 import { translated } from "@/app/utils/locale";
 
 import { ProductViewModal } from "../../store/purcheses.types";
@@ -35,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
         <AspectRatio ratio={ratio?.toString()}>
-          <img src={image} alt={translated(title)} />
+          <Image src={image} alt={translated(title)} />
         </AspectRatio>
       </div>
       <div className="product-card__footer">

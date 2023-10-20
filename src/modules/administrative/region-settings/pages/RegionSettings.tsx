@@ -26,7 +26,8 @@ export const RegionSettingsIndex: React.FC = () => {
     (state) => state.saveProfileDetails
   );
 
-  const loading = useProfileStore((state) => state.loading);
+  const loading = useProfileStore((state) => state.fetchLoading);
+  const saveLoading = useProfileStore((state) => state.saveLoading);
   const country = useProfileStore(getCountyCode);
   const currency = useProfileStore(getCurrencyCode);
 
@@ -38,7 +39,7 @@ export const RegionSettingsIndex: React.FC = () => {
 
   const onSubmit = async (values: any) => {
     await saveProfileDetails(values);
-    await fetchProfileDetails(/*force*/ true);
+    await fetchProfileDetails();
   };
 
   useEffect(() => {
@@ -63,7 +64,7 @@ export const RegionSettingsIndex: React.FC = () => {
               label="Currency"
               autodetect={false}
             />
-            <Button type="submit" variant="success">
+            <Button type="submit" variant="success" loading={saveLoading}>
               {t("Save the language and region")}
             </Button>
           </Form>

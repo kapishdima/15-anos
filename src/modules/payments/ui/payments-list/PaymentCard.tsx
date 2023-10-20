@@ -9,6 +9,7 @@ import { getCategoryImage } from "@/app/utils/category-icon";
 import { PaymentViewModal } from "../../store/payments";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
+import { PaymentPrice } from "./PaymentPrice";
 
 type PaymentCardProps = {
   payment: PaymentViewModal;
@@ -30,8 +31,11 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  console.log("payment.completed", payment.completed === "Invalid Date");
   const formatCompletedDate = t("Format Date", {
-    date: new Date(payment.completed),
+    date: new Date(
+      payment.completed === "Invalid Date" ? Date.now() : payment.completed
+    ),
   });
 
   const setCurrentPayment = usePaymentsStore(
@@ -88,6 +92,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
             ? `${t("Paid")} ${formatCompletedDate}`
             : `${t("Already paid")}: ${payment.paid} $`
         }
+        extra={<PaymentPrice price={payment.pay} />}
       />
     </>
   );

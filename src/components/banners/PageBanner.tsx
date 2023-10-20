@@ -1,5 +1,6 @@
 import React from "react";
 import { AspectRatio } from "../aspect-ratio/AspectRatio";
+import { Image } from "../image/Image";
 
 type PageBannerProps = {
   image: string;
@@ -9,7 +10,8 @@ type PageBannerProps = {
 export const PageBanner: React.FC<PageBannerProps> = ({ image, title }) => {
   return (
     <AspectRatio ratio="8/3">
-      <div className="page-banner" style={{ backgroundImage: `url(${image})` }}>
+      <div className="page-banner">
+        <Image src={image} className="page-banner__image" />
         <h2 className="page-banner__title">{title}</h2>
       </div>
     </AspectRatio>

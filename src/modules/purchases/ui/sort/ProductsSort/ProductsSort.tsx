@@ -26,7 +26,7 @@ export const ProductsSort: React.FC = () => {
       ref={triggerRef}
       opened={opened}
       onClickOutside={() => setOpened(false)}
-      placement="bottom-start"
+      placement="bottom-end"
       triggerElement={
         <Button ref={triggerRef} variant="text" onClick={toogleOpened}>
           <img src={SortIcon} alt="" />

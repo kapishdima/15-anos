@@ -35,7 +35,7 @@ export type Payment = {
 export type PaymentViewModal = {
   id: string;
   categoryId: string;
-  completed: Date;
+  completed: Date | string;
   date: Date;
   notes: string;
   status: Statuses;

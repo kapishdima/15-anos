@@ -19,6 +19,7 @@ export enum AppRoutes {
   WEDDING_PROFILE = "/wedding-profile",
   REGION_SETTINGS = "/region-settings",
   DESIGN_SETTINGS = "/design-settings",
+  INVITE_SEETINGS = "/invite-settings",
   POSTS = "/posts",
   POST = "/post",
   VENDORS = "/vendors",

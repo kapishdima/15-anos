@@ -8,4 +8,13 @@
   justify-content: center;
 
   row-gap: 12px;
+
+  &__link {
+    font-family: $button-ff;
+    font-size: $button-fz;
+    font-weight: $button-fw;
+    color: $successColor;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
 }

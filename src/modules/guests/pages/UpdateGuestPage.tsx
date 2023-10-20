@@ -73,7 +73,7 @@ export const UpdateGuestPage: React.FC = () => {
                 loading={loading}
                 type="submit"
               >
-                {t("Add guests")}
+                {t("Save guests")}
               </Button>
             </FormActions>
           </Form>

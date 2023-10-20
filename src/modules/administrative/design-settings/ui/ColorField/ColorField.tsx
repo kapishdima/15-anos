@@ -1,8 +1,9 @@
-import { ColorPickerField, useClickOutside } from '@/components';
-import React, { useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { ColorPickerField, useClickOutside } from "@/components";
+import classNames from "classnames";
+import React, { useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type ColorFieldProps = {
   name: string;
@@ -18,6 +19,8 @@ export const ColorField: React.FC<ColorFieldProps> = ({ label, name }) => {
 
   const [shownPicker, setShowPicker] = useState(false);
   const color = watch(name);
+  const isWhiteColor =
+    color === "#fff" || color === "#ffffff" || color === "white";
 
   const onIndicatorClick = () => {
     setShowPicker((_shownPicker) => !_shownPicker);
@@ -43,19 +46,26 @@ export const ColorField: React.FC<ColorFieldProps> = ({ label, name }) => {
   return (
     <div className="color-field-container">
       <div className="color-field" onClick={onIndicatorClick} ref={triggerRef}>
-        <label className="color-field__label">{t(label || '')}</label>
+        <label className="color-field__label">{t(label || "")}</label>
 
-        <div className="color-field__indicator" style={{ backgroundColor: color }}></div>
+        <div
+          className={"color-field__indicator"}
+          style={{
+            backgroundColor: color,
+            border: isWhiteColor ? "1px solid #aeaba8" : "",
+          }}
+        ></div>
       </div>
       {shownPicker &&
         createPortal(
           <div
             className="color-field__picker"
             style={calculatePickerPosition()}
-            ref={triggerContainerRef}>
+            ref={triggerContainerRef}
+          >
             <ColorPickerField name={name} />
           </div>,
-          document.body,
+          document.body
         )}
     </div>
   );

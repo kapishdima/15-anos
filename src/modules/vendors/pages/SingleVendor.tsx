@@ -4,6 +4,7 @@ import classNames from "classnames";
 
 import {
   AppLayout,
+  AspectRatio,
   Button,
   IconButton,
   LikeIcon,
@@ -46,7 +47,9 @@ export const SingleVendor: React.FC = () => {
 
       <div className="vendor-page">
         <div className="vendor-page__image">
-          <img src={vendor.image} alt={translated(vendor.title)} />
+          <AspectRatio>
+            <img src={vendor.image} alt={translated(vendor.title)} />
+          </AspectRatio>
           <div className="vendor-page__actions">
             <IconButton
               appearance="outline"

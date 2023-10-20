@@ -1,26 +1,22 @@
-import React from 'react';
-import { ColorField } from '../ColorField/ColorField';
-import { ScrollXArea } from '@/components';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { ColorField } from "../ColorField/ColorField";
+import { ScrollXArea } from "@/components";
+import { useTranslation } from "react-i18next";
+import { useFormContext } from "react-hook-form";
+import { ProfileColor } from "@/modules/profile";
 
 export const Colors: React.FC = () => {
   const { t } = useTranslation();
+  const { getValues } = useFormContext();
+  const colors: ProfileColor[] = getValues("colors");
+
   return (
     <div className="colors">
-      <label className="colors-label">{t('Theme colors')}</label>
+      <label className="colors-label">{t("Theme colors")}</label>
       <ScrollXArea>
-        <ColorField name={`countdown`} label="Countdown" />
-        <ColorField name={`countdown`} label="Countdown" />
-        <ColorField name={`countdown`} label="Countdown" />
-        <ColorField name={`upper_bar`} label="Upper bar" />
-        <ColorField name={`upper_bar`} label="Upper bar" />
-        <ColorField name={`lower_bar`} label="Lower bar" />
-        <ColorField name={`lower_bar`} label="Lower bar" />
-        <ColorField name={`lower_bar`} label="Lower bar" />
-        <ColorField name={`invitation`} label="Invitation" />
-        <ColorField name={`invitation`} label="Invitation" />
-        <ColorField name={`invitation`} label="Invitation" />
-        <ColorField name={`invitation_text`} label="Invitation text" />
+        {colors.map((color, index) => (
+          <ColorField name={`colors.[${index}].color`} label={color.title} />
+        ))}
       </ScrollXArea>
     </div>
   );

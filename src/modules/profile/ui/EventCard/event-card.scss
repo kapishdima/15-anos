@@ -29,6 +29,7 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 2;
 
       background-color: rgba($accentColor, 30%);
     }
@@ -45,6 +46,7 @@
   width: 92%;
 
   position: absolute;
+  z-index: 3;
   bottom: -8%;
   left: 4%;
 

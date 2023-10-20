@@ -1,0 +1,16 @@
+#tooltip.guests-popover {
+  overflow: hidden;
+  padding: 0;
+}
+
+.guests-popover {
+  .select-option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+}

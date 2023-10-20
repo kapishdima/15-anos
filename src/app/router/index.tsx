@@ -25,6 +25,7 @@ import {
 import { WeddingProfileIndex } from "@/modules/administrative/wedding-profile";
 import { RegionSettingsIndex } from "@/modules/administrative/region-settings";
 import { DesignSettingsIndex } from "@/modules/administrative/design-settings";
+import { InviteSettingsIndex } from "@/modules/administrative/invite-settings";
 
 import { PostsIndex, SinglePost } from "@/modules/posts";
 import {
@@ -179,6 +180,14 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <DesignSettingsIndex />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${AppRoutes.INVITE_SEETINGS}`,
+    element: (
+      <ProtectedRoute>
+        <InviteSettingsIndex />
       </ProtectedRoute>
     ),
   },

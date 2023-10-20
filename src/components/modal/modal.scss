@@ -37,7 +37,7 @@
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     &-text {
       display: flex;
       flex-direction: column;
@@ -51,6 +51,8 @@
 
   &__title {
     @include modalTitle;
+
+    max-width: 80%;
   }
 
   &__close {

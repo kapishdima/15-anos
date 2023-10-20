@@ -94,8 +94,9 @@
   "We have compiled a list of payments for you. Now you can change or delete them and add your own.": "Hemos creado una lista de pagos para ti. Ahora puedes cambiarlos o eliminarlos y añadir los tuyos.",
   "You have no payments. Add payment to start preparing for the event.": "No tienes pagos. Añade uno para empezar la preparación del evento.",
 
-  "budget_available_2": "Disponible ",
-  "budget_available_3": ", pagado ",
+  "budget_available_1": "Disponible ",
+  "budget_available_2": ", pagado ",
+  "budget_available_3": "",
 
   "Payment details": "Detalles del pago",
 

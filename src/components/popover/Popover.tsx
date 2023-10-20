@@ -8,6 +8,7 @@ type PopoverProps = {
   placement: Placement;
   triggerElement: JSX.Element;
   onClickOutside: () => void;
+  className?: string;
 };
 
 export const Popover = React.forwardRef<
@@ -15,7 +16,7 @@ export const Popover = React.forwardRef<
   React.PropsWithChildren<PopoverProps>
 >(
   (
-    { children, placement, opened, triggerElement, onClickOutside },
+    { children, placement, opened, triggerElement, className, onClickOutside },
     referenceElement
   ) => {
     const containerElement = useRef(null);
@@ -44,6 +45,7 @@ export const Popover = React.forwardRef<
         {triggerElement}
         <div
           id="tooltip"
+          className={className}
           data-show={opened}
           ref={popperElement}
           style={styles.popper}

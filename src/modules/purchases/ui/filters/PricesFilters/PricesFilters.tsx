@@ -20,8 +20,6 @@ const STEPS_LIMIT = 4;
 
 export const PriceFilters: React.FC<PriceFiltersProps> = ({ priceStep }) => {
   const { symbol, convert } = usePrice();
-  const [searchParams] = useSearchParams();
-  const setPrice = useProductsSearch((state) => state.setPrice);
 
   const prices = Array(STEPS_LIMIT)
     .fill(0)
@@ -34,20 +32,11 @@ export const PriceFilters: React.FC<PriceFiltersProps> = ({ priceStep }) => {
         to: nextValue,
         title:
           index === STEPS_LIMIT - 1
-            ? `${symbol} ${prevValue}+`
-            : `${symbol} ${prevValue} - ${symbol} ${nextValue}`,
+            ? `${symbol}${prevValue}+`
+            : `${symbol}${prevValue} - ${symbol}${nextValue}`,
       });
       return acc;
     }, []);
-
-  // useEffect(() => {
-  //   const prices = searchParams.getAll("prices[]") || [];
-  //   for (const price of prices) {
-  //     setPrice(price);
-  //   }
-  // }, []);
-
-  console.log(prices);
 
   return (
     <div className="prices-filters">

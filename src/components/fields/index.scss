@@ -11,10 +11,7 @@
 }
 
 .form-field--capitalized {
-  display: block;
-  &::first-letter {
-    text-transform: uppercase;
-  }
+  text-transform: capitalize;
 }
 
 .form-field,
@@ -115,6 +112,7 @@ input::-webkit-inner-spin-button {
 }
 
 .category-select-icon {
+  flex: 0 0 28px;
   width: 28px;
   height: 28px;
 
@@ -127,4 +125,10 @@ input::-webkit-inner-spin-button {
   img {
     width: 16px;
   }
+}
+
+.fileuploader__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -75,8 +75,8 @@
 
   .loader,
   .loader:after {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     border-width: 1px;
   }
 }
@@ -101,11 +101,11 @@
 .like-button {
   &.liked {
     will-change: transform;
-    animation: like 400ms ease both;
+    // animation: like 400ms ease both;
 
     svg {
       path {
-        animation: likeFill 400ms ease both;
+        // animation: likeFill 400ms ease both;
       }
     }
   }

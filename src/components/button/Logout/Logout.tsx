@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { logout } from "@/modules/firebase/auth";
 import { AppRoutes } from "@app/router/routes";
-import { Dialog, LogoutIcon, Modal, TextField, useModal } from "@/components";
+import { LogoutIcon, Modal, useModal } from "@/components";
 import { useTranslation } from "react-i18next";
 import { getEventTitle } from "@/modules/event";
 
@@ -15,11 +15,6 @@ export const Logout: React.FC = () => {
   const { t } = useTranslation();
   const { open, close } = useModal();
   const navigate = useNavigate();
-
-  const submitEventTitle = (values: any) => {
-    console.log(values);
-    close(EVENT_TITLE_MODAL);
-  };
 
   const onClick = () => {
     const hasEventTitle = Boolean(getEventTitle());
@@ -39,6 +34,11 @@ export const Logout: React.FC = () => {
     navigate(AppRoutes.LOGIN);
   };
 
+  const onSpecityConfirm = () => {
+    close(EVENT_TITLE_MODAL);
+    navigate(AppRoutes.INVITE_SEETINGS);
+  };
+
   return (
     <>
       <div className="logout" onClick={onClick}>
@@ -56,19 +56,15 @@ export const Logout: React.FC = () => {
         onCancel={onCancelClose}
         onConfirm={onConfirm}
       />
-      <Dialog
+      <Modal
+        maxWidth="45vw"
         id={EVENT_TITLE_MODAL}
         title={t(
           "You did not specify the event name. Without it, you can’t log in. Please specify it"
         )}
-        onSubmit={submitEventTitle}
-      >
-        <TextField
-          name="eventTitle"
-          label={t("Specify")}
-          placeholder="Enter event title"
-        />
-      </Dialog>
+        confirmButtonText="Specify"
+        onConfirm={onSpecityConfirm}
+      ></Modal>
     </>
   );
 };

@@ -14,6 +14,12 @@ export const getEventId = () => {
   return `event${event.eventNumber}`;
 };
 
+export const getEventNumber = () => {
+  const event = getEvent();
+
+  return event.eventNumber;
+};
+
 export const getEventTitle = () => {
   const event = getEvent();
 

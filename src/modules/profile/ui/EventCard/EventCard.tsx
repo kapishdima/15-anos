@@ -1,17 +1,23 @@
 import React, { useEffect } from "react";
 
-import EventImage from "@image/mock-event.jpg";
 import { EventTimer } from "./EventTimer";
-import { AspectRatio } from "@/components";
+import { Image, AspectRatio } from "@/components";
+
 import { useProfileStore } from "../../store/profile";
 
 export const EventCard: React.FC = () => {
   const fetchProfileMainImage = useProfileStore(
     (state) => state.fethcProfileMainImage
   );
+  const fetchProfileDetails = useProfileStore(
+    (state) => state.fetchProfileDetails
+  );
+
   const profile = useProfileStore((state) => state.profile);
+  const mainImage = useProfileStore((state) => state.mainImage);
 
   useEffect(() => {
+    fetchProfileDetails();
     fetchProfileMainImage();
   }, []);
 
@@ -19,7 +25,8 @@ export const EventCard: React.FC = () => {
     <div className="event-card">
       <div className="event-card__image">
         <AspectRatio>
-          <img src={EventImage} alt="Event" />
+          {/* <img src={mainImage || EventImage} alt="Event" /> */}
+          <Image src={mainImage} />
         </AspectRatio>
       </div>
       <div className="event-card__timer">

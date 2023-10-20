@@ -1,80 +1,134 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
 import {
   saveProfile,
   getProfileDetails,
   getProfileMainImage,
+  uploadImageMain,
+  getProfilePasswords,
+  uploadEventTitle,
 } from "../../profile/api/profile.api";
+import { getEventTitle } from "@/modules/event";
 
 export type ProfileDetails = {
   country: string;
   currency: string;
-  budget: number;
-  guests: number;
+  budget: any;
+  guests: any;
   date: Date;
+  colors: ProfileColor[];
+};
+
+export type ProfileMainImage = {
+  image: string;
+};
+
+export type ProfileColor = {
+  title: string;
+  color: string;
+  id: string;
+};
+
+export type ProfilePasswords = {
+  assistantPassword: string;
+  ownerPassword: string;
+  viewerPassword: string;
 };
 
 export interface ProfileStore {
   profile: ProfileDetails | null;
-  loading: boolean;
-  fetchProfileDetails: (force?: boolean) => Promise<void>;
-  saveProfileDetails: (detailsData: ProfileDetails) => void;
+  eventTitle: string;
+  profilePasswords: ProfilePasswords | null;
+  mainImage: string;
+  fetchLoading: boolean;
+  uploadImageLoading: boolean;
+  saveLoading: boolean;
+  fetchProfileDetails: () => Promise<void>;
   fethcProfileMainImage: () => Promise<void>;
+  fetchEventTitle: () => void;
+  fetchPasswords: () => Promise<void>;
+  saveProfileDetails: (detailsData: ProfileDetails) => void;
+  saveImageMain: (file: File) => void;
+  saveEventTitle: (eventTitle: string) => Promise<void>;
 }
 
 export const useProfileStore = create<ProfileStore>()(
-  devtools(
-    persist(
-      (set, get) => ({
-        profile: null,
-        loading: false,
-        fetchProfileDetails: async (force?: boolean) => {
-          set(() => ({
-            loading: true,
-          }));
+  devtools((set, get) => ({
+    profile: null,
+    profilePasswords: null,
+    eventTitle: "",
+    fetchLoading: false,
+    uploadImageLoading: false,
+    saveLoading: false,
+    mainImage: "",
+    fetchProfileDetails: async () => {
+      set(() => ({
+        fetchLoading: true,
+      }));
 
-          const cacheProfile = get().profile;
+      const profile = await getProfileDetails();
 
-          const hasCachedProfile = Boolean(cacheProfile);
-
-          const profile =
-            hasCachedProfile && !force
-              ? cacheProfile
-              : await getProfileDetails();
-
-          set(() => ({
-            profile,
-            loading: false,
-          }));
-        },
-        saveProfileDetails: async (values: any) => {
-          try {
-            set(() => ({ loading: true }));
-            await saveProfile(values);
-            set(() => ({ loading: false }));
-          } catch (error) {
-            console.error(error);
-            set(() => ({ loading: false }));
-          }
-        },
-        fethcProfileMainImage: async () => {
-          try {
-            set(() => ({ loading: true }));
-            await getProfileMainImage();
-            set(() => ({ loading: false }));
-          } catch (error) {
-            console.error(error);
-            set(() => ({ loading: false }));
-          }
-        },
-      }),
-      {
-        name: "profile_details",
-        partialize: (state) => ({
-          profile: state.profile,
-        }),
+      set(() => ({
+        profile,
+        fetchLoading: false,
+      }));
+    },
+    saveProfileDetails: async (values: any) => {
+      try {
+        set(() => ({ saveLoading: true }));
+        const profile = get().profile;
+        await saveProfile({ ...profile, ...values });
+        set(() => ({ saveLoading: false }));
+      } catch (error) {
+        console.error(error);
+        set(() => ({ saveLoading: false }));
       }
-    )
-  )
+    },
+    saveImageMain: async (file: File) => {
+      try {
+        set(() => ({ uploadImageLoading: true }));
+        await uploadImageMain(file);
+        set(() => ({ uploadImageLoading: false }));
+      } catch (error) {
+        console.error(error);
+        set(() => ({ uploadImageLoading: false }));
+      }
+    },
+    fethcProfileMainImage: async () => {
+      try {
+        set(() => ({ fetchLoading: true }));
+        const mainImage = await getProfileMainImage();
+        set(() => ({ fetchLoading: false, mainImage }));
+      } catch (error) {
+        console.error(error);
+        set(() => ({ fetchLoading: false }));
+      }
+    },
+    fetchEventTitle: () => {
+      const eventTitle = getEventTitle();
+      set(() => ({
+        eventTitle,
+      }));
+    },
+    fetchPasswords: async () => {
+      set(() => ({
+        fetchLoading: true,
+      }));
+      const passwords = await getProfilePasswords();
+      set(() => ({
+        fetchLoading: false,
+        profilePasswords: passwords,
+      }));
+    },
+    saveEventTitle: async (eventTitle: string) => {
+      set(() => ({
+        saveLoading: true,
+      }));
+      await uploadEventTitle(eventTitle);
+      set(() => ({
+        saveLoading: false,
+      }));
+    },
+  }))
 );

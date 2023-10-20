@@ -8,8 +8,8 @@
   margin-top: 5%;
 
   &__image {
-    width: 100%;
-    height: 40vh;
+    width: 50%;
+    // height: 40vh;
 
     position: relative;
 
@@ -20,8 +20,8 @@
 
     img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      // height: 100%;
+      // object-fit: cover;
     }
   }
 
@@ -98,8 +98,8 @@
 }
 
 .vendor-page__slider {
-  width: 100%;
-  height: 20vh;
+  // width: 100%;
+  // height: 20vh;
 
   .vendor-page__slide {
     display: flex;

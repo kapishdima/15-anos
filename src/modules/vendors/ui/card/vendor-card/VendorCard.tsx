@@ -1,6 +1,6 @@
 import { AppRoutes } from "@/app/router/routes";
 import { translated } from "@/app/utils/locale";
-import { IconButton, LikeIcon } from "@/components";
+import { AspectRatio, IconButton, LikeIcon } from "@/components";
 import { useLike } from "@/modules/vendors/hooks/useLike";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 import { SearchedVendor } from "@/modules/vendors/store/vendors.types";
@@ -29,7 +29,9 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
       onClick={onClick}
     >
       <div className="vendor-card__image">
-        <img src={image} alt={translated(title)} />
+        <AspectRatio>
+          <img src={image} alt={translated(title)} />
+        </AspectRatio>
       </div>
       <div className="vendor-card__content">
         <h3 className="vendor-card__title">{translated(title)}</h3>
@@ -49,6 +51,7 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
             liked,
           })}
           onClick={liked ? disslikeVendor : likeVendor}
+          propagateEvent={false}
         >
           <LikeIcon />
         </IconButton>

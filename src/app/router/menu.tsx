@@ -8,6 +8,7 @@ import {
   TasksIcon,
   UsersIcon,
   VendorsIcon,
+  InviteIcon,
 } from "@/components/index";
 import { AppRoutes } from "./routes";
 
@@ -65,6 +66,11 @@ export const createMenu = () => {
         icon: <DesignIcon />,
         title: "Design",
         path: AppRoutes.DESIGN_SETTINGS,
+      },
+      {
+        icon: <InviteIcon />,
+        title: "Invite",
+        path: AppRoutes.INVITE_SEETINGS,
       },
       {
         icon: <LocaleIcon />,

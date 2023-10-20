@@ -10,6 +10,7 @@ import {
 import { paymentsAmount, perGuest } from "../../store/payments.selectors";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { usePrice } from "@/modules/purchases/hooks/usePriceConverter";
 
 export const PaymentsProgress = () => {
   const { t } = useTranslation();
@@ -23,6 +24,8 @@ export const PaymentsProgress = () => {
   const paymentPerGuest = usePaymentDetailsStore((state) =>
     perGuest(state, paymentsSum)
   );
+
+  const { symbol: currencySymbol } = usePrice();
 
   const [value, setValue] = useState(0);
 
@@ -44,9 +47,9 @@ export const PaymentsProgress = () => {
     <ProgressCard
       value={value}
       title="Budget utilization"
-      hint={`$${available} ${t("budget_available_2")} $${paid} ${t(
-        "budget_available_3"
-      )}`}
+      hint={`${t("budget_available_1")}$${available}${t(
+        "budget_available_2"
+      )}${currencySymbol}${paid}${t("budget_available_3")}`}
       extra={
         <div className="progress-card__extra">
           <div

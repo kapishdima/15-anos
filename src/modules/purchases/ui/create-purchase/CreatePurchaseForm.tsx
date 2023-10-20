@@ -9,7 +9,6 @@ export const CreatePurchaseForm: React.FC = () => {
 
   return (
     <>
-      <DropzoneField name="image" label={"Item image"} />
       <TextField
         name="title"
         label={t("Name")}
@@ -26,6 +25,13 @@ export const CreatePurchaseForm: React.FC = () => {
         name="url"
         label={t("Link")}
         placeholder={t("Link to an online store")}
+      />
+      <DropzoneField
+        name="image"
+        label={"Item image"}
+        onUpload={function (files: File): void {
+          throw new Error("Function not implemented.");
+        }}
       />
     </>
   );
