@@ -24,12 +24,12 @@ const statusesIcons = {
 };
 
 const statusColors = {
-  none: "aeaba8",
-  confirmed: "2ecc71",
-  confirmedGuest: "2ecc71",
-  invited: "f1c40f",
-  declined: "e74c3c",
-  declinedGuest: "e74c3c",
+  none: "FAFAFC",
+  confirmed: "50DF71",
+  confirmedGuest: "50DF71",
+  invited: "FEE106",
+  declined: "FE3636",
+  declinedGuest: "FE3636",
 };
 
 export const GuestCard: React.FC<GuestCardProps> = ({ guest }) => {

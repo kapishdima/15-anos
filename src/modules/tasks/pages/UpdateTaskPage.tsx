@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   AppLayout,
   Button,
+  DeleteButton,
   Form,
   FormActions,
   FormContent,
@@ -78,9 +79,7 @@ export const UpdateTaskPage: React.FC = () => {
               >
                 {t("Cancel")}
               </Button>
-              <Button variant="error" onClick={onDelete}>
-                {t("Delete")}
-              </Button>
+              <DeleteButton onDelete={onDelete} id={task?.id || ""} />
               <CreateTaskActions
                 loading={loading}
                 updateTaskStatus={updateTaskStatus}

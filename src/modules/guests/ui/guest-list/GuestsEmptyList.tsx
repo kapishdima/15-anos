@@ -11,7 +11,7 @@ export const GuestEmptyList: React.FC = () => {
   return (
     <div className="guests-empty-list">
       <UsersIcon />
-      <h2 className="guests-empty-list__title heading1">
+      <h2 className="guests-empty-list__title ">
         {t("Your guest list is empty. Add first guest to it")}
       </h2>
       <Link to={AppRoutes.CREATE_GUEST} className="guests-empty-list__link">

@@ -81,9 +81,15 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
         {hasManyImages ? (
           <PurchaseImageSlider images={images} ratio={ratio} />
         ) : (
-          <AspectRatio ratio={ratio?.toString()}>
-            <img src={image} alt="Purchase" />
-          </AspectRatio>
+          // <AspectRatio ratio={ratio?.toString()}>
+          // </AspectRatio>
+          <div style={{ display: "flex" }}>
+            <img
+              src={image}
+              alt="Purchase"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
         )}
       </div>
 

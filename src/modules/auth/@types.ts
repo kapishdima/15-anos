@@ -1,10 +1,10 @@
 export type EventDetails = {
   eventNumber: string;
   eventTitle: string;
-  userId: string;
+  userId: number;
 };
 
-export type UserRoles = 'owner' | 'assistant' | 'viewer';
+export type UserRoles = "owner" | "assistant" | "viewer";
 
 export type LoginCredentials = {
   password: string;

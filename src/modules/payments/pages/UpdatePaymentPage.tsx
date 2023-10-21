@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   AppLayout,
   Button,
+  DeleteButton,
   Form,
   FormActions,
   FormContent,
@@ -87,9 +88,7 @@ export const UpdatePaymentPage: React.FC = () => {
               >
                 {t("Cancel")}
               </Button>
-              <Button variant="error" onClick={onDelete}>
-                {t("Delete")}
-              </Button>
+              <DeleteButton onDelete={onDelete} id={payment?.id || ""} />
               <CreatePaymentActions
                 loading={loading}
                 isCompleted={Boolean(payment?.isCompleted)}

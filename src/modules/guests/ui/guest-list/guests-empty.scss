@@ -9,6 +9,13 @@
 
   row-gap: 12px;
 
+  &__title {
+    font-family: $anevir-ff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: $darkColor;
+  }
+
   &__link {
     font-family: $button-ff;
     font-size: $button-fz;

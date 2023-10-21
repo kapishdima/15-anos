@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   AppLayout,
   Button,
+  DeleteButton,
   Form,
   FormActions,
   FormContent,
@@ -46,7 +47,7 @@ export const UpdateGuestPage: React.FC = () => {
 
   return (
     <AppLayout>
-      <PageHeader title={t("Task details")} hasBackButton />
+      <PageHeader title={t("Guest details")} hasBackButton />
 
       <div className="vendors-page-container">
         <FormContent>
@@ -64,9 +65,7 @@ export const UpdateGuestPage: React.FC = () => {
               >
                 {t("Cancel")}
               </Button>
-              <Button variant="error" onClick={onDelete}>
-                {t("Delete")}
-              </Button>
+              <DeleteButton onDelete={onDelete} id={guest?.id || ""} />
               <Button
                 aria-label="Close this dialog window"
                 variant="success"

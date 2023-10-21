@@ -5,6 +5,7 @@ import App from "./App";
 import "./styles/index.scss";
 import { ToastContainer } from "react-toastify";
 import { UserLocationProvider } from "./app/location/UserLocationProvider";
+import { RolesProvider } from "./modules/roles/RolesProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

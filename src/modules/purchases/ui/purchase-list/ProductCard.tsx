@@ -40,9 +40,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <PopularIcon />
           </div>
         )}
-        <AspectRatio ratio={ratio?.toString()}>
-          <Image src={image} alt={translated(title)} />
-        </AspectRatio>
+        {/* <AspectRatio ratio={ratio?.toString()}> */}
+        <Image
+          src={image}
+          alt={translated(title)}
+          style={{
+            width: "100%",
+            height: "100%",
+            // aspectRatio: `${ratio} auto`,
+            // objectFit: "cover",
+          }}
+        />
+        {/* </AspectRatio> */}
       </div>
       <div className="product-card__footer">
         <div className="product-card__info">

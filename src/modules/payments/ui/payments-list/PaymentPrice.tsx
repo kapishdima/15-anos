@@ -6,7 +6,7 @@ type PaymentPriceProps = {
 };
 
 export const PaymentPrice: React.FC<PaymentPriceProps> = ({ price }) => {
-  const { symbol } = usePrice(price);
+  const { code } = usePrice(price);
 
   const formattedPrice = Math.round(price).toLocaleString("en-US", {
     style: "decimal",
@@ -15,7 +15,7 @@ export const PaymentPrice: React.FC<PaymentPriceProps> = ({ price }) => {
   return (
     <div className="payment-price">
       <span className="payment-price__value">{formattedPrice} </span>
-      <span className="payment-price__symbol">{symbol}</span>
+      <span className="payment-price__symbol">{code}</span>
     </div>
   );
 };

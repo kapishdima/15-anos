@@ -59,6 +59,7 @@ export const saveProfile = async (
 
   const profilePayloadData = {
     ...profileData,
+    guests: parseInt(profileData.guests || "0"),
     budget: parseInt(profileData.budget || "0"),
     country: country
       ? `${country?.code};${country?.emoji}:${country?.name}`
@@ -83,7 +84,6 @@ export const getProfileMainImage = async () => {
     [eventId, Collections.MAIN_IMAGE]
   );
 
-  console.log("mainImage", mainImage);
   return mainImage?.image;
 };
 

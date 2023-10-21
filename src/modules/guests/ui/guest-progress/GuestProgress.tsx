@@ -33,13 +33,13 @@ export const GuestProgress = () => {
   const invitedPercent = toPercent(invitedGuests, guests);
   const declinedPercent = toPercent(declinedGuests, guests);
 
-  const progressBarBgGradient = `linear-gradient(to right, #2ecc71 0, #2ecc71 ${confirmedPercent}%, #f1c40f ${confirmedPercent}%, #f1c40f ${
+  const progressBarBgGradient = `linear-gradient(to right, #50DF71 0, #50DF71 ${confirmedPercent}%, #FEE106 ${confirmedPercent}%, #FEE106 ${
     confirmedPercent + invitedPercent
-  }%, #e74c3c ${confirmedPercent + invitedPercent}%, #e74c3c ${
+  }%, #FE3636 ${confirmedPercent + invitedPercent}%, #FE3636 ${
     confirmedPercent + invitedPercent + declinedPercent
-  }%, #aeaba8 ${
+  }%, #FAFAFC ${
     confirmedPercent + invitedPercent + declinedPercent
-  }%, #aeaba8 ${
+  }%, #FAFAFC ${
     confirmedPercent + invitedPercent + declinedPercent + notInvitedGuests
   }%) `;
 

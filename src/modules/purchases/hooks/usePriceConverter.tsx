@@ -22,6 +22,7 @@ export const usePrice = (price = 0) => {
   };
 
   return {
+    code,
     symbol,
     convertedPrice,
     convert,

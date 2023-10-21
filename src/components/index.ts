@@ -2,6 +2,7 @@ import { Button } from "./button/Button/Button";
 import { IconButton } from "./button/IconButton/IconButton";
 import { Logout } from "./button/Logout/Logout";
 import { BackButton } from "./button/BackButton/BackButton";
+import { DeleteButton } from "./button/DeleteButton/DeleteButton";
 
 import { CountrySelect } from "./fields/CountrySelect";
 import { CurrencyField } from "./fields/CurrencyField/CurrencyField";
@@ -200,4 +201,5 @@ export {
   Popover,
   AspectRatio,
   Image,
+  DeleteButton,
 };

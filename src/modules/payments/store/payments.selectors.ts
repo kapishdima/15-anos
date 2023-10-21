@@ -48,16 +48,16 @@ export const sortedByDate = (payments: PaymentViewModal[]) => {
 export const sortedByCategoriesAlphabet = (
   payments: PaymentViewModal[]
 ): GroupedPayments => {
-  const sorted = sortBy(payments, (payment) =>
-    payment.categoryId.toLowerCase()
-  );
   const orderByDate = orderBy(
-    sorted,
+    payments,
     (payment) => new Date(payment.date),
     "asc"
   );
+  const sorted = sortBy(orderByDate, (payment) =>
+    payment.categoryId.toLowerCase()
+  );
 
-  return groupByCategory(orderByDate);
+  return groupByCategory(sorted);
 };
 
 export const groupedByDate = (payments: PaymentViewModal[]) => {

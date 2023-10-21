@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { BaseInputProps, Input } from "./Input";
+import { capitalize } from "@/app/utils/text";
 
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -80,9 +81,12 @@ export const TextField: React.FC<TextFieldProps> = ({
 
                   const value = event.target.value;
                   const capitalizedValue =
-                    capitilizedInput && !capitilizedWords
-                      ? value.charAt(0).toUpperCase() + value.slice(1)
-                      : value;
+                    !capitilizedInput && !capitilizedWords
+                      ? value
+                      : capitalize(
+                          value,
+                          capitilizedInput ? "sentence" : "words"
+                        );
 
                   field.onChange(capitalizedValue);
                 }}

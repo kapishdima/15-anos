@@ -48,10 +48,10 @@ export const sortedByDate = (tasks: TaskViewModal[]) => {
 export const sortedByCategoriesAlphabet = (
   tasks: TaskViewModal[]
 ): GroupedTasks => {
-  const sorted = sortBy(tasks, (task) => task.categoryId.toLowerCase());
-  const orderByDate = orderBy(sorted, (task) => new Date(task.date), "asc");
+  const orderByDate = orderBy(tasks, (task) => new Date(task.date), "asc");
+  const sorted = sortBy(orderByDate, (task) => task.categoryId.toLowerCase());
 
-  return groupByCategory(orderByDate);
+  return groupByCategory(sorted);
 };
 
 export const groupedByDate = (tasks: TaskViewModal[]) => {

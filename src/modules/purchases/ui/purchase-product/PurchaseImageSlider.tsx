@@ -21,9 +21,15 @@ export const PurchaseImageSlider: React.FC<PurchaseImageSliderProps> = ({
         navigation
       >
         {images.map((image) => (
-          <AspectRatio ratio={ratio?.toString()}>
-            <img src={image} alt="Purchase" />
-          </AspectRatio>
+          // <AspectRatio ratio={ratio?.toString()}>
+          <div style={{ display: "flex" }}>
+            <img
+              src={image}
+              alt="Purchase"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
+          // </AspectRatio>
         ))}
       </Slider>
     </div>

@@ -31,7 +31,6 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  console.log("payment.completed", payment.completed === "Invalid Date");
   const formatCompletedDate = t("Format Date", {
     date: new Date(
       payment.completed === "Invalid Date" ? Date.now() : payment.completed

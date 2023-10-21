@@ -1,5 +1,6 @@
-import { signInAnonymously, signOut } from 'firebase/auth';
-import { auth } from './index';
+import { signInAnonymously, signOut } from "firebase/auth";
+import { auth } from "./index";
+import { EVENT_DETAILS } from "@/app/constants/local-storage-keys";
 
 export const authAnonymously = async () => {
   try {
@@ -21,6 +22,7 @@ export const forceRefreshUser = async () => {
 export const logout = async () => {
   try {
     await signOut(auth);
+    window.localStorage.clear();
   } catch (error) {
     console.error(error);
   }

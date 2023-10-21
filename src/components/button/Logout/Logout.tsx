@@ -7,6 +7,8 @@ import { AppRoutes } from "@app/router/routes";
 import { LogoutIcon, Modal, useModal } from "@/components";
 import { useTranslation } from "react-i18next";
 import { getEventTitle } from "@/modules/event";
+import { usePermission } from "@/modules/roles/usePermission";
+import { RoleActions } from "@/modules/roles";
 
 const LOGIN_CONFIRMATION_MODAL = "login_confirmation_modal";
 const EVENT_TITLE_MODAL = "event_title_modal";
@@ -15,10 +17,15 @@ export const Logout: React.FC = () => {
   const { t } = useTranslation();
   const { open, close } = useModal();
   const navigate = useNavigate();
+  const permission = usePermission();
 
   const onClick = () => {
     const hasEventTitle = Boolean(getEventTitle());
-    if (hasEventTitle) {
+    const hasPermissionToSpecifyEventTitle = permission?.hasPermission(
+      RoleActions.SPECIFY_EVENT_TITLE
+    );
+
+    if (hasEventTitle || !hasPermissionToSpecifyEventTitle) {
       open(LOGIN_CONFIRMATION_MODAL);
     } else {
       open(EVENT_TITLE_MODAL);

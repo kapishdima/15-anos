@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { Translated } from '@/app/utils/locale';
-import { getCategories } from '../api/categories.api';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { Translated } from "@/app/utils/locale";
+import { getCategories } from "../api/categories.api";
 
 export type Category = {
   id: string;
@@ -31,14 +31,16 @@ export const useCategoriesStore = create<CategoriesStore>()(
         }));
 
         const cachedCategories = get().categories;
-        const hasCacheCategories = Boolean(cachedCategories && cachedCategories.length);
-        const categories = hasCacheCategories ? cachedCategories : await getCategories();
-
-        console.log(categories);
+        const hasCacheCategories = Boolean(
+          cachedCategories && cachedCategories.length
+        );
+        const categories = hasCacheCategories
+          ? cachedCategories
+          : await getCategories();
 
         set(() => ({ categories, loading: false }));
       },
     }),
-    { name: 'categories' },
-  ),
+    { name: "categories" }
+  )
 );

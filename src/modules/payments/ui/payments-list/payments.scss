@@ -44,7 +44,7 @@
 
 .payment-price {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   column-gap: 4px;
   &__value {
     font-family: $anevir-ff;
@@ -54,7 +54,9 @@
   }
   &__symbol {
     font-family: $anevir-ff;
-    font-size: 0.875rem;
+    font-weight: 500;
+    font-size: 0.75rem;
     color: $darkGrayColor;
+    margin-bottom: 1px;
   }
 }

@@ -6,6 +6,7 @@ import {
   updateDocument,
 } from "@/modules/firebase/firestore";
 import { getEventId } from "@/modules/event";
+import capitalize from "lodash/capitalize";
 
 import { Guest, GuestStatuses, GuestViewModal } from "../store/guests";
 
@@ -61,8 +62,6 @@ export const updateGuest = async (
     },
     {}
   );
-
-  console.log(id);
 
   const updatedGuests = guests.map((guest) => {
     if (guest.id === id) {

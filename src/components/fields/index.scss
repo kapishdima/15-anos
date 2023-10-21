@@ -12,6 +12,9 @@
 
 .form-field--capitalized {
   text-transform: capitalize;
+  &::placeholder {
+    text-transform: none;
+  }
 }
 
 .form-field,

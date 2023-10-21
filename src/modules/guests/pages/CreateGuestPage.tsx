@@ -35,7 +35,7 @@ export const CreateGuestPage: React.FC = () => {
 
   return (
     <AppLayout>
-      <PageHeader title={t("Task details")} hasBackButton />
+      <PageHeader title={t("Guest")} hasBackButton />
 
       <div className="vendors-page-container">
         <FormContent>
