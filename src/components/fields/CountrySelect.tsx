@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 
-import { countries } from '@app/data/countries';
-import { useUserLocation } from '@app/location/useUserLocation';
+import { countries } from "@app/data/countries";
+import { useUserLocation } from "@app/location/useUserLocation";
 
-import { SelectField } from './SelectField';
-import { BaseInputProps } from './Input';
+import { SelectField } from "./SelectField";
+import { BaseInputProps } from "./Input";
 
 type CountrySelectProps = BaseInputProps & {
   placeholder?: string;
@@ -34,5 +34,13 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
     setValue(name, location?.country);
   }, [location, location?.country]);
 
-  return <SelectField name={name} label={label} placeholder={placeholder} options={options} />;
+  return (
+    <SelectField
+      className="select-field--extra-small"
+      name={name}
+      label={label}
+      placeholder={placeholder}
+      options={options}
+    />
+  );
 };

@@ -38,6 +38,7 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
 
   return (
     <SelectField
+      className="select-field--extra-small"
       name={name}
       label={label}
       placeholder={placeholder}

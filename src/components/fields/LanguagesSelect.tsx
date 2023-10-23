@@ -32,6 +32,7 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
 
   return (
     <SelectField
+      className="select-field--extra-small"
       name={name}
       label={label}
       defaultSelected={

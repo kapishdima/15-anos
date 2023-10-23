@@ -19,6 +19,7 @@ type Children = ({
 }) => JSX.Element;
 
 export type BaseInputProps = {
+  htmlName?: string;
   name: string;
   label?: string | null;
   suffix?: string;
@@ -27,6 +28,8 @@ export type BaseInputProps = {
   capitilizedInput?: boolean;
   capitilizedWords?: boolean;
   style?: React.CSSProperties;
+  autoComplete?: string;
+  autoFocus?: boolean;
 };
 
 type InputProps = BaseInputProps & {

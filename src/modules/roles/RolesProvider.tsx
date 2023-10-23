@@ -39,7 +39,6 @@ export const RolesProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     return permissionsForRole.includes(action);
   };
-  console.log(eventDetails);
 
   useEffect(() => {
     const userId = eventDetails?.userId;

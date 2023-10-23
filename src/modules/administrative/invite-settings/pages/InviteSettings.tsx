@@ -11,6 +11,8 @@ import { useTranslation } from "react-i18next";
 import { useProfileStore } from "@/modules/profile/store/profile";
 
 import { PasswordItem } from "../ui/PasswordItem/PasswordItem";
+import { saveEventTitleValidation } from "../validation/save-event-title";
+import { Protected, RoleActions } from "@/modules/roles";
 
 export const InviteSettingsIndex: React.FC = () => {
   const { t } = useTranslation();
@@ -61,16 +63,22 @@ export const InviteSettingsIndex: React.FC = () => {
               password={passwords?.viewerPassword || "Loading..."}
             />
           </div>
-          <Form onSubmit={onSubmit} initialValues={initialValues}>
-            <TextField
-              name="eventTitle"
-              label="Event name"
-              placeholder="Enter event name"
-            />
-            <Button type="submit" variant="success" loading={saveLoading}>
-              {t("Save the event name")}
-            </Button>
-          </Form>
+          <Protected action={RoleActions.SPECIFY_EVENT_TITLE}>
+            <Form
+              onSubmit={onSubmit}
+              initialValues={initialValues}
+              schema={saveEventTitleValidation}
+            >
+              <TextField
+                name="eventTitle"
+                label="Event name"
+                placeholder="Enter event name"
+              />
+              <Button type="submit" variant="success" loading={saveLoading}>
+                {t("Save the event name")}
+              </Button>
+            </Form>
+          </Protected>
         </div>
       </div>
     </AppLayout>

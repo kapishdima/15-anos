@@ -20,6 +20,7 @@ type SelectProps = {
   variant?: "filled" | "outline";
   invalid?: boolean;
   showSelectedValue?: boolean;
+  className?: string;
 };
 
 export const Select: React.FC<SelectProps> = ({
@@ -28,6 +29,7 @@ export const Select: React.FC<SelectProps> = ({
   placeholder,
   defaultSelected,
   invalid,
+  className,
   showSelectedValue = true,
   appearence = "select",
   variant = "outline",
@@ -74,7 +76,7 @@ export const Select: React.FC<SelectProps> = ({
   }, [defaultSelected]);
 
   return (
-    <div className={classNames("select", { opened })} ref={select}>
+    <div className={classNames("select", { opened }, className)} ref={select}>
       <div
         className={classNames(
           "select-field",

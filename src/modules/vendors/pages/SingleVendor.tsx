@@ -42,14 +42,14 @@ export const SingleVendor: React.FC = () => {
   }, []);
 
   return (
-    <AppLayout>
+    <AppLayout fullWidth>
       <PageHeader title={t("Vendor")} hasBackButton />
 
       <div className="vendor-page">
         <div className="vendor-page__image">
-          <AspectRatio>
-            <img src={vendor.image} alt={translated(vendor.title)} />
-          </AspectRatio>
+          {/* <AspectRatio>
+          </AspectRatio> */}
+          <img src={vendor.image} alt={translated(vendor.title)} />
           <div className="vendor-page__actions">
             <IconButton
               appearance="outline"
@@ -64,33 +64,35 @@ export const SingleVendor: React.FC = () => {
             </IconButton>
           </div>
         </div>
-        <h4 className="vendor-page__title">{translated(vendor.title)}</h4>
-        <p
-          className="vendor-page__description"
-          dangerouslySetInnerHTML={{
-            __html: description.replaceAll("<n>", "<br/>"),
-          }}
-        ></p>
-        {liked && (
-          <div className="vendor-page__details">
-            <Button variant="text" appearance="ghost" onClick={onClick}>
-              <VendorsIcon />
-              {t("View vendor details")}
-            </Button>
-          </div>
-        )}
+        <div className="vendor-page__content">
+          <h4 className="vendor-page__title">{translated(vendor.title)}</h4>
+          <p
+            className="vendor-page__description"
+            dangerouslySetInnerHTML={{
+              __html: description.replaceAll("<n>", "<br/>"),
+            }}
+          ></p>
+          {liked && (
+            <div className="vendor-page__details">
+              <Button variant="text" appearance="ghost" onClick={onClick}>
+                <VendorsIcon />
+                {t("View vendor details")}
+              </Button>
+            </div>
+          )}
 
-        <div className="vendor-page__contact">
-          <h4 className="vendor-page__contact-info">
-            Don't forget to tell the vendor that you got it's contact from
-            Quincy to check if there is a discount for you
-          </h4>
-          <ContactViewer
-            vendorId={vendor.id}
-            contacts={vendor.contacts}
-            placement="top-start"
-            buttonText="Contact the vendor"
-          />
+          <div className="vendor-page__contact">
+            <h4 className="vendor-page__contact-info">
+              Don't forget to tell the vendor that you got it's contact from
+              Quincy to check if there is a discount for you
+            </h4>
+            <ContactViewer
+              vendorId={vendor.id}
+              contacts={vendor.contacts}
+              placement="top-start"
+              buttonText="Contact the vendor"
+            />
+          </div>
         </div>
       </div>
     </AppLayout>

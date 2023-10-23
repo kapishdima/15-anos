@@ -70,6 +70,7 @@ export const Form: React.FC<FormProps> = ({
       <form
         onSubmit={form.handleSubmit(submit)}
         className={classNames("form-container", classes)}
+        autoComplete="on"
       >
         {children}
       </form>

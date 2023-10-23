@@ -4,68 +4,68 @@ import { AppLayout, Button, Form, PageHeader } from "@components/index";
 import { useTranslation } from "react-i18next";
 import { DropzoneField } from "@/components/fields/DropzoneField";
 import { Colors } from "../ui/Colors/Colors";
-import { useProfileStore } from "@/modules/profile";
+import { ProfileColors, useProfileStore } from "@/modules/profile";
 
 const defaultColors = [
   {
-    title: "Countdown",
+    title: "Countdown text",
     color: "#ed819e",
-    id: "countdownColor",
+    id: ProfileColors.CountdownText,
   },
   {
-    title: "Countdown",
+    title: "Countdown title",
     color: "#ed819e",
-    id: "countdownTextColor",
+    id: ProfileColors.CountdownTitle,
   },
   {
     title: "Countdown",
     color: "#ffffff",
-    id: "countdownTextDateColor",
+    id: ProfileColors.CountdownBg,
   },
   {
-    title: "Upper bar",
+    title: "Navbar Text",
     color: "#ed819e",
-    id: "upperBarColor",
+    id: ProfileColors.NavbarText,
   },
   {
-    title: "Upper bar",
+    title: "Navbar",
     color: "#ffffff",
-    id: "upperBarTextColor",
+    id: ProfileColors.NavbarBg,
   },
   {
-    title: "Lower bar",
+    title: "Tab bar text",
     color: "#ed819e",
-    id: "lowerBarColor",
+    id: ProfileColors.TabbarText,
   },
   {
-    title: "Lower bar",
+    title: "Tab bar unselected",
     color: "#ddd",
-    id: "lowerBarColor",
+    id: ProfileColors.TabbarText,
   },
   {
-    title: "Lower bar",
+    title: "Tab bar",
     color: "#ffffff",
-    id: "lowerBarColor",
+    id: ProfileColors.TabbarBg,
   },
   {
     title: "Invitation",
     color: "#ffffff",
-    id: "invitationColor",
+    id: ProfileColors.InvintationBg,
   },
   {
-    title: "Invitation",
+    title: "Invitation title",
     color: "#ffffff",
-    id: "invitationColor",
-  },
-  {
-    title: "Invitation",
-    color: "#ed819e",
-    id: "invitationColor",
+    id: ProfileColors.InvintationTitle,
   },
   {
     title: "Invitation text",
+    color: "#ed819e",
+    id: ProfileColors.InvintationText,
+  },
+  {
+    title: "Invitation button",
     color: "#000000",
-    id: "invitationTextColor",
+    id: ProfileColors.InvintationButton,
   },
 ];
 

@@ -24,6 +24,9 @@ export const TextField: React.FC<TextFieldProps> = ({
   iconBefore,
   iconAfter,
   style,
+  autoComplete,
+  autoFocus,
+  htmlName,
   onChange,
   onKeyDown,
   capitilizedWords = false,
@@ -62,7 +65,7 @@ export const TextField: React.FC<TextFieldProps> = ({
                 id={name}
                 ref={field.ref}
                 type={type || "text"}
-                name={field.name}
+                name={htmlName}
                 value={field.value}
                 placeholder={t(placeholder || "") || ""}
                 className={classNames(
@@ -93,6 +96,8 @@ export const TextField: React.FC<TextFieldProps> = ({
                 onBlur={field.onBlur}
                 onKeyDown={onKeyDown}
                 style={{ color, ...style }}
+                autoComplete={autoComplete}
+                autoFocus={autoFocus}
               />
               <div className="form-input__after-icon">
                 {iconAfter ? (

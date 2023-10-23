@@ -1,9 +1,9 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import { TextField } from '@components/index';
+import { TextField } from "@components/index";
 
-import { useEventTitleField } from '../hook/useEventTitleField';
+import { useEventTitleField } from "../hook/useEventTitleField";
 
 export const EventTitleField: React.FC = () => {
   const shown = useEventTitleField();
@@ -13,5 +13,13 @@ export const EventTitleField: React.FC = () => {
     return null;
   }
 
-  return <TextField placeholder={t('Enter event title')} name="eventTitle" />;
+  return (
+    <TextField
+      placeholder={t("Enter event title")}
+      name="eventTitle"
+      htmlName="username"
+      autoComplete="username"
+      autoFocus
+    />
+  );
 };

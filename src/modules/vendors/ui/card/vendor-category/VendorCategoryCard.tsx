@@ -33,12 +33,16 @@ export const VendorCategoryCard: React.FC<VendorCategoryCardProps> = ({
         "vendor-category-card--selected": selectedCategoroId === id,
       })}
       onClick={onClick}
+      style={{ backgroundImage: `url(${image})` }}
     >
-      <div className="vendor-category-card__image">
-        <AspectRatio ratio="8/1">
-          <img src={image} alt={translated(title)} />
-        </AspectRatio>
-      </div>
+      {/* <div className="vendor-category-card__image">
+        
+        <img
+          src={image}
+          alt={translated(title)}
+          style={{ aspectRatio: "8/1" }}
+        />
+      </div> */}
       <h4 className="vendor-category-card__title">{translated(title)}</h4>
     </div>
   );
