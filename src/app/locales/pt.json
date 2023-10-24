@@ -227,5 +227,18 @@
   "Log out": "Sair",
   "You did not specify the event name. Without it, you can’t log in. Please specify it.": "Você não especificou o título do evento. Sem fazer isso, você não pode acessar o perfil. Por favor especifique-o.",
   "Specify": "Especificar",
-  "Are you sure you want to log out?": "Tem certeza de que deseja sair?"
+  "Are you sure you want to log out?": "Tem certeza de que deseja sair?",
+
+  "Password:": "Senha:",
+  "Assistant": "Ajudante",
+  "Observer": "Observador",
+  "Send an invitation": "Enviar convite",
+  "This role does not allow access to the settings on the Home screen and does not allow to delete anything, but allows to edit and add information": "Esse papel não permite acesso às configurações na tela principal e não permite excluir nada, mas permite editar e adicionar informações",
+  "This role does not allow access to settings on the Home screen and does not allow to add, edit or delete information": "Esse papel não permite acesso às configurações na tela principal e não permite excluir, editar e adicionar informações",
+  "The name of the event is used to enter the profile as a partner. It is not shown anywhere.": "O título do evento é usado para acessar o perfil como parceiro. Não é mostrado em nenhum lugar.",
+  "Loading": "Carregando",
+  "Save the event name": "Salvar o título do evento",
+
+  "invitation_message_1": "Você está convidado para o Quincy. Baixe o aplicativo e digite a senha para fazer login: ",
+  "invitation_message_2": ".\n\nBaixar:"
 }

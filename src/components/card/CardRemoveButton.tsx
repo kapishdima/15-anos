@@ -9,6 +9,7 @@ type CardRemoveButtonProps = {
   id: string;
   removal?: boolean;
   loading?: boolean;
+  shown?: boolean;
   onDelete: () => void;
 };
 
@@ -17,6 +18,7 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
   removal,
   loading,
   onDelete,
+  shown = true,
 }) => {
   const confirmationModalId = `${id}_remove_modal`;
   const { t } = useTranslation();
@@ -34,6 +36,10 @@ export const CardRemoveButton: React.FC<CardRemoveButtonProps> = ({
   const onCancel = () => {
     close(confirmationModalId);
   };
+
+  if (!shown) {
+    return null;
+  }
 
   return (
     <>

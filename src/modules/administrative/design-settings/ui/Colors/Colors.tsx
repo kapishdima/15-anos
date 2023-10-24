@@ -1,6 +1,5 @@
 import React from "react";
 import { ColorField } from "../ColorField/ColorField";
-import { ScrollXArea } from "@/components";
 import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { ProfileColor } from "@/modules/profile";
@@ -13,11 +12,11 @@ export const Colors: React.FC = () => {
   return (
     <div className="colors">
       <label className="colors-label">{t("Theme colors")}</label>
-      <ScrollXArea>
+      <div className="colors-list">
         {colors.map((color, index) => (
           <ColorField name={`colors.[${index}].color`} label={color.title} />
         ))}
-      </ScrollXArea>
+      </div>
     </div>
   );
 };

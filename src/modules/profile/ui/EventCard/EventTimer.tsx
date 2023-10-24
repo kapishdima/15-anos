@@ -3,18 +3,18 @@ import Countdown from "react-countdown";
 import { useTranslation } from "react-i18next";
 import { useProfileColor } from "../../hooks/useProfileColor";
 import { ProfileColors } from "../../models/profile-colors";
+import { useProfileStore } from "../../store/profile";
 
-type EventTimerProps = {
-  from: Date | number;
-};
-
-export const EventTimer: React.FC<EventTimerProps> = ({ from }) => {
+export const EventTimer: React.FC = () => {
   const { t } = useTranslation();
+
   const bgColor = useProfileColor(ProfileColors.CountdownBg);
   const titleColor = useProfileColor(ProfileColors.CountdownTitle);
   const textColor = useProfileColor(ProfileColors.CountdownText);
 
-  const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
+  const profile = useProfileStore((state) => state.profile);
+
+  const renderer = ({ days, hours, minutes, seconds }: any) => {
     return (
       <div className="event-timer__countdown">
         <div className="event-timer__countdown-item">
@@ -77,9 +77,15 @@ export const EventTimer: React.FC<EventTimerProps> = ({ from }) => {
     );
   };
 
+  console.log("from", profile?.date);
+
+  if (!profile?.date) {
+    return null;
+  }
+
   return (
     <div className="event-timer" style={{ backgroundColor: bgColor }}>
-      <Countdown date={from} renderer={renderer} />
+      <Countdown date={new Date(profile.date).getTime()} renderer={renderer} />
     </div>
   );
 };

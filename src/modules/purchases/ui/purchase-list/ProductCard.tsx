@@ -15,6 +15,7 @@ import { ProductViewModal } from "../../store/purcheses.types";
 import { useLike } from "../../hooks/useLike";
 import { usePrice } from "../../hooks/usePriceConverter";
 import { usePopular } from "../../hooks/usePopulary";
+import { Protected, RoleActions } from "@/modules/roles";
 
 type ProductCardProps = {
   product: ProductViewModal;
@@ -40,18 +41,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <PopularIcon />
           </div>
         )}
-        {/* <AspectRatio ratio={ratio?.toString()}> */}
         <Image
           src={image}
           alt={translated(title)}
           style={{
             width: "100%",
             height: "100%",
-            // aspectRatio: `${ratio} auto`,
-            // objectFit: "cover",
           }}
         />
-        {/* </AspectRatio> */}
       </div>
       <div className="product-card__footer">
         <div className="product-card__info">
@@ -76,17 +73,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </div>
           )}
         </div>
-        <IconButton
-          appearance="outline"
-          loading={loading}
-          loadingVariant="accent"
-          classes={classNames("like-button", {
-            liked,
-          })}
-          onClick={liked ? disslikeProduct : likeProduct}
-        >
-          <LikeIcon />
-        </IconButton>
+        <Protected action={RoleActions.LIKE_PURCHASE}>
+          <IconButton
+            appearance="outline"
+            loading={loading}
+            loadingVariant="accent"
+            classes={classNames("like-button", {
+              liked,
+            })}
+            onClick={liked ? disslikeProduct : likeProduct}
+          >
+            <LikeIcon />
+          </IconButton>
+        </Protected>
       </div>
     </div>
   );

@@ -22,12 +22,18 @@ export const ProductActions: React.FC<ProductActionsProps> = ({ category }) => {
   return (
     <>
       <div className="product-actions">
-        {hasFilters && (
-          <Button variant="text" onClick={toggleFiltersOpened}>
-            <img src={FilterIcon} alt="" /> Filters
-          </Button>
-        )}
-        {hasFilters && <ProductsSort />}
+        <div className="product-actions__content">
+          {hasFilters && (
+            <Button
+              variant="text"
+              style={{ color: "#83dd8b" }}
+              onClick={toggleFiltersOpened}
+            >
+              <img src={FilterIcon} alt="" /> Filters
+            </Button>
+          )}
+          {hasFilters && <ProductsSort />}
+        </div>
       </div>
       {hasFilters && (
         <ProductFilters category={category} opened={filtersOpened} />

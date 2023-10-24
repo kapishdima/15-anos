@@ -18,6 +18,7 @@ import { useLike } from "../hooks/useLike";
 import { ContactViewer } from "../ui/contacts/viewer/ContactsViewer";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
+import { Protected, RoleActions } from "@/modules/roles";
 
 export const SingleVendor: React.FC = () => {
   const { t } = useTranslation();
@@ -47,21 +48,21 @@ export const SingleVendor: React.FC = () => {
 
       <div className="vendor-page">
         <div className="vendor-page__image">
-          {/* <AspectRatio>
-          </AspectRatio> */}
           <img src={vendor.image} alt={translated(vendor.title)} />
           <div className="vendor-page__actions">
-            <IconButton
-              appearance="outline"
-              loading={loading}
-              loadingVariant="accent"
-              classes={classNames("like-button", {
-                liked,
-              })}
-              onClick={liked ? disslikeVendor : likeVendor}
-            >
-              <LikeIcon />
-            </IconButton>
+            <Protected action={RoleActions.LIKE_VENDOR}>
+              <IconButton
+                appearance="outline"
+                loading={loading}
+                loadingVariant="accent"
+                classes={classNames("like-button", {
+                  liked,
+                })}
+                onClick={liked ? disslikeVendor : likeVendor}
+              >
+                <LikeIcon />
+              </IconButton>
+            </Protected>
           </div>
         </div>
         <div className="vendor-page__content">

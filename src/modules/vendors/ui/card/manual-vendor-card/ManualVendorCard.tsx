@@ -9,6 +9,7 @@ import { SearchedVendor } from "@/modules/vendors/store/vendors.types";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 
 import { ContactViewer } from "../../contacts/viewer/ContactsViewer";
+import { RoleActions } from "@/modules/roles";
 
 type ManualVendorCardProps = SearchedVendor & {
   color: string;
@@ -53,6 +54,7 @@ export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
       loading={actionLoading && actionId === id}
       onOpen={onOpen}
       onDelete={onDelete}
+      action={RoleActions.EDIT_VENDORS}
     />
   );
 };

@@ -1,6 +1,7 @@
 import { AppRoutes } from "@/app/router/routes";
 import { translated } from "@/app/utils/locale";
 import { AspectRatio, IconButton, LikeIcon } from "@/components";
+import { Protected, RoleActions } from "@/modules/roles";
 import { useLike } from "@/modules/vendors/hooks/useLike";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 import { SearchedVendor } from "@/modules/vendors/store/vendors.types";
@@ -43,18 +44,20 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
         ></p>
       </div>
       <div className="vendor-card__actions">
-        <IconButton
-          appearance="outline"
-          loading={loading}
-          loadingVariant="accent"
-          classes={classNames("like-button", {
-            liked,
-          })}
-          onClick={liked ? disslikeVendor : likeVendor}
-          propagateEvent={false}
-        >
-          <LikeIcon />
-        </IconButton>
+        <Protected action={RoleActions.LIKE_VENDOR}>
+          <IconButton
+            appearance="outline"
+            loading={loading}
+            loadingVariant="accent"
+            classes={classNames("like-button", {
+              liked,
+            })}
+            onClick={liked ? disslikeVendor : likeVendor}
+            propagateEvent={false}
+          >
+            <LikeIcon />
+          </IconButton>
+        </Protected>
       </div>
     </Link>
   );

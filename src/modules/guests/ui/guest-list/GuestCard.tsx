@@ -11,6 +11,7 @@ import { GuestsStatus } from "../buttons/GuestStatus";
 
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
+import { RoleActions } from "@/modules/roles";
 
 type GuestCardProps = { guest: Guest };
 
@@ -78,6 +79,7 @@ export const GuestCard: React.FC<GuestCardProps> = ({ guest }) => {
         hoverable={false}
         loading={loading}
         removal={isRemoval}
+        action={RoleActions.EDIT_GUEST}
       />
     </>
   );

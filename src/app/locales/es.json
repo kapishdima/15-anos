@@ -228,5 +228,18 @@
   "Log out": "Cerrar sesión",
   "You did not specify the event name. Without it, you can’t log in. Please specify it.": "No has indicado el nombre del evento. Sin el no se puede acceder al perfil. Por favor, indícalo.",
   "Specify": "Indicar",
-  "Are you sure you want to log out?": "¿Seguro que quieres cerrar sesión?"
+  "Are you sure you want to log out?": "¿Seguro que quieres cerrar sesión?",
+
+  "Password:": "Contraseña:",
+  "Assistant": "Ayudante",
+  "Observer": "Observador",
+  "Send an invitation": "Enviar la invitación",
+  "This role does not allow access to the settings on the Home screen and does not allow to delete anything, but allows to edit and add information": "Este rol no permite el acceso a los ajustes en la pantalla principal, ni eliminar su contenido. Con este rol se puede editar y añadir la información",
+  "This role does not allow access to settings on the Home screen and does not allow to add, edit or delete information": "Este rol no permite el acceso a los ajustes en la pantalla principal y tampoco deja añadir, editar o eliminar el contenido",
+  "The name of the event is used to enter the profile as a partner. It is not shown anywhere.": "El nombre del evento se usa para acceder al perfil como pareja. Este nombre no aparece en ningún sitio.",
+  "Loading": "Cargando",
+  "Save the event name": "Guardar el nombre del evento",
+
+  "invitation_message_1": "Te han invitado a unirte a Quincy. Descarga la app e introduce la contraseña para acceder al perfil:",
+  "invitation_message_2": ".\n\nDescargar:"
 }

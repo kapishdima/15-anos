@@ -5,6 +5,8 @@ import { CheckIcon, Spinner } from "@components/index";
 import { Translated, translated } from "@/app/utils/locale";
 
 import { CardRemoveButton } from "./CardRemoveButton";
+import { RoleActions } from "@/modules/roles";
+import { usePermission } from "@/modules/roles";
 
 type CardProps = {
   id: string;
@@ -22,6 +24,7 @@ type CardProps = {
   description?: Translated;
   expires?: boolean;
   hasVisibleIcon?: boolean;
+  action?: RoleActions;
   onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
@@ -42,11 +45,16 @@ export const Card: React.FC<CardProps> = ({
   hint,
   expires,
   description,
+  action,
   showHint = true,
   showDescription = false,
   hoverable = true,
   hasVisibleIcon = true,
 }) => {
+  const permission = usePermission();
+  const canOpen =
+    !permission || !action ? false : permission.hasPermission(action);
+
   const handleIconClick = (event: MouseEvent) => {
     event.stopPropagation();
 
@@ -57,6 +65,12 @@ export const Card: React.FC<CardProps> = ({
     onIconClick(id);
   };
 
+  const handleOpen = () => {
+    if (canOpen) {
+      onOpen();
+    }
+  };
+
   return (
     <div
       className={classNames("card", {
@@ -64,7 +78,7 @@ export const Card: React.FC<CardProps> = ({
         "card--hoverable": hoverable,
         "card--expires": expires,
       })}
-      onClick={onOpen}
+      onClick={handleOpen}
     >
       <div className="card__image" onClick={handleIconClick}>
         <div className="card__icon" style={{ backgroundColor: `#${color}` }}>
@@ -90,6 +104,7 @@ export const Card: React.FC<CardProps> = ({
           removal={removal}
           onDelete={() => onDelete(id)}
           loading={loading}
+          shown={canOpen}
         />
       </div>
     </div>

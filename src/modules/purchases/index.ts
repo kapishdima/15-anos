@@ -4,7 +4,10 @@ import { SinglePurchasePage } from "./pages/SinglePurchasePage";
 import { ManualProductList } from "./pages/ManualProductList";
 import { CreatePurchasePage } from "./pages/CreatePurchasePage";
 
+import { usePrice } from "./hooks/usePriceConverter";
+
 export {
+  usePrice,
   CreatePurchasePage,
   PurchasesIndex,
   PurchaseBestIdeas,

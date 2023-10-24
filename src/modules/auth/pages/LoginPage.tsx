@@ -16,7 +16,7 @@ import Logo from "@image/logo.png";
 export const LoginPage: React.FC = () => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const boxMaxWidth = isMobile ? "90vw" : "500px";
+  const boxMaxWidth = isMobile ? "90vw" : "380px";
 
   return (
     <AuthLayout>

@@ -25,6 +25,7 @@ import { usePopular } from "../../hooks/usePopulary";
 import TailorIcon from "@image/icons/tailor.png";
 import DeliveryIcon from "@image/icons/delivery.png";
 import ReturnIcon from "@image/icons/return.png";
+import { Protected, RoleActions } from "@/modules/roles";
 
 type PurchaseProductProps = {
   ratio: number;
@@ -64,25 +65,25 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
     <div className="purchase-product">
       <div className="purchase-image">
         <div className="purchase-actions">
-          <IconButton
-            loading={loading}
-            loadingVariant="accent"
-            appearance="filled"
-            classes={classNames("purchase-like", {
-              liked,
-            })}
-            size="lg"
-            onClick={liked ? disslikeProduct : likeProduct}
-          >
-            <LikeIcon />
-          </IconButton>
+          <Protected action={RoleActions.LIKE_PURCHASE}>
+            <IconButton
+              loading={loading}
+              loadingVariant="accent"
+              appearance="filled"
+              classes={classNames("purchase-like", {
+                liked,
+              })}
+              size="lg"
+              onClick={liked ? disslikeProduct : likeProduct}
+            >
+              <LikeIcon />
+            </IconButton>
+          </Protected>
         </div>
 
         {hasManyImages ? (
           <PurchaseImageSlider images={images} ratio={ratio} />
         ) : (
-          // <AspectRatio ratio={ratio?.toString()}>
-          // </AspectRatio>
           <div style={{ display: "flex" }}>
             <img
               src={image}

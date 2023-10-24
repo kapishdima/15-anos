@@ -29,6 +29,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   htmlName,
   onChange,
   onKeyDown,
+  hint,
   capitilizedWords = false,
   capitilizedInput = false,
   variant = "outline",
@@ -114,6 +115,7 @@ export const TextField: React.FC<TextFieldProps> = ({
               </div>
               {suffix && <div className="form-input__suffix">{suffix}</div>}
             </div>
+            {hint && <div className="form-field__hint">{hint}</div>}
             {fieldState.error && (
               <div className="form-field__error">
                 {fieldState.error.message}

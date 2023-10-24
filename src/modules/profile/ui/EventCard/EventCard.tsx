@@ -13,7 +13,6 @@ export const EventCard: React.FC = () => {
     (state) => state.fetchProfileDetails
   );
 
-  const profile = useProfileStore((state) => state.profile);
   const mainImage = useProfileStore((state) => state.mainImage);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export const EventCard: React.FC = () => {
         </AspectRatio>
       </div>
       <div className="event-card__timer">
-        <EventTimer from={new Date(profile?.date!).getTime() || Date.now()} />
+        <EventTimer />
       </div>
     </div>
   );

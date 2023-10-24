@@ -10,6 +10,7 @@ import { AppRoutes } from "@/app/router/routes";
 import { useTasksStore } from "@modules/tasks";
 import { getCategoryImage } from "@/app/utils/category-icon";
 import { TaskViewModal } from "../../store/tasks";
+import { RoleActions } from "@/modules/roles";
 
 type TaskCardProps = {
   task: TaskViewModal;
@@ -75,6 +76,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         onIconClick={updateTaskStatus}
         hint={hint}
         expires={expires}
+        action={RoleActions.EDIT_TASK}
       />
     </>
   );

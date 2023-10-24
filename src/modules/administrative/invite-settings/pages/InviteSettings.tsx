@@ -13,6 +13,7 @@ import { useProfileStore } from "@/modules/profile/store/profile";
 import { PasswordItem } from "../ui/PasswordItem/PasswordItem";
 import { saveEventTitleValidation } from "../validation/save-event-title";
 import { Protected, RoleActions } from "@/modules/roles";
+import { InviteRoles } from "../ui/Invite/Invite";
 
 export const InviteSettingsIndex: React.FC = () => {
   const { t } = useTranslation();
@@ -48,20 +49,29 @@ export const InviteSettingsIndex: React.FC = () => {
         <div className="invite-settings">
           <div className="password-list">
             <PasswordItem
-              role="Owner"
-              description="This role the same access as yours. To log in, you will need to specify the name of the event"
-              password={passwords?.ownerPassword || "Loading..."}
+              role={t("Owner")}
+              description={t(
+                "This role the same access as yours. To log in, you will need to specify the name of the event"
+              )}
+              password={passwords?.ownerPassword || t("Loading")}
             />
             <PasswordItem
-              role="Assistant"
-              description="This role does not allow access to the settings, on the Home screen and does not allow to delete anything, but allows to edit and add information"
-              password={passwords?.assistantPassword || "Loading..."}
+              role={t("Assistant")}
+              description={t(
+                "This role does not allow access to the settings, on the Home screen and does not allow to delete anything, but allows to edit and add information"
+              )}
+              password={passwords?.assistantPassword || t("Loading")}
             />
             <PasswordItem
-              role="Viewer"
-              description="This role does not allow to settings on the Home screen and does not allow to add, edit or delete information"
-              password={passwords?.viewerPassword || "Loading..."}
+              role={t("Observer")}
+              description={t(
+                "This role does not allow to settings on the Home screen and does not allow to add, edit or delete information"
+              )}
+              password={passwords?.viewerPassword || t("Loading")}
             />
+          </div>
+          <div className="invite-actions">
+            <InviteRoles />
           </div>
           <Protected action={RoleActions.SPECIFY_EVENT_TITLE}>
             <Form
@@ -73,6 +83,11 @@ export const InviteSettingsIndex: React.FC = () => {
                 name="eventTitle"
                 label="Event name"
                 placeholder="Enter event name"
+                hint={
+                  t(
+                    "The name of the event is used to enter the profile as a partner. It is not shown anywhere."
+                  ) || ""
+                }
               />
               <Button type="submit" variant="success" loading={saveLoading}>
                 {t("Save the event name")}

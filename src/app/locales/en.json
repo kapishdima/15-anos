@@ -223,5 +223,18 @@
   "Log out": "Log out",
   "You did not specify the event name. Without it, you can’t log in. Please specify it.": "You did not specify the event name. Without it, you can’t log in. Please specify it.",
   "Specify": "Specify",
-  "Are you sure you want to log out?": "Are you sure you want to log out?"
+  "Are you sure you want to log out?": "Are you sure you want to log out?",
+
+  "Password:": "Password:",
+  "Assistant": "Assistant",
+  "Observer": "Observer",
+  "Send an invitation": "Send an invitation",
+  "This role does not allow access to the settings on the Home screen and does not allow to delete anything, but allows to edit and add information": "This role does not allow access to the settings on the Home screen and does not allow to delete anything, but allows to edit and add information",
+  "This role does not allow access to settings on the Home screen and does not allow to add, edit or delete information": "This role does not allow access to settings on the Home screen and does not allow to add, edit or delete information",
+  "The name of the event is used to enter the profile as a partner. It is not shown anywhere.": "The name of the event is used to enter the profile as a partner. It is not shown anywhere.",
+  "Loading": "Loading",
+  "Save the event name": "Save the event name",
+
+  "invitation_message_1": "You are invited to Quincy. Download the application and enter the password to log in: ",
+  "invitation_message_2": ".\n\nDownload:"
 }

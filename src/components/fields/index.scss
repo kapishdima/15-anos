@@ -32,6 +32,12 @@
     @include inputError;
   }
 
+  &__hint {
+    font-family: $anevir-ff;
+    font-size: 0.85rem;
+    color: $darkGrayColor;
+  }
+
   background-color: transparent;
   border: 1px solid #cbcbcb;
   border-radius: 12px;

@@ -1,12 +1,11 @@
+import React from "react";
 import { Button } from "@/components";
-import { usePrice } from "@/modules/purchases/hooks/usePriceConverter";
+import { usePrice } from "@/modules/purchases";
 import {
   PriceRange,
   useProductsSearch,
 } from "@/modules/purchases/store/products_search";
 import { isActivePrice } from "@/modules/purchases/store/selectors/product_search.selector";
-import React, { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 
 type PriceFiltersProps = {
   priceStep: number;

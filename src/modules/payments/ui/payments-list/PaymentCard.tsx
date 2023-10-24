@@ -10,6 +10,7 @@ import { PaymentViewModal } from "../../store/payments";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
 import { PaymentPrice } from "./PaymentPrice";
+import { RoleActions } from "@/modules/roles";
 
 type PaymentCardProps = {
   payment: PaymentViewModal;
@@ -92,6 +93,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
             : `${t("Already paid")}: ${payment.paid} $`
         }
         extra={<PaymentPrice price={payment.pay} />}
+        action={RoleActions.EDIT_PAYMENTS}
       />
     </>
   );

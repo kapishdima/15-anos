@@ -23,6 +23,7 @@ export type BaseInputProps = {
   name: string;
   label?: string | null;
   suffix?: string;
+  hint?: string;
   type?: HTMLInputTypeAttribute;
   variant?: "filled" | "outline";
   capitilizedInput?: boolean;
