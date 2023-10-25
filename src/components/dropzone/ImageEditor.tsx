@@ -37,7 +37,8 @@ export const ImageEditor: React.FC<ImageEditorProps> = ({
       {image && modalOpened && (
         <ReactCropper
           src={
-            "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg"
+            // "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg"
+            image
           }
           //"https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg"
           style={{ height: 500, width: "100%" }}
