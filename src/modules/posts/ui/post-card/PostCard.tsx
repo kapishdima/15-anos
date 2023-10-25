@@ -38,6 +38,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
             })}
             loading={postInProccessing === post.id && loading}
             onClick={liked ? disslikePost : likePost}
+            propagateEvent={false}
           >
             <LikeIcon />
           </IconButton>
