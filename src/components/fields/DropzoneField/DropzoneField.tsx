@@ -1,6 +1,6 @@
 import React from "react";
-import { BaseInputProps } from "./Input";
-import { DefaultFileItem, Dropzone } from "../dropzone/Dropzone";
+import { BaseInputProps } from "../Input";
+import { DefaultFileItem, Dropzone } from "../../dropzone/Dropzone";
 import { useTranslation } from "react-i18next";
 
 type DropzoneFieldProps = Omit<BaseInputProps, "name"> & {

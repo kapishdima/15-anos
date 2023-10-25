@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
-import { AppLayout, Button, Form, PageHeader } from "@components/index";
+import {
+  DropzoneField,
+  AppLayout,
+  Button,
+  Form,
+  PageHeader,
+} from "@components/index";
 
 import { useTranslation } from "react-i18next";
-import { DropzoneField } from "@/components/fields/DropzoneField";
+
 import { Colors } from "../ui/Colors/Colors";
 import { ProfileColors, useProfileStore } from "@/modules/profile";
 

@@ -18,6 +18,7 @@ import { TextAreaField } from "./fields/TextAreaField";
 import { NumberField } from "./fields/NumberField";
 import { SearchField } from "./fields/SearchField";
 import { ColorPickerField } from "./fields/ColorPickerField";
+import { DropzoneField } from "./fields/DropzoneField/DropzoneField";
 
 import { Form } from "./form/Form";
 
@@ -202,4 +203,5 @@ export {
   AspectRatio,
   Image,
   DeleteButton,
+  DropzoneField,
 };

@@ -77,8 +77,6 @@ export const EventTimer: React.FC = () => {
     );
   };
 
-  console.log("from", profile?.date);
-
   if (!profile?.date) {
     return null;
   }

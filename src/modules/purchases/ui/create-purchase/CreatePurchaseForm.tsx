@@ -1,8 +1,7 @@
 import React from "react";
-
-import { TextField, TextAreaField } from "@/components";
 import { useTranslation } from "react-i18next";
-import { DropzoneField } from "@/components/fields/DropzoneField";
+
+import { DropzoneField, TextField, TextAreaField } from "@/components";
 
 export const CreatePurchaseForm: React.FC = () => {
   const { t } = useTranslation();
