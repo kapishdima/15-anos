@@ -1,8 +1,10 @@
 import format from "date-fns/format";
-import { GroupedPayments, PaymentViewModal, PaymentsStore } from "./payments";
-
 import sortBy from "lodash.sortby";
 import { orderBy } from "lodash";
+
+import { toMonthYearDate } from "@/app/utils/date";
+
+import { GroupedPayments, PaymentViewModal, PaymentsStore } from "./payments";
 import { PaymentDetailsStore } from "./payment-details";
 
 export const exceptCompletedPayments = (payments: PaymentViewModal[]) => {
@@ -11,7 +13,7 @@ export const exceptCompletedPayments = (payments: PaymentViewModal[]) => {
 
 export const groupByMonth = (payments: PaymentViewModal[]) => {
   const groupedPayments = payments.reduce((acc, payment) => {
-    const key = format(new Date(payment.date), "MMMM, yyyy");
+    const key = toMonthYearDate(payment.date);
     acc[key] = [...(acc[key] || []), payment];
 
     return acc;

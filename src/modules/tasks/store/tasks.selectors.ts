@@ -1,9 +1,10 @@
 import format from "date-fns/format";
-import { translated } from "@/app/utils/locale";
+
 import { GroupedTasks, TaskViewModal, TasksStore } from "./tasks";
 
 import sortBy from "lodash.sortby";
 import { orderBy } from "lodash";
+import { toMonthYearDate } from "@/app/utils/date";
 
 export const getCompletedTasks = (tasks: TaskViewModal[]) => {
   return tasks.filter((task) => !task.isCompleted);
@@ -11,7 +12,7 @@ export const getCompletedTasks = (tasks: TaskViewModal[]) => {
 
 export const groupByMonth = (tasks: TaskViewModal[]) => {
   const groupedTask = tasks.reduce((acc, task) => {
-    const key = format(task.date, "MMMM, yyyy");
+    const key = toMonthYearDate(task.date);
     acc[key] = [...(acc[key] || []), task];
 
     return acc;

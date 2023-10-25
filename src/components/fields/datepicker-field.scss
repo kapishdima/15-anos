@@ -13,9 +13,17 @@
   background-color: $lightGrayColor;
 }
 
+.react-datepicker__current-month {
+  text-transform: capitalize;
+}
+
 .react-datepicker__day--selected,
 .react-datepicker__day--selected:hover {
   background-color: $accentColor;
+}
+
+.react-datepicker__input-container input {
+  text-transform: capitalize;
 }
 
 .react-datepicker__time-container

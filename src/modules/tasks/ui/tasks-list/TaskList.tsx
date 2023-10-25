@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { GroupedTasks } from '../../store/tasks';
-import { TaskGroup } from './TaskGroup';
+import { GroupedTasks } from "../../store/tasks";
+import { TaskGroup } from "./TaskGroup";
 
 type TaskListProps = {
   tasks: GroupedTasks;
@@ -12,7 +12,12 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, hasCardHint }) => {
   return (
     <div className="task-list">
       {Object.entries(tasks).map(([title, tasks]) => (
-        <TaskGroup title={title} tasks={tasks} key={title} hasCardHint={hasCardHint} />
+        <TaskGroup
+          title={title}
+          tasks={tasks}
+          key={title}
+          hasCardHint={hasCardHint}
+        />
       ))}
     </div>
   );
