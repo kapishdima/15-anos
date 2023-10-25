@@ -43,6 +43,21 @@
     width: 20px;
     height: 20px;
   }
+
+  &-children {
+    width: 100%;
+
+    transition: opacity 0.25s ease;
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  &-loader {
+    position: absolute;
+    z-index: 10;
+  }
 }
 
 // ----------------------------------

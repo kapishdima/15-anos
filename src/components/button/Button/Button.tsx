@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { HTMLAttributes, PropsWithChildren, MouseEvent } from "react";
 
 import { Spinner } from "@components/index";
+import { loaderByName } from "@craco/craco";
 
 type ButtonVariants = "primary" | "error" | "text" | "success" | "secondary";
 type ButtonAppearance = "filled" | "ghost" | "outline";
@@ -51,7 +52,14 @@ export const Button = React.forwardRef<any, ButtonProps>(
         onClick={handleClick}
         {...attrs}
       >
-        {loading ? <Spinner variant="white" /> : children}
+        <div className={classNames("button-children", { hide: loading })}>
+          {children}
+        </div>
+        {loading && (
+          <div className="button-loader">
+            <Spinner variant="white" />
+          </div>
+        )}
       </button>
     );
   }
