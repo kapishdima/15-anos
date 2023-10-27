@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang={{language}}>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73036845-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-73036845-3');
+        gtag('config', 'UA-73036845-4');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png"
+        href="https://firebasestorage.googleapis.com/v0/b/quinceanera-planner.appspot.com/o/website%2Ffavicon.png?alt=media&token=6a327934-6d37-450b-9d6d-47f5b7f324cf">
+    <!-- <meta property="og:image" {{#if article.[0].image}} content="{{article.[0].image}}" {{else}}
+        content="https://firebasestorage.googleapis.com/v0/b/quinceanera-planner.appspot.com/o/registry%2Fshared%2Fwallpaper.jpg?alt=media&token=54e05eb8-031a-4365-b42c-170496ba4bfe"
+        {{/if}} />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="es_LA" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+    <meta property="og:title" {{#if article.[0].title}} content="{{article.[0].title}} - Quincy" {{else}}
+        content="Quincy" {{/if}} /> -->
+    <title>{{article.[0].title}} - Quincy</title>
+    <meta name="description" content="{{article.[0].description}}" />
+    <meta property="og:locale" content="{{language}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{article.[0].title}} - Quincy" />
+    <meta property="og:site_name" content="15-ANOS.COM" />
+    <meta property="og:description" content="{{article.[0].description}}" />
+    <meta property="og:url" content="https://www.15-anos.com/articles/{{article.[0].url}}&hl={{language}}" />
+    <meta property="og:site_name" content="Quincy" />
+    <meta property="og:image" content="{{article.[0].image}}" />
+    {{!-- <meta property="og:image:width" content="1080" />
+	<meta property="og:image:height" content="1080" /> --}}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Quincy -  {{article.[0].title}}">
+    <meta name="twitter:image" content="{{article.[0].image}}">
+    <meta name="twitter:site" content="@QuinceaneraApps">
+    <meta name="twitter:description" content="{{article.[0].description}}">
+    <meta name="robots" content="nofollow" />
+    <link type="text/css" media="all" rel="stylesheet" href="https://www.15-anos.com/w3.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Lora&display=swap" as="style"
+        onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Kumbh Sans&display=swap" as="style"
+        onload="this.onload=null;this.rel='stylesheet'" />
+    <script src="https://kit.fontawesome.com/b43573acec.js" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://www.15-anos.com/articles/{{article.[0].url}}&hl={{language}}" />
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Lora"
+        }
+
+        h1 {
+            font-weight: 500;
+            font-size: 16pt;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        h2 {
+            font-size: 14pt;
+        }
+
+        body {
+            font-family: "Kumbh Sans";
+            background-color: #FFFFFF;
+        }
+
+        .body-white {
+            background-color: #FFFFFF;
+        }
+
+        .body-dark {
+            background-color: #000000;
+        }
+
+        .credit {
+            font-family: "Kumbh Sans";
+            font-size: 7pt;
+            color: rgb(201, 201, 201);
+            text-align: right;
+            line-height: 100%;
+            padding-bottom: 10px !important;
+        }
+
+        .w3-white {
+            background-color: #FAFAFC;
+        }
+
+        .w3-dark {
+            color: #FFFFFF !important;
+            background-color: #121212;
+        }
+
+        .w3-padding-16 {
+            padding-bottom: 2px !important;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: "Kumbh Sans";
+            font-size: 7pt;
+            color: rgb(201, 201, 201);
+            text-align: right;
+            line-height: 100%;
+        }
+
+        .app-link {
+            font-size: 11pt !important;
+            color: rgb(125, 125, 125);
+        }
+
+        p {
+            margin-block-end: 0em !important;
+        }
+
+        strong {
+            font-weight: 900;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="https://www.15-anos.com/assets/lazysizes.min.js" async></script>
+    <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let userLang = navigator.language || navigator.userLanguage;
+            let userLanguage = "en";
+            if (window.location.href.includes('&hl=')) {
+                if (window.location.href.includes('&hl=es')) {
+                    userLanguage = "es";
+                }
+                else if (window.location.href.includes('&hl=pt')) {
+                    userLanguage = "pt";
+                }
+            }
+            else {
+                if (userLang === "es" || userLang === "pt") {
+                    userLanguage = userLang;
+                }
+            }
+            console.log('language:' + userLanguage);
+            const homeButton = document.getElementById('homeButton');
+            const languageButton1 = document.getElementById('languageButton1');
+            const languageButton2 = document.getElementById('languageButton2');
+            const articlesButton = document.getElementById('articlesButton');
+            const vendorsButton = document.getElementById('vendorsButton');
+            const downloadTitle = document.getElementById('downloadTitle');
+            if (userLanguage === "es") {
+                homeButton.innerHTML = "<b>Inicio</b>";
+                homeButton.href = "../es.html"
+                languageButton1.innerHTML = "<b>English</b>";
+                languageButton1.href = "../";
+                articlesButton.innerHTML = "Artículos";
+                articlesButton.href = "../articles-es";
+                vendorsButton.innerHTML = "Para proveedores";
+                vendorsButton.href = "../vendors-contact-es.html";
+                downloadTitle.innerHTML = "¡Lee este y otros artículos en la aplicación!";
+            }
+            else if (userLanguage === "pt") {
+                homeButton.innerHTML = "<b>Pagina inicial</b>";
+                homeButton.href = "../pt.html"
+                languageButton1.innerHTML = "<b>English</b>";
+                languageButton1.href = "../";
+                languageButton2.innerHTML = "<b>Español</b>";
+                languageButton2.href = "../es.html";
+                articlesButton.innerHTML = "Artigos";
+                articlesButton.href = "../articles-pt";
+                vendorsButton.innerHTML = "Para os contratados";
+                vendorsButton.href = "../vendors-contact-pt.html";
+                downloadTitle.innerHTML = "Leia este e outros artigos no app!";
+            }
+        })
+        function currentDiv(n) {
+            showDivs(slideIndex = n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-opacity-off";
+        }
+    </script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '571770223251629');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+</head>
+
+<body {{#if article.[0].mode}} class="body-{{article.[0].mode}}" {{else}}{{/if}}>
+    <div class="w3-top" id="top">
+        <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+            <a href="../" class="w3-bar-item w3-button" style="font-size:15px;line-height: 1.5;"
+                id="homeButton"><b>Home</b></a>
+            <a href="../es.html" class="w3-bar-item w3-button language-button" id="languageButton1"><b>Español</b></a>
+            <a href="../pt.html" class="w3-bar-item w3-button language-button"
+                id="languageButton2"><b>Portuguese</b></a>
+            <div class="w3-right w3-hide-small">
+                <a href="../articles-en" class="w3-bar-item w3-button" style="font-size:15px;line-height: 1.5;"
+                    id="articlesButton">Articles</a>
+                <a href="../vendors-contact.html" class="w3-bar-item w3-button" style="font-size:15px;line-height: 1.5;"
+                    id="vendorsButton">For vendors</a>
+            </div>
+        </div>
+    </div>
+    <div id="header" style="background-color:#f690ab;padding-bottom:16px !important; margin-block-end:1em">
+        <header class="w3-display-container w3-content w3-wide" style="max-width:800px;background-color:#f690ab;"
+            id="home">
+            <img class="w3-image" src="/assets/header3.jpg" alt="Quincy - Quinceañera planner" style="margin-top: 50px;"
+                width="800" height="800">
+            <div class="w3-row-padding w3-padding-16 w3-center" style="margin-block-end: 1em;">
+                <div class="w3-quarter">
+                    <p></p>
+                </div>
+                <div class="w3-quarter">
+                    <a href="https://apps.apple.com/app/id1491304785">
+                        <img class="w3-image" alt="Download Quincy in App Store" src="/assets/quincy-app-store.png">
+                    </a>
+                </div>
+                <div class="w3-quarter">
+                    <a href="https://play.google.com/store/apps/details?id=com.ikskom.quinceanera.planner.organizer">
+                        <img class="w3-image" alt="Download Quincy in Google Play" src="/assets/quincy-google-play.png">
+                    </a>
+                </div>
+                <div class="w3-quarter">
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="w3-content" style="max-width:600px; font-size: 11pt;">
+        <div class="w3-row">
+            <div class="w3-col l12 s12">
+                <div class="w3-container  {{#if article.[0].mode}} w3-{{article.[0].mode}} {{else}} w3-white {{/if}}">
+                    <div class="w3-content" style="max-width:1200px">
+                        <img class="mySlides lazyload"  data-src="https://www.marieclaire.com.au/media/44278/dress-mng.jpeg?width=720&center=0.0,0.0"
+                            style="width:100%;display:none">
+                        <img class="mySlides"
+                            src="https://www.marieclaire.com.au/media/44278/dress-mng.jpeg?width=720&center=0.0,0.0"
+                            style="width:100%">
+                        <img class="mySlides"
+                            src="https://i.pinimg.com/originals/0a/37/cd/0a37cd9eb2ed3d103bb9a148728eafa6.jpg"
+                            style="width:100%;display:none">
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-col s12">
+                                <img class="demo w3-opacity w3-hover-opacity-off"
+                                    src="https://www.marieclaire.com.au/media/44278/dress-mng.jpeg?width=720&center=0.0,0.0"
+                                    style="width:15%;cursor:pointer" onclick="currentDiv(1)">
+                                <img class="demo w3-opacity w3-hover-opacity-off"
+                                    src="https://www.marieclaire.com.au/media/44278/dress-mng.jpeg?width=720&center=0.0,0.0"
+                                    style="width:15%;cursor:pointer" onclick="currentDiv(2)">
+                                <img class="demo w3-opacity w3-hover-opacity-off"
+                                    src="https://i.pinimg.com/originals/0a/37/cd/0a37cd9eb2ed3d103bb9a148728eafa6.jpg"
+                                    style="width:15%;cursor:pointer" onclick="currentDiv(3)">
+                                <img class="demo w3-opacity w3-hover-opacity-off"
+                                    src="https://cdn130.picsart.com/311768574207201.jpg?type=webp&to=crop&r=256"
+                                    style="width:15%;cursor:pointer" onclick="currentDiv(1)">
+                                <img class="demo w3-opacity w3-hover-opacity-off"
+                                    src="https://www.marieclaire.com.au/media/44278/dress-mng.jpeg?width=720&center=0.0,0.0"
+                                    style="width:15%;cursor:pointer" onclick="currentDiv(2)">
+                                <img class="demo w3-opacity w3-hover-opacity-off"
+                                    src="https://i.pinimg.com/originals/0a/37/cd/0a37cd9eb2ed3d103bb9a148728eafa6.jpg"
+                                    style="width:15%;cursor:pointer" onclick="currentDiv(3)">
+                            </div>
+                        </div>
+                    </div>
+                    <h1>Tiara de oro con grandes cristales rojos</h1>
+                    <h2><span style=" color: transparent; text-shadow: 0 0 0 rgb(150, 150, 150)">desde </span> 10$</h2>
+                    <h2> % OFERTA ESPECIAL</h2>
+                    <p>Tiara elegante y clasica que completara tu look! La tiara es briliante y completara tu vestido,
+                        sin importar el color color que sea. Ligero, no trae dolor de cabeaza. Increible calidad de mano
+                        de obra de la tiara, es muy resistente yesta bien hecha.</p>
+                    <br>
+                    <p>Colores: <span
+                            style=" color: transparent; text-shadow: 0 0 0 rgb(0, 128, 0);font-size: 150%;">🔴</span>
+                        <span
+                            style=" color: transparent; text-shadow: 0 0 0 rgb(250, 128, 0);font-size: 150%;">🔴</span>
+                    </p>
+                    <p>Tallas: <span style=" color: transparent; text-shadow: 0 0 0  rgb(131, 221, 139)"><i
+                                class="fas fa-ruler"></i> Posibilidad de confeccion personal</span> </p>
+                    <p>Entrega: <span style=" color: transparent; text-shadow: 0 0 0  rgb(131, 221, 139)"><i
+                                class="fas fa-truck"></i> Hay servicio de entrega</span> </p>
+                    <p>Devolucion: <span style=" color: transparent; text-shadow: 0 0 0  rgb(131, 221, 139)"><i
+                                class="fas fa-file-alt"></i> Hay politica de devolucion</span> </p>
+                    <button class="big-button">IR A LA TIENDA</button>
+                    <a href="https://google.com" class="big-button">Go to Google</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" style="padding-bottom:16px !important; margin-block-end:1em">
+        <header class="w3-display-container w3-content w3-wide" style="max-width:800px;">
+            <img class="w3-image lazyload" data-src="/assets/header_transparent.png" alt="Quincy - Quinceañera planner"
+                style="margin-top: 50px;" width="800" height="800">
+            <div class="w3-row-padding w3-padding-16 w3-center" style="margin-block-end: 1em;">
+                <div class="w3-quarter">
+                    <p></p>
+                </div>
+                <div class="w3-quarter">
+                    <a href="https://apps.apple.com/app/id1491304785">
+                        <img class="w3-image" alt="Download Quincy in App Store" src="/assets/quincy-app-store.png">
+                    </a>
+                </div>
+                <div class="w3-quarter">
+                    <a href="https://play.google.com/store/apps/details?id=com.ikskom.quinceanera.planner.organizer">
+                        <img class="w3-image" alt="Download Quincy in Google Play" src="/assets/quincy-google-play.png">
+                    </a>
+                </div>
+                <div class="w3-quarter">
+                </div>
+            </div>
+        </header>
+        <h3 id="downloadTitle" style="text-align: center;font-family: Kumbh Sans;">Read this and other articles in the
+            app!</h3>
+    </div>
+    </div>
+    {{!-- <footer class="w3-center w3-padding-16" id="footer2">
+        <p style="color: #000000;"><b>info<code></code>@</code><b>invitation</b>-apps.com</b></p>
+    </footer> --}}
+</body>
+
+</html>

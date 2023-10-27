@@ -1,0 +1,17 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "R8WYAKVHF7.com.quinceanera.planner" ],
+             "components": [
+               {
+                  "/": "/articles/*"
+               }
+             ]
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "R8WYAKVHF7.com.quinceanera.planner" ]
+   }
+}

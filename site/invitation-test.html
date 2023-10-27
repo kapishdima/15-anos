@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73036845-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-73036845-3');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="/public/assets/favicon.png">
+    <meta property="og:title" content="Quincy - Articles" />
+    <title>Quincy - Articles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kumbh Sans">
+    <script src="https://kit.fontawesome.com/b43573acec.js" crossorigin="anonymous"></script>
+
+<body style="background-color:#f690ab;">
+    <style>
+        body {
+            font-family: "Kumbh Sans" !important;
+        }
+
+        .invitation-card {
+            border-radius: 20pt;
+            background: #ffffff;
+            padding-bottom: 20pt;
+            max-width: 600px;
+            margin: auto;
+            height: auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            position: relative;
+            text-align: center;
+            color: white;
+            /* display: flex; */
+        }
+
+        .invitation-image-container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .invitation-image {
+            max-width: 100%;
+            border-top-left-radius: 20pt;
+            border-top-right-radius: 20pt;
+        }
+
+        .invitation-title-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+        }
+
+        .invitation-title {
+            margin-top: 0px;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            margin-bottom: 0px;
+            font-family: "Lora";
+            font-weight: 900;
+            font-size: 20pt;
+        }
+
+        .invitation-subtitle {
+            margin-top: 0px;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            margin-bottom: 15pt;
+            font-weight: 900;
+            font-size: 10pt;
+        }
+
+        .invitation-text {
+            color: black;
+            margin: 15pt;
+            text-align: start;
+            font-size: 12pt;
+        }
+
+        .invitation-text-bold {
+            color: black;
+            margin: 15pt;
+            text-align: start;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+
+        .invitation-icon {
+            margin-right: 10pt;
+        }
+
+        .invitation-rsvp-title {
+            color: black;
+            margin-top: 30pt;
+            margin-bottom: 0pt;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            font-size: 20pt;
+            font-weight: bold;
+        }
+
+        .invitation-rsvp-form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .invitation-rsvp-form-label {
+            color: black;
+            opacity: 50%;
+            display: inline-block;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            text-align: start;
+            width: -webkit-fill-available;
+        }
+
+        input[type=text],
+        select {
+            height: 30pt;
+            width: -webkit-fill-available;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            margin-bottom: 15pt;
+            padding-left: 10pt;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-sizing: border-box;
+            font-size: 12pt;
+            font-family: 'Kumbh Sans';
+        }
+
+        input[type=submit] {
+            width: auto;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            background-color: #83DD8B;
+            color: white;
+            padding-left: 10pt;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12pt;
+            font-family: 'Kumbh Sans';
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 0 0 rgb(255, 255, 255);
+            outline: none;
+        }
+
+        select:focus {
+            box-shadow: 0 0 0 rgb(255, 255, 255);
+            outline: none;
+        }
+
+        .form_toggle {
+            height: 40pt;
+            display: inline-block;
+            overflow: hidden;
+            margin-left: 15pt;
+            margin-right: 15pt;
+            width: -webkit-fill-available;
+        }
+
+        .form_toggle-item {
+            width: 50%;
+            float: left;
+            display: inline-block;
+        }
+
+        .form_toggle-item input[type=radio] {
+            display: none;
+        }
+
+        .form_toggle-item label {
+            display: inline-block;
+            padding: 0px 15pt;
+            line-height: 30pt;
+            border: 1px solid #ccc;
+            border-right: none;
+            cursor: pointer;
+            user-select: none;
+            width: 100%;
+            font-size: 12pt;
+            font-family: 'Kumbh Sans';
+            color: #ccc;
+            background: #ffffff;
+            height: 30pt;
+        }
+
+        .form_toggle .item-1 label {
+            border-radius: 20pt 0 0 20pt;
+        }
+
+        .form_toggle .item-2 label {
+            border-radius: 0 20pt 20pt 0;
+            border-right: 1px solid #ccc;
+        }
+
+        /* Checked */
+        .form_toggle .item-1 input[type=radio]:checked+label {
+            color: #e94c4c;
+        }
+
+        .form_toggle .item-2 input[type=radio]:checked+label {
+            color: #83DD8B;
+        }
+
+        .invitation-rsvp-form-submit {
+            width: 50% !important;
+            height: 30pt;
+            padding-left: 0pt !important;
+            background: #83DD8B;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    </head>
+
+    <div style="background-color: #ffffff;">
+        <div class="w3-main w3-content" style="max-width:1200px; background-color: #ffffff !important;">
+            <div class="w3-container w3-padding-16" id="about">
+                <div class="invitation-card">
+                    <div class="invitation-image-container">
+                        <img class="invitation-image" src="/public/assets/header3.jpg"
+                            alt="Quincy - Quinceañera planner">
+                        <div class="invitation-title-container">
+                            <p class="invitation-title">Mis Quince</p>
+                            <p class="invitation-subtitle">10.10.2021</p>
+                        </div>
+
+                    </div>
+                    <p class="invitation-text">I would like to invite you to my quince party. Can't wait to see you and
+                        to celebrate this important event all together! Please, confirm your presence.</p>
+                    <div>
+                        <p class="invitation-text-bold"><i class="far fa-clock invitation-icon"></i> 10.10.2021 15:30
+                        </p>
+                    </div>
+                    <div>
+                        <p class="invitation-text-bold"><i class="fas fa-map-pin invitation-icon"
+                                aria-hidden="true"></i>Los Angeles, Main st. 10</p>
+                    </div>
+                    <p class="invitation-rsvp-title">RSVP</p>
+                    <p class="invitation-text">Please, confirm your presence. The deadline is 01.10.2021.</p>
+                    <form class="invitation-rsvp-form" action="/action_page.php">
+                        <label class="invitation-rsvp-form-label" for="fname">Enter you full name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your full name..">
+
+                        <label class="invitation-rsvp-form-label" for="country">Enter the number of additional
+                            guests</label>
+                        <select id="country" name="country">
+                            <option value="0">No additional guests</option>
+                            <option value="1">+1</option>
+                            <option value="2">+2</option>
+                        </select>
+                        <label class="invitation-rsvp-form-label" for="country">Confirm your presence</label>
+                        <div class="form_toggle">
+                            <div class="form_toggle-item item-1">
+                                <input id="fid-1" type="radio" name="radio" value="off">
+                                <label for="fid-1">Decline</label>
+                            </div>
+                            <div class="form_toggle-item item-2">
+                                <input id="fid-2" type="radio" name="radio" value="on">
+                                <label for="fid-2">Confirm</label>
+                            </div>
+                        </div>
+                        <input class="invitation-rsvp-form-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+                </a>
+            </div>
+        </div>
+        <div class="w3-row-padding w3-padding-16 w3-center"
+            style="margin-block-end: 1em; margin: auto; max-width: 200px;">
+            <div class="w3-third" style="padding: 5px;">
+                <a href="https://www.facebook.com/quinceanera.apps" target="_blank">
+                    <img class="w3-image" style="max-width: 50px;" src="/public/assets/facebook.png">
+                </a>
+            </div>
+            <div class="w3-third" style="padding: 5px;">
+                <a href="https://www.instagram.com/quinceanera.apps/" target="_blank">
+                    <img class="w3-image" style="max-width: 50px;" src="/public/assets/instagram.png">
+                </a>
+            </div>
+            <div class="w3-third" style="padding: 5px;">
+                <a href="https://pinterest.ru/quinceanerainvitation/" target="_blank">
+                    <img class="w3-image" style="max-width: 50px;" src="/public/assets/pinterest.png">
+                </a>
+            </div>
+        </div>
+    </div>
+    <footer class="w3-center w3-padding-16">
+        <p style="color: #000000;"><b>info<code>@</code><b>invitation</b>-apps.com</b></p>
+    </footer>
+</body>
+
+</html>

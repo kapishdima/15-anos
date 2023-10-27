@@ -1,0 +1,3 @@
+Sitemap: https://www.15-anos.com/sitemap.xml
+User-agent: *
+Disallow: /registry/
