@@ -2,7 +2,7 @@
   "name": "15-anos",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": "/planner",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@googlemaps/react-wrapper": "^1.1.35",
@@ -53,7 +53,8 @@
     "test": "craco test",
     "eject": "craco eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "build:prod": "rm -rf site/planner && yarn build && cp -R build site && mv site/build site/planner"
   },
   "eslintConfig": {
     "extends": [
