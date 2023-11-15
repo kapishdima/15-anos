@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/planner/static/css/main.61ac7749.css",
-    "main.js": "/planner/static/js/main.bbd980e4.js",
+    "main.js": "/planner/static/js/main.bd7fad10.js",
     "static/media/avenirnextcyr-thinitalic.eot": "/planner/static/media/avenirnextcyr-thinitalic.abcd9d8551aca503cabd.eot",
     "static/media/avenirnextcyr-lightitalic.eot": "/planner/static/media/avenirnextcyr-lightitalic.95733b154be717cbb8c3.eot",
     "static/media/avenirnextcyr-thinitalic.ttf": "/planner/static/media/avenirnextcyr-thinitalic.44d27c99cedb0d339d39.ttf",
@@ -138,10 +138,10 @@
     "static/media/avenirnextcyr-ultralight.woff": "/planner/static/media/avenirnextcyr-ultralight.31d6cfe0d16ae931b73c.woff",
     "static/media/avenirnextcyr-ultralightit.woff": "/planner/static/media/avenirnextcyr-ultralightit.31d6cfe0d16ae931b73c.woff",
     "main.61ac7749.css.map": "/planner/static/css/main.61ac7749.css.map",
-    "main.bbd980e4.js.map": "/planner/static/js/main.bbd980e4.js.map"
+    "main.bd7fad10.js.map": "/planner/static/js/main.bd7fad10.js.map"
   },
   "entrypoints": [
     "static/css/main.61ac7749.css",
-    "static/js/main.bbd980e4.js"
+    "static/js/main.bd7fad10.js"
   ]
 }
