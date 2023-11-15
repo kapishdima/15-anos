@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "quinceanera-planner"
+  },
+  "targets": {
+    "quinceanera-planner": {
+      "hosting": {
+        "quincy-planner": [
+          "quincy-planner"
+        ]
+      }
+    }
   }
 }

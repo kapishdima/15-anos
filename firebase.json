@@ -1,10 +1,172 @@
 {
   "hosting": {
     "public": "site",
+    "target": "quincy-planner",
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "https://quincy-planner.web.app/",
+        "destination": "https://www.15-anos.com/",
+        "type": 301
+      },
+      {
+        "source": "/registry/**",
+        "function": "registry"
+      },
+      {
+        "source": "/articles/**",
+        "function": "article"
+      },
+      {
+        "source": "/articles-en",
+        "function": "articles"
+      },
+      {
+        "source": "/articles-es",
+        "function": "articles"
+      },
+      {
+        "source": "/articles-pt",
+        "function": "articles"
+      },
+      {
+        "source": "/item/shopping/**",
+        "function": "shoppingItem"
+      },
+      {
+        "source": "/item/registry/**",
+        "function": "shoppingItem"
+      },
+      {
+        "source": "/vendor/**",
+        "function": "vendorItem"
+      },
+      {
+        "source": "/invitation/**",
+        "function": "invitationNew"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "https://quincy-planner.web.app/",
+        "destination": "https://www.15-anos.com/",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/es",
+        "destination": "https://www.15-anos.com/es",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/pt",
+        "destination": "https://www.15-anos.com/pt",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/articles-en",
+        "destination": "https://www.15-anos.com/articles-en",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/articles-es",
+        "destination": "https://www.15-anos.com/articles-es",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/articles-pt",
+        "destination": "https://www.15-anos.com/articles-pt",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/articles/**",
+        "destination": "https://www.15-anos.com/articles-en",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/vendors-contact",
+        "destination": "https://www.15-anos.com/vendors-contact",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/vendors-contact-es",
+        "destination": "https://www.15-anos.com/vendors-contact-es",
+        "type": 301
+      },
+      {
+        "source": "https://quincy-planner.web.app/vendors-contact-pt",
+        "destination": "https://www.15-anos.com/vendors-contact-pt",
+        "type": 301
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "404.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=300"
+          }
+        ]
+      },
+      {
+        "source": "/.well-known/apple-app-site-association",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      },
+      {
+        "source": "/.well-known/assetlinks.json",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      },
+      {
+        "source": "/apple-app-site-association",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      }
     ]
   }
 }
