@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import { Colors } from "../ui/Colors/Colors";
 import { ProfileColors, useProfileStore } from "@/modules/profile";
 
+import EmptyPhoto from "@/image/emptyphoto.png";
+
 const defaultColors = [
   {
     title: "Countdown text",
@@ -127,7 +129,10 @@ export const DesignSettingsIndex: React.FC = () => {
               loading={uploadImageLoading}
               name="main_image"
               label="Main image"
-              defaultFile={{ name: "main_image", preview: mainImage }}
+              defaultFile={{
+                name: "main_image",
+                preview: mainImage || EmptyPhoto,
+              }}
               onUpload={onImageMainUpload}
             />
             <Button variant="success" type="submit" loading={saveLoading}>

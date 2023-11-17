@@ -8,5 +8,5 @@ export const useProfileColor = (colorName: ProfileColors) => {
     return "";
   }
 
-  return profile.colors.find((color) => color.id === colorName)?.color || "";
+  return profile.colors?.find((color) => color.id === colorName)?.color || "";
 };

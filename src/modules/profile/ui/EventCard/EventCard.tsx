@@ -5,6 +5,8 @@ import { Image, AspectRatio } from "@/components";
 
 import { useProfileStore } from "../../store/profile";
 
+import EmptyPhoto from "@/image/emptyphoto.png";
+
 export const EventCard: React.FC = () => {
   const fetchProfileMainImage = useProfileStore(
     (state) => state.fethcProfileMainImage
@@ -25,7 +27,7 @@ export const EventCard: React.FC = () => {
       <div className="event-card__image">
         <AspectRatio>
           {/* <img src={mainImage || EventImage} alt="Event" /> */}
-          <Image src={mainImage} />
+          <Image src={mainImage || EmptyPhoto} />
         </AspectRatio>
       </div>
       <div className="event-card__timer">
