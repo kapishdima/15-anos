@@ -30,18 +30,18 @@ export const ProductsSort: React.FC = () => {
       triggerElement={
         <Button ref={triggerRef} variant="text" onClick={toogleOpened}>
           <img src={SortIcon} alt="" />
-          Sort
+          {t("Sorting")}
         </Button>
       }
     >
       <div className="sort-item" onClick={() => sort("asc", "price")}>
-        {t("Price: Low to Hight")}
+        {t("Price: Low to High")}
       </div>
       <div className="sort-item" onClick={() => sort("desc", "price")}>
-        {t("Price: Hight to Low")}
+        {t("Price: High to Low")}
       </div>
       <div className="sort-item" onClick={() => sort("desc", "popularity")}>
-        {t("Popularity: Hight to Low")}
+        {t("Popularity: High to Low")}
       </div>
     </Popover>
   );

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { BaseInputProps, Input } from "./Input";
 import { capitalize } from "@/app/utils/text";
+import { translated } from "@/app/utils/locale";
 
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
@@ -67,7 +68,7 @@ export const TextField: React.FC<TextFieldProps> = ({
                 ref={field.ref}
                 type={type || "text"}
                 name={htmlName}
-                value={field.value}
+                value={translated(field.value)}
                 placeholder={t(placeholder || "") || ""}
                 className={classNames(
                   "form-field",

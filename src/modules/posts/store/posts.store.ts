@@ -86,16 +86,7 @@ export const usePostsStore = create<PostsStore>()(
             loading: true,
           }));
 
-          const cachedLikedPosts = get().likedPosts;
-
-          const hasCachedLiked = Boolean(
-            cachedLikedPosts && cachedLikedPosts.length
-          );
-
-          console.log(hasCachedLiked);
-
-          const likedPosts =
-            hasCachedLiked && !force ? cachedLikedPosts : await getPostsLiked();
+          const likedPosts = await getPostsLiked();
 
           set(() => ({
             likedPosts,
@@ -124,7 +115,7 @@ export const usePostsStore = create<PostsStore>()(
             await sendLikedPost(postId);
             set(() => ({ likeLoading: false, postInProcessing: postId }));
           } catch (error) {
-            console.error(error);
+            console.log(error);
             set(() => ({ likeLoading: false, postInProcessing: postId }));
           }
         },

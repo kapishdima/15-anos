@@ -33,3 +33,28 @@
 .create-profile__container {
   margin: 10% 0;
 }
+
+.get-started__actions {
+  width: 90%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-top: 32px;
+  row-gap: 8px;
+
+  .create-profile-button {
+    width: 100%;
+    text-decoration: none;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .login-button {
+    text-decoration: none;
+  }
+}

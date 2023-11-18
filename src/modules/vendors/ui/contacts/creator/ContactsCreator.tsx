@@ -33,7 +33,7 @@ const contactsComponents = {
 };
 
 const contactsOptions: Option[] = [
-  { value: "phone", label: "Phone", icon: <img src={PhoneIcon} /> },
+  { value: "phone", label: "Phone number", icon: <img src={PhoneIcon} /> },
   { value: "mail", label: "Email", icon: <img src={EmailIcon} /> },
   { value: "address", label: "Address", icon: <img src={AddressIcon} /> },
   { value: "facebook", label: "Facebook", icon: <img src={FacebookIcon} /> },

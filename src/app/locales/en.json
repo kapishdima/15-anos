@@ -236,5 +236,10 @@
   "Save the event name": "Save the event name",
 
   "invitation_message_1": "You are invited to Quincy. Download the application and enter the password to log in: ",
-  "invitation_message_2": ".\n\nDownload:"
+  "invitation_message_2": ".\n\nDownload:",
+
+  "Filters": "Filters",
+  "Price range": "Price range",
+  "Search": "Search",
+  "Sorting": "Sorting"
 }

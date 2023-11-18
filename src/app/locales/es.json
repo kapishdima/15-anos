@@ -120,6 +120,7 @@
   "Show confirmed guests": "Mostrar confirmados",
   "Status": "Estado",
   "Not invited": "No está invitado",
+  "Not Invited": "No está invitado",
   "Invited": "Invitado",
   "Won't come": "No asistirá",
   "Confirmed participation": "Ha confirmado la asistencia",
@@ -174,6 +175,7 @@
   "Save the language and region": "Guardar idioma y región",
 
   "Purchases": "Compras",
+  "Purchase": "Comprar",
 
   "Description": "Descripción",
   "Link": "Enlace",
@@ -241,5 +243,38 @@
   "Save the event name": "Guardar el nombre del evento",
 
   "invitation_message_1": "Te han invitado a unirte a Quincy. Descarga la app e introduce la contraseña para acceder al perfil:",
-  "invitation_message_2": ".\n\nDescargar:"
+  "invitation_message_2": ".\n\nDescargar:",
+
+  "Filters": "Filtros",
+  "Price range": "Precio",
+  "Search": "Buscar",
+  "Sorting": "Ordenar",
+
+  "Vendors": "Proveedores",
+  "Search by title, name, contact": "Búsqueda por empresa, nombre, número de teléfono o email",
+  "Contact": "Contactar",
+  "Vendor details": "Detalles del proveedor",
+  "Website_contact": "Página web",
+  "Phone number": "Teléfono",
+  "E-mail": "Email",
+  "Address": "Dirección",
+  "Contact person": "Persona de contacto",
+  "Add a contact": "Añadir contacto",
+  "Add a task": "Añadir tarea",
+  "Add a payment": "Añadir pago",
+  "Add a vendor": "Añadir proveedor",
+  "Save the vendor": "Guardar proveedor",
+
+  "Search for local vendors": "Buscar proveedores locales",
+  "City": "Ciudad",
+  "Change the city": "Cambiar la ciudad",
+  "Save the city": "Guardar la ciudad",
+  "Mark your city on the map or enter its name": "Indica tu ciudad en el mapa o introduce su nombre",
+  "Contact the vendor": "Contactar con el proveedor",
+
+  "Unfortunately, we need more time to add vendors from this category for your city. Share the app with your friends, because the more requests we get from your city, the sooner we will add vendors!": "Lamentablemente aún no hemos podido añadir los proveedores de esta categoría para tu ciudad. Comparte la app con tus amigos. Cuantas más solicitudes recibamos, más rápido se añadirán nuevos proveedores",
+  "We are very sorry :(": "Perdón, lo sentimos mucho :(",
+
+  "Invite": "Invitar",
+  "Event name": "Nombre del evento"
 }

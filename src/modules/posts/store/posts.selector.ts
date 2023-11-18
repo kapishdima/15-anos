@@ -1,13 +1,7 @@
 import { PostsStore } from "./posts.store";
 
 export const isPostLiked = (id: string, state: PostsStore) => {
-  return Boolean(
-    state.likedPosts.find((post) => {
-      console.log("post.inititalId", post.inititalId);
-      console.log("id", id);
-      return post.inititalId === id;
-    })
-  );
+  return Boolean(state.likedPosts.find((post) => post.inititalId === id));
 };
 
 export const getCategory = (tagId: string, state: PostsStore) => {

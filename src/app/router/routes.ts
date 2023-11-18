@@ -28,4 +28,5 @@ export enum AppRoutes {
   CREATE_VENDOR = "/vendors/create",
   UPDATE_VENDOR = "/vendors/update",
   SET_USER_LOCATION = "/location/create",
+  GET_STARTED = "/get-started",
 }

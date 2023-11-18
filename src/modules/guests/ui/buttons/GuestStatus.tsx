@@ -19,7 +19,7 @@ const statusesIcons = {
 };
 
 const statusColors = {
-  none: "#FAFAFC",
+  none: "#DCDCDD",
   confirmed: "#50DF71",
   invited: "#FEE106",
   declined: "#FE3636",
@@ -68,7 +68,7 @@ export const GuestsStatus: React.FC<GuestsStatusProps> = ({ onSelect }) => {
             onClick={toogleOpened}
             propagateEvent={false}
           >
-            Status
+            {t("Status")}
           </Button>
         }
         onClickOutside={() => setOpened(false)}

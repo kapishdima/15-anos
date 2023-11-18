@@ -240,5 +240,39 @@
   "Save the event name": "Salvar o título do evento",
 
   "invitation_message_1": "Você está convidado para o Quincy. Baixe o aplicativo e digite a senha para fazer login: ",
-  "invitation_message_2": ".\n\nBaixar:"
+  "invitation_message_2": ".\n\nBaixar:",
+
+  "Filters": "Filtros",
+  "Price range": "Faixa de preços",
+  "Search": "Buscar",
+  "Sorting": "Sistematização",
+
+  "Vendors": "Contratados",
+  "Search by title, name, contact": "Pesquise pelo título, nome, contato",
+  "Contact": "Contato",
+  "Vendor details": "Detalhes do contratado",
+  "Website": "Site",
+  "Phone number": "Número do telefone",
+  "E-mail": "Email",
+  "Address": "Endereço",
+  "Contact person": "Responsável",
+  "Add a contact": "Adicionar contato",
+  "Add a task": "Adicionar tarefa",
+  "Add a payment": "Adicionar pagamento",
+  "Add a vendor": "Adicionar contratado",
+  "Save the vendor": "Salvar contratado",
+
+  "Search for local vendors": "Procure contratados locais",
+  "City": "Cidade",
+  "Change the city": "Mudar de cidade",
+  "Save the city": "Salvar a cidade",
+  "Mark your city on the map or enter its name": "Marque sua cidade no mapa ou digite o nome dela",
+  "Contact the vendor": "Contatar o contratado",
+
+  "Unfortunately, we need more time to add vendors from this category for your city. Share the app with your friends, because the more requests we get from your city, the sooner we will add vendors!": "Infelizmente, ainda não conseguimos adicionar contratados desta categoria para a sua cidade. Compartilhe o aplicativo com seus amigos, pois quanto mais solicitações da sua cidade recebermos, mais rápido adicionaremos contratados!",
+  "We are very sorry :(": "Desculpe, sentimos muito (",
+
+  "Invite": "Convidar",
+
+  "Event name": "Título do evento"
 }

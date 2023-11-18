@@ -49,7 +49,7 @@ export const CreatePurchasePage: React.FC = () => {
 
   return (
     <AppLayout>
-      <PageHeader title={t("Purchase details")} hasBackButton />
+      <PageHeader title={t("Purchase")} hasBackButton />
 
       <div className="vendors-page-container">
         <FormContent>

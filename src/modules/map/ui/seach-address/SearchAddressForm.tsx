@@ -12,6 +12,7 @@ import {
   toPositionLiteral,
 } from "../../api/map";
 import { WITH_MARKER_ZOOM } from "../map/Map";
+import { useTranslation } from "react-i18next";
 
 type SearchAddressProps = {
   setCenter: (center: google.maps.LatLngLiteral) => void;
@@ -26,6 +27,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
   setZoom,
   position,
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const searchAndApplyPosition = async (values: any) => {
@@ -63,7 +65,7 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
 
   return (
     <div className="search-address-form">
-      <h4 className="search-address-form__title">Search by address</h4>
+      <h4 className="search-address-form__title">{t("Search by address")}</h4>
       <Form
         classes="search-address-form__container"
         onSubmit={searchAndApplyPosition}
@@ -72,11 +74,11 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
         <div className="search-address-form__row">
           <TextField
             name="address"
-            placeholder="Enter your address"
+            placeholder="Mark your city on the map or enter its name"
             variant="filled"
             capitilizedInput
           />
-          <Button type="submit">Search</Button>
+          <Button type="submit">{t("Search")}</Button>
         </div>
         <div className="search-address-form__actions">
           <Button
@@ -85,10 +87,10 @@ export const SearchAddressForm: React.FC<SearchAddressProps> = ({
             type="button"
             onClick={onGeolocationClick}
           >
-            Use my geolocation
+            {t("Use my geolocation")}
           </Button>
           <Button variant="success" type="button" onClick={saveSelectedAddress}>
-            Save the city
+            {t("Save the city")}
           </Button>
         </div>
       </Form>

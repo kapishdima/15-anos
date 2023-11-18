@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AppRoutes } from "./routes";
 
-import { CreateProfilePage, LoginPage } from "@modules/auth";
+import { CreateProfilePage, GetStartedPage, LoginPage } from "@modules/auth";
 import {
   CreatePaymentPage,
   PaymentsIndex,
@@ -47,6 +47,10 @@ export const router = createBrowserRouter(
     {
       path: AppRoutes.CREATE_PROFILE,
       element: <CreateProfilePage />,
+    },
+    {
+      path: AppRoutes.GET_STARTED,
+      element: <GetStartedPage />,
     },
     {
       path: AppRoutes.ROOT,

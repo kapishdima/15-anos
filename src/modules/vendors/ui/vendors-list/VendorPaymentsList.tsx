@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button, Spinner } from "@/components";
 import { AppRoutes } from "@/app/router/routes";
 import { PaymentCard } from "@/modules/payments/ui/payments-list/PaymentCard";
+import { useTranslation } from "react-i18next";
 
 type VendorTasksListProps = {
   id: string;
@@ -16,6 +17,7 @@ export const VendorPaymentsList: React.FC<VendorTasksListProps> = ({
   id,
   categoryId,
 }) => {
+  const { t } = useTranslation();
   const fetchPayments = useVendorsRelations(
     (state) => state.fetchVendorPayments
   );
@@ -57,7 +59,7 @@ export const VendorPaymentsList: React.FC<VendorTasksListProps> = ({
         to={`${AppRoutes.CREATE_PAYMENT}?vendorId=${id}&categoryId=${categoryId}`}
         className="without-decoration"
       >
-        <Button variant="success">Add a payment</Button>
+        <Button variant="success">{t("Add a payment")}</Button>
       </Link>
     </div>
   );

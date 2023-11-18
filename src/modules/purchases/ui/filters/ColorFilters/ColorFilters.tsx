@@ -4,6 +4,7 @@ import { useProductParameters } from "@/modules/purchases/store/products_paramet
 import { useProductsSearch } from "@/modules/purchases/store/products_search";
 import { isActiveColor } from "@/modules/purchases/store/selectors/product_search.selector";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 type ColorFiltersProps = {
   colorsForFilter: string[];
@@ -16,6 +17,7 @@ type ColorFilterItemProps = {
 export const ColorFilters: React.FC<ColorFiltersProps> = ({
   colorsForFilter,
 }) => {
+  const { t } = useTranslation();
   const parameters = useProductParameters((state) => state.parameters);
   const colors = colorsForFilter.map((color) => ({
     label: color,
@@ -24,7 +26,7 @@ export const ColorFilters: React.FC<ColorFiltersProps> = ({
 
   return (
     <div className="color-filters">
-      <h3 className="color-filters__title">Colors</h3>
+      <h3 className="color-filters__title">{t("Colors")}</h3>
 
       <div className="color-filters__list">
         {colors.map((color) => (

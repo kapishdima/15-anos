@@ -6,6 +6,7 @@ import {
   useProductsSearch,
 } from "@/modules/purchases/store/products_search";
 import { isActivePrice } from "@/modules/purchases/store/selectors/product_search.selector";
+import { useTranslation } from "react-i18next";
 
 type PriceFiltersProps = {
   priceStep: number;
@@ -18,6 +19,7 @@ type PriceFilterItemProps = {
 const STEPS_LIMIT = 4;
 
 export const PriceFilters: React.FC<PriceFiltersProps> = ({ priceStep }) => {
+  const { t } = useTranslation();
   const { symbol, convert } = usePrice();
 
   const prices = Array(STEPS_LIMIT)
@@ -39,7 +41,7 @@ export const PriceFilters: React.FC<PriceFiltersProps> = ({ priceStep }) => {
 
   return (
     <div className="prices-filters">
-      <h3 className="prices-filters__title">Price range</h3>
+      <h3 className="prices-filters__title">{t("Price range")}</h3>
       <div className="prices-filters__list">
         {prices.map((price) => (
           <PriceFilterItem range={price} />

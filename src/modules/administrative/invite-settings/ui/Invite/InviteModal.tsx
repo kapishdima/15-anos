@@ -36,6 +36,7 @@ export const InviteModal: React.FC<InviteModalProps> = ({
         <p className="invite-text__value">
           {t("invitation_message_1")} <span>{password}</span>{" "}
           {t("invitation_message_2")}
+          <a href="quincy.app.link"> quincy.app.link</a>
         </p>
       </div>
       <div className="invite-methods">

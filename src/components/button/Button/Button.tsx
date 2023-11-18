@@ -27,6 +27,7 @@ export const Button = React.forwardRef<any, ButtonProps>(
       children,
       loading,
       disabled,
+      className,
       onClick,
       propagateEvent = true,
       ...attrs
@@ -47,7 +48,7 @@ export const Button = React.forwardRef<any, ButtonProps>(
       <button
         ref={ref}
         type={type}
-        className={classNames("button", variant, appearance)}
+        className={classNames("button", variant, appearance, className)}
         disabled={disabled}
         onClick={handleClick}
         {...attrs}

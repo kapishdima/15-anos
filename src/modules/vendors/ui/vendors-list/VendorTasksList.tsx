@@ -5,6 +5,7 @@ import { getCategoryById, useCategoriesStore } from "@/modules/categories";
 import { Link } from "react-router-dom";
 import { Button, Spinner } from "@/components";
 import { AppRoutes } from "@/app/router/routes";
+import { useTranslation } from "react-i18next";
 
 type VendorTasksListProps = {
   id: string;
@@ -15,6 +16,7 @@ export const VendorTasksList: React.FC<VendorTasksListProps> = ({
   id,
   categoryId,
 }) => {
+  const { t } = useTranslation();
   const fetchTasks = useVendorsRelations((state) => state.fetchVendorTasks);
   const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
   const tasks = useVendorsRelations((state) => state.tasks);
@@ -54,7 +56,7 @@ export const VendorTasksList: React.FC<VendorTasksListProps> = ({
         to={`${AppRoutes.CREATE_TASK}?vendorId=${id}&categoryId=${categoryId}`}
         className="without-decoration"
       >
-        <Button variant="success">Add a task</Button>
+        <Button variant="success">{t("Add a task")}</Button>
       </Link>
     </div>
   );

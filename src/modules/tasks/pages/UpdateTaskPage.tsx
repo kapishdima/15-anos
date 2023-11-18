@@ -61,7 +61,7 @@ export const UpdateTaskPage: React.FC = () => {
 
   return (
     <AppLayout>
-      <PageHeader title={t("Vendors details")} hasBackButton />
+      <PageHeader title={t("Task details")} hasBackButton />
 
       <div className="vendors-page-container">
         <FormContent>

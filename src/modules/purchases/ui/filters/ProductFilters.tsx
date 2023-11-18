@@ -8,6 +8,7 @@ import { PriceFilters } from "./PricesFilters/PricesFilters";
 import { ProductsCategory } from "../../store/purcheses.types";
 import { useProductsStore } from "../../store/products";
 import { useProductsSearch } from "../../store/products_search";
+import { useTranslation } from "react-i18next";
 
 type ProductFiltersProps = {
   category?: ProductsCategory;
@@ -18,6 +19,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
   category,
   opened,
 }) => {
+  const { t } = useTranslation();
   const currency = useProfileStore(getCurrencyCode);
   const searchProducts = useProductsStore((state) => state.searchProducts);
   const prices = useProductsSearch((state) => state.prices);
@@ -43,7 +45,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
             variant="success"
             onClick={() => searchProducts({ prices, colors })}
           >
-            Search
+            {t("Search")}
           </Button>
         </div>
       </div>

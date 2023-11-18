@@ -4,7 +4,6 @@ import { usePostsStore } from "../store/posts.store";
 export const useLike = (postId: string) => {
   const loading = usePostsStore((state) => state.likeLoading);
   const liked = usePostsStore((state) => isPostLiked(postId, state));
-  console.log("liked", liked);
   const sendLikedPost = usePostsStore((state) => state.likePost);
   const sendDisslikedPost = usePostsStore((state) => state.disslikePost);
 

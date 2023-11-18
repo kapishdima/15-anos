@@ -51,9 +51,7 @@
     position: relative;
     z-index: 1;
 
-    width: 100%;
-    min-height: 23vh;
-    max-height: 23vh;
+    aspect-ratio: 1/0;
 
     overflow: hidden;
 
@@ -62,7 +60,7 @@
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
 
@@ -136,15 +134,10 @@
       height: 16px;
     }
 
-    .liked-button {
-      &.liked {
-        will-change: transform;
-        animation: like 400ms ease both;
-
-        svg {
-          path {
-            animation: likeFill 400ms ease both;
-          }
+    .like-button.liked {
+      svg {
+        path {
+          fill: $accentColor;
         }
       }
     }

@@ -3,7 +3,6 @@ import { AppLayout, PageBanner, PageHeader } from "@/components";
 import { useTranslation } from "react-i18next";
 import { useParams, useSearchParams } from "react-router-dom";
 
-import { ProductFilters } from "../ui/filters/ProductFilters";
 import { ProductsList } from "../ui/purchase-list/ProductsList";
 
 import { useProductsStore } from "../store/products";
@@ -57,7 +56,7 @@ export const PurchaseBestIdeas: React.FC = () => {
         <PageHeader title={t("Best ideas")} hasBackButton />
         <PageBanner
           image={shoppingCategory?.imageHeader || ""}
-          title={id || ""}
+          title={shoppingCategory?.title || ""}
         />
 
         <ProductActions category={shoppingCategory} />

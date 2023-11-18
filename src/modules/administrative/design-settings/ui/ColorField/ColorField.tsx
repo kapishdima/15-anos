@@ -47,7 +47,9 @@ export const ColorField: React.FC<ColorFieldProps> = ({ label, name }) => {
       <div>
         <ColorPickerField name={name} />
         <div className="colors-actions">
-          <Button onClick={() => setOpened(false)}>Save color</Button>
+          <Button onClick={() => setOpened(false)} variant="success">
+            Save color
+          </Button>
         </div>
       </div>
     </Popover>

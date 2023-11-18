@@ -5,12 +5,14 @@ import { ProductsCategory } from "@/modules/purchases/store/purcheses.types";
 
 import FilterIcon from "@image/icons/filter.png";
 import { ProductsSort } from "../../sort/ProductsSort/ProductsSort";
+import { useTranslation } from "react-i18next";
 
 type ProductActionsProps = {
   category?: ProductsCategory;
 };
 
 export const ProductActions: React.FC<ProductActionsProps> = ({ category }) => {
+  const { t } = useTranslation();
   const [filtersOpened, setFiltersOpened] = useState(false);
 
   const toggleFiltersOpened = () => {
@@ -29,7 +31,7 @@ export const ProductActions: React.FC<ProductActionsProps> = ({ category }) => {
               style={{ color: "#83dd8b" }}
               onClick={toggleFiltersOpened}
             >
-              <img src={FilterIcon} alt="" /> Filters
+              <img src={FilterIcon} alt="" /> {t("Filters")}
             </Button>
           )}
           {hasFilters && <ProductsSort />}

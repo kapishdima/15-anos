@@ -15,7 +15,7 @@ type GuestStatusesSelectProps = {
 const statuses = [
   { value: "none", label: "Not invited", icon: <QuestionIcon /> },
   { value: "invited", label: "Invited", icon: <InvitedIcon /> },
-  { value: "declined", label: "Wont't come", icon: <WontComeIcon /> },
+  { value: "declined", label: "Won't come", icon: <WontComeIcon /> },
   {
     value: "confirmed",
     label: "Confirmed participation",
