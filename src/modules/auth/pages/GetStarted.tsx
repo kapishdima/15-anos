@@ -38,7 +38,9 @@ export const GetStartedPage: React.FC = () => {
             </Link>
 
             <Link to={AppRoutes.LOGIN} className="login-button">
-              <Button variant="text">Log in</Button>
+              <Button variant="text" style={{ color: "#ed819e" }}>
+                Log in
+              </Button>
             </Link>
           </div>
         </div>
