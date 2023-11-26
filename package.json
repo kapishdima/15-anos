@@ -54,7 +54,7 @@
     "eject": "craco eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "build:prod": "rm -rf site/planner && yarn build && cp -R build site && mv site/build site/planner"
+    "build:prod": "rm -rf site/planner && DISABLE_ESLINT_PLUGIN=true yarn build && cp -R build site && mv site/build site/planner"
   },
   "eslintConfig": {
     "extends": [
