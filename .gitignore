@@ -10,6 +10,7 @@
 
 # production
 /build
+/site/planner
 
 # misc
 .DS_Store
