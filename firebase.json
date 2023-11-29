@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "site",
-    "target": "quinceanera-planner",
+    "target": "quincy-planner",
     "cleanUrls": true,
     "rewrites": [
       {
