@@ -44,6 +44,10 @@
       {
         "source": "/invitation/**",
         "function": "invitationNew"
+      },
+      {
+        "source": "/planner/**",
+        "destination": "/planner/index.html"
       }
     ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
