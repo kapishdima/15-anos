@@ -17,4 +17,4 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUINCEANERA_PLANNER }}"
           channelId: live
-          projectId: quincy-planner
+          projectId: quinceanera-planner
