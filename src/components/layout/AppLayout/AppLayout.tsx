@@ -1,11 +1,12 @@
 import React, { PropsWithChildren } from "react";
 
+import classNames from "classnames";
+import { useAnalytics } from "@app/analytics";
 import { RolesProvider } from "@modules/roles/RolesProvider";
 
 import { AppContent } from "../AppContent/AppContent";
 import { AppNavbar } from "../AppNavbar/AppNavbar";
 import { AppLoader } from "../AppLoader/AppLoader";
-import classNames from "classnames";
 
 type AppLayoutProps = PropsWithChildren & {
   loading?: boolean;
@@ -17,6 +18,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   children,
   fullWidth,
 }) => {
+  useAnalytics();
+
   return (
     <RolesProvider>
       <div className="app-layout">
