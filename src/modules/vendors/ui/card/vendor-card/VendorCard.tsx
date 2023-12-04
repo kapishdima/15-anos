@@ -1,3 +1,7 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
+
 import { AppRoutes } from "@/app/router/routes";
 import { translated } from "@/app/utils/locale";
 import { AspectRatio, IconButton, LikeIcon } from "@/components";
@@ -5,14 +9,11 @@ import { Protected, RoleActions } from "@/modules/roles";
 import { useLike } from "@/modules/vendors/hooks/useLike";
 import { useVendorsStore } from "@/modules/vendors/store/vendors.store";
 import { SearchedVendor } from "@/modules/vendors/store/vendors.types";
-import classNames from "classnames";
-import React from "react";
-import { Link } from "react-router-dom";
 
 type VendorCardProps = SearchedVendor;
 
 export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
-  const { id, title, image, description } = vendor;
+  const { title, image, description } = vendor;
 
   const { likeVendor, disslikeVendor, liked, loading } = useLike(vendor);
   const saveVendor = useVendorsStore((state) => state.saveVendor);
@@ -43,8 +44,8 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
           }}
         ></p>
       </div>
-      <div className="vendor-card__actions">
-        <Protected action={RoleActions.LIKE_VENDOR}>
+      <Protected action={RoleActions.LIKE_VENDOR}>
+        <div className="vendor-card__actions">
           <IconButton
             appearance="outline"
             loading={loading}
@@ -57,8 +58,8 @@ export const VendorCard: React.FC<VendorCardProps> = (vendor) => {
           >
             <LikeIcon />
           </IconButton>
-        </Protected>
-      </div>
+        </div>
+      </Protected>
     </Link>
   );
 };

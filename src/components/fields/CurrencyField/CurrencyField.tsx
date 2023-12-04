@@ -40,6 +40,11 @@ export const CurrencyField: React.FC<CurrencyFieldProps> = ({
     setValue(name, value || "0");
   };
 
+  const onFocus = () => {
+    const value = getValues(name);
+    setValue(name, value !== "0" ? value : "");
+  };
+
   return (
     <Input name={name}>
       {({ field, fieldState }) => (
@@ -49,7 +54,7 @@ export const CurrencyField: React.FC<CurrencyFieldProps> = ({
               {t(label)}
             </label>
           )}
-          <div className="form-input__container">
+          <div className="form-input__container" onFocus={onFocus}>
             <MaskedField {...field} mask={mask.name} blocks={mask.blocks} />
           </div>
           {fieldState.error && (

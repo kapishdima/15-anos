@@ -66,7 +66,9 @@ export const useLogin = () => {
   };
 
   const onSuccessLogin = async (eventDetails: EventDetails) => {
-    window.localStorage.setItem(EVENT_DETAILS, JSON.stringify(eventDetails));
+    if (eventDetails) {
+      window.localStorage.setItem(EVENT_DETAILS, JSON.stringify(eventDetails));
+    }
 
     /**
      In order for the data of an anonymous user to be successfully updated, 

@@ -79,7 +79,7 @@ export const GuestCard: React.FC<GuestCardProps> = ({ guest }) => {
         hoverable={false}
         loading={loading}
         removal={isRemoval}
-        action={RoleActions.EDIT_GUEST}
+        action={[RoleActions.EDIT_GUEST]}
       />
     </>
   );

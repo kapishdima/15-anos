@@ -24,7 +24,7 @@ type CardProps = {
   description?: Translated;
   expires?: boolean;
   hasVisibleIcon?: boolean;
-  action?: RoleActions;
+  action?: RoleActions[];
   onIconClick?: (id: string) => void;
   onOpen: () => void;
   onDelete: (id: string) => void;
@@ -52,8 +52,8 @@ export const Card: React.FC<CardProps> = ({
   hasVisibleIcon = true,
 }) => {
   const permission = usePermission();
-  const canOpen =
-    !permission || !action ? false : permission.hasPermission(action);
+  const canMakeAction =
+    !permission || !action?.length ? false : permission.hasPermissions(action);
 
   const handleIconClick = (event: MouseEvent) => {
     event.stopPropagation();
@@ -66,10 +66,12 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const handleOpen = () => {
-    if (canOpen) {
+    if (canMakeAction) {
       onOpen();
     }
   };
+
+  const canMark = () => hasVisibleIcon && canMakeAction;
 
   return (
     <div
@@ -84,7 +86,7 @@ export const Card: React.FC<CardProps> = ({
         <div className="card__icon" style={{ backgroundColor: `#${color}` }}>
           {loading ? <Spinner variant="white" /> : <img src={icon} alt="" />}
         </div>
-        {hasVisibleIcon && (
+        {canMark() && (
           <div className="card__checked-icon">
             <CheckIcon />
           </div>
@@ -104,7 +106,7 @@ export const Card: React.FC<CardProps> = ({
           removal={removal}
           onDelete={() => onDelete(id)}
           loading={loading}
-          shown={canOpen}
+          shown={canMakeAction}
         />
       </div>
     </div>

@@ -54,7 +54,7 @@ export const ManualVendorCard: React.FC<ManualVendorCardProps> = ({
       loading={actionLoading && actionId === id}
       onOpen={onOpen}
       onDelete={onDelete}
-      action={RoleActions.EDIT_VENDORS}
+      action={[RoleActions.EDIT_VENDORS]}
     />
   );
 };

@@ -5,6 +5,7 @@ import { Button } from "@/components";
 import { useTranslation } from "react-i18next";
 
 import { TogglePaymentStatus } from "./TogglePaymentStatus";
+import { Protected, RoleActions } from "@/modules/roles";
 
 type CreatePaymentActionsProps = {
   isCompleted: boolean;
@@ -37,11 +38,13 @@ export const CreatePaymentActions: React.FC<CreatePaymentActionsProps> = ({
           {t("Confirm")}
         </Button>
       ) : (
-        <TogglePaymentStatus
-          loading={loading}
-          onClick={updatePaymentStatus}
-          isCompleted={Boolean(isCompleted)}
-        />
+        <Protected action={RoleActions.MARK_PAYMENT}>
+          <TogglePaymentStatus
+            loading={loading}
+            onClick={updatePaymentStatus}
+            isCompleted={Boolean(isCompleted)}
+          />
+        </Protected>
       )}
     </>
   );

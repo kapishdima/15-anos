@@ -5,6 +5,7 @@ import { Button } from "@/components";
 import { useTranslation } from "react-i18next";
 
 import { ToggleTaskStatus } from "../ToggleTaskStatus/ToggleTaskStatus";
+import { Protected, RoleActions } from "@/modules/roles";
 
 type CreateTaskActionsProps = {
   isCompleted: boolean;
@@ -36,11 +37,13 @@ export const CreateTaskActions: React.FC<CreateTaskActionsProps> = ({
           {t("Save the task")}
         </Button>
       ) : (
-        <ToggleTaskStatus
-          loading={loading}
-          onClick={updateTaskStatus}
-          isCompleted={Boolean(isCompleted)}
-        />
+        <Protected action={RoleActions.MARK_TASK}>
+          <ToggleTaskStatus
+            loading={loading}
+            onClick={updateTaskStatus}
+            isCompleted={Boolean(isCompleted)}
+          />
+        </Protected>
       )}
     </>
   );

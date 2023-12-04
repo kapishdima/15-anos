@@ -15,21 +15,26 @@ import { authAnonymously } from "@/modules/firebase/auth";
 import { auth } from "@/modules/firebase";
 
 import { useError } from "./useError";
-import { CreateProfileCredentials, CreateProfilePayload } from "../@types";
+import { CreateProfileCredentials, CreateProfileRequest } from "../@types";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "@/app/router/routes";
 
 export const useCreateProfile = () => {
   const [exucute, isLoading, error] = useHttpsCallable<
-    CreateProfilePayload,
+    CreateProfileRequest,
     CloutFunctionResponse
   >(getFunctions(), CloudFunctionsRoutes.CREATE_PROFILE);
   const { t } = useTranslation();
   const { handleError, detectCanCreateProfile } = useError();
   const location = useUserLocation();
+  const navigate = useNavigate();
 
   const toCreateProfilePayload = (values: CreateProfileCredentials) => {
     const formatedDate = format(new Date(values.date), "yyyy-MM-dd-HH:mm");
     return {
       ...values,
+      guests: parseInt(values.guests),
+      budget: parseInt(values.budget),
       date: formatedDate,
       timezone: getTimezoneOffset(location?.timezone || ""),
       market:
@@ -55,6 +60,11 @@ export const useCreateProfile = () => {
       SUCCESS_ACCOUNT_CREATION,
       successAccountCreations + 1
     );
+
+    toast.success(t("Account successfully created"));
+    setTimeout(() => {
+      navigate(AppRoutes.LOGIN);
+    }, 500);
   };
 
   const createProfile = async (values: any) => {

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 type UserLocation = {
   country: string;
@@ -6,21 +6,25 @@ type UserLocation = {
   currency: string;
 };
 
-export const UserLocationContext = React.createContext<UserLocation | null>(null);
+export const UserLocationContext = React.createContext<UserLocation | null>(
+  null
+);
 
-export const UserLocationProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [country, setCountry] = useState('');
-  const [timezone, setTimezone] = useState('');
-  const [currency, setCurrency] = useState('');
+export const UserLocationProvider: React.FC<PropsWithChildren> = ({
+  children,
+}) => {
+  const [country, setCountry] = useState("");
+  const [timezone, setTimezone] = useState("");
+  const [currency, setCurrency] = useState("");
 
   const fetchUserLocation = async () => {
-    const response = await fetch('http://www.geoplugin.net/json.gp');
+    const response = await fetch("https://ipapi.co/json/");
     const location = await response.json();
 
     if (location) {
-      setCountry(location.geoplugin_countryCode);
-      setTimezone(location.geoplugin_timezone);
-      setCurrency(location.geoplugin_currencyCode);
+      setCountry(location.country_code);
+      setTimezone(location.timezone);
+      setCurrency(location.currency);
     }
   };
 

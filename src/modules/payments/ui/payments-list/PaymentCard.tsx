@@ -93,7 +93,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
             : `${t("Already paid")}: ${payment.paid} $`
         }
         extra={<PaymentPrice price={payment.pay} />}
-        action={RoleActions.EDIT_PAYMENTS}
+        action={[RoleActions.EDIT_PAYMENTS, RoleActions.MARK_PAYMENT]}
       />
     </>
   );

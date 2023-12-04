@@ -14,7 +14,6 @@ import {
   ExternalLink,
   PercentIcon,
   InfoIcon,
-  AspectRatio,
 } from "@/components";
 import { PurchaseImageSlider } from "./PurchaseImageSlider";
 import { useLike } from "../../hooks/useLike";
@@ -175,10 +174,12 @@ export const PurchaseProduct: React.FC<PurchaseProductProps> = ({
           {popularCount} {t("added_to_shopping_list_2")}
         </div>
         <div className="purchase-actions">
-          <Button>
-            <FillHeartIcon />
-            {t("Add")}
-          </Button>
+          <Protected action={RoleActions.LIKE_PURCHASE}>
+            <Button>
+              <FillHeartIcon />
+              {t("Add")}
+            </Button>
+          </Protected>
           <a
             href={url}
             target="_blank"

@@ -10,6 +10,7 @@ import { useLike } from "../../hooks/useLike";
 import { usePostsStore } from "../../store/posts.store";
 import { getCategory } from "../../store/posts.selector";
 import { ReadedIndicator } from "../readed-indicator/ReadedIndicator";
+import { Protected, RoleActions } from "@/modules/roles";
 
 type PostCardProps = {
   post: Post;
@@ -29,20 +30,22 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <div className="post-card__image">
           <img src={imageSmall} alt={translated(title)} />
         </div>
-        <div className="post-action">
-          <IconButton
-            appearance="outline"
-            loadingVariant="accent"
-            classes={classNames("like-button", {
-              liked,
-            })}
-            loading={postInProccessing === post.id && loading}
-            onClick={liked ? disslikePost : likePost}
-            propagateEvent={false}
-          >
-            <LikeIcon />
-          </IconButton>
-        </div>
+        <Protected action={RoleActions.LIKE_POST}>
+          <div className="post-action">
+            <IconButton
+              appearance="outline"
+              loadingVariant="accent"
+              classes={classNames("like-button", {
+                liked,
+              })}
+              loading={postInProccessing === post.id && loading}
+              onClick={liked ? disslikePost : likePost}
+              propagateEvent={false}
+            >
+              <LikeIcon />
+            </IconButton>
+          </div>
+        </Protected>
 
         <div className="post-card__info">
           <div className="post-card__content">

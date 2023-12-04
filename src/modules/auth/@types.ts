@@ -17,6 +17,16 @@ export type LoginPayload = LoginCredentials & {
 
 export type CreateProfileCredentials = {
   date: string;
+  budget: string;
+  guests: string;
+  country: string;
+  language: string;
+  currency: string;
+};
+
+export type CreateProfileRequest = {
+  date: string;
+  budget: number;
   guests: number;
   country: string;
   language: string;

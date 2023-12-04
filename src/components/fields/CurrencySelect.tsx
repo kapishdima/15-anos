@@ -33,6 +33,7 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
     if (!autodetect) {
       return;
     }
+
     setValue(name, location?.currency);
   }, [location, location?.country]);
 

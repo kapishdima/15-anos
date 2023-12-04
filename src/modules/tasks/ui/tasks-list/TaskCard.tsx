@@ -76,7 +76,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         onIconClick={updateTaskStatus}
         hint={hint}
         expires={expires}
-        action={RoleActions.EDIT_TASK}
+        action={[RoleActions.EDIT_TASK, RoleActions.MARK_TASK]}
       />
     </>
   );

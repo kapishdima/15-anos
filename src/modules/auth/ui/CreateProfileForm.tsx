@@ -61,6 +61,7 @@ export const CreateProfileForm: React.FC = () => {
         label={t("How many guests are you expecting?")}
         type="number"
         color="#2ecc71"
+        clearOnFocus
       />
       <CountrySelect
         name="country"

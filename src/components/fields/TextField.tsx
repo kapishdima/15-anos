@@ -5,12 +5,14 @@ import { useTranslation } from "react-i18next";
 import { BaseInputProps, Input } from "./Input";
 import { capitalize } from "@/app/utils/text";
 import { translated } from "@/app/utils/locale";
+import { useFormContext } from "react-hook-form";
 
 type TextFieldProps = BaseInputProps & {
   placeholder?: string | null;
   color?: string;
   iconBefore?: string | any;
   iconAfter?: JSX.Element | string;
+  clearOnFocus?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent) => void;
 };
@@ -28,14 +30,32 @@ export const TextField: React.FC<TextFieldProps> = ({
   autoComplete,
   autoFocus,
   htmlName,
-  onChange,
-  onKeyDown,
   hint,
+  clearOnFocus,
   capitilizedWords = false,
   capitilizedInput = false,
   variant = "outline",
+  onChange,
+  onKeyDown,
 }) => {
+  const { setValue, getValues } = useFormContext();
   const { t } = useTranslation();
+
+  const onBlur = () => {
+    if (!clearOnFocus) {
+      return;
+    }
+    const value = getValues(name);
+    setValue(name, value || "0");
+  };
+
+  const onFocus = () => {
+    if (!clearOnFocus) {
+      return;
+    }
+    const value = getValues(name);
+    setValue(name, value !== "0" ? value : "");
+  };
 
   return (
     <Input name={name}>
@@ -95,7 +115,13 @@ export const TextField: React.FC<TextFieldProps> = ({
 
                   field.onChange(capitalizedValue);
                 }}
-                onBlur={field.onBlur}
+                onFocus={(event) => {
+                  onFocus();
+                }}
+                onBlur={() => {
+                  onBlur();
+                  field.onBlur();
+                }}
                 onKeyDown={onKeyDown}
                 style={{ color, ...style }}
                 autoComplete={autoComplete}

@@ -14,6 +14,7 @@ type RolesContextValues = {
   roles: typeof permissions;
   currentRole: string | null;
   hasPermission: (action: RoleActions) => boolean;
+  hasPermissions: (action: RoleActions[]) => boolean;
 };
 
 export const RolesContext = createContext<RolesContextValues | null>(null);
@@ -40,6 +41,20 @@ export const RolesProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return permissionsForRole.includes(action);
   };
 
+  const hasPermissions = (actions: RoleActions[]) => {
+    if (!currentRole) {
+      return false;
+    }
+
+    const permissionsForRole = permissions[currentRole];
+
+    if (!permissionsForRole) {
+      return false;
+    }
+
+    return actions.every((action) => permissionsForRole.includes(action));
+  };
+
   useEffect(() => {
     const userId = eventDetails?.userId;
     if (!userId) {
@@ -50,7 +65,7 @@ export const RolesProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <RolesContext.Provider
-      value={{ roles: permissions, currentRole, hasPermission }}
+      value={{ roles: permissions, currentRole, hasPermission, hasPermissions }}
     >
       {children}
     </RolesContext.Provider>
