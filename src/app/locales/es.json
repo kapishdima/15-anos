@@ -235,6 +235,7 @@
   "Password:": "Contraseña:",
   "Assistant": "Ayudante",
   "Observer": "Observador",
+  "Owner": "Madrina",
   "Send an invitation": "Enviar la invitación",
   "This role does not allow access to the settings on the Home screen and does not allow to delete anything, but allows to edit and add information": "Este rol no permite el acceso a los ajustes en la pantalla principal, ni eliminar su contenido. Con este rol se puede editar y añadir la información",
   "This role does not allow access to settings on the Home screen and does not allow to add, edit or delete information": "Este rol no permite el acceso a los ajustes en la pantalla principal y tampoco deja añadir, editar o eliminar el contenido",
@@ -276,5 +277,7 @@
   "We are very sorry :(": "Perdón, lo sentimos mucho :(",
 
   "Invite": "Invitar",
-  "Event name": "Nombre del evento"
+  "Event name": "Nombre del evento",
+
+  "Don't forget to tell the vendor that you got it's contact from Weddi to check if there is a discount for you.": "No olvides comunicar al proveedor que lo conociste por Weddi para saber si hay algún descuento especial del proveedor."
 }

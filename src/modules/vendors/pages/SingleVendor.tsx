@@ -84,8 +84,9 @@ export const SingleVendor: React.FC = () => {
 
           <div className="vendor-page__contact">
             <h4 className="vendor-page__contact-info">
-              Don't forget to tell the vendor that you got it's contact from
-              Quincy to check if there is a discount for you
+              {t(
+                "Don't forget to tell the vendor that you got it's contact from Weddi to check if there is a discount for you."
+              )}
             </h4>
             <ContactViewer
               vendorId={vendor.id}

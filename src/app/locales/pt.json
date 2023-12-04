@@ -232,6 +232,7 @@
   "Password:": "Senha:",
   "Assistant": "Ajudante",
   "Observer": "Observador",
+  "Owner": "Madrinha",
   "Send an invitation": "Enviar convite",
   "This role does not allow access to the settings on the Home screen and does not allow to delete anything, but allows to edit and add information": "Esse papel não permite acesso às configurações na tela principal e não permite excluir nada, mas permite editar e adicionar informações",
   "This role does not allow access to settings on the Home screen and does not allow to add, edit or delete information": "Esse papel não permite acesso às configurações na tela principal e não permite excluir, editar e adicionar informações",
@@ -274,5 +275,7 @@
 
   "Invite": "Convidar",
 
-  "Event name": "Título do evento"
+  "Event name": "Título do evento",
+
+  "Don't forget to tell the vendor that you got it's contact from Weddi to check if there is a discount for you.": "Lembre-se de informar ao contratado que você o encontrou no Weddi para verificar se ele ofereceria um desconto"
 }
