@@ -41,6 +41,8 @@ export const Dropzone: React.FC<DropzoneProps> = ({
     defaultFile
   );
 
+  const isSameFile = file?.name === defaultFile?.name;
+
   const onDrop = (acceptedFiles: File[]) => {
     const acceptedFile = acceptedFiles[0];
     setFile(
@@ -78,7 +80,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
           <p className="dropzone-available">.png, .jpg, .jpeg </p>
 
           <div className="dropzone-file-bg">
-            {file && (
+            {!isSameFile && (
               <div className="editor-button">
                 <IconButton
                   propagateEvent={false}
@@ -90,6 +92,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             )}
             {file && (
               <Image
+                style={{ maxWidth: "100%" }}
                 src={file.preview}
                 onLoad={() => {
                   URL.revokeObjectURL(file.preview);
@@ -99,7 +102,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
           </div>
         </div>
         <div className="dropzone-actions">
-          {file && (
+          {!isSameFile && (
             <Button
               loading={loading}
               variant="success"

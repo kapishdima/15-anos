@@ -33,17 +33,20 @@ export const ImageEditor: React.FC<ImageEditorProps> = ({
   };
 
   return (
-    <Modal id={modalId} confirmButtonText={"Crop"} onConfirm={onClick}>
+    <Modal
+      id={modalId}
+      confirmButtonText={"Crop"}
+      onConfirm={onClick}
+      maxWidth="50vw"
+    >
       {image && modalOpened && (
         <ReactCropper
-          src={
-            // "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg"
-            image
-          }
-          //"https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg"
-          style={{ height: 500, width: "100%" }}
+          src={image}
+          style={{ height: 450, width: "100%" }}
           aspectRatio={1 / 1}
           initialAspectRatio={1 / 1}
+          viewMode={1}
+          background={false}
           onInitialized={(instance) => setCropper(instance)}
         />
       )}
