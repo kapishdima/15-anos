@@ -15,6 +15,7 @@ import {
 } from "../store/purcheses.types";
 import { orderBy, where } from "firebase/firestore";
 import { getEventId } from "@/modules/event";
+import { upload } from "@/modules/firebase/firestorage";
 
 export const getProductsByCategory = async (
   id: string,
@@ -76,4 +77,14 @@ export const deleteProduct = (
   const eventId = getEventId();
 
   return deleteDocument(Collections.EVENTS, [eventId, type, id]);
+};
+
+export const uploadShoppingImage = async (productId: string, file: File) => {
+  const eventId = getEventId();
+
+  const uploadedFile = await upload("shopping", `${productId}.jpg`, file);
+
+  return pushData(Collections.EVENTS, [eventId, "shopping", productId], {
+    image: uploadedFile,
+  });
 };

@@ -8,14 +8,21 @@ import { CloutFunctionResponse } from "@app/http/http";
 import { useUserLocation } from "@app/location/useUserLocation";
 import { currensies } from "@app/data/currencies";
 import { getTimezoneOffset } from "@app/location/getTimezone";
-import { SUCCESS_ACCOUNT_CREATION } from "@app/constants/local-storage-keys";
+import {
+  EVENT_DETAILS,
+  SUCCESS_ACCOUNT_CREATION,
+} from "@app/constants/local-storage-keys";
 import { CloudFunctionsRoutes } from "@app/constants/cloud-functions";
 
-import { authAnonymously } from "@/modules/firebase/auth";
+import { authAnonymously, forceRefreshUser } from "@/modules/firebase/auth";
 import { auth } from "@/modules/firebase";
 
 import { useError } from "./useError";
-import { CreateProfileCredentials, CreateProfileRequest } from "../@types";
+import {
+  CreateProfileCredentials,
+  CreateProfileRequest,
+  EventDetails,
+} from "../@types";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
 
@@ -60,11 +67,25 @@ export const useCreateProfile = () => {
       SUCCESS_ACCOUNT_CREATION,
       successAccountCreations + 1
     );
+  };
 
-    toast.success(t("Account successfully created"));
-    setTimeout(() => {
-      navigate(AppRoutes.LOGIN);
-    }, 500);
+  const onSuccessCreation = async (eventDetails: EventDetails) => {
+    if (eventDetails) {
+      window.localStorage.setItem(EVENT_DETAILS, JSON.stringify(eventDetails));
+    }
+
+    /**
+     In order for the data of an anonymous user to be successfully updated, 
+     you need to do force get user token 
+     * */
+
+    await forceRefreshUser();
+
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser) {
+        navigate(AppRoutes.ROOT);
+      }
+    });
   };
 
   const createProfile = async (values: any) => {
@@ -89,6 +110,7 @@ export const useCreateProfile = () => {
       }
 
       saveSuccessAccountCreation();
+      onSuccessCreation(response?.data);
 
       return response?.data;
     });

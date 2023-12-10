@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { languages } from "@app/data/languages";
@@ -16,7 +15,6 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
   name,
   label,
   placeholder,
-  country,
 }) => {
   const { i18n } = useTranslation();
 

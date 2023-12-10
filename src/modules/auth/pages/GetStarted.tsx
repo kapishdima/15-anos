@@ -34,12 +34,12 @@ export const GetStartedPage: React.FC = () => {
               to={AppRoutes.CREATE_PROFILE}
               className="create-profile-button"
             >
-              <Button>Create profile</Button>
+              <Button>{t("Create profile")}</Button>
             </Link>
 
             <Link to={AppRoutes.LOGIN} className="login-button">
               <Button variant="text" style={{ color: "#ed819e" }}>
-                Log in
+                {t("Log in")}
               </Button>
             </Link>
           </div>
