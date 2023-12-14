@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { useFormContext } from "react-hook-form";
 
@@ -29,13 +29,18 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
     title: currency.symbol,
   }));
 
-  useEffect(() => {
-    if (!autodetect) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (!autodetect) {
+  //     return;
+  //   }
 
-    setValue(name, location?.currency);
-  }, [location, location?.country]);
+  //   const option = options.find(
+  //     (option) =>
+  //       option.value.toLowerCase() === location?.currency.toLowerCase()
+  //   );
+
+  //   setValue(name, option?.value);
+  // }, [location?.currency]);
 
   return (
     <SelectField
@@ -44,6 +49,7 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
       label={label}
       placeholder={placeholder}
       options={options}
+      defaultSelected={location?.currency}
     />
   );
 };

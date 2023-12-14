@@ -78,6 +78,7 @@ export const InviteSettingsIndex: React.FC = () => {
               onSubmit={onSubmit}
               initialValues={initialValues}
               schema={saveEventTitleValidation}
+              resetAfterSubmit={false}
             >
               <TextField
                 name="eventTitle"

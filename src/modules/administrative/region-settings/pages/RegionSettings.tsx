@@ -30,9 +30,7 @@ export const RegionSettingsIndex: React.FC = () => {
   const saveLoading = useProfileStore((state) => state.saveLoading);
   const country = useProfileStore(getCountyCode);
   const currency = useProfileStore(getCurrencyCode);
-  const profile = useProfileStore((state) => state.profile);
 
-  console.log(profile);
   const initialValues = {
     country: country,
     language: "en",

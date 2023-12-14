@@ -1,6 +1,5 @@
 import { signInAnonymously, signOut } from "firebase/auth";
 import { auth } from "./index";
-import { EVENT_DETAILS } from "@/app/constants/local-storage-keys";
 
 export const authAnonymously = async () => {
   try {

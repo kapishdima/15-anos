@@ -31,8 +31,9 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
     if (!autodetect) {
       return;
     }
+
     setValue(name, location?.country);
-  }, [location, location?.country]);
+  }, [location?.country]);
 
   return (
     <SelectField
@@ -41,6 +42,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
       label={label}
       placeholder={placeholder}
       options={options}
+      defaultSelected={location?.country}
     />
   );
 };

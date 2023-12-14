@@ -20,6 +20,7 @@ type FormProps = PropsWithChildren & {
   classes?: string;
   schema?: ObjectSchema<any>;
   submitAfterDelay?: boolean;
+  resetAfterSubmit?: boolean;
 };
 
 export const Form: React.FC<FormProps> = ({
@@ -29,6 +30,7 @@ export const Form: React.FC<FormProps> = ({
   classes,
   schema,
   id,
+  resetAfterSubmit = true,
   submitAfterDelay,
 }) => {
   const form = useForm({
@@ -42,12 +44,12 @@ export const Form: React.FC<FormProps> = ({
     onSubmit(values, form.reset);
   };
 
-  useEffect(() => {
-    form.reset(initialValues);
-  }, [initialValues]);
+  // useEffect(() => {
+  //   form.reset(initialValues);
+  // }, [initialValues]);
 
   React.useEffect(() => {
-    if (form.formState.isSubmitSuccessful) {
+    if (form.formState.isSubmitSuccessful && resetAfterSubmit) {
       form.reset();
     }
   }, [form.formState, form.reset]);

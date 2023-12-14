@@ -18,7 +18,7 @@ export const ProtectedRoute: React.FC<PropsWithChildren> = ({ children }) => {
   }, [location]);
 
   if (user === null) {
-    return <Navigate replace to={AppRoutes.LOGIN} />;
+    return <Navigate replace to={AppRoutes.GET_STARTED} />;
   }
 
   return <>{children}</>;

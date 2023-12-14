@@ -15,6 +15,7 @@ import {
 
 import { useCreateProfile } from "../hook/useCreateProfile";
 import { CreateProfileCredentials } from "../@types";
+import { useUserLocation } from "@/app/location/useUserLocation";
 
 const date = new Date();
 date.setFullYear(new Date().getFullYear() + 1);
@@ -23,21 +24,23 @@ date.setMinutes(0);
 
 const minDate = addWeeks(new Date(), 2);
 
-const initialValues = {
-  date: new Date(date),
-  budget: "0",
-  country: "",
-  guests: "0",
-  language: "",
-  currency: "",
-};
-
 export const CreateProfileForm: React.FC = () => {
   const { t } = useTranslation();
   const { createProfile, isLoading } = useCreateProfile();
+  const location = useUserLocation();
 
   const onSubmit = async (values: CreateProfileCredentials) => {
     await createProfile(values);
+  };
+
+  const initialValues = {
+    date: new Date(date),
+    budget: "0",
+    country: location?.country || "",
+    currency: location?.currency || "",
+    guests: "0",
+    language: "",
+    market: `${location?.country.toUpperCase()}-web`,
   };
 
   return (
@@ -45,6 +48,7 @@ export const CreateProfileForm: React.FC = () => {
       onSubmit={onSubmit}
       classes="create-profile__form"
       initialValues={initialValues}
+      resetAfterSubmit={false}
     >
       <DatepickerField
         min={minDate}

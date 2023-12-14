@@ -13,6 +13,7 @@ export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
 
   const { login, isLoading, canLogin } = useLogin();
+  console.log(isLoading);
 
   const onSubmit = async (values: LoginCredentials) => {
     await login(values);
@@ -23,6 +24,7 @@ export const LoginForm: React.FC = () => {
       onSubmit={onSubmit}
       classes="login-form"
       schema={loginSchemaValidation}
+      resetAfterSubmit={false}
     >
       <PasswordField
         placeholder={t("Enter password")}

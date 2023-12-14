@@ -1,7 +1,11 @@
-import { initializeApp } from 'firebase/app';
-import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+import {
+  browserSessionPersistence,
+  getAuth,
+  setPersistence,
+} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -19,5 +23,5 @@ export const auth = getAuth();
 export const db = getFirestore();
 export const storage = getStorage();
 
-setPersistence(auth, browserLocalPersistence);
+setPersistence(auth, browserSessionPersistence);
 export default app;

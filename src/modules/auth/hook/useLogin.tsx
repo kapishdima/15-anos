@@ -1,4 +1,4 @@
-import { getFunctions } from "firebase/functions";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import { useHttpsCallable } from "react-firebase-hooks/functions";
 import { useNavigate } from "react-router-dom";
 
@@ -18,12 +18,14 @@ import {
 import { authAnonymously, forceRefreshUser } from "../../firebase/auth";
 import { auth } from "../../firebase";
 import { useError } from "./useError";
+import { useState } from "react";
 
 export const useLogin = () => {
-  const [exucute, isLoading, error] = useHttpsCallable<
-    LoginPayload,
-    CloutFunctionResponse
-  >(getFunctions(), CloudFunctionsRoutes.LOGIN);
+  const [loading, setLoading] = useState(false);
+  // const [exucute, isLoading, error] = useHttpsCallable<
+  //   LoginPayload,
+  //   CloutFunctionResponse
+  // >(getFunctions(), CloudFunctionsRoutes.LOGIN);
   const { canLogin, detectCanLogin, handleError } = useError();
   const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ export const useLogin = () => {
       After 3 attempts the user must wait 10 * (number of attempts) seconds 
       before he can log in again 
      * */
+    setLoading(true);
 
     const hasMaxAttempts = detectCanLogin();
 
@@ -52,14 +55,21 @@ export const useLogin = () => {
         return;
       }
 
-      const response = await exucute(toLoginPayload(values));
+      // const response = await exucute(toLoginPayload(values));
+      const callLogin = httpsCallable<LoginPayload, CloutFunctionResponse>(
+        getFunctions(),
+        CloudFunctionsRoutes.LOGIN
+      );
+      const response = await callLogin(toLoginPayload(values));
 
       if (response?.data.error) {
+        setLoading(false);
         return handleError(response?.data.error);
       }
 
       clearInvalidAttempts();
       onSuccessLogin(response?.data);
+      setLoading(false);
 
       return response?.data;
     });
@@ -75,19 +85,20 @@ export const useLogin = () => {
      you need to do force get user token 
      * */
 
-    await forceRefreshUser();
-
-    auth.onAuthStateChanged(() => {
-      if (auth.currentUser) {
-        navigate(AppRoutes.ROOT);
-      }
+    await forceRefreshUser().then(() => {
+      navigate(AppRoutes.ROOT);
     });
+
+    // auth.onAuthStateChanged(() => {
+    //   if (auth.currentUser) {
+    //     navigate(AppRoutes.ROOT);
+    //   }
+    // });
   };
 
   return {
     login,
-    isLoading,
-    error,
+    isLoading: loading,
     canLogin,
   };
 };

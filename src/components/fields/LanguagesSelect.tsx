@@ -24,6 +24,14 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
     value: language.code.toLowerCase(),
   }));
 
+  const includesToLanguages = () => {
+    return Boolean(
+      languages.find(
+        (language) => language.code.toLowerCase() === i18n.language
+      )
+    );
+  };
+
   const changeLanguage = (value: string) => {
     i18n.changeLanguage(value.toLowerCase());
   };
@@ -34,7 +42,7 @@ export const LanguagesSelect: React.FC<LanguagesSelectProps> = ({
       name={name}
       label={label}
       defaultSelected={
-        !i18n.language || i18n.language === "ru" ? "en" : i18n.language
+        !i18n.language || !includesToLanguages() ? "en" : i18n.language
       }
       placeholder={placeholder}
       options={options}
