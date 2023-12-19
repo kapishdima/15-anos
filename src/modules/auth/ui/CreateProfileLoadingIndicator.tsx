@@ -10,6 +10,7 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 
 import { useModal } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const progressDuration = 12;
 const interval = (progressDuration * 1000) / 100;
@@ -24,6 +25,7 @@ export const CreateProfileLoadingIndicator: React.FC<
 > = ({ opened, id }) => {
   const [percentage, setPercentage] = useState(0);
   const { close } = useModal();
+  const { t } = useTranslation();
 
   useInterval(
     () => {
@@ -71,7 +73,9 @@ export const CreateProfileLoadingIndicator: React.FC<
                 </h4>
               </CircularProgressbarWithChildren>
             </div>
-            <h2 className="create-profile-indicator-title">Creating profile</h2>
+            <h2 className="create-profile-indicator-title">
+              {t("Creating profile")}
+            </h2>
           </main>
         </div>
       </div>
