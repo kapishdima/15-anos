@@ -24,6 +24,7 @@
     "lodash.sortby": "^4.7.0",
     "micromodal": "^0.4.10",
     "react": "^18.2.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-color": "^2.19.3",
     "react-countdown": "^2.3.5",
     "react-cropper": "^2.3.3",

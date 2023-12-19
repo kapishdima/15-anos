@@ -1,5 +1,4 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { useHttpsCallable } from "react-firebase-hooks/functions";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import format from "date-fns/format";
@@ -27,17 +26,17 @@ import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/router/routes";
 import { countries } from "@/app/data/countries";
 import { useState } from "react";
+import { languages } from "@/app/data/languages";
+import { useModal } from "@/components";
+import { CREATE_PROFILE_INDICATOR } from "../ui/CreateProfileForm";
 
 export const useCreateProfile = () => {
-  // const [exucute, isLoading, error] = useHttpsCallable<
-  // CreateProfileRequest,
-  // CloutFunctionResponse
-  // >(getFunctions(), CloudFunctionsRoutes.CREATE_PROFILE);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const { handleError, detectCanCreateProfile } = useError();
   const location = useUserLocation();
   const navigate = useNavigate();
+  const { close } = useModal();
 
   const toCreateProfilePayload = (values: CreateProfileCredentials) => {
     const formatedDate = format(new Date(values.date), "yyyy-MM-dd-HH:mm");
@@ -49,18 +48,19 @@ export const useCreateProfile = () => {
       (currency) => currency.code === values.currency
     );
 
+    const language = languages.find(
+      (language) => language.code === values.language
+    );
+
     return {
       ...values,
       country: `${country?.code};${country?.emoji}:${country?.name}`,
       currency: `${currency?.code};${currency?.symbol}:${currency?.symbol_native}`,
+      language: `${language?.code};${language?.flag}:${language?.name}`,
       guests: parseInt(values.guests),
       budget: parseInt(values.budget),
       date: formatedDate,
       timezone: getTimezoneOffset(location?.timezone || ""),
-      market:
-        currensies.find(
-          (currency) => currency.code === location?.country.toLowerCase()
-        )?.code || "",
     };
   };
 
@@ -92,11 +92,11 @@ export const useCreateProfile = () => {
      you need to do force get user token 
      * */
 
-    await forceRefreshUser();
+    // await forceRefreshUser();
 
-    auth.onAuthStateChanged(() => {
+    auth.onAuthStateChanged(async () => {
       if (auth.currentUser) {
-        navigate(AppRoutes.ROOT);
+        forceRefreshUser().then(() => navigate(AppRoutes.ROOT));
       }
     });
   };
@@ -105,6 +105,7 @@ export const useCreateProfile = () => {
     setLoading(true);
     if (!detectCanCreateProfile()) {
       setLoading(false);
+      close(CREATE_PROFILE_INDICATOR);
       return toast.error(
         t(
           "You cannot create a new profile because you have already created 3 profiles"
@@ -120,13 +121,13 @@ export const useCreateProfile = () => {
         return;
       }
 
-      const callLogin = httpsCallable<
+      const callCreateProfile = httpsCallable<
         CreateProfileRequest,
         CloutFunctionResponse
       >(getFunctions(), CloudFunctionsRoutes.CREATE_PROFILE);
-      const response = await callLogin(toCreateProfilePayload(values));
 
-      // const response = await exucute(toCreateProfilePayload(values));
+      const response = await callCreateProfile(toCreateProfilePayload(values));
+
       if (response?.data.error) {
         setLoading(false);
         return handleError(response?.data.error);
@@ -134,7 +135,7 @@ export const useCreateProfile = () => {
 
       saveSuccessAccountCreation();
       onSuccessCreation(response?.data);
-      setLoading(true);
+      setLoading(false);
 
       return response?.data;
     });

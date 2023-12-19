@@ -10,12 +10,16 @@ export const authAnonymously = async () => {
 };
 
 export const forceRefreshUser = async () => {
-  if (!auth.currentUser) {
+  try {
+    if (!auth.currentUser) {
+      return false;
+    }
+
+    await auth.currentUser.getIdToken(true);
+    return true;
+  } catch (error) {
     return false;
   }
-
-  await auth.currentUser.getIdToken(true);
-  return true;
 };
 
 export const logout = async () => {

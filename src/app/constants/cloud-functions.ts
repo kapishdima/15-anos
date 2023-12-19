@@ -5,4 +5,5 @@ export enum CloudFunctionsRoutes {
   ADD_VENDOR_ACTION = "addVendorAction",
   GET_PROFILE_PASSWORD = "getPasswords",
   SAVE_EVENT_TITLE = "saveEventTitle",
+  FORCE_TOKEN_REFRESH = "getIDTokenForcingRefresh",
 }

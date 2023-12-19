@@ -1,5 +1,4 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { useHttpsCallable } from "react-firebase-hooks/functions";
 import { useNavigate } from "react-router-dom";
 
 import { CloutFunctionResponse } from "@app/http/http";
@@ -22,10 +21,6 @@ import { useState } from "react";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
-  // const [exucute, isLoading, error] = useHttpsCallable<
-  //   LoginPayload,
-  //   CloutFunctionResponse
-  // >(getFunctions(), CloudFunctionsRoutes.LOGIN);
   const { canLogin, detectCanLogin, handleError } = useError();
   const navigate = useNavigate();
 
@@ -55,7 +50,6 @@ export const useLogin = () => {
         return;
       }
 
-      // const response = await exucute(toLoginPayload(values));
       const callLogin = httpsCallable<LoginPayload, CloutFunctionResponse>(
         getFunctions(),
         CloudFunctionsRoutes.LOGIN
@@ -85,8 +79,15 @@ export const useLogin = () => {
      you need to do force get user token 
      * */
 
-    await forceRefreshUser().then(() => {
-      navigate(AppRoutes.ROOT);
+    auth.onAuthStateChanged(async () => {
+      if (auth.currentUser) {
+        forceRefreshUser().then(() => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+          navigate(AppRoutes.ROOT);
+        });
+      }
     });
 
     // auth.onAuthStateChanged(() => {

@@ -13,6 +13,8 @@ import {
 } from "@modules/tasks";
 
 import { useCategoriesStore } from "@modules/categories";
+import { forceRefreshUser } from "@/modules/firebase/auth";
+import { auth } from "@/modules/firebase";
 
 export const TasksListPage: React.FC = () => {
   const fetchTasks = useTasksStore((state) => state.fetchTasks);
@@ -28,6 +30,15 @@ export const TasksListPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
+  }, []);
+
+  useEffect(() => {
+    auth.onIdTokenChanged(async () => {
+      forceRefreshUser();
+    });
+    auth.onAuthStateChanged(async () => {
+      forceRefreshUser();
+    });
   }, []);
 
   return (

@@ -58,3 +58,32 @@
     text-decoration: none;
   }
 }
+
+.create-profile-indicator-container {
+  width: 150px;
+  height: 150px;
+}
+
+.create-profile-indicator-modal {
+  .modal__content {
+    width: 40vw;
+    height: 40vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 0;
+  }
+}
+
+.create-profile-indicator-title {
+  margin-top: 16px;
+  @include modalTitle;
+}
+.create-profile-indicator-progress {
+  font-family: $anevir-ff;
+  font-size: 18px;
+  font-weight: normal;
+}
