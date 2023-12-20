@@ -31,6 +31,7 @@ export const PurchaseBestIdeas: React.FC = () => {
     (state) => state.fetchProductsParameters
   );
   const clearProduct = useProductsStore((state) => state.clearProduct);
+  const reset = useProductsStore((state) => state.reset);
 
   const products = useProductsStore((state) => state.productsForView);
   const shoppingCategory = useRecommendedShoppingStore((state) =>
@@ -48,6 +49,10 @@ export const PurchaseBestIdeas: React.FC = () => {
     fetchPurchaseParametrs();
     fetchProfileDetails();
     fetchProductsByCategory(id, type, true);
+
+    return () => {
+      reset();
+    };
   }, []);
 
   return (

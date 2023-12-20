@@ -50,7 +50,7 @@ export const CreateProfileLoadingIndicator: React.FC<
       id={id}
       aria-hidden="true"
     >
-      <div className="modal__overlay" tabIndex={-1} data-micromodal-close>
+      <div className="modal__overlay" tabIndex={-1}>
         <div
           className="modal__container"
           role="dialog"

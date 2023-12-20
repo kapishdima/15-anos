@@ -7,7 +7,7 @@ import {
 import { getEventId } from "@/modules/event";
 
 import { Product, ProductViewModal } from "../store/purcheses.types";
-import { orderBy } from "firebase/firestore";
+import { uploadToPath } from "@/modules/firebase/firestorage";
 
 export const getManualWishList = async (): Promise<ProductViewModal[]> => {
   const eventId = getEventId();
@@ -25,4 +25,26 @@ export const getManualWishList = async (): Promise<ProductViewModal[]> => {
     ...product,
     addedData: new Date(toDate(product.addedDate)),
   }));
+};
+
+export const createManualWishProduct = async (
+  productData: any
+): Promise<void> => {
+  const eventId = getEventId();
+
+  const registryCode = eventId.substring(eventId.length, eventId.length - 7);
+
+  const uploadPath = `registry/shared/${registryCode}/${productData.title}.jpg`;
+  const image = await uploadToPath(uploadPath, productData.image);
+
+  const productPayloadData = {
+    ...productData,
+    image,
+  };
+
+  return pushData(
+    Collections.EVENTS,
+    [eventId, Collections.MANUAL_WISH_LIST, productPayloadData.title],
+    productPayloadData
+  );
 };

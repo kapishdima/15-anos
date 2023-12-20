@@ -48,11 +48,11 @@ export const Form: React.FC<FormProps> = ({
   //   form.reset(initialValues);
   // }, [initialValues]);
 
-  React.useEffect(() => {
-    if (form.formState.isSubmitSuccessful && resetAfterSubmit) {
-      form.reset();
-    }
-  }, [form.formState, form.reset]);
+  // React.useEffect(() => {
+  //   if (form.formState.isSubmitSuccessful && resetAfterSubmit) {
+  //     form.reset();
+  //   }
+  // }, [form.formState, form.reset]);
 
   useEffect(() => {
     EventEmitter.subscribe(Events.CLOSE_MODAL, () => {

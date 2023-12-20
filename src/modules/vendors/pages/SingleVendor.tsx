@@ -49,8 +49,8 @@ export const SingleVendor: React.FC = () => {
       <div className="vendor-page">
         <div className="vendor-page__image">
           <img src={vendor.image} alt={translated(vendor.title)} />
-          <div className="vendor-page__actions">
-            <Protected action={RoleActions.LIKE_VENDOR}>
+          <Protected action={RoleActions.LIKE_VENDOR}>
+            <div className="vendor-page__actions">
               <IconButton
                 appearance="outline"
                 loading={loading}
@@ -62,8 +62,8 @@ export const SingleVendor: React.FC = () => {
               >
                 <LikeIcon />
               </IconButton>
-            </Protected>
-          </div>
+            </div>
+          </Protected>
         </div>
         <div className="vendor-page__content">
           <h4 className="vendor-page__title">{translated(vendor.title)}</h4>

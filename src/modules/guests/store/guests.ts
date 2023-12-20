@@ -78,7 +78,6 @@ export const useGuestsStore = create<GuestsStore>()(
       }));
 
       const guests = await getGuests();
-
       const total = guests.length;
       const confirmed = guests.filter(
         (guest) => guest.status === "confirmed"

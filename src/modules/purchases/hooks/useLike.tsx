@@ -17,6 +17,7 @@ export const useLike = (product: ProductViewModal) => {
   );
 
   const loading = useProductsStore((state) => state.actionLoading);
+  const actionId = useProductsStore((state) => state.actionProductId);
 
   const addProduct = useProductsStore((state) => state.addProduct);
   const deleteProduct = useProductsStore((state) => state.deleteProduct);
@@ -44,7 +45,7 @@ export const useLike = (product: ProductViewModal) => {
 
   return {
     liked,
-    loading,
+    loading: loading && actionId === (product.id || product.title),
     likeProduct,
     disslikeProduct,
   };

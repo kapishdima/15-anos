@@ -19,3 +19,11 @@ export const upload = async (
 
   return getDownloadURL(uploadedFile.ref);
 };
+
+export const uploadToPath = async (path: string, file: File) => {
+  const imageRef = ref(storage, path);
+
+  const uploadedFile = await uploadBytes(imageRef, file);
+
+  return getDownloadURL(uploadedFile.ref);
+};

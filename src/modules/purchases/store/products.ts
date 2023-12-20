@@ -19,6 +19,7 @@ export interface ProductsStore {
   products: ProductViewModal[];
   loading: boolean;
   actionLoading: boolean;
+  actionProductId: string | null;
 
   addProduct: (type: ProductTypes, payload: any) => Promise<void>;
   deleteProduct: (type: ProductTypes, id: string) => Promise<void>;
@@ -32,6 +33,7 @@ export interface ProductsStore {
   ) => Promise<void>;
   searchProducts: (filters: ProductsFilters) => void;
   sortProducts: (type: "asc" | "desc", by: string) => void;
+  reset: () => void;
 }
 
 export const useProductsStore = create<ProductsStore>()(
@@ -42,6 +44,7 @@ export const useProductsStore = create<ProductsStore>()(
         products: [],
         loading: false,
         actionLoading: false,
+        actionProductId: null,
         fetchProductsByCategory: async (
           id: string,
           type: ProductTypes,
@@ -115,7 +118,10 @@ export const useProductsStore = create<ProductsStore>()(
         },
         addProduct: async (type: ProductTypes, values: any) => {
           try {
-            set(() => ({ actionLoading: true }));
+            set(() => ({
+              actionLoading: true,
+              actionProductId: values.id || values.title,
+            }));
             await addManualProduct(type, values);
             set(() => ({ actionLoading: false }));
           } catch (error) {
@@ -132,6 +138,11 @@ export const useProductsStore = create<ProductsStore>()(
             console.error(error);
             set(() => ({ actionLoading: false }));
           }
+        },
+        reset: () => {
+          set(() => ({
+            productsForView: [],
+          }));
         },
       }),
       {

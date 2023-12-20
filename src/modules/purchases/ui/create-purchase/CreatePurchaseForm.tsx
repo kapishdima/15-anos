@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useFormContext } from "react-hook-form";
 
 import { DropzoneField, TextField, TextAreaField } from "@/components";
 
 export const CreatePurchaseForm: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const { setValue } = useFormContext();
 
   return (
     <>
@@ -28,8 +31,13 @@ export const CreatePurchaseForm: React.FC = () => {
       <DropzoneField
         name="image"
         label={"Item image"}
+        loading={loading}
         onUpload={function (files: File): void {
-          throw new Error("Function not implemented.");
+          setLoading(true);
+          setValue("image", files);
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         }}
       />
     </>

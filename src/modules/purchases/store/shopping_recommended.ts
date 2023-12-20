@@ -6,9 +6,9 @@ import { ProductsCategory } from "./purcheses.types";
 
 export interface RecommendedShoppingStore {
   products: ProductsCategory[];
-
   loading: boolean;
   fetchRecommendedShoppingList: (force?: boolean) => Promise<void>;
+  // reset: () => void;
 }
 
 export const useRecommendedShoppingStore = create<RecommendedShoppingStore>()(

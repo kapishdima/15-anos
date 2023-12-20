@@ -31,17 +31,30 @@ export const CreatePurchasePage: React.FC = () => {
 
   const activeTab = searchParams.get("activeTab");
 
-  const addProduct = useProductsStore((state) => state.addProduct);
+  const createManualShoppingProduct = useManualShoppingStore(
+    (state) => state.createManualShoppingProduct
+  );
+  const createManualWishProduct = useManualWishList(
+    (state) => state.createManualWishProduct
+  );
   const fetchManualShoppingList = useManualShoppingStore(
     (state) => state.fetchManualShoppingList
   );
   const fetchManualWishList = useManualWishList(
     (state) => state.fetchManualWishList
   );
-  const loading = useManualShoppingStore((state) => state.loading);
+
+  const createLoadingShopping = useManualShoppingStore(
+    (state) => state.createLoading
+  );
+  const createLoadingWish = useManualWishList((state) => state.createLoading);
 
   const createPurchase = async (values: any) => {
-    await addProduct(activeTab === "0" ? "shopping" : "registry", values);
+    if (activeTab === "0") {
+      await createManualShoppingProduct(values);
+    } else {
+      await createManualWishProduct(values);
+    }
     fetchManualShoppingList(/*force*/ true);
     fetchManualWishList(/*force*/ true);
     navigate(-1);
@@ -66,7 +79,9 @@ export const CreatePurchasePage: React.FC = () => {
               <Button
                 aria-label="Close this dialog window"
                 variant="success"
-                loading={loading}
+                loading={
+                  activeTab === "0" ? createLoadingShopping : createLoadingWish
+                }
                 type="submit"
               >
                 {t("Save the item")}

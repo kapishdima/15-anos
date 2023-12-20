@@ -25,7 +25,7 @@ const statusesIcons = {
 };
 
 const statusColors = {
-  none: "FAFAFC",
+  none: "DCDCDD",
   confirmed: "50DF71",
   confirmedGuest: "50DF71",
   invited: "FEE106",

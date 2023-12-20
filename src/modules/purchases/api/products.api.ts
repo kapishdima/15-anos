@@ -55,18 +55,10 @@ export const addManualProduct = async (
 ): Promise<void> => {
   const eventId = getEventId();
 
-  // const image = await upload(productData.image);
-
-  // console.log(image);
-  const productPayloadData = {
-    ...productData,
-    // image,
-  };
-
   return pushData(
     Collections.EVENTS,
-    [eventId, type, productPayloadData.id || productPayloadData.title],
-    productPayloadData
+    [eventId, type, productData.id || productData.title],
+    productData
   );
 };
 

@@ -33,7 +33,7 @@ const minDate = addWeeks(new Date(), 2);
 
 export const CreateProfileForm: React.FC = () => {
   const { t } = useTranslation();
-  const { createProfile, isLoading } = useCreateProfile();
+  const { createProfile } = useCreateProfile();
   const location = useUserLocation();
   const { open, opened } = useModal();
 

@@ -75,6 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         <Protected action={RoleActions.LIKE_PURCHASE}>
           <IconButton
+            propagateEvent={false}
             appearance="outline"
             loading={loading}
             loadingVariant="accent"
