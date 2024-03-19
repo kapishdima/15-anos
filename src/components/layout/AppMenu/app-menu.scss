@@ -32,7 +32,8 @@
 
     text-decoration: none;
 
-    transition: background-color 0.5s ease, color 0.5s ease, padding-left 0.5s ease;
+    transition: background-color 0.5s ease, color 0.5s ease,
+      padding-left 0.5s ease;
 
     @include menuLink;
 
@@ -44,7 +45,7 @@
     }
 
     &:before {
-      content: '';
+      content: "";
 
       position: absolute;
       bottom: 0;
@@ -61,15 +62,7 @@
     }
 
     &:hover {
-      // background-color: $accentColor;
       padding-left: $menu-item-padding-x;
-      // color: #fff;
-
-      // svg {
-      //   path {
-      //     fill: #fff;
-      //   }
-      // }
 
       &:before {
         opacity: 1;

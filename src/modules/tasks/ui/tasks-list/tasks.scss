@@ -3,12 +3,12 @@
 
   &__month {
     font-family: $recoleta-alt-ff;
-    font-size: 1.25rem;
+    font-size: $fz-list-group-title;
     font-weight: 500;
     color: $darkColor;
     text-transform: capitalize;
 
-    margin-bottom: 14px;
+    margin-bottom: 0.33333rem;
   }
   .expires {
     color: $errorColor;
@@ -18,11 +18,11 @@
     margin-bottom: 16px;
     &-title {
       font-family: $anevir-ff;
-      font-size: 0.75rem;
-      font-weight: 500;
+      font-size: $fz-list-group-date;
+      font-weight: 600;
       color: $darkColor;
 
-      margin-bottom: 10px;
+      margin: 5px 0;
       text-transform: uppercase;
     }
   }

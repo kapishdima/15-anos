@@ -72,13 +72,13 @@ export const UpdateTaskPage: React.FC = () => {
           >
             <CreateTaskForm />
             <FormActions>
-              <Button
+              {/* <Button
                 appearance="ghost"
                 variant="error"
                 onClick={() => navigate(-1)}
               >
                 {t("Cancel")}
-              </Button>
+              </Button> */}
               <DeleteButton onDelete={onDelete} id={task?.id || ""} />
               <CreateTaskActions
                 loading={loading}

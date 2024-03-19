@@ -55,11 +55,11 @@
       color: $accentColor;
 
       &--value {
-        font-size: 0.875rem;
+        font-size: $fz-event-timer-value;
         font-weight: 500;
       }
       &--title {
-        font-size: 0.625rem;
+        font-size: $fz-event-timer-value-label;
         font-weight: 400;
       }
     }

@@ -5,9 +5,11 @@
 
   column-gap: 8px;
 
+  min-width: $button-min-width; // 133px;
+
   padding: 0 $button-padding-x;
-  height: 36px;
-  border-radius: 20px;
+  height: $button-height;
+  border-radius: $button-br;
   border: none;
   background-color: transparent;
 
@@ -225,6 +227,7 @@
 
 .ghost.success {
   color: $successColor;
+  font-size: $fz-hideshow-button;
 
   &:hover {
     color: darken($successColor, 10%);

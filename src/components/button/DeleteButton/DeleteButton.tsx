@@ -3,6 +3,8 @@ import { Modal } from "@/components/modal/Modal";
 import { Button } from "../Button/Button";
 import { useTranslation } from "react-i18next";
 import { useModal } from "@/components/modal/useModal";
+import { IconButton } from "../IconButton/IconButton";
+import { TrashIcon } from "@/components/icons";
 
 type DeleteButtonProps = {
   id: string;
@@ -30,9 +32,13 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onDelete }) => {
 
   return (
     <>
-      <Button variant="error" onClick={openConfirmationModal}>
-        {t("Delete")}
-      </Button>
+      <IconButton
+        variant="error"
+        onClick={openConfirmationModal}
+        propagateEvent={false}
+      >
+        <TrashIcon />
+      </IconButton>
       <Modal
         id={confirmationModalId}
         onConfirm={onConfirm}

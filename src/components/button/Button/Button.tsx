@@ -2,7 +2,6 @@ import classNames from "classnames";
 import React, { HTMLAttributes, PropsWithChildren, MouseEvent } from "react";
 
 import { Spinner } from "@components/index";
-import { loaderByName } from "@craco/craco";
 
 type ButtonVariants = "primary" | "error" | "text" | "success" | "secondary";
 type ButtonAppearance = "filled" | "ghost" | "outline";

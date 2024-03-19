@@ -11,7 +11,11 @@ $anevir-ff: "Avenir";
 // Sizes
 // ------------------------------
 
+$base-fz: 1rem;
 $sidebar-width: 300px;
+
+$button-min-width: 100pt;
+$button-height: 30pt;
 
 // ------------------------------
 // Colors
@@ -52,6 +56,7 @@ $task-progressbar-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
 $base-br: 14px;
 $menu-link-br: 12px;
 $event-timer-br: 38px;
+$button-br: 15px;
 
 // ------------------------------
 // Paddings
@@ -80,8 +85,8 @@ $main-content-padding-x: 32px;
 $task-progress-padding-y: 16px;
 $task-progress-padding-x: 18px;
 
-$task-card-padding-y: 12px;
-$task-card-padding-x: 12px;
+$task-card-padding-y: 15px;
+$task-card-padding-x: 15px;
 
 $purchase-category-card-padding-x: 12px;
 $purchase-category-card-padding-y: 12px;
@@ -122,7 +127,7 @@ $popover-padding-y: 16px;
 // The style is used for values ​​in input fields
 @mixin inputValue {
   font-family: $anevir-ff;
-  font-size: 1rem;
+  font-size: $fz-form-field;
   font-weight: 500;
   color: $darkColor;
 }
@@ -138,7 +143,7 @@ $popover-padding-y: 16px;
 // The style is used for label ​​in input fields
 @mixin inputLabel {
   font-family: $anevir-ff;
-  font-size: 0.75rem;
+  font-size: $fz-form-field-label;
   font-weight: 400;
   color: $darkGrayColor;
 }
@@ -154,7 +159,7 @@ $popover-padding-y: 16px;
 // The style is used for menu group title in sidebar
 @mixin menuTitle {
   font-family: $recoleta-alt-ff;
-  font-size: 1.25rem;
+  font-size: $fz-menu-group-title;
   font-weight: 400;
   color: $darkColor;
 }
@@ -162,8 +167,8 @@ $popover-padding-y: 16px;
 // The style is used for menu link in sidebar
 @mixin menuLink {
   font-family: $anevir-ff;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: $fz-menu-item;
+  font-weight: 600;
   color: $darkColor;
 }
 
@@ -190,9 +195,10 @@ $popover-padding-y: 16px;
 // The style is used for modal title;
 @mixin modalTitle {
   font-family: $recoleta-alt-ff;
-  font-size: 1.5rem;
+  font-size: $fz-modal-title;
   font-weight: 400;
   color: $darkColor;
+  text-align: center;
 }
 
 // The style is used for modal description;

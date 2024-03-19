@@ -36,9 +36,9 @@
   }
 
   &__label {
-    font-size: 0.75rem;
     font-family: $anevir-ff;
-    font-weight: 400;
+    font-size: $fz-progressbar-value;
+    font-weight: 600;
     color: $darkColor;
   }
 }
